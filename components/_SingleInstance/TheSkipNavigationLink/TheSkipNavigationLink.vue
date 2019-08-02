@@ -10,7 +10,7 @@ export default {
     class="TheSkipNavigationLink TheSkipNavigationLink__BBtn"
     naked
   >
-    {{ $t('skipNavigation.text') }}
+    <!-- {{ $t('skipNavigation.text') }} -->
   </BBtn>
 </template>
 

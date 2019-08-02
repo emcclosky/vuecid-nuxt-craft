@@ -1,0 +1,9 @@
+query Page($slug: String) {
+  entries(section: [page], slug: $slug) {
+    ...on PageFlexContent {
+      id
+      title
+      slug
+    }
+  }
+}

@@ -30,6 +30,7 @@
     "@nuxtjs/sitemap": "^1.2.0",
     "@wearelucid/vue-bows": "^1.1.0",
     "@wearelucid/vuecid-helpers": "v3.0.0",
+    "graphql-tag": "^2.10.1",
     "no-scroll": "^2.1.0",
     "normalize-scss": "^7.0.0",
     "nuxt": "^2.4.0",

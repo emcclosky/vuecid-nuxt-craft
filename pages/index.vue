@@ -1,26 +1,33 @@
 <script>
-import { mapGetters } from 'vuex'
 import basePage from '~/components/_basePage.vue'
 import Examples from '~/components/Examples/Examples/Examples.vue'
-import pages from '~/apollo/queries/pages'
+import page from '~/apollo/queries/page'
 
 export default {
   components: {
     Examples
   },
   apollo: {
-    pages: {
-      prefetch: true,
-      query: pages
+    entries: {
+      query: page,
+      prefetch: ({ route }) => ({ slug: route.params.slug }),
+      variables() {
+        return { slug: this.$route.params.slug }
+      }
     }
   },
-  extends: basePage
+  extends: basePage,
+  mounted() {
+    this.log('this.apollo: ', this.apollo)
+  }
   // computed: mapGetters('data', ['page'])
 }
 </script>
 
 <template>
-  <div v-if="pages" class="Page">
-    <Examples :page="pages" />
+  <div v-if="entries" class="Page">
+    <no-ssr>
+      <Examples :page="entries" />
+    </no-ssr>
   </div>
 </template>

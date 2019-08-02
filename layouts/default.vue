@@ -1,35 +1,33 @@
 <script>
 import { mapState } from 'vuex'
-import handlePreview from '~/components/_handlePreview.vue'
-import TheSkipNavigationLink from '~/components/_SingleInstance/TheSkipNavigationLink/TheSkipNavigationLink.vue'
-import TheHeaderBar from '~/components/_SingleInstance/TheHeaderBar/TheHeaderBar.vue'
-import TheFooter from '~/components/_SingleInstance/TheFooter/TheFooter.vue'
+// import TheSkipNavigationLink from '~/components/_SingleInstance/TheSkipNavigationLink/TheSkipNavigationLink.vue'
+// import TheHeaderBar from '~/components/_SingleInstance/TheHeaderBar/TheHeaderBar.vue'
+// import TheFooter from '~/components/_SingleInstance/TheFooter/TheFooter.vue'
 
 export default {
   components: {
-    TheSkipNavigationLink,
-    TheHeaderBar,
-    TheFooter
+    // TheSkipNavigationLink,
+    // TheHeaderBar,
+    // TheFooter
   },
-  extends: handlePreview,
   computed: mapState({
     previewActive: state => state.data.previewActive
   }),
   created() {
-    if (process.browser) {
-      // eslint-disable-next-line no-console
-      console.info(
-        `%c -----------------------------------
-< Made by Lucid — www.wearelucid.ch >
-  -----------------------------------
-        \\   ^__^
-          \\  (oo)\\_______
-            (__)\\       )\\/\\
-                ||----w |
-                ||     ||`,
-        'font-family:monospace'
-      )
-    }
+    //     if (process.browser) {
+    //       // eslint-disable-next-line no-console
+    //       console.info(
+    //         `%c -----------------------------------
+    // < Made by Lucid — www.wearelucid.ch >
+    //   -----------------------------------
+    //         \\   ^__^
+    //           \\  (oo)\\_______
+    //             (__)\\       )\\/\\
+    //                 ||----w |
+    //                 ||     ||`,
+    //         'font-family:monospace'
+    //       )
+    //     }
   },
   methods: {
     setFocusOnMain() {
@@ -52,16 +50,16 @@ export default {
   <div class="Layout">
     <!-- Use this with vue-breakpoint-component: -->
     <!-- <no-ssr><VBreakpoint @input="updateBreakpoint($event)" /></no-ssr> -->
-    <BAlert v-if="previewActive" message="Preview" />
+    <!-- <BAlert v-if="previewActive" message="Preview" />
     <TheSkipNavigationLink
       ref="skipnavigationlink"
       @click.native="setFocusOnMain()"
     />
-    <TheHeaderBar />
+    <TheHeaderBar /> -->
     <main id="main" ref="main" class="Layout__content">
       <nuxt />
     </main>
-    <TheFooter />
+    <!-- <TheFooter /> -->
   </div>
 </template>
 

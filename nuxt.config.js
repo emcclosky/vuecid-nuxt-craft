@@ -67,28 +67,28 @@ export default {
     // Be aware that there is still a bug where the page title is not updated:
     // Demo: https://imgur.com/QSv4n12
     // Issue to watch/subscribe and fix this ASAP: https://github.com/nuxt-community/analytics-module/issues/8
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: config.googleAnalyticsId,
-        // Opt out by default and enable tracking if user accepts cookies
-        disabled: () => {
-          if (process.browser) {
-            if (localStorage.getItem('cookie:accepted')) {
-              return false
-            }
-          }
-          return true
-        },
-        set: [{ field: 'anonymizeIp', value: true }],
-        debug: {
-          // Uncomment the following line to debug GA in development environment (check your console output):
-          // enabled: process.env.NODE_ENV === 'development',
-          // Only send hit task in production. To test locally run `$ yarn netlifyify` (sets NODE_ENV to production).
-          sendHitTask: process.env.NODE_ENV === 'production'
-        }
-      }
-    ],
+    // [
+    //   '@nuxtjs/google-analytics',
+    //   {
+    //     id: config.googleAnalyticsId,
+    //     // Opt out by default and enable tracking if user accepts cookies
+    //     disabled: () => {
+    //       if (process.browser) {
+    //         if (localStorage.getItem('cookie:accepted')) {
+    //           return false
+    //         }
+    //       }
+    //       return true
+    //     },
+    //     set: [{ field: 'anonymizeIp', value: true }],
+    //     debug: {
+    //       // Uncomment the following line to debug GA in development environment (check your console output):
+    //       // enabled: process.env.NODE_ENV === 'development',
+    //       // Only send hit task in production. To test locally run `$ yarn netlifyify` (sets NODE_ENV to production).
+    //       sendHitTask: process.env.NODE_ENV === 'production'
+    //     }
+    //   }
+    // ],
     '@nuxtjs/sitemap',
     [
       '@nuxtjs/pwa',
@@ -139,9 +139,7 @@ export default {
    */
   apollo: {
     clientConfigs: {
-      default: {
-        httpEndpoint: 'https://api.graph.cool/simple/v1/cj1dqiyvqqnmj0113yuqamkuu' // prettier-ignore
-      }
+      default: '~/apollo/client-configs/default.js'
     }
   },
 

@@ -1,8 +1,45 @@
 {
-  allCars {
-    id
-    make
-    model
-    year
+  entries(section: [page]) {
+    ...on PagePageContent {
+      id
+      title
+      flexibleContent {
+        ...on FlexibleContentRichtext {
+          __typename
+          richtext {
+            totalPages
+            content
+          }
+        }
+        ...on FlexibleContentImage {
+          __typename
+          image {
+            id
+          }
+        }
+        ...on FlexibleContentTeaser {
+          __typename
+          teaserTitle
+          text
+          teaserLink {
+          	url
+            title
+            ...on PagePageContent {
+              id
+              title
+              flexibleContent {
+                __typename
+                ...on FlexibleContentRichtext {
+                  richtext {
+                    totalPages
+                    content
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

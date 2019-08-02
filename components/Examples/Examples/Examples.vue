@@ -1,17 +1,16 @@
 <script>
-import { mapState } from 'vuex'
-import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
-import Loader from '~/components/Examples/Loader/Loader.vue'
+// import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
+// import Loader from '~/components/Examples/Loader/Loader.vue'
 
 export default {
   name: 'Examples',
   components: {
-    Styleguide,
-    Loader
+    // Styleguide,
+    // Loader
   },
   props: {
     page: {
-      type: Object,
+      type: [Object, Array],
       required: true,
       default: null
     }
@@ -19,12 +18,15 @@ export default {
   mounted() {
     // Type `localStorage.debug = true` in your console to get fancy logs
     this.log('Hello world')
+    this.log('this.$apollo: ', this.$apollo)
   }
 }
 </script>
 
 <template>
   <div class="Examples">
+    Example:
+    {{ page }}
     {{ page.make }}<br>
     {{ page.model }}<br>
 
