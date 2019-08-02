@@ -1,0 +1,42 @@
+{
+  "home": {
+    "title": "vuecid-nuxt"
+  },
+  "error": {
+    "title": "Oooops 🙈",
+    "message": "Une erreur est survenue.",
+    "404": "Cette page n'existe pas.",
+    "link": "Retour à la page d'accueil"
+  },
+  "exampleContent": {
+    "title": "Beispiel Content Francais",
+    "text": "<p>Hello from fr.json</p>"
+  },
+  "skipNavigation": {
+    "text": "Passer au contenu"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Prochain",
+    "allPosts": "Tous les articles"
+  },
+  "lang": "Francais",
+  "cookieLaw": {
+    "DEV_getTranslationForYourLang": "https://github.com/ToX82/cookie-bar/tree/master/lang",
+    "message": "🍪 Ce site utilise des cookies pour améliorer l'expérience de navigation et fournir des fonctionnalités supplémentaires.",
+    "buttonText": "OK",
+    "buttonLinkText": "En savoir plus",
+    "buttonClose": "Fermer"
+  },
+  "ui": {
+    "mail": "adresse e-mail",
+    "name": "Nom de famille",
+    "firstName": "Prénom",
+    "salutation": "Civilité",
+    "titleMale": "Monsieur",
+    "titleFemale": "Madame",
+    "mailAriaHint": "Entrez votre adress e-mail ici",
+    "nameAriaHint": "Entrez votre nom ici",
+    "subscribe": "Abonnér"
+  }
+}

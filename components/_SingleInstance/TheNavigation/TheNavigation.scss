@@ -1,0 +1,110 @@
+@import '~assets/css/global';
+$c: 'TheNavigation';
+
+$c-the-navigation-spacer-default: 1em;
+
+.#{$c} {
+  position: relative;
+
+  &__list {
+    @include mq($to: medium) {
+      @include px-and-rem('margin-top', $s-the-header-bar-height-small);
+      display: none;
+      justify-content: flex-start;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - #{px-to-rem($s-the-header-bar-height-small)});
+      background: $s-color-white;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes
+
+      &.is-open {
+        display: flex;
+      }
+    }
+
+    @include mq($from: medium) {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+    }
+  }
+
+  &__item {
+    @include font-style-base;
+
+    @include mq($to: medium) {
+      width: 100%;
+      text-align: center;
+      margin-bottom: $c-the-navigation-spacer-default * 1.5;
+    }
+
+    @include mq($from: medium) {
+      &:not(:last-child) {
+        margin-right: $c-the-navigation-spacer-default;
+      }
+    }
+
+    &--has-children {
+      position: relative;
+
+      // todo we should be able to access the sub-list by tab (a11-y)
+      &:hover {
+        .#{$c}__sub-list {
+          visibility: visible;
+        }
+      }
+    }
+
+    &--child {
+      display: block;
+      margin-bottom: $c-the-navigation-spacer-default / 2;
+      white-space: nowrap;
+
+      @include mq($from: medium) {
+        margin-bottom: $c-the-navigation-spacer-default;
+        background-color: $s-color-white;
+      }
+    }
+
+    a {
+      @include hocus-focus($type: textcolor, $color: $s-color-primary);
+    }
+  }
+
+  &__sub-list {
+    padding-top: $c-the-navigation-spacer-default;
+
+    @include mq($from: medium) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__link {
+    /* Win some specificity battles caused by BBtn component */
+    &.is-active.is-active { // sass-lint:disable-line force-element-nesting
+      color: $s-color-primary;
+    }
+
+    &.#{$c}__BBtn.#{$c}__BBtn { // sass-lint:disable-line force-element-nesting
+      margin-bottom: 0;
+    }
+  }
+
+  &__lang-item {
+    text-transform: capitalize;
+
+    &:not(:last-child) {
+      &::after {
+        content: ' / ';
+      }
+    }
+  }
+}

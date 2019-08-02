@@ -1,0 +1,11 @@
+@import '~assets/css/global';
+
+$c: 'Paginate';
+
+.#{$c} {
+  @include set-gutter('small');
+
+  &__button-container {
+    margin-top: px-to-rem($s-size-spacer-medium);
+  }
+}

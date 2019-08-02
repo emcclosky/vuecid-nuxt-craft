@@ -1,0 +1,49 @@
+@import '~assets/css/global';
+
+$c: 'Loader';
+
+$c-loader-size: 30px;
+$c-loader-border-size: 5px;
+$c-loader-min-height: 100px;
+
+
+.#{$c} {
+  height: 100%;
+  width: 100%;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: px-to-rem($c-loader-min-height);
+
+  &__animation {
+    border: px-to-rem($c-loader-border-size) solid $s-color-primary;
+    display: block;
+    border-radius: px-to-rem($c-loader-size);
+    height: px-to-rem($c-loader-size);
+    width: px-to-rem($c-loader-size);
+    top: 50%;
+    left: 50%;
+    margin: - px-to-rem($c-loader-size / 2);
+    opacity: 0;
+    position: absolute;
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+
+    @keyframes pulsate {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+    }
+  }
+}

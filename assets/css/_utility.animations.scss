@@ -1,0 +1,44 @@
+/*
+* Page transition
+*/
+.page-enter-active,
+.page-leave-active {
+  transition: opacity $s-animation-duration-default $s-animation-easing-default;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/*
+* Animation: Fade
+*/
+.u-anim-fade-enter-active,
+.u-anim-fade-leave-active {
+  transition-duration: $s-animation-duration-default;
+  transition-property: opacity;
+}
+
+.u-anim-fade-enter,
+.u-anim-fade-leave-active {
+  opacity: 0;
+}
+
+/*
+ * Animation: Fade Delayed
+ */
+.u-anim-fade-delayed-enter-active,
+.u-anim-fade-delayed-leave-active {
+  transition-duration: $s-animation-duration-default;
+  transition-property: opacity;
+}
+
+.u-anim-fade-delayed-enter-active {
+  transition-delay: $s-animation-duration-default;
+}
+
+.u-anim-fade-delayed-enter,
+.u-anim-fade-delayed-leave-active {
+  opacity: 0;
+}

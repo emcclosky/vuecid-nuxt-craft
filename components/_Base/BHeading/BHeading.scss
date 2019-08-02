@@ -1,0 +1,61 @@
+@import '~assets/css/global';
+
+$c: 'BHeading';
+
+.#{$c} {
+  margin-bottom: 1em;
+
+  &__anchor {
+    display: none;
+  }
+
+  &__content {
+    a {
+      @include hocus-focus($type: textcolor, $color: $s-color-primary);
+    }
+  }
+
+  &.has-clickable-anchor {
+    .#{$c} {
+      &__anchor {
+        @include hocus-focus($type: textcolor, $color: $s-color-primary);
+        display: inline-block;
+        margin-left: 0.5em;
+        text-decoration: none;
+        visibility: hidden;
+      }
+    }
+
+    &:hover {
+      .#{$c} {
+        &__anchor {
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &--level-1 {
+    @include font-style-heading1;
+  }
+
+  &--level-2 {
+    @include font-style-heading2;
+  }
+
+  &--level-3 {
+    @include font-style-heading3;
+  }
+
+  &--level-4 {
+    @include font-style-heading4;
+  }
+
+  &--level-5 {
+    @include font-style-heading5;
+  }
+
+  &--level-6 {
+    @include font-style-heading6;
+  }
+}

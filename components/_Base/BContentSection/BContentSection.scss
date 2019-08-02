@@ -1,0 +1,11 @@
+@import '~assets/css/global';
+
+$c: 'BContentSection';
+
+.#{$c} {
+  margin-bottom: 2em;
+
+  &--centered {
+    @include set-gutter('small');
+  }
+}

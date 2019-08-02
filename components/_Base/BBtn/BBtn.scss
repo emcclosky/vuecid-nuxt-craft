@@ -1,0 +1,73 @@
+@import '~assets/css/global';
+
+$c: 'BBtn';
+$c-b-btn-padding-vertical: 0.5em;
+$c-b-btn-padding-horizontal: 1em;
+$c-b-btn-border-radius: 4px;
+$c-b-btn-color: $s-color-primary;
+$c-b-btn-color-text: $s-color-text-default;
+$c-b-btn-color-text-inverted: $s-color-white;
+
+.#{$c} {
+  @include hocus-focus($type: textcolor, $color: $c-b-btn-color);
+  @include reset-button;
+  @include font-style-button;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  text-align: center;
+  padding: $c-b-btn-padding-vertical $c-b-btn-padding-horizontal;
+  color: $c-b-btn-color-text-inverted;
+  text-decoration: none;
+  background-color: $c-b-btn-color;
+  border-radius: $c-b-btn-border-radius;
+  margin: 0 0 px-to-rem($s-size-spacer-small);
+  transition: background-color $s-animation-duration-default $s-animation-easing-default, color $s-animation-duration-default $s-animation-easing-default;
+
+  &:hover {
+    color: $c-b-btn-color-text;
+    background-color: lighten($c-b-btn-color, 20%);
+  }
+
+  &.is-disabled {
+    cursor: default;
+    color: lighten(grayscale($c-b-btn-color-text), 25%);
+    background-color: lighten(grayscale($c-b-btn-color), 20%);
+
+    &:hover {
+      color: lighten(grayscale($c-b-btn-color-text), 75%);
+    }
+  }
+
+  // A naked button
+  &.is-naked {
+    color: $c-b-btn-color-text;
+    text-align: center;
+    padding: 0;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0 0 px-to-rem($s-size-spacer-small);
+
+    &:hover {
+      color: $c-b-btn-color;
+    }
+
+    & a {
+      color: $c-b-btn-color-text;
+
+      &:hover {
+        color: $c-b-btn-color;
+      }
+    }
+
+    &.is-disabled,
+    &:disabled {
+      color: lighten(grayscale($c-b-btn-color-text), 50%);
+
+      &:hover {
+        color: lighten(grayscale($c-b-btn-color-text), 50%);
+      }
+    }
+  }
+}

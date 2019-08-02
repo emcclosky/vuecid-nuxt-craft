@@ -1,0 +1,32 @@
+@import '~assets/css/global';
+
+$c: 'BAlert';
+$c-b-alert-height: $s-size-spacer-medium;
+
+.#{$c} {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: px-to-rem($c-b-alert-height);
+  text-align: center;
+  background-color: $s-color-alert;
+  opacity: 0.5;
+
+  &.is-error {
+    background-color: $s-color-error;
+  }
+
+  &.is-success {
+    background-color: $s-color-success;
+
+    .#{$c}__message {
+      color: $s-color-black;
+    }
+  }
+
+  &__message {
+    line-height: px-to-rem($c-b-alert-height);
+    color: $s-color-white;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "home": {
+    "title": "vuecid-nuxt"
+  },
+  "error": {
+    "title": "Oooops 🙈",
+    "message": "An error occurred.",
+    "404": "This Page doesn't exist.",
+    "link": "Back to home page"
+  },
+  "exampleContent": {
+    "title": "Example Content English",
+    "text": "<p>Hello from en.json</p>"
+  },
+  "skipNavigation": {
+    "text": "Skip to main content"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "allPosts": "All posts"
+  },
+  "lang": "English",
+  "cookieLaw": {
+    "DEV_getTranslationForYourLang": "https://github.com/ToX82/cookie-bar/tree/master/lang",
+    "message": "🍪 This website makes use of cookies to enhance browsing experience and provide additional functionality.",
+    "buttonText": "OK",
+    "buttonLinkText": "Details",
+    "buttonClose": "Close"
+  },
+  "ui": {
+    "mail": "Email-Address",
+    "name": "Surname",
+    "firstName": "First name",
+    "salutation": "Title",
+    "titleMale": "Mr.",
+    "titleFemale": "Mrs.",
+    "mailAriaHint": "Enter your email here",
+    "nameAriaHint": "Enter your name here",
+    "subscribe": "Subscribe"
+  }
+}

@@ -1,0 +1,27 @@
+@import '~assets/css/global';
+
+$c: 'TheHeaderBar';
+$c-the-headerbar-shadow-color: rgba($s-color-black, 0.1);
+$c-the-headerbar-shadow-size: 5px;
+
+.#{$c} {
+  display: flex;
+  align-items: center;
+  padding: px-to-rem($s-size-gutter-small);
+  box-shadow: 0 $c-the-headerbar-shadow-size $c-the-headerbar-shadow-size $c-the-headerbar-shadow-color;
+
+  @include mq($from: medium) {
+    padding: px-to-rem($s-size-gutter-medium);
+  }
+
+  &__item {
+    &:first-child {
+      flex: 0 1 10%;
+    }
+
+    &:last-child {
+      text-align: right;
+      flex: 0 1 90%;
+    }
+  }
+}

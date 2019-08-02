@@ -1,0 +1,21 @@
+@import '~assets/css/global';
+
+$c: 'Examples';
+
+.#{$c} {
+  &__info {
+    @include font-style-small;
+    @include font-style-italic;
+    margin-bottom: 0;
+  }
+
+  .has-background {
+    background: $s-color-lightgrey;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .has-spacing {
+    margin-top: 10em;
+  }
+}

@@ -1,0 +1,39 @@
+@import '~assets/css/global';
+@import '~sass-burger/burger';
+
+$c: 'BBurger';
+
+$c-b-burger-size: 35px;
+$c-b-burger-padding: 0;
+$c-b-burger-border-size: 2px;
+$c-b-burger-gutter: 6px;
+$c-b-burger-container-size: $c-b-burger-size + ($c-b-burger-padding * 2);
+
+.#{$c} {
+  @include hocus-focus($type: textcolor, $color: $s-color-primary);
+  width: px-to-rem($c-b-burger-container-size);
+  height: px-to-rem($c-b-burger-container-size);
+  padding: px-to-rem($c-b-burger-padding);
+  margin-right: px-to-rem(-$c-b-burger-padding);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+
+  @include mq($from: medium) {
+    display: none;
+  }
+
+  &__burger {
+    @include burger($width: $c-b-burger-size, $height: $c-b-burger-border-size, $gutter: $c-b-burger-gutter, $color: $s-color-black, $border-radius: 0, $transition-duration: $s-animation-duration-default);
+  }
+
+  &.is-active {
+    .#{$c}__burger {
+      @include burger-to-cross($color: $s-color-black);
+    }
+  }
+}

@@ -1,0 +1,92 @@
+/*
+ * Naming conventions inspired by
+ * https://speckyboy.com/naming-conventions-sizes-scalable-css/
+ */
+
+/*
+ * Settings – Variables
+ */
+
+$s-font-family-base: 'Arial', sans-serif;
+
+/*
+ * Font Sizes
+ * Before starting a project:
+ * Set up a type-specification file
+ */
+
+/* Font-Sizes */
+$s-fz-small: 14px;
+$s-fz-medium: 18px; // base
+$s-fz-increased: 24px;
+$s-fz-large: 36px;
+$s-fz-huge: 64px;
+$s-line-height-std: 1.2;
+
+/*
+ *  Settings – Spacing
+ */
+
+// $s-size-spacer-atomic:
+// $s-size-spacer-micro:
+// $s-size-spacer-tiny:
+$s-size-spacer-small: 20px;
+// $s-size-spacer-reduced:
+$s-size-spacer-medium: $s-size-spacer-small * 2;
+$s-size-spacer-increased: $s-size-spacer-small * 3;
+$s-size-spacer-large: $s-size-spacer-small * 4;
+// $s-size-spacer-huge:
+// $s-size-spacer-giant:
+
+$s-size-gutter-small: $s-size-spacer-small;
+$s-size-gutter-medium: $s-size-gutter-small * 2;
+$s-size-gutter-large: $s-size-gutter-small * 4;
+
+$s-size-content-max-width-small: $s-fz-medium * 30; // 600px = 20px * 30em (don't make paragraphs too wide!)
+$s-size-content-max-width-medium: 1100px;
+$s-size-content-max-width-large: 1440px;
+
+
+/*
+ *  Settings – Specific sizes
+ */
+
+$s-the-header-bar-height-small: 70px;
+$s-the-header-bar-height: 110px;
+
+/*
+ *  Settings – Susy Grid
+ */
+
+$s-amount-columns: 12;
+
+/*
+ *  Settings – Animations
+ */
+
+$s-animation-duration-default: 0.3s;
+$s-animation-easing-default: ease-in-out;
+
+/*
+ *  Settings – Breakpoints
+ */
+
+$s-size-breakpoint-initial: 1px;
+$s-size-breakpoint-tiny: 320px;
+$s-size-breakpoint-small: 375px;
+// $s-size-breakpoint-small-01: 400px;
+$s-size-breakpoint-reduced: 420px;
+$s-size-breakpoint-medium: 768px;
+$s-size-breakpoint-increased: 1024px;
+$s-size-breakpoint-large: 1440px;
+$s-size-breakpoint-huge: 1920px;
+$s-size-breakpoint-giant: 2200px;
+
+/*
+ *  Settings – z-Index
+ */
+
+$s-zindex-map: (
+  'skip-navigation-link': 110,
+  'menu': 90
+);

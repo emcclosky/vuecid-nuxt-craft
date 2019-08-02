@@ -1,0 +1,104 @@
+/*
+ * Strong,B Styles
+ */
+
+@mixin font-style-strong {
+  // You might want to replace this with an actual font file
+  font-weight: bold;
+}
+
+/*
+ * Italic
+ */
+
+@mixin font-style-italic {
+  // You might want to replace this with an actual font file
+  font-style: italic;
+}
+
+/*
+ * Link & Button Styles
+ */
+
+@mixin font-style-link {
+  @include font-style-base;
+  text-decoration: underline;
+}
+
+@mixin font-style-button {
+  @include font-style-base;
+}
+
+/*
+ * Font Styles
+ */
+
+@mixin font-style-base {
+  font-family: $s-font-family-base;
+  font-size: px-to-rem($s-fz-medium);
+  font-weight: normal;
+  line-height: $s-line-height-std;
+  letter-spacing: normal;
+
+  @include mq($from: medium) {
+    font-size: px-to-rem($s-fz-increased);
+  }
+}
+
+@mixin font-style-small {
+  @include font-style-base;
+  font-size: px-to-rem($s-fz-small);
+
+  @include mq($from: medium) {
+    font-size: px-to-rem($s-fz-medium);
+  }
+}
+
+@mixin font-style-heading-base {
+  @include font-style-base;
+  @include font-style-strong;
+  margin-bottom: 0.5em;
+}
+
+@mixin font-style-heading1 {
+  @include font-style-heading-base;
+  @include fluid-size('font-size', $s-size-breakpoint-tiny, $s-size-breakpoint-huge, $s-fz-increased, $s-fz-huge);
+}
+
+@mixin font-style-heading2 {
+  @include font-style-heading-base;
+  font-size: px-to-rem($s-fz-increased);
+
+  @include mq($from: medium) {
+    font-size: px-to-rem($s-fz-large);
+  }
+}
+
+@mixin font-style-heading3 {
+  @include font-style-heading-base;
+}
+
+@mixin font-style-heading4 {
+  @include font-style-heading-base;
+  color: $s-color-grey;
+}
+
+@mixin font-style-heading5 {
+  @include font-style-heading-base;
+  @include font-style-italic;
+  font-weight: normal;
+}
+
+@mixin font-style-heading6 {
+  @include font-style-heading-base;
+  padding: 0.5em;
+  font-size: px-to-rem($s-fz-small);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $s-color-white;
+  background: $s-color-grey;
+
+  @include mq($from: medium) {
+    font-size: px-to-rem($s-fz-small);
+  }
+}

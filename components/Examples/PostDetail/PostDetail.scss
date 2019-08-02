@@ -1,0 +1,11 @@
+@import '~assets/css/global';
+
+$c: 'PostDetail';
+
+.#{$c} {
+
+  &__title,
+  &__btn-container {
+    @include set-gutter('small');
+  }
+}

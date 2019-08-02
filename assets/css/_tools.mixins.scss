@@ -1,0 +1,294 @@
+/*
+ * Precise Control over sizes:
+ * Adapt a layout from a minimum size to a maximum size in a given range of screen widths
+ *
+ * Usage:
+ * html {
+ *   @include fluid-size('font-size', 320px, 1366px, 14px, 18px);
+ *   // or like this
+ *   @include fluid-size('font-size', 32.0rem, 136.6rem, 1.4rem, 1.8rem);
+ * }
+ * @params:
+ * $properties: e.g. 'font-size', 'padding-top' etc.
+ * $min-vw: below this viewport we don't see any change
+ * $max-vw: above this viewport we don't see any change
+ * $min-value: smallest value for property
+ * $max-value: biggest value
+ *
+ * ! Beware: Don't mix units. You can either use all parameters in px or in rem, but don't mix them.
+ * Because Breakpoints should be set in pixel you should prefer px over other units.
+ * (https://adamwathan.me/dont-use-em-for-media-queries/)
+ *
+ */
+
+@mixin fluid-size($properties, $min-vw, $max-vw, $min-value, $max-value) {
+  @each $property in $properties {
+    #{$property}: $min-value;
+  }
+
+  @media (min-width: $min-vw) {
+    @each $property in $properties {
+      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+    }
+  }
+
+  @media (min-width: $max-vw) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/*
+ * General Mixins
+ */
+
+/*
+ * Hide visually
+ * See http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ * for discussion of different solutions
+ */
+@mixin visually-hidden() {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+@mixin visually-hidden-reset() {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+@mixin visually-hidden-focusable() {
+  @include visually-hidden;
+
+  &:focus,
+  &:active {
+    @include visually-hidden-reset;
+  }
+}
+
+/*
+ * Contain floats with clearfix
+ *
+ * http://nicolasgallagher.com/micro-clearfix-hack/
+ */
+@mixin clearfix() {
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+/*
+ * Lists with layout purpose
+ */
+@mixin reset-list() {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/*
+ * Reset button
+ */
+@mixin reset-button() {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  appearance: none;
+}
+
+/*
+ * Replace text
+ */
+@mixin replace-text() {
+  display: block;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+/*
+ * Select dropdown element reset default appearance
+ */
+@mixin reset-select() {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  appearance: none;
+}
+
+/*
+ * Set Ellipsis
+ */
+@mixin set-ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ * WordWrap
+ */
+@mixin word-wrap($break: true) {
+  hyphens: auto;
+
+  @if $break == true {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+/*
+ * Hocus Focus
+ */
+@mixin hocus-focus($type: bgcolor, $color: $s-color-primary) {
+  @if $type == bgcolor {
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:active {
+      background-color: $color;
+    }
+
+    [data-whatinput='keyboard'] &:focus {
+      background-color: $color;
+    }
+  } @else if $type == textcolor {
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:active {
+      color: $color;
+    }
+
+    [data-whatinput='keyboard'] &:focus {
+      // color: $color;
+      outline: 1px solid $color;
+      outline-offset: 10px;
+    }
+  }
+}
+
+/*
+ * Reset Link
+ */
+@mixin reset-link() {
+  color: $s-color-text-default;
+  cursor: pointer;
+
+  &:hover {
+    color: $s-color-primary;
+  }
+}
+
+
+/*
+ * Define different component max widths
+ * Also check sketch file for further visual information
+ * @Params: small | medium | large | full-width
+ */
+
+@mixin set-gutter($size: 'small') {
+  // small is mainly for paragraphs and is calculated from font-size
+  @if ($size == 'small') {
+    width: 100%;
+    padding: 0 px-to-rem($s-size-gutter-small);
+
+    @include mq($from: medium) {
+      padding: 0 px-to-rem($s-size-gutter-medium);
+      max-width: px-to-rem($s-size-content-max-width-small + 2 * ($s-size-gutter-medium));
+      margin-left: auto;
+      margin-right: auto;
+    }
+  } @else if ($size == 'medium') {
+    width: 100%;
+    padding: 0 px-to-rem($s-size-gutter-small);
+
+    @include mq($from: medium) {
+      padding: 0 px-to-rem($s-size-gutter-medium);
+      max-width: px-to-rem($s-size-content-max-width-medium + 2 * ($s-size-gutter-medium));
+      margin-left: auto;
+      margin-right: auto;
+    }
+  } @else if ($size == 'large') {
+    width: 100%;
+    padding: 0 px-to-rem($s-size-gutter-small);
+
+    @include mq($from: medium) {
+      padding: 0 px-to-rem($s-size-gutter-medium);
+      max-width: px-to-rem($s-size-content-max-width-large + 2 * ($s-size-gutter-medium));
+      margin-left: auto;
+      margin-right: auto;
+    }
+  } @else if ($size == 'full-width') {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+
+    @include mq($from: medium) {
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+/*
+ * Simple Grid
+ */
+
+@mixin grid($columns: 2, $gutter: $s-size-gutter-small) {
+  width: (100% / $columns);
+  padding-left: px-to-rem($gutter / 2);
+  padding-right: px-to-rem($gutter / 2);
+}
+
+@mixin grid-wrapper($columns: 2, $gutter: 20) {
+  margin-right: px-to-rem(-$gutter / 2);
+  margin-left: px-to-rem(-$gutter / 2);
+}
+
+/*
+ * Use pixels and rem at the same time for better debugging
+ * Example: @include px-and-rem($prop: 'height', $px: '20px');
+ * The pixel value will be overridden, but is still readable in the inspector.
+ */
+@mixin px-and-rem($prop: 'width', $px: '10px') {
+  #{$prop}: $px;
+  #{$prop}: px-to-rem($px); // sass-lint:disable-line no-duplicate-properties
+}

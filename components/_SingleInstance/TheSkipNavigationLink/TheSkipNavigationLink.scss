@@ -1,0 +1,38 @@
+@import '~assets/css/global';
+
+$c: 'TheSkipNavigationLink';
+
+.#{$c} {
+  @include font-style-link;
+  z-index: z('skip-navigation-link');
+  background-color: $s-color-white;
+  padding: 0.3em;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+  overflow: hidden;
+
+  &:active,
+  &:focus,
+  &:hover {
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+
+  &.#{$c}__BBtn.is-naked { // sass-lint:disable-line force-element-nesting
+    margin-left: px-to-rem($s-size-gutter-small);
+    background-color: rgba($s-color-white, 0.8); // sass-lint:disable-line no-color-literals
+    padding: 0.3em 0.3em 0.3em 0;
+    border-radius: 0;
+
+    @include mq($from: medium) {
+      margin-left: px-to-rem($s-size-gutter-medium);
+    }
+  }
+}

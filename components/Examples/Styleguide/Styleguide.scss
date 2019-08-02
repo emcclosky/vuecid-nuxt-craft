@@ -1,0 +1,9 @@
+@import '~assets/css/global';
+
+$c: 'Styleguide';
+
+.#{$c} {
+  &__heading {
+    margin: 5em 0 1em;
+  }
+}

@@ -1,0 +1,18 @@
+/*
+ * Export breakpoints so we can import them in javascript with some webpack magic
+ */
+
+@import 'settings.variables';
+
+// sass-lint:disable no-misspelled-properties
+:export {
+  initial: $s-size-breakpoint-initial;
+  tiny: $s-size-breakpoint-tiny;
+  small: $s-size-breakpoint-small;
+  reduced: $s-size-breakpoint-reduced;
+  medium: $s-size-breakpoint-medium;
+  increased: $s-size-breakpoint-increased;
+  large: $s-size-breakpoint-large;
+  huge: $s-size-breakpoint-huge;
+  giant: $s-size-breakpoint-giant;
+}

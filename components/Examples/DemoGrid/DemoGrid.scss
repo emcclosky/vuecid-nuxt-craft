@@ -1,0 +1,112 @@
+@import '~assets/css/global';
+
+$c: 'DemoGrid';
+// $c-demogrid-some-variable: 'Some Value';
+
+.#{$c} {
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+  justify-content: space-between;
+  padding-top: px-to-rem(30px);
+  background: susy-svg-grid($colors: rgba(#c7eaee, 0.7)) no-repeat scroll; // sass-lint:disable-line no-color-literals
+
+  &__box {
+    width: span(12 of 12);
+    background-color: $s-color-primary;
+    margin-bottom: px-to-rem(30px);
+    min-height: px-to-rem(80px);
+    line-height: px-to-rem(80px);
+    text-align: center;
+    color: $s-color-white;
+    float: left;
+    font-size: px-to-rem(12px);
+    overflow: hidden;
+
+    &--three-one {
+      width: span(3 of 12);
+      background-color: $s-color-secondary;
+
+      @include mq($from: medium) {
+        width: span(1 of 12);
+      }
+    }
+
+    &--four-one {
+      width: span(4 of 12);
+      background-color: $s-color-secondary;
+
+      @include mq($from: medium) {
+        width: span(1 of 12);
+      }
+    }
+
+    &--six-one {
+      width: span(6 of 12);
+      background-color: $s-color-secondary;
+
+      @include mq($from: medium) {
+        width: span(1 of 12);
+      }
+    }
+
+    &--one {
+      width: span(1 of 12);
+    }
+
+    &--two {
+      width: span(2 of 12);
+    }
+
+    &--three {
+      width: span(3 of 12);
+    }
+
+    &--four {
+      width: span(4 of 12);
+    }
+
+    &--five {
+      width: span(5 of 12);
+    }
+
+    &--six {
+      width: span(6 of 12);
+    }
+
+    &--seven {
+      width: span(7 of 12);
+    }
+
+    &--eight {
+      width: span(8 of 12);
+    }
+
+    &--nine {
+      width: span(9 of 12);
+    }
+
+    &--ten {
+      width: span(10 of 12);
+    }
+
+    &--eleven {
+      width: span(11 of 12);
+    }
+  }
+
+  &__label {
+
+    &--mobile {
+      @include mq($from: medium) {
+        display: none;
+      }
+    }
+
+    &--desk {
+      @include mq($to: medium) {
+        display: none;
+      }
+    }
+  }
+}

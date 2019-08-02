@@ -1,0 +1,14 @@
+# Netlify Redirect & Rewrite Rules
+# Check https://www.netlify.com/docs/redirects/
+# TODO: Add your langs and your home slug
+
+/de/*           /:splat
+
+/en/home/* preview_id=:val1 preview_nonce=:val2 preview=:val3 /en/?preview_id=:val1&preview_nonce=:val2&preview=true:val3
+/fr/home/* preview_id=:val1 preview_nonce=:val2 preview=:val3 /fr/?preview_id=:val1&preview_nonce=:val2&preview=true:val3
+
+/en/home/*      /en/:splat
+/fr/home/*      /fr/:splat
+
+/home/* preview_id=:val1 preview_nonce=:val2 preview=:val3 /?preview_id=:val1&preview_nonce=:val2&preview=true:val3
+/home/*         /:splat

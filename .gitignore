@@ -1,0 +1,27 @@
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist
+
+# PWA
+static/sw.js
+
+# Sitemap
+static/sitemap.xml
+
+# Static JSON Files
+static/data
+
+# Webpack Monitor Stats
+.monitor
+
+tsconfig.json
+
+.idea

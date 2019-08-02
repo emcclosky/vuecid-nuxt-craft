@@ -1,0 +1,18 @@
+@import '~assets/css/global';
+
+$c: 'PostsList';
+
+.#{$c} {
+
+  &__item {
+    margin-bottom: px-to-rem($s-size-spacer-small);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      @include hocus-focus($type: textcolor, $color: $s-color-primary);
+    }
+  }
+}

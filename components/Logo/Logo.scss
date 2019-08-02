@@ -1,0 +1,16 @@
+@import '../../assets/css/global';
+
+$c: 'Logo';
+$c-logo-height: 30px;
+
+.#{$c} {
+  line-height: 0;
+
+  &__image {
+    height: px-to-rem($c-logo-height);
+  }
+
+  a {
+    @include hocus-focus($type: textcolor, $color: $s-color-primary);
+  }
+}

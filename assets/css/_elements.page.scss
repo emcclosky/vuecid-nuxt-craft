@@ -1,0 +1,63 @@
+// Page-level styling (e.g. html and body elements).
+
+html {
+  @include word-wrap;
+  height: 100%;
+  font-family: $s-font-family-base;
+  font-size: (100% / 1.6); // now 1rem equals 10px
+  font-weight: normal;
+  line-height: $s-line-height-std;
+  color: $s-color-text-default;
+  background: $s-color-body-background;
+  -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+  -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+  -webkit-text-size-adjust: none; // sass-lint:disable-line no-vendor-prefixes
+  font-kerning: normal;
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+
+body {
+  @include font-style-base;
+  min-height: 100%;
+}
+
+main {
+  outline: none;
+}
+
+h1 {
+  @include font-style-heading1;
+}
+
+h2 {
+  @include font-style-heading2;
+}
+
+h3 {
+  @include font-style-heading3;
+}
+
+h4 {
+  @include font-style-heading4;
+}
+
+h5 {
+  @include font-style-heading5;
+}
+
+h6 {
+  @include font-style-heading6;
+}
+
+p {
+  @include font-style-base;
+  margin-bottom: 1em;
+}
+
+a {
+  @include reset-link;
+}
+
+ul {
+  @include reset-list;
+}
