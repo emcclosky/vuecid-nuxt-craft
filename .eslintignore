@@ -1,7 +1,8 @@
-# Make sure to add your ignored files to .eslintignore
-# We can't ignore /packages/*/dist/*.js because of npm publishing
-# But we wan't them to exclude from linting!
-# https://github.com/eslint/eslint/issues/9794
+# Don't lint Lerna Packages dist folders
+/packages/*/dist/**/*.js
+
+
+# Copy from .gitignore:
 
 # dependencies
 node_modules
