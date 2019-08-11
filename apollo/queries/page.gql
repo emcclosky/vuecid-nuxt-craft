@@ -1,9 +1,16 @@
-query Page($slug: String) {
+#import "./fragments/flexibleContent.gql"
+
+query ($slug: String!) {
   entries(section: [page], slug: $slug) {
-    ...on PageFlexContent {
+    ... on PageFlexContent {
       id
       title
       slug
+      flexibleContent {
+        ...text
+        ...image
+        ...teaser
+      }
     }
   }
 }

@@ -12,22 +12,31 @@ export default {
       query: page,
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
-        return { slug: this.$route.params.slug }
+        return { slug: 'home' }
       }
     }
   },
   extends: basePage,
+  computed: {
+    page() {
+      return this.entries && this.entries.length ? this.entries[0] : false
+    }
+  },
   mounted() {
-    this.log('this.apollo: ', this.apollo)
+    this.log('this.page: ', this.page)
   }
-  // computed: mapGetters('data', ['page'])
 }
 </script>
 
 <template>
-  <div v-if="entries" class="Page">
-    <no-ssr>
-      <Examples :page="entries" />
-    </no-ssr>
+  <div class="Page">
+    <div v-if="page">
+      <no-ssr>
+        <Examples :page="page" />
+      </no-ssr>
+    </div>
+    <div v-else>
+      Maybe you forgot to create a page with your home slug set in your config?
+    </div>
   </div>
 </template>

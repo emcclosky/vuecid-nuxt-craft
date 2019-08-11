@@ -1,11 +1,11 @@
 <script>
-// import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
+import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
 // import Loader from '~/components/Examples/Loader/Loader.vue'
 
 export default {
   name: 'Examples',
   components: {
-    // Styleguide,
+    Styleguide
     // Loader
   },
   props: {
@@ -25,18 +25,15 @@ export default {
 
 <template>
   <div class="Examples">
-    Example:
-    {{ page }}
-    {{ page.make }}<br>
-    {{ page.model }}<br>
-
     <!-- Styleguide -->
-    <!-- <BContentSection>
+    <BContentSection>
       <BContentSection class="has-spacing" type="div" :modifiers="['centered']">
         <BHeading :level="2" has-clickable-anchor>Styleguide</BHeading>
         <Styleguide />
       </BContentSection>
-    </BContentSection> -->
+    </BContentSection>
+
+
   </div>
 </template>
 

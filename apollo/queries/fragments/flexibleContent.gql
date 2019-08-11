@@ -1,0 +1,20 @@
+fragment text on FlexibleContentRichtext {
+  richtext {
+    content
+  }
+}
+
+fragment image on FlexibleContentImage {
+  image {
+    id
+  }
+}
+
+fragment teaser on FlexibleContentTeaser {
+  teaserTitle
+  text
+  teaserLink {
+    url
+    title
+  }
+}

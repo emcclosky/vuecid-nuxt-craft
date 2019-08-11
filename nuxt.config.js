@@ -138,6 +138,7 @@ export default {
    ** Apollo config
    */
   apollo: {
+    includeNodeModules: true,
     clientConfigs: {
       default: '~/apollo/client-configs/default.js'
     }
