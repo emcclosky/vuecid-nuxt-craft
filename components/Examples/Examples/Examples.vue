@@ -32,8 +32,6 @@ export default {
         <Styleguide />
       </BContentSection>
     </BContentSection>
-
-
   </div>
 </template>
 

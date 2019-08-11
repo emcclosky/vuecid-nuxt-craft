@@ -106,7 +106,6 @@ const config = {
   //     postType: 'my_custom_post_type'
   //   }
   // },
-
 }
 
 export default config

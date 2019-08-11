@@ -53,8 +53,7 @@ export default {
 </script>
 
 <template>
-  <nav>
-  </nav>
+  <nav></nav>
 </template>
 
 <style src="./TheNavigation.scss" lang="scss" />

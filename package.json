@@ -14,13 +14,12 @@
     "build": "nuxt build --modern",
     "start": "nuxt start",
     "generate": "nuxt generate --modern",
-    "netlify": "yarn fetch && yarn generate",
+    "netlify": "yarn generate",
     "netlifyify": "yarn netlify && PORT=3000 serve",
-    "fetch": "babel-node --presets env -- fetchData.js",
     "lint": "sass-lint -c .sass-lint.yml '**/*.scss' -v -q -i 'node_modules/**/*.scss' && eslint --ext .js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "scaffold": "plop",
-    "build-fragment" : "babel-node --presets env -- apollo/schemaQuery.js"
+    "build-fragment" : "babel-node --presets env -- apollo/schemaQuery.js",
+    "scaffold": "plop"
   },
   "precommit": "lint",
   "dependencies": {
