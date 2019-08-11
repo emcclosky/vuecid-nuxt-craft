@@ -13,22 +13,6 @@ export default {
   computed: mapState({
     previewActive: state => state.data.previewActive
   }),
-  created() {
-    //     if (process.browser) {
-    //       // eslint-disable-next-line no-console
-    //       console.info(
-    //         `%c -----------------------------------
-    // < Made by Lucid — www.wearelucid.ch >
-    //   -----------------------------------
-    //         \\   ^__^
-    //           \\  (oo)\\_______
-    //             (__)\\       )\\/\\
-    //                 ||----w |
-    //                 ||     ||`,
-    //         'font-family:monospace'
-    //       )
-    //     }
-  },
   methods: {
     setFocusOnMain() {
       // Props to https://www.bignerdranch.com/blog/web-accessibility-skip-navigation-links/
