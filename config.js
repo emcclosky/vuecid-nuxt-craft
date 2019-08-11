@@ -7,32 +7,32 @@ const urls = {
 }
 
 // TODO: Add your langs
-// const langs = [
-//   {
-//     default: true, // Specify default lang
-//     lang: 'de',
-//     slug: 'de',
-//     locale: 'de_CH',
-//     name: 'Deutsch'
-//   },
-//   {
-//     lang: 'en',
-//     slug: 'en',
-//     locale: 'en_US',
-//     name: 'English'
-//   },
-//   {
-//     lang: 'fr',
-//     slug: 'fr',
-//     locale: 'fr_FR',
-//     name: 'Français'
-//   }
-// ]
+const langs = [
+  {
+    default: true, // Specify default lang
+    lang: 'de',
+    slug: 'de',
+    locale: 'de_CH',
+    name: 'Deutsch'
+  },
+  {
+    lang: 'en',
+    slug: 'en',
+    locale: 'en_US',
+    name: 'English'
+  }
+  // {
+  //   lang: 'fr',
+  //   slug: 'fr',
+  //   locale: 'fr_FR',
+  //   name: 'Français'
+  // }
+]
 
-// const getDefaultLang = () => {
-//   const dl = langs.find(l => l.default === true)
-//   return dl.lang
-// }
+const getDefaultLang = () => {
+  const dl = langs.find(l => l.default === true)
+  return dl.lang
+}
 
 // TODO: Add your home slug from WordPress
 const homeSlug = 'home'
@@ -40,8 +40,8 @@ const homeSlug = 'home'
 const config = {
   env: {
     LOG_VERBOSE: false,
-    // LANGS: langs,
-    // DEFAULTLANG: getDefaultLang(),
+    LANGS: langs,
+    DEFAULTLANG: getDefaultLang(),
     BACKENDURLPRODUCTION: urls.backendUrlProduction,
     BACKENDURLLOCAL: urls.backendUrlLocal,
     FRONTENDURLPRODUCTION: urls.frontendUrlProduction,
@@ -69,43 +69,43 @@ const config = {
   themeColor: '#ffffff',
 
   // TODO: Replace favicon source file in /static/icon.png (512px x 512px)
-  iconSizes: [32, 57, 60, 72, 76, 120, 144, 152, 167, 180, 192, 512]
+  iconSizes: [32, 57, 60, 72, 76, 120, 144, 152, 167, 180, 192, 512],
 
   // TODO: Add route aliases (for example for posts)
-  // routeAliases: {
-  //   posts: {
-  //     locales: {
-  //       de: '/beitraege',
-  //       en: '/posts',
-  //       fr: '/articles'
-  //     }
-  //   },
-  //   'posts-slug': {
-  //     locales: {
-  //       de: '/beitraege/:slug',
-  //       en: '/posts/:slug',
-  //       fr: '/articles/:slug'
-  //     },
-  //     isInBundle: false,
-  //     postType: 'posts'
-  //   },
-  //   my_custom_post_type: {
-  //     locales: {
-  //       de: '/custom-post-type-slug-de',
-  //       en: '/custom-post-type-slug-en',
-  //       fr: '/custom-post-type-slug-fr'
-  //     }
-  //   },
-  //   'my_custom_post_type-slug': {
-  //     locales: {
-  //       de: '/custom-post-type-slug-de/:slug',
-  //       en: '/custom-post-type-slug-en/:slug',
-  //       fr: '/custom-post-type-slug-fr/:slug'
-  //     },
-  //     isInBundle: true,
-  //     postType: 'my_custom_post_type'
-  //   }
-  // },
+  routeAliases: {
+    posts: {
+      locales: {
+        de: '/beitraege',
+        en: '/posts'
+        // fr: '/articles'
+      }
+    }
+    // 'posts-slug': {
+    //   locales: {
+    //     de: '/beitraege/:slug',
+    //     en: '/posts/:slug',
+    //     fr: '/articles/:slug'
+    //   },
+    //   isInBundle: false,
+    //   postType: 'posts'
+    // },
+    // my_custom_post_type: {
+    //   locales: {
+    //     de: '/custom-post-type-slug-de',
+    //     en: '/custom-post-type-slug-en',
+    //     fr: '/custom-post-type-slug-fr'
+    //   }
+    // },
+    // 'my_custom_post_type-slug': {
+    //   locales: {
+    //     de: '/custom-post-type-slug-de/:slug',
+    //     en: '/custom-post-type-slug-en/:slug',
+    //     fr: '/custom-post-type-slug-fr/:slug'
+    //   },
+    //   isInBundle: true,
+    //   postType: 'my_custom_post_type'
+    // }
+  }
 }
 
 export default config

@@ -1,5 +1,6 @@
 // eslint-disable-next-line prettier/prettier
 // import { generateLocalizedRoutes, generateRoutesFromData } from '@wearelucid/vuecid-helpers'
+import { generateLocalizedRoutes } from '@wearelucid/vuecid-craft-helpers'
 import config from './config'
 
 export default {
@@ -185,22 +186,18 @@ export default {
     middleware: ['i18n'],
     extendRoutes(routes) {
       // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
-      // const newRoutes = generateLocalizedRoutes({
-      //   baseRoutes: routes,
-      //   defaultLang: config.env.DEFAULTLANG,
-      //   langs: config.env.LANGS,
-      //   routeAliases: config.routeAliases
-      // })
+      const newRoutes = generateLocalizedRoutes({
+        baseRoutes: routes,
+        defaultLang: config.env.DEFAULTLANG,
+        langs: config.env.LANGS,
+        routeAliases: config.routeAliases
+      })
 
       // Clear array
-      // routes.splice(0, routes.length)
+      routes.splice(0, routes.length)
 
       // Push newly created routes
-      routes.push({
-        name: 'test',
-        path: '/test',
-        component: '~/pages/index.vue'
-      })
+      routes.push(...newRoutes)
     }
   },
 
