@@ -1,11 +1,7 @@
-# `vuecid-craft-helpers`
+# `Vuecid Craft Helpers`
 
-> TODO: description
+Helper library to let nuxt work smoothly with headless CraftCMS
 
 ## Usage
 
-```
-const vuecidCraftHelpers = require('vuecid-craft-helpers');
-
-// TODO: DEMONSTRATE API
-```
+`$ yarn add @wearelucid/vuecid-craft-helpers`
