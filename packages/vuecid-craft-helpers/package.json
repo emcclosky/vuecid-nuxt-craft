@@ -1,6 +1,6 @@
 {
   "name": "@wearelucid/vuecid-craft-helpers",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Helper functions to get your Vuecid-CraftCMS Frontend up and running.",
   "author": "Lucid <buero@wearelucid.ch> (https://www.wearelucid.ch)",
   "homepage": "https://github.com/wearelucid/vuecid-nuxt-craft.git",
@@ -12,6 +12,9 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "bugs": {
     "url": "https://github.com/wearelucid/vuecid-nuxt-craft/issues"
