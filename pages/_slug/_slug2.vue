@@ -35,8 +35,10 @@ export default {
       <em>This is a _slug page</em>
     </BContentSection>
 
-    <BHeading v-if="page.title" :level="1">
-      {{ page.title }}
-    </BHeading>
+    <BContentSection class="has-spacing" type="div" :modifiers="['centered']">
+      <BHeading v-if="page.title" :level="1">
+        {{ page.title }}
+      </BHeading>
+    </BContentSection>
   </div>
 </template>

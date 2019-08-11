@@ -32,6 +32,16 @@ export default {
   <div class="Page">
     <div v-if="page">
       <no-ssr>
+        <BContentSection
+          class="has-spacing"
+          type="div"
+          :modifiers="['centered']"
+        >
+          <BHeading v-if="page.title" :level="1">
+            {{ page.title }}
+          </BHeading>
+        </BContentSection>
+
         <Examples :page="page" />
       </no-ssr>
     </div>
