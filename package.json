@@ -18,7 +18,7 @@
     "netlifyify": "yarn netlify && PORT=3000 serve",
     "lint": "sass-lint -c .sass-lint.yml '**/*.scss' -v -q -i 'node_modules/**/*.scss' && eslint --ext .js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "build-fragment" : "babel-node --presets env -- apollo/schemaQuery.js",
+    "build-fragment": "babel-node --presets env -- apollo/schemaQuery.js",
     "scaffold": "plop"
   },
   "precommit": "lint",
@@ -60,6 +60,7 @@
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
     "inquirer-directory": "^2.1.0",
+    "lerna": "^3.16.4",
     "node-sass": "^4.10.0",
     "plop": "^2.0.0",
     "pre-commit": "^1.2.2",
