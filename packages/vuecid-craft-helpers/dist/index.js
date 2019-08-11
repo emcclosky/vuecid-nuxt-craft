@@ -1,3 +1,4 @@
 // Routes utilities
 import generateLocalizedRoutes from './routes/generateLocalizedRoutes';
-export { generateLocalizedRoutes };
+import generateRoutesFromData from './routes/generateRoutesFromData';
+export { generateLocalizedRoutes, generateRoutesFromData };
