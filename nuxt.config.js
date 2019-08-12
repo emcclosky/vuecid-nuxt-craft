@@ -154,15 +154,16 @@ export default {
     // https://nuxtjs.org/guide/routing#implementation-for-github-pages-and-netlify
     fallback: true,
     // Apply route generation magic:
-    routes: [
-      ...generateRoutesFromData({
+    async routes() {
+      const generatedRoutes = await generateRoutesFromData({
         langs: config.env.LANGS,
         postTypes: config.postTypes,
         dataPath: '../../../../../static/data',
         bundle: 'basic',
         homeSlug: config.env.HOMESLUG
       })
-    ]
+      return [...generatedRoutes]
+    }
   },
 
   /*
