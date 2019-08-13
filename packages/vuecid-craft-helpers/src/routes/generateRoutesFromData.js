@@ -10,7 +10,6 @@ export default async function generateRoutesFromData(
     api: [],
     query: '',
     token: '',
-    bundle: '',
     homeSlug: 'home',
     errorPrefix: 'error-'
   }
@@ -59,6 +58,12 @@ export default async function generateRoutesFromData(
     .catch(error => {
       console.log('error: ', error) // eslint-disable-line no-console
     })
+
+  // Kick out all the pages containing the home slug
+  // This could also delete a page that contains a string like '…/home…'
+  // maybe a page with the permalink /pages/something/home-sweet-home
+  // Sadly this step is necessary since we can not redirect() with our middleware during generate
+  routes = routes.filter(s => !s.includes(`/${options.homeSlug}`))
 
   return routes
 }
