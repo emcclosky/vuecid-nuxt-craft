@@ -3,7 +3,9 @@ const urls = {
   backendUrlProduction: 'https://cms.lucid.build',
   backendUrlLocal: 'http://cms.vuecid.test',
   frontendUrlProduction: 'https://vuecid-nuxt-craft.lucid.build',
-  frontendUrlLocal: 'http://localhost:3000'
+  frontendUrlLocal: 'http://localhost:3000',
+  graphqlPath: '/api',
+  graphqlToken: 'Uzwv98bNdEu0JNyOUtxxhD5d8ub6-DPXZfPsvYQXXmlWgb3Xyc6txbX92PaslqVj' // prettier-ignore
 }
 
 // TODO: Add your langs
@@ -46,6 +48,8 @@ const config = {
     BACKENDURLLOCAL: urls.backendUrlLocal,
     FRONTENDURLPRODUCTION: urls.frontendUrlProduction,
     FRONTENDURLLOCAL: urls.frontendUrlLocal,
+    GRAPHQL_PATH: urls.graphqlPath,
+    GRAPHQL_TOKEN: urls.graphqlToken,
     HOMESLUG: homeSlug
   },
 

@@ -1,7 +1,6 @@
 // eslint-disable-next-line prettier/prettier
 import { generateLocalizedRoutes, generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
 import config from './config'
-require('dotenv').config()
 
 export default {
   server: {
@@ -64,7 +63,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
-    '@nuxtjs/dotenv',
     // Google Analytics Module
     // Be aware that there is still a bug where the page title is not updated:
     // Demo: https://imgur.com/QSv4n12
@@ -156,9 +154,9 @@ export default {
     // Apply route generation magic:
     routes: async () => {
       const generatedRoutes = await generateRoutesFromData({
-        endpoint: `${process.env.BACKEND_URL_PRODUCTION}${process.env.GRAPHQL_PATH}`,
+        endpoint: `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`,
         section: 'pages', // depends on the name you put in your backend for this kind of section
-        token: process.env.GRAPHQL_TOKEN,
+        token: config.env.GRAPHQL_TOKEN,
         langs: config.env.LANGS,
         homeSlug: config.env.HOMESLUG
       })
@@ -215,12 +213,10 @@ export default {
     //   '/admin/**'
     // ],
     routes: async () => {
-      console.log('process.env: ', process.env)
-
       const routes = await generateRoutesFromData({
-        endpoint: `${process.env.BACKEND_URL_PRODUCTION}${process.env.GRAPHQL_PATH}`,
+        endpoint: `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`,
         section: 'pages', // depends on the name you put in your backend for this kind of section
-        token: process.env.GRAPHQL_TOKEN,
+        token: config.env.GRAPHQL_TOKEN,
         langs: config.env.LANGS,
         homeSlug: config.env.HOMESLUG
       })

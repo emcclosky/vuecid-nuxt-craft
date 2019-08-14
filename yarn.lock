@@ -1921,13 +1921,6 @@
     axios-retry "^3.1.2"
     consola "^2.7.1"
 
-"@nuxtjs/dotenv@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/dotenv/-/dotenv-1.4.0.tgz#900dae02dd6f89800374dcf4f1a559ee5dbfe911"
-  dependencies:
-    consola "^2.9.0"
-    dotenv "^8.0.0"
-
 "@nuxtjs/eslint-config@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config/-/eslint-config-1.0.1.tgz#95723021cfe436cee71ee24507ce014ddfa38449"
