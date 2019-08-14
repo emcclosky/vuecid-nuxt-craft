@@ -27,6 +27,9 @@ static/data
 # Webpack Monitor Stats
 .monitor
 
+# dotenv Environment Variables
+.env
+
 tsconfig.json
 
 .idea

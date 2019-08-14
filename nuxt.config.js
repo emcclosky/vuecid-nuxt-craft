@@ -3,6 +3,7 @@
 import { generateLocalizedRoutes } from '@wearelucid/vuecid-craft-helpers'
 import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
 import config from './config'
+require('dotenv').config()
 
 export default {
   server: {
@@ -65,6 +66,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    '@nuxtjs/dotenv',
     // Google Analytics Module
     // Be aware that there is still a bug where the page title is not updated:
     // Demo: https://imgur.com/QSv4n12
@@ -154,12 +156,12 @@ export default {
     // https://nuxtjs.org/guide/routing#implementation-for-github-pages-and-netlify
     fallback: true,
     // Apply route generation magic:
-    async routes() {
+    routes: async () => {
       const generatedRoutes = await generateRoutesFromData({
+        endpoint: `${process.env.BACKEND_URL_PRODUCTION}${process.env.GRAPHQL_PATH}`,
+        section: 'pages', // depends on the name you put in your backend for this kind of section
+        token: process.env.GRAPHQL_TOKEN,
         langs: config.env.LANGS,
-        postTypes: config.postTypes,
-        dataPath: '../../../../../static/data',
-        bundle: 'basic',
         homeSlug: config.env.HOMESLUG
       })
       return [...generatedRoutes]
@@ -214,25 +216,15 @@ export default {
     //   '/secret',
     //   '/admin/**'
     // ],
-    routes: [
-      // ...generateRoutesFromData({
-      //   langs: config.env.LANGS,
-      //   postTypes: config.postTypes,
-      //   dataPath: '../../../../../static/data',
-      //   bundle: 'basic',
-      //   homeSlug: config.env.HOMESLUG
-      // })
-      // '/page/1',
-      // {
-      //   url: '/page/2',
-      //   changefreq: 'daily',
-      //   priority: 1,
-      //   lastmodISO: '2017-06-30T13:30:00.000Z',
-      //   links: [
-      //     { lang: 'en', url: 'http://test.com/page-1/', },
-      //     { lang: 'ja', url: 'http://test.com/page-1/ja/', }
-      //   ]
-      // }
-    ]
+    routes: async () => {
+      const routes = await generateRoutesFromData({
+        endpoint: `${process.env.BACKEND_URL_PRODUCTION}${process.env.GRAPHQL_PATH}`,
+        section: 'pages', // depends on the name you put in your backend for this kind of section
+        token: process.env.GRAPHQL_TOKEN,
+        langs: config.env.LANGS,
+        homeSlug: config.env.HOMESLUG
+      })
+      return routes
+    }
   }
 }

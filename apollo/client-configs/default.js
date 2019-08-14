@@ -2,16 +2,14 @@ import {
   IntrospectionFragmentMatcher,
   InMemoryCache
 } from 'apollo-cache-inmemory'
-import config from '../../config'
 import introspectionQueryResultData from '../fragmentTypes.json'
 
-export default function(context) {
+export default function({ env }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
-  const token =
-    'Uzwv98bNdEu0JNyOUtxxhD5d8ub6-DPXZfPsvYQXXmlWgb3Xyc6txbX92PaslqVj'
-  const endpoint = `${config.env.BACKENDURLPRODUCTION}/api`
+  const token = env.GRAPHQL_TOKEN
+  const endpoint = `${env.BACKEND_URL_PRODUCTION}${env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
   return {
