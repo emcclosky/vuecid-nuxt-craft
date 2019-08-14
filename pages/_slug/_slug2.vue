@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from 'vuex'
-import basePage from '~/components/_basePage.vue'
+// import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 
 export default {
@@ -13,7 +13,7 @@ export default {
       }
     }
   },
-  extends: basePage,
+  // extends: basePage,
   computed: {
     ...mapGetters('data', ['page']),
     page() {
@@ -22,6 +22,11 @@ export default {
   },
   mounted() {
     this.log('entries: ', this.entries)
+  },
+  head() {
+    return {
+      title: this.page.title
+    }
   }
 }
 </script>
