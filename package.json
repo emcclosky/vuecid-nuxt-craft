@@ -14,7 +14,7 @@
     "build": "nuxt build --modern",
     "start": "nuxt start",
     "generate": "nuxt generate --modern",
-    "netlify": "yarn generate",
+    "netlify": "yarn build-fragment && yarn generate",
     "netlifyify": "yarn netlify && PORT=3000 serve",
     "lint": "sass-lint -c .sass-lint.yml '**/*.scss' -v -q -i 'node_modules/**/*.scss' && eslint --ext .js,.vue --ignore-path .eslintignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",

@@ -2,14 +2,14 @@ import config from '../config'
 const fs = require('fs')
 const fetch = require('node-fetch')
 
-const endpoint = `${config.env.BACKENDURLPRODUCTION}/api`
+const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+const token = config.env.GRAPHQL_TOKEN
 
 fetch(endpoint, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    Authorization:
-      'Bearer Uzwv98bNdEu0JNyOUtxxhD5d8ub6-DPXZfPsvYQXXmlWgb3Xyc6txbX92PaslqVj'
+    Authorization: `Bearer ${token}`
   },
   body: JSON.stringify({
     variables: {},
