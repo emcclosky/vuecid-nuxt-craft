@@ -1,5 +1,4 @@
 // eslint-disable-next-line prettier/prettier
-// import { generateLocalizedRoutes, generateRoutesFromData } from '@wearelucid/vuecid-helpers'
 import { generateLocalizedRoutes } from '@wearelucid/vuecid-craft-helpers'
 import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
 import config from './config'
