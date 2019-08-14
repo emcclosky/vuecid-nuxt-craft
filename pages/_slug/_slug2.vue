@@ -25,7 +25,7 @@ export default {
   },
   head() {
     return {
-      title: this.page.title
+      title: this.page.title || 'Nothing fetched yet'
     }
   }
 }
