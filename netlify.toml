@@ -13,5 +13,8 @@
   # GraphQL path
   GRAPHQL_PATH = "/api"
 
+  # GraphQL path
+  TESTY = "testya"
+
   # GraphQL Bearer token
   GRAPHQL_TOKEN = "Uzwv98bNdEu0JNyOUtxxhD5d8ub6-DPXZfPsvYQXXmlWgb3Xyc6txbX92PaslqVj"

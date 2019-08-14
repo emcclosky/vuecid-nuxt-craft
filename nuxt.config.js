@@ -215,6 +215,8 @@ export default {
     //   '/admin/**'
     // ],
     routes: async () => {
+      console.log('process.env: ', process.env)
+
       const routes = await generateRoutesFromData({
         endpoint: `${process.env.BACKEND_URL_PRODUCTION}${process.env.GRAPHQL_PATH}`,
         section: 'pages', // depends on the name you put in your backend for this kind of section
