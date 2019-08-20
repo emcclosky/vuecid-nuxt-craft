@@ -1,16 +1,21 @@
 <script>
-// import { mapGetters } from 'vuex'
-
 export default {
-  // computed: mapGetters('data', ['options', 'page']),
-  // head() {
-  //   if (!this.page || !this.options) return
-  //   return this.$generateMetaInfo({
-  //     siteSettings: this.options,
-  //     post: this.page,
-  //     locale: this.$i18n.locale,
-  //     path: this.$route.path
-  //   })
-  // }
+  head() {
+    if (!this.page) {
+      return {
+        title: 'nothing'
+      }
+    }
+    this.log('this.page: ', this.page)
+    return {
+      title: 'hallejuli'
+    }
+    // return this.$generateMetaInfo({
+    //   siteSettings: {},
+    //   post: this.page,
+    //   locale: this.$i18n.locale,
+    //   path: this.$route.path
+    // })
+  }
 }
 </script>

@@ -5,12 +5,16 @@ import {
 import introspectionQueryResultData from '../fragmentTypes.json'
 import config from '~/config.js'
 
-export default function() {
+export default function({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
-  const token = config.env.GRAPHQL_TOKEN
-  const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+  const token = isDev
+    ? config.env.GRAPHQL_TOKEN_LOCAL
+    : config.env.GRAPHQL_TOKEN
+  const endpoint = isDev
+    ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
+    : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
   return {

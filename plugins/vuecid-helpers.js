@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import { generateMetaInfo } from '@wearelucid/vuecid-helpers/dist/wp'
+// import { generateMetaInfo } from '@wearelucid/vuecid-helpers'
+import generateMetaInfo from '~/packages/vuecid-craft-helpers/src/meta/generateMetaInfo.js'
 
 // Pass in default options:
 const config = {

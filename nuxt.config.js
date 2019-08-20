@@ -139,6 +139,7 @@ export default {
    */
   apollo: {
     includeNodeModules: true,
+    errorHandler: '~/apollo/plugins/apolloErrorHandler.js',
     clientConfigs: {
       default: '~/apollo/client-configs/default.js'
     }

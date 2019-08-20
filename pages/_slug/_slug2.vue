@@ -1,6 +1,6 @@
 <script>
 import { mapGetters } from 'vuex'
-// import basePage from '~/components/_basePage.vue'
+import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 
 export default {
@@ -13,7 +13,7 @@ export default {
       }
     }
   },
-  // extends: basePage,
+  extends: basePage,
   computed: {
     ...mapGetters('data', ['page']),
     page() {
@@ -21,12 +21,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$apollo.store)
     this.log('entries: ', this.entries)
-  },
-  head() {
-    return {
-      title: this.page.title || 'Nothing fetched yet'
-    }
   }
 }
 </script>
@@ -43,6 +39,13 @@ export default {
       <BHeading v-if="page.title" :level="1">
         {{ page.title }}
       </BHeading>
+      <div v-if="page.richtext && page.richtext.content">
+        {{ page.richtext }}
+      </div>
+      <BRichtext
+        v-if="page.richtext && page.richtext.content"
+        :content="page.richtext.content"
+      />
     </BContentSection>
   </div>
 </template>

@@ -1,5 +1,7 @@
 <script>
 import { mapState } from 'vuex'
+// import seomatic from '~/apollo/queries/seomatic'
+
 // import TheSkipNavigationLink from '~/components/_SingleInstance/TheSkipNavigationLink/TheSkipNavigationLink.vue'
 // import TheHeaderBar from '~/components/_SingleInstance/TheHeaderBar/TheHeaderBar.vue'
 // import TheFooter from '~/components/_SingleInstance/TheFooter/TheFooter.vue'
@@ -10,9 +12,18 @@ export default {
     // TheHeaderBar,
     // TheFooter
   },
+  // apollo: {
+  //   seomatic: {
+  //     query: seomatic,
+  //     prefetch: true
+  //   }
+  // },
   computed: mapState({
     previewActive: state => state.data.previewActive
   }),
+  // mounted() {
+  //   this.log('seomatic: ', this.seomatic)
+  // },
   methods: {
     setFocusOnMain() {
       // Props to https://www.bignerdranch.com/blog/web-accessibility-skip-navigation-links/

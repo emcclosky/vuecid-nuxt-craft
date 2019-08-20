@@ -1,17 +1,14 @@
-#import "./fragments/flexibleContent.gql"
+#import "./fragments/seomatic.gql"
 
-query ($slug: String!) {
+query Page($slug: String!) {
   entries(section: [pages], slug: $slug) {
     slug
     title
-    ... on PageFlexContent {
-      id
-      title
-      slug
-      flexibleContent {
-        ...text
-        ...image
-        ...teaser
+    ...SeoMaticFragment
+    ...on Pages {
+      richtext {
+        totalPages
+        content
       }
     }
   }

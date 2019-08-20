@@ -1,8 +1,0 @@
-{
-  entries(section: [page]) {
-    ...on PageFlexContent {
-      id
-      title
-    }
-  }
-}
