@@ -1,28 +1,38 @@
 <script>
-import { mapGetters } from 'vuex'
 import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 
 export default {
+  extends: basePage,
+  data: () => {
+    return {
+      page: false,
+      seomatic: {}
+    }
+  },
   apollo: {
     entries: {
       query: page,
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
         return { slug: this.$route.params.slug }
+      },
+      result(result) {
+        if (!result.data || !result.data.entries || !result.data.entries.length) { // eslint-disable-line
+          console.warn('The apollo query did not return a result.') // eslint-disable-line
+          return
+        }
+        this.page = result.data.entries[0]
+        this.seomatic.metaTitleContainer = JSON.parse(result.data.entries[0].seomatic.metaTitleContainer) // eslint-disable-line
+        this.seomatic.metaTagContainer = JSON.parse(result.data.entries[0].seomatic.metaTagContainer) // eslint-disable-line
+        this.seomatic.metaLinkContainer = JSON.parse(result.data.entries[0].seomatic.metaLinkContainer) // eslint-disable-line
+        this.seomatic.metaJsonLdContainer = JSON.parse(result.data.entries[0].seomatic.metaJsonLdContainer) // eslint-disable-line
       }
     }
   },
-  extends: basePage,
-  computed: {
-    ...mapGetters('data', ['page']),
-    page() {
-      return this.entries.length ? this.entries[0] : false
-    }
-  },
   mounted() {
-    console.log(this.$apollo.store)
-    this.log('entries: ', this.entries)
+    this.log('page: ', this.page)
+    this.log('seomatic: ', this.seomatic)
   }
 }
 </script>
