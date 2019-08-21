@@ -12,4 +12,12 @@ query Page($slug: String!) {
       }
     }
   }
+
+  seomatic(uri: "/") {
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+  }
 }
