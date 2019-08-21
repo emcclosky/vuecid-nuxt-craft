@@ -1,21 +1,27 @@
 <script>
+import seomaticQuery from '~/apollo/queries/seomatic'
+
 export default {
-  head() {
-    if (!this.page) {
-      return {
-        title: 'nothing'
+  apollo: {
+    seomatic: {
+      query: seomaticQuery,
+      prefetch: ({ route }) => ({ slug: route.params.slug }),
+      variables() {
+        return { slug: this.$route.params.slug }
       }
     }
-    this.log('this.page: ', this.page)
-    return {
-      title: 'hallejuli'
+  },
+  head() {
+    if (!this.seomatic) {
+      console.warn('No SEO settings from GraphQL query returned.') // eslint-disable-line
     }
-    // return this.$generateMetaInfo({
-    //   siteSettings: {},
-    //   post: this.page,
-    //   locale: this.$i18n.locale,
-    //   path: this.$route.path
-    // })
+    this.log('this.seomatic: ', this.seomatic)
+    return this.$generateMetaInfo({
+      siteSettings: {},
+      post: this.page,
+      locale: this.$i18n.locale,
+      path: this.$route.path
+    })
   }
 }
 </script>

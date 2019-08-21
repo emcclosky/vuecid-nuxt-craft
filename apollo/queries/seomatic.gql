@@ -1,0 +1,8 @@
+query Seomatic($slug: String!) {
+  seomatic(uri: $slug, asArray: true) {
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaJsonLdContainer
+  }
+}

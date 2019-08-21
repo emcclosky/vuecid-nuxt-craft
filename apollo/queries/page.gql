@@ -4,20 +4,11 @@ query Page($slug: String!) {
   entries(section: [pages], slug: $slug) {
     slug
     title
-    ...SeoMaticFragment
     ...on Pages {
       richtext {
         totalPages
         content
       }
     }
-  }
-
-  seomatic(uri: "/") {
-    metaTitleContainer
-    metaTagContainer
-    metaLinkContainer
-    metaScriptContainer
-    metaJsonLdContainer
   }
 }

@@ -1,5 +1,4 @@
 <script>
-import gql from 'graphql-tag'
 import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 
@@ -19,18 +18,12 @@ export default {
         return { slug: this.$route.params.slug }
       },
       result(result) {
-        console.log('result: ', result)
         this.page = result.data.entries[0]
-        this.seomatic.metaTitleContainer = JSON.parse(result.data.entries[0].seomatic.metaTitleContainer) // eslint-disable-line
-        this.seomatic.metaTagContainer = JSON.parse(result.data.entries[0].seomatic.metaTagContainer) // eslint-disable-line
-        this.seomatic.metaLinkContainer = JSON.parse(result.data.entries[0].seomatic.metaLinkContainer) // eslint-disable-line
-        this.seomatic.metaJsonLdContainer = JSON.parse(result.data.entries[0].seomatic.metaJsonLdContainer) // eslint-disable-line
       }
     }
   },
   mounted() {
     this.log('page: ', this.page)
-    this.log('seomatic: ', this.seomatic)
   }
 }
 </script>
