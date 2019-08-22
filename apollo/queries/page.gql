@@ -1,5 +1,3 @@
-#import "./fragments/seomatic.gql"
-
 query Page($slug: String!) {
   entries(section: [pages], slug: $slug) {
     slug

@@ -6,8 +6,7 @@ export default {
   extends: basePage,
   data: () => {
     return {
-      page: false,
-      seomatic: {}
+      page: false
     }
   },
   apollo: {
@@ -18,6 +17,7 @@ export default {
         return { slug: this.$route.params.slug }
       },
       result(result) {
+        console.log('result: ', result)
         this.page = result.data.entries[0]
       }
     }

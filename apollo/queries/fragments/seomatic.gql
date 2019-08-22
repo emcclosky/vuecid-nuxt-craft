@@ -1,8 +1,0 @@
-fragment SeoMaticFragment on Pages{
-  seomatic(asArray: true) {
-    metaTitleContainer
-    metaTagContainer
-    metaLinkContainer
-    metaJsonLdContainer
-  }
-}

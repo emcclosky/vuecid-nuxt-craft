@@ -8,6 +8,13 @@ export default {
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
         return { slug: this.$route.params.slug }
+      },
+      result(result) {
+        this.seomatic = result.data.seomatic
+        this.ogImage =
+          result.data && result.data.entries && result.data.entries[0].ogImage
+            ? result.data.entries[0].ogImage[0].url
+            : false
       }
     }
   },
@@ -16,11 +23,9 @@ export default {
       console.warn('No SEO settings from GraphQL query returned.') // eslint-disable-line
     }
     this.log('this.seomatic: ', this.seomatic)
-    return this.$generateMetaInfo({
-      siteSettings: {},
-      post: this.page,
-      locale: this.$i18n.locale,
-      path: this.$route.path
+    return this.$generateMetaFromSeomatic({
+      seomaticMeta: this.seomatic,
+      ogImage: this.ogImage
     })
   }
 }
