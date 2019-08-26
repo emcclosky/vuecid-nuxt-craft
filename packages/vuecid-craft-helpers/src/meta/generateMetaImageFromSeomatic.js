@@ -24,6 +24,7 @@ export default function generateMetaImageFromSeomatic({
     { hid: 'og:image:width', name: 'og:image:width', content: imageWidth },
     { hid: 'og:image:height', name: 'og:image:height', content: imageHeight },
     { hid: 'twitter:image', name: 'twitter:image', content: imageUrl },
-    { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' } // prettier-ignore
+    { hid: 'twitter:image:width', name: 'twitter:image:width', content: imageWidth }, // prettier-ignore
+    { hid: 'twitter:image:height', name: 'twitter:image:height', content: imageHeight } // prettier-ignore
   ]
 }

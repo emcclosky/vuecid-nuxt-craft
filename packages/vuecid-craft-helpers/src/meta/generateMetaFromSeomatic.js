@@ -110,53 +110,34 @@ export default function generateMetaFromSeomatic({
     fallbackImage: seomaticOgImage
   })
 
-  console.log('ogImage: ', ogImage)
+  console.log('checkNested(metaTagContainer, \'twitter:title', 'content\'): ', checkNested(metaTagContainer, 'twitter:title', 'content'))
+
+  const twitterTitleTest = checkNested(metaTagContainer, 'twitter:title', 'content') ? metaTagContainer['twitter:title'].content : title
+  const twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title
+
+  // const twitterTitle = metaTagContainer['twitter:title'].content || title
+  // const twitterDescription = metaTagContainer['twitter:description'].content || description
+  // const twitterSite = metaTagContainer['twitter:site'].content || ''
+  // const twitterCreator = metaTagContainer['twitter:creator'].content || ''
 
 
-  //   "fb:profile_id": [],
-  //   "fb:app_id": [],
-  //   "og:locale": {
-  //     "content": "en_US",
-  //     "property": "og:locale"
-  //   },
-  //
-  //   "og:type": {
-  //     "content": "website",
-  //     "property": "og:type"
-  //   },
-  //   "og:url": {
-  //     "content": "http://cms.lucid.test/bart-simpson-loves-skateboarding",
-  //     "property": "og:url"
-  //   },
-  //   "og:title": {
-  //     "content": "Bart Simpson loves Skateboarding",
-  //     "property": "og:title"
-  //   },
-  //   "og:description": {
-  //     "content": "Specific SEO text for pages structures",
-  //     "property": "og:description"
-  //   },
-  //   "og:image": {
-  //     "content": "https://cms.lucid.build/_1200x630_crop_center-center_82_none/Screenshot-2019-08-21-at-13.37.26.png?mtime=1566430227",
-  //     "property": "og:image"
-  //   },
-  //   "og:image:width": {
-  //     "content": "1200",
-  //     "property": "og:image:width"
-  //   },
-  //   "og:image:height": {
-  //     "content": "630",
-  //     "property": "og:image:height"
-  //   },
-  //   "og:image:alt": {
-  //     "content": "Image SEO description comes here",
-  //     "property": "og:image:alt"
-  //   },
-  //   "og:see_also": [],
-  //   "google-site-verification": [],
-  //   "bing-site-verification": [],
-  //   "pinterest-site-verification": []
-  // }
+  // twitter:card
+  // twitter:url
+  // twitter:title
+  // twitter:description
+  // twitter:site
+  // twitter:creator
+
+  // <meta name="title" content="My site title">
+  // <meta name="description" content="My site description">
+  // <meta name="keywords" content="keyowrd1, keyword2">
+  // <meta name="robots" content="index, follow">
+  // <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  // <meta name="language" content="Spanish">
+  // <meta name="revisit-after" content="3 days">
+  // <meta name="author" content="werarelucid">
+
+
 
   const metaInfo = {
     title,
@@ -190,6 +171,8 @@ export default function generateMetaFromSeomatic({
   //     { hid: 'og:site_name', property: 'og:site_name', content: siteName },
   //     { hid: 'og:locale', property: 'og:locale', content: locale },
   //     { hid: 'twitter:title', name: 'twitter:title', content: title },
+  //     { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
+
   //     {
   //       hid: 'twitter:description',
   //       name: 'twitter:description',
@@ -229,4 +212,10 @@ export default function generateMetaFromSeomatic({
   return {
     title
   }
+}
+
+function checkNested(obj, level, ...rest) {
+  if (obj === undefined) return false
+  if (rest.length === 0 && obj.hasOwnProperty(level)) return true
+  return checkNested(obj[level], ...rest)
 }
