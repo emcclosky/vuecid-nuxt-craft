@@ -13,7 +13,10 @@ export default {
       result(result) {
         this.seomatic = result.data.seomatic
         this.ogImage =
-          result.data && result.data.entries && result.data.entries[0].ogImage && result.data.entries[0].ogImage[0]
+          result.data &&
+          result.data.entries &&
+          result.data.entries[0].ogImage &&
+          result.data.entries[0].ogImage[0]
             ? result.data.entries[0].ogImage[0]
             : false
       }
@@ -23,12 +26,11 @@ export default {
     if (!this.seomatic) {
       console.warn('No SEO settings from GraphQL query returned.') // eslint-disable-line
     }
-    this.log('this.seomatic: ', this.seomatic)
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      specificOgImage: this.ogImage,
-      debug: true
+      specificOgImage: this.ogImage
+      // debug: true
     })
   }
 }

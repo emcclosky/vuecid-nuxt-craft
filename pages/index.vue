@@ -15,17 +15,6 @@ export default {
       variables() {
         return { slug: 'home' }
       }
-    },
-    seoyolo: {
-      query: gql`{
-          seomatic(uri: "/") {
-            metaTitleContainer
-          }
-        }
-      `,
-      update(data) {
-        return data.seomatic
-      }
     }
   },
   extends: basePage,
@@ -35,7 +24,6 @@ export default {
     }
   },
   mounted() {
-    this.log('this.seoyolo: ', this.seoyolo)
     this.log('this.page: ', this.page)
   }
 }
