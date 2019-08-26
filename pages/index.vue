@@ -1,8 +1,8 @@
 <script>
-import gql from 'graphql-tag'
 import basePage from '~/components/_basePage.vue'
 import Examples from '~/components/Examples/Examples/Examples.vue'
 import page from '~/apollo/queries/page'
+import config from '~/config.js'
 
 export default {
   components: {
@@ -13,7 +13,7 @@ export default {
       query: page,
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
-        return { slug: 'home' }
+        return { slug: config.env.HOMESLUG }
       }
     }
   },

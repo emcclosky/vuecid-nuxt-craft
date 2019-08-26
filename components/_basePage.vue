@@ -8,7 +8,10 @@ export default {
       query: seomaticQuery,
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
-        return { slug: this.$route.params.slug }
+        console.log('this.$route.params.slug: ', this.$route.params.slug)
+        const slug = this.$route.params.slug || config.env.HOMESLUG
+        console.log('slug: ', slug)
+        return { slug }
       },
       result(result) {
         this.seomatic = result.data.seomatic
@@ -25,12 +28,15 @@ export default {
   head() {
     if (!this.seomatic) {
       console.warn('No SEO settings from GraphQL query returned.') // eslint-disable-line
+      if (!this.$route.params.slug) {
+        console.warn(`You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
+      }
     }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
       specificOgImage: this.ogImage
-      // debug: true
+      // ,debug: true
     })
   }
 }
