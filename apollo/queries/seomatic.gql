@@ -9,7 +9,7 @@ query Seomatic($slug: String!) {
   entries(section: [pages], slug: $slug) {
     ...on Pages {
       ogImage {
-        url
+        url: url(transform: ogImage)
       }
     }
   }
