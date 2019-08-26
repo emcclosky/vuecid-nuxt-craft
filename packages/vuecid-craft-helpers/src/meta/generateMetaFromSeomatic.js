@@ -21,7 +21,8 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 export default function generateMetaFromSeomatic({
   seomaticMeta = {},
   specificOgImage = false,
-  frontendUrl = false
+  frontendUrl = false,
+  debug = false
 } = {}) {
   console.log('specificOgImage: ', specificOgImage)
 
@@ -46,35 +47,8 @@ export default function generateMetaFromSeomatic({
   console.log('metaTagContainer: ', metaTagContainer)
   console.log('metaLinkContainer: ', metaLinkContainer)
 
-  // // const siteName = metaTagContainer.site_name.content
-
-  //   const _siteSettings = {
-  //     meta_site_name: '',
-  //     meta_description_default: '',
-  //     website_url: '',
-  //     ...siteSettings.global.meta_global_site_settings,
-  //     ...siteSettings.localized
-  //   }
-
-  //   // Site Name: Use site settings
-  //   const siteName = _siteSettings.meta_site_name
-
-  //   // Title: Use post meta title or fallback to post title
-  //   const title = post.meta_title ? post.meta_title : post.title || ''
-
-  //   // Description: Use post meta description or fallback to site settings
-  //   const description = post.meta_description
-  //     ? post.meta_description
-  //     : _siteSettings.meta_description_default
-
-  //   //  Canonical: Construct canonical and ensure we don't mess up the slashes
-  //   const canonicalUrl = removeTrailingSlash(
-  //     `${verifyTrailingSlash(_siteSettings.meta_website_url)}${removeLeadingSlash(
-  //       path
-  //     )}`
-  //   )
-
-  // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: 🚧
+  // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: e.g. 🚧
+  // This can be changed in seomatics settings
   const title = metaTitleContainer.title.title || ''
 
   const locale = metaTagContainer['og:locale'].content || ''
@@ -82,7 +56,6 @@ export default function generateMetaFromSeomatic({
   const description = metaTagContainer.description.content || ''
   const keywords = metaTagContainer.keywords.content || ''
   const referrer = metaTagContainer.referrer.content || ''
-  const ogLocale = metaTagContainer['og:locale'].content || ''
   const ogType = metaTagContainer['og:type'].content || ''
 
   // SEOMatic allows to set a specific url pattern for every section
@@ -90,54 +63,28 @@ export default function generateMetaFromSeomatic({
   // This will point to the backend url, which is wrong.
   // Because we don't want to change this for every section we extract the site's home url and replace it with the frontend url
   const homeUrl = metaLinkContainer.home.href
-  const ogUrl = metaTagContainer['og:url'].content || ''
-  const realOgUrl = ogUrl.replace(homeUrl, verifyTrailingSlash(frontendUrl))
+  const seomaticOgUrl = metaTagContainer['og:url'].content || ''
+  const ogUrl = seomaticOgUrl.replace(homeUrl, verifyTrailingSlash(frontendUrl))
 
   const ogTitle = metaTagContainer['og:title'].content || title
   const ogDescription = metaTagContainer['og:description'].content || description
-  const ogImageWidth = metaTagContainer['og:image:width'].content || ''
-  const ogImageHeight = metaTagContainer['og:image:height'].content || ''
-  const ogImageA = metaTagContainer['og:image:alt'].content || ''
-  const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
+  // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
   const seomaticOgImage = {
     image: metaTagContainer['og:image'].content || false,
     width: metaTagContainer['og:image:width'].content || false,
-    height: metaTagContainer['og:image:height'].content || false
+    height: metaTagContainer['og:image:height'].content || false,
+    alt: metaTagContainer['og:image:alt'].content || ''
   }
   const ogImage = generateMetaImageFromSeomatic({
     specificImage: specificOgImage,
     fallbackImage: seomaticOgImage
   })
 
-  console.log('checkNested(metaTagContainer, \'twitter:title', 'content\'): ', checkNested(metaTagContainer, 'twitter:title', 'content'))
-
-  const twitterTitleTest = checkNested(metaTagContainer, 'twitter:title', 'content') ? metaTagContainer['twitter:title'].content : title
-  const twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title
-
-  // const twitterTitle = metaTagContainer['twitter:title'].content || title
-  // const twitterDescription = metaTagContainer['twitter:description'].content || description
-  // const twitterSite = metaTagContainer['twitter:site'].content || ''
-  // const twitterCreator = metaTagContainer['twitter:creator'].content || ''
-
-
-  // twitter:card
-  // twitter:url
-  // twitter:title
-  // twitter:description
-  // twitter:site
-  // twitter:creator
-
-  // <meta name="title" content="My site title">
-  // <meta name="description" content="My site description">
-  // <meta name="keywords" content="keyowrd1, keyword2">
-  // <meta name="robots" content="index, follow">
-  // <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  // <meta name="language" content="Spanish">
-  // <meta name="revisit-after" content="3 days">
-  // <meta name="author" content="werarelucid">
-
-
+  const twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title // prettier-ignore
+  const twitterDescription = metaTagContainer['twitter:description'] ? metaTagContainer['twitter:description'].content : description // prettier-ignore
+  const twitterSite = metaTagContainer['twitter:site'] ? metaTagContainer['twitter:site'].content : '' // prettier-ignore
+  const twitterCreator = metaTagContainer['twitter:creator'] ? metaTagContainer['twitter:creator'].content : '' // prettier-ignore
 
   const metaInfo = {
     title,
@@ -147,75 +94,30 @@ export default function generateMetaFromSeomatic({
     meta: [
       { name: 'application-name', content: siteName },
       { hid: 'description', name: 'description', content: description },
-    ]
+      { hid: 'keywords', name: 'keywords', content: keywords },
+      { hid: 'og:title', property: 'og:title', content: ogTitle },
+      { hid: 'og:description', property: 'og:description', content: ogDescription }, // prettier-ignore
+      { hid: 'og:url', property: 'og:url', content: ogUrl },
+      { hid: 'og:type', property: 'og:type', content: ogType },
+      { hid: 'og:site_name', property: 'og:site_name', content: siteName },
+      { hid: 'og:locale', property: 'og:locale', content: locale },
+      { hid: 'twitter:title', name: 'twitter:title', content: twitterTitle },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }, // prettier-ignore
+      { hid: 'twitter:description', name: 'twitter:description', content: twitterDescription }, // prettier-ignore
+      { hid: 'twitter:site', name: 'twitter:site', content: twitterSite },
+      { hid: 'twitter:creator', property: 'twitter:creator', content: twitterCreator }, // prettier-ignore
+      { hid: 'referrer', property: 'referrer', content: referrer }, // prettier-ignore
+      ...ogImage
+    ],
+    link: [{ rel: 'canonical', href: ogUrl }]
   }
 
-  // const metaInfo = {
-  //   title: titlePattern
-  //     ? `${title}${titlePatternSeparator}${siteName}`
-  //     : siteName,
-  //   htmlAttrs: {
-  //     lang: locale
-  //   },
-  //   meta: [
-  //     { name: 'application-name', content: siteName },
-  //     { hid: 'description', name: 'description', content: description },
-  //     { hid: 'og:title', property: 'og:title', content: title },
-  //     {
-  //       hid: 'og:description',
-  //       property: 'og:description',
-  //       content: description
-  //     },
-  //     { hid: 'og:url', property: 'og:url', content: canonicalUrl },
-  //     { hid: 'og:type', property: 'og:type', content: 'website' },
-  //     { hid: 'og:site_name', property: 'og:site_name', content: siteName },
-  //     { hid: 'og:locale', property: 'og:locale', content: locale },
-  //     { hid: 'twitter:title', name: 'twitter:title', content: title },
-  //     { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' }
-
-  //     {
-  //       hid: 'twitter:description',
-  //       name: 'twitter:description',
-  //       content: description
-  //     },
-  //     {
-  //       hid: 'twitter:site',
-  //       name: 'twitter:site',
-  //       content: _siteSettings.meta_publisher_twitter_handle
-  //     },
-  //     {
-  //       hid: 'fb:admins',
-  //       property: 'fb:admins',
-  //       content: _siteSettings.meta_facebook_admins_id
-  //     },
-  //     // Generate meta image:
-  //     ...generateMetaImageInfo({ siteSettings: _siteSettings, post: post })
-  //   ],
-  //   link: [
-  //     { rel: 'canonical', href: canonicalUrl },
-  //     // Generate hreflangs from post:
-  //     ...generateHreflangs(post)
-  //   ]
-  // }
-
-//   // Log output
-//   if (debug) {
-//     console.table(metaInfo)
-//     console.table(metaInfo.meta)
-//     console.table(metaInfo.link)
-//   }
-
-//   return metaInfo
-// }
-
-
-  return {
-    title
+  // Log output
+  if (debug) {
+    console.table(metaInfo)
+    console.table(metaInfo.meta)
+    console.table(metaInfo.link)
   }
-}
 
-function checkNested(obj, level, ...rest) {
-  if (obj === undefined) return false
-  if (rest.length === 0 && obj.hasOwnProperty(level)) return true
-  return checkNested(obj[level], ...rest)
+  return metaInfo
 }

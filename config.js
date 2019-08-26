@@ -59,7 +59,7 @@ const config = {
   googleAnalyticsId: 'UA-74285401-2',
 
   // TODO: Add your Google Site Verification for Search Console
-  googleSiteVerification: 'LHfMKDN9ClPzK9o_YM_wg_W6Dz6Y_NeiWrW7T7W1GdU',
+  googleSiteVerification: 'EvzhaYYBQ_6xTZ4EBRyKsvWETvSyivkiSOwJzpEzfqA',
 
   // TODO: Add your post types
   postTypes: [

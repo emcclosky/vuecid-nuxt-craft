@@ -14,7 +14,7 @@ export default {
         this.seomatic = result.data.seomatic
         this.ogImage =
           result.data && result.data.entries && result.data.entries[0].ogImage && result.data.entries[0].ogImage[0]
-            ? result.data.entries[0].ogImage[0].url
+            ? result.data.entries[0].ogImage[0]
             : false
       }
     }
@@ -27,7 +27,8 @@ export default {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      specificOgImage: this.ogImage
+      specificOgImage: this.ogImage,
+      debug: true
     })
   }
 }
