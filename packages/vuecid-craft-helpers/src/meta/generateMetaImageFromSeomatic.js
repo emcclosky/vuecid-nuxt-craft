@@ -8,6 +8,8 @@
  * also they have to override nuxt.configs manifest infos, which sets an hid
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
+ * @param {Object|Boolean} specificImage
+ * @param {Object} fallbackImage
  */
 
 export default function generateMetaImageFromSeomatic({

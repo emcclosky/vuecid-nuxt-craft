@@ -17,7 +17,6 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
  * @return {Array}
  */
 
-
 export default function generateMetaFromSeomatic({
   seomaticMeta = {},
   specificOgImage = false,
@@ -112,7 +111,6 @@ export default function generateMetaFromSeomatic({
     link: [{ rel: 'canonical', href: ogUrl }]
   }
 
-  // Log output
   if (debug) {
     console.table(metaInfo)
     console.table(metaInfo.meta)
