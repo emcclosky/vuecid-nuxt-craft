@@ -24,6 +24,10 @@ export default {
       {
         name: 'google-site-verification',
         content: config.googleSiteVerification
+      },
+      {
+        name: 'msvalidate.01',
+        content: config.bingSiteVerification
       }
     ]
   },
