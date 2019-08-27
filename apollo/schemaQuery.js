@@ -59,5 +59,5 @@ fetch(endpoint, {
     )
   })
   .catch(error => {
-    console.log('error: ', error)
+    console.warn('❌ – Error while generating apollo fragmentTypes: ', error) // eslint-disable-line
   })

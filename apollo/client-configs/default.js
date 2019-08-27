@@ -1,9 +1,12 @@
+import { createLogger } from '@wearelucid/vue-bows'
 import {
   IntrospectionFragmentMatcher,
   InMemoryCache
 } from 'apollo-cache-inmemory'
 import introspectionQueryResultData from '../fragmentTypes.json'
 import config from '~/config.js'
+
+const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
 export default function({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -19,8 +22,8 @@ export default function({ isDev }) {
   const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
-  console.log('token: ', token)
-  console.log('endpoint: ', endpoint)
+  log('token: ', token.substring(0, 10))
+  log('endpoint: ', endpoint)
 
   return {
     httpEndpoint: endpoint,

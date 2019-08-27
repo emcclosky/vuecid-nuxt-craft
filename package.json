@@ -28,7 +28,7 @@
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/pwa": "3.0.0-beta.16",
     "@nuxtjs/sitemap": "^1.2.0",
-    "@wearelucid/vue-bows": "^1.1.0",
+    "@wearelucid/vue-bows": "^1.2.0",
     "@wearelucid/vuecid-craft-helpers": "^0.2.1",
     "@wearelucid/vuecid-helpers": "v3.0.0",
     "graphql-tag": "^2.10.1",
