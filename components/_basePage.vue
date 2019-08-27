@@ -18,6 +18,7 @@ export default {
         this.ogImage =
           result.data &&
           result.data.entries &&
+          result.data.entries[0] &&
           result.data.entries[0].ogImage &&
           result.data.entries[0].ogImage[0]
             ? result.data.entries[0].ogImage[0]
