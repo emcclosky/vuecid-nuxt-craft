@@ -164,7 +164,7 @@ export default {
         section: 'pages', // depends on the name you put in your backend for this kind of section
         token: config.env.GRAPHQL_TOKEN,
         homeSlug: config.env.HOMESLUG
-        ,debug: true
+        // ,debug: true
       })
       return [...generatedRoutes]
     }
