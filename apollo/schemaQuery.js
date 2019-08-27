@@ -5,6 +5,7 @@ const fetch = require('node-fetch')
 const argv = require('minimist')(process.argv.slice(2))
 
 const useLocalDB = argv.local
+const verbose = argv.verbose
 
 // See if the fragments should be builded from a local craft installation
 const endpoint = useLocalDB
@@ -13,6 +14,11 @@ const endpoint = useLocalDB
 const token = useLocalDB
   ? config.env.GRAPHQL_TOKEN_LOCAL
   : config.env.GRAPHQL_TOKEN
+
+if (verbose) {
+  console.log('endpoint: ', endpoint)
+  console.log('token: ', token)
+}
 
 fetch(endpoint, {
   method: 'POST',
