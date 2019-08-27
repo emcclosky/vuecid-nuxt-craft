@@ -35,6 +35,12 @@ async function generateRoutesFromData(
       console.log('error: ', error) // eslint-disable-line no-console
     })
 
+  if (!routes) {
+    throw new Error('❌ No routes could be fetched')
+  } else {
+    console.log('📩 uccessfully fetch routes: ', routes) // eslint-disable-line no-console
+  }
+
   // Kick out all the pages containing the home slug
   // This could also delete a page that contains a string like '…/home…'
   // maybe a page with the permalink /pages/something/home-sweet-home
