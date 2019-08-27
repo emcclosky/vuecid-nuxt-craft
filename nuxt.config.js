@@ -163,7 +163,6 @@ export default {
         endpoint: `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`,
         section: 'pages', // depends on the name you put in your backend for this kind of section
         token: config.env.GRAPHQL_TOKEN,
-        langs: config.env.LANGS,
         homeSlug: config.env.HOMESLUG
         ,debug: true
       })

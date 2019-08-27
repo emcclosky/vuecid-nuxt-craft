@@ -7,6 +7,7 @@ const argv = require('minimist')(process.argv.slice(2))
 const useLocalDB = argv.local
 const verbose = argv.verbose
 
+
 // See if the fragments should be builded from a local craft installation
 const endpoint = useLocalDB
   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
@@ -16,8 +17,9 @@ const token = useLocalDB
   : config.env.GRAPHQL_TOKEN
 
 if (verbose) {
-  console.log('endpoint: ', endpoint)
-  console.log('token: ', token)
+  console.log('arguments: ', argv) // eslint-disable-line
+  console.log('endpoint: ', endpoint) // eslint-disable-line
+  console.log('token: ', token) // eslint-disable-line
 }
 
 fetch(endpoint, {
