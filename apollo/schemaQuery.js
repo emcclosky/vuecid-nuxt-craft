@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 // Parse terminal arguments with minimist
 const argv = require('minimist')(process.argv.slice(2))
 
-const useLocalDB = argv.local
+const useLocalDB = !argv.production
 const verbose = argv.verbose
 
 
