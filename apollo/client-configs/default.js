@@ -17,14 +17,17 @@ export default function({ isDev }) {
     : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
+  console.log('token: ', token)
+  console.log('endpoint: ', endpoint)
+
   return {
     httpEndpoint: endpoint,
-    httpLinkOptions: {
-      fetchOptions: {
-        mode: 'cors' // Cors Needed for external Cross origins, need to allow headers from server
-      },
-      credentials: 'omit' // must be omit to support application/json content type
-    },
+    // httpLinkOptions: {
+    //   fetchOptions: {
+    //     mode: 'cors' // Cors Needed for external Cross origins, need to allow headers from server
+    //   },
+    //   credentials: 'omit' // must be omit to support application/json content type
+    // },
     // httpEndpoint: 'https://cms.lucid.build/api',
     getAuth: () => `Bearer ${token}`, // use this method to overwrite functions
     cache

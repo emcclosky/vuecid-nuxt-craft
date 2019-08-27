@@ -27,10 +27,17 @@ async function generateRoutesFromData(options = {
     }
   }).catch(error => {
     console.log('error: ', error); // eslint-disable-line no-console
-  }); // Kick out all the pages containing the home slug
+  });
+
+  if (!routes) {
+    throw new Error('❌ No routes could be fetched');
+  } else {
+    console.log('📩 uccessfully fetch routes: ', routes); // eslint-disable-line no-console
+  } // Kick out all the pages containing the home slug
   // This could also delete a page that contains a string like '…/home…'
   // maybe a page with the permalink /pages/something/home-sweet-home
   // Sadly this step is necessary since we can not redirect() with our middleware during generate
+
 
   routes = routes.filter(r => !r.includes(`/${options.homeSlug}`)).map(r => verifyLeadingSlash(removeTrailingSlash(r)));
   return routes;

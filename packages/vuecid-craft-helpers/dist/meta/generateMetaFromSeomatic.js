@@ -22,24 +22,25 @@ export default function generateMetaFromSeomatic({
   frontendUrl = false,
   debug = false
 } = {}) {
-  console.log('specificOgImage: ', specificOgImage);
-
   if (!seomaticMeta) {
     console.warn('Your meta info cannot be generated, because the seomatic object is falsey.'); // prettier-ignore
 
     return;
   }
 
-  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // // Apollo parses the first level of our seomatic object
+  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!');
+
+  if (debug) {
+    console.table(seomaticMeta);
+  } // // Apollo parses the first level of our seomatic object
   // // But unfortunately everything that is nested is just a JSON String and needs to be parsed
+
 
   const metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer);
   const metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer);
-  const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer); // const metaJsonLdContainer = JSON.parse(seomaticMeta.metaJsonLdContainer)
-
-  console.log('metaTitleContainer: ', metaTitleContainer);
-  console.log('metaTagContainer: ', metaTagContainer);
-  console.log('metaLinkContainer: ', metaLinkContainer); // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: e.g. 🚧
+  const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer); // not needed at this point:
+  // const metaJsonLdContainer = JSON.parse(seomaticMeta.metaJsonLdContainer)
+  // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: e.g. 🚧
   // This can be changed in seomatics settings
 
   const title = metaTitleContainer.title.title || '';

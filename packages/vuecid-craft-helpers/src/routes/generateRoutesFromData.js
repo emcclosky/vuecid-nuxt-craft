@@ -9,10 +9,15 @@ async function generateRoutesFromData(
     endpoint: '',
     section: 'pages',
     token: '',
-    homeSlug: 'home'
+    homeSlug: 'home',
+    debug: false
   }
 ) {
   const { token, endpoint, section } = options
+
+  if (options.debug) {
+    console.log('options: ', options) // eslint-disable-line
+  }
 
   // Fetch all sections with the specified section name from your GraphQL API
   let routes = await axios
@@ -22,6 +27,9 @@ async function generateRoutesFromData(
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then(result => {
+      if (options.debug) {
+        console.log('result: ', result) // eslint-disable-line
+      }
       if (result.data.data.entries) {
         return result.data.data.entries.map(r => r.uri)
       } else {
@@ -36,9 +44,9 @@ async function generateRoutesFromData(
     })
 
   if (!routes) {
-    throw new Error('❌ No routes could be fetched')
+    throw new Error('❌ – No routes could be fetched')
   } else {
-    console.log('📩 uccessfully fetch routes: ', routes) // eslint-disable-line no-console
+    console.log('📩 – Successfully fetched routes: ', routes) // eslint-disable-line no-console
   }
 
   // Kick out all the pages containing the home slug

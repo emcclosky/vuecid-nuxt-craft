@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/jones/.nvm/versions/node/v10.16.0/bin/node /usr/local/bin/yarn build-fragment
+  /Users/jones/.nvm/versions/node/v10.16.0/bin/node /usr/local/bin/yarn
 
 PATH: 
   /Users/jones/.nvm/versions/node/v10.16.0/bin:/usr/local/sbin:/usr/local/sbin:/usr/local/php5/bin:/Users/jones/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:
@@ -30,11 +30,11 @@ npm manifest:
       "build": "nuxt build --modern",
       "start": "nuxt start",
       "generate": "nuxt generate --modern",
-      "netlify": "yarn build-fragment && yarn generate",
+      "netlify": "yarn build-fragments && yarn generate",
       "netlifyify": "yarn netlify && PORT=3000 serve",
       "lint": "sass-lint -c .sass-lint.yml '**/*.scss' -v -q -i 'node_modules/**/*.scss' && eslint --ext .js,.vue --ignore-path .eslintignore .",
       "lintfix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
-      "build-fragment": "babel-node --presets env -- apollo/schemaQuery.js",
+      "build-fragments": "babel-node --presets env -- apollo/schemaQuery.js",
       "scaffold": "plop"
     },
     "precommit": "lint",
@@ -45,7 +45,7 @@ npm manifest:
       "@nuxtjs/pwa": "3.0.0-beta.16",
       "@nuxtjs/sitemap": "^1.2.0",
       "@wearelucid/vue-bows": "^1.1.0",
-      "@wearelucid/vuecid-craft-helpers": "^0.1.2",
+      "@wearelucid/vuecid-craft-helpers": "^0.2.1",
       "@wearelucid/vuecid-helpers": "v3.0.0",
       "graphql-tag": "^2.10.1",
       "no-scroll": "^2.1.0",
@@ -85,7 +85,7 @@ npm manifest:
       "prettier": "^1.16.4",
       "sass-lint": "^1.12.1",
       "sass-loader": "^7.0.0"
-    },
+    }
   }
 
 yarn manifest: 
@@ -2613,9 +2613,9 @@ Lockfile:
       "@babel/core" "^7.1.0"
       bows "^1.7.0"
   
-  "@wearelucid/vuecid-craft-helpers@^0.1.2":
-    version "0.1.2"
-    resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.1.2.tgz#6160bf9d6678c7c3fbd1b395507348f7e194ca07"
+  "@wearelucid/vuecid-craft-helpers@^0.2.0":
+    version "0.2.0"
+    resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.2.0.tgz#10fb0d19285f2bd6145dad938dbf42e59eac2a18"
     dependencies:
       "@babel/core" "^7.5.5"
       "@wearelucid/vuecid-helpers" "^3.0.0"
@@ -14224,9 +14224,4 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.14.tgz#d33058359d335bc0db1f0af66158b32872af3bf7"
 
 Trace: 
-  SyntaxError: /Users/jones/Documents/github/lucid/vuecid-nuxt-craft/package.json: Unexpected token } in JSON at position 2489
-      at JSON.parse (<anonymous>)
-      at /Users/jones/.config/yarn/global/node_modules/yarn/lib/cli.js:770:59
-      at Generator.next (<anonymous>)
-      at step (/Users/jones/.config/yarn/global/node_modules/yarn/lib/cli.js:92:30)
-      at /Users/jones/.config/yarn/global/node_modules/yarn/lib/cli.js:103:13
+  Error: ENOENT: no such file or directory, copyfile '/Users/jones/Library/Caches/Yarn/v1/npm-protobufjs-6.8.8-c8b4f1282fd7a90e6f5b109ed11c84af82908e7c/src/rpc/service.js' -> '/Users/jones/Documents/github/lucid/vuecid-nuxt-craft/node_modules/protobufjs/src/rpc/service.js'
