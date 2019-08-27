@@ -9,12 +9,14 @@ export default function({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
-  const token = isDev
-    ? config.env.GRAPHQL_TOKEN_LOCAL
-    : config.env.GRAPHQL_TOKEN
-  const endpoint = isDev
-    ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
-    : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+  // const token = isDev
+  //   ? config.env.GRAPHQL_TOKEN_LOCAL
+  //   : config.env.GRAPHQL_TOKEN
+  // const endpoint = isDev
+  //   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
+  //   : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+  const token = config.env.GRAPHQL_TOKEN
+  const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
   console.log('token: ', token)

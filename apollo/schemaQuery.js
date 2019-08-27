@@ -1,11 +1,18 @@
 import config from '../config'
 const fs = require('fs')
 const fetch = require('node-fetch')
+// Parse terminal arguments with minimist
+const argv = require('minimist')(process.argv.slice(2))
 
-const endpoint = `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
-// const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
-const token = config.env.GRAPHQL_TOKEN_LOCAL
-// const token = config.env.GRAPHQL_TOKEN
+const useLocalDB = argv.local
+
+// See if the fragments should be builded from a local craft installation
+const endpoint = useLocalDB
+  ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
+  : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+const token = useLocalDB
+  ? config.env.GRAPHQL_TOKEN_LOCAL
+  : config.env.GRAPHQL_TOKEN
 
 fetch(endpoint, {
   method: 'POST',
