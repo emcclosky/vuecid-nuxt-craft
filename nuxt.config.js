@@ -147,6 +147,8 @@ export default {
     errorHandler: '~/apollo/plugins/apolloErrorHandler.js',
     clientConfigs: {
       default: '~/apollo/client-configs/default.js'
+      // If you want to connect to a your local backend use this config instead:
+      // default: '~/apollo/client-configs/local.js'
     }
   },
 
@@ -189,7 +191,7 @@ export default {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active-exact',
-    middleware: ['i18n'],
+    middleware: ['i18n', 'previews'],
     extendRoutes(routes) {
       // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
       const newRoutes = generateLocalizedRoutes({

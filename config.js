@@ -5,8 +5,8 @@ const urls = {
   frontendUrlProduction: 'https://vuecid-nuxt-craft.lucid.build',
   frontendUrlLocal: 'http://localhost:3000',
   graphqlPath: '/api',
-  graphqlToken: 'f_AvaK-6WhkE3RLEm4i91h76bB92Clnv5ueP-gAGtmyPtYItmvPkkvewr-mLFC15', // prettier-ignore
-  graphqlTokenLocal: 'f_AvaK-6WhkE3RLEm4i91h76bB92Clnv5ueP-gAGtmyPtYItmvPkkvewr-mLFC15' // prettier-ignore
+  graphqlToken: '9_L-szR9jENYXnel4el6XFfV7CZbMl6xH579qXUgj5usflhrnaQts92rqk8_H6h3', // prettier-ignore
+  graphqlTokenLocal: '9_L-szR9jENYXnel4el6XFfV7CZbMl6xH579qXUgj5usflhrnaQts92rqk8_H6h3' // prettier-ignore
 }
 
 // TODO: Add your langs
@@ -42,7 +42,7 @@ const homeSlug = 'home'
 
 const config = {
   env: {
-    LOG_VERBOSE: false,
+    LOG_VERBOSE: true,
     LANGS: langs,
     DEFAULTLANG: getDefaultLang(),
     BACKENDURLPRODUCTION: urls.backendUrlProduction,
