@@ -15,15 +15,16 @@ export default {
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
         return { slug: config.env.HOMESLUG }
+      },
+      result(result) {
+        // Only set this.page to graphql data if we are not seeing a preview
+        if (!this.preview) {
+          this.page = result.data.entries[0]
+        }
       }
     }
   },
   extends: basePage,
-  computed: {
-    page() {
-      return this.entries && this.entries.length ? this.entries[0] : false
-    }
-  },
   async asyncData({ params, env, query }) {
     const previewData = await loadPreviewData({
       params,

@@ -45,6 +45,12 @@ export default {
 
 <template>
   <div class="Page">
+    <div v-if="preview && !previewData">
+      Unfortunately the preview could not be displayed. If you have never saved
+      your entry do it and return to the preview. If another problem prevents
+      the preview from working... 🤷‍♂️
+    </div>
+
     <BContentSection
       :modifiers="['centered']"
       style="background: #efefef; text-align: center; padding: 1em;"

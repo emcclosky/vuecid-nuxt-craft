@@ -43,6 +43,7 @@ export default async function(
       .catch(error => {
         console.log('error: ', error) // eslint-disable-line
       })
+
     return {
       page: previewData,
       preview: true
