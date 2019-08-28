@@ -7,7 +7,6 @@ const argv = require('minimist')(process.argv.slice(2))
 const useLocalDB = !argv.production
 const verbose = argv.verbose
 
-
 // See if the fragments should be builded from a local craft installation
 const endpoint = useLocalDB
   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`

@@ -35,7 +35,7 @@ export default {
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
       specificOgImage: this.ogImage
-      // ,debug: true
+      ,debug: true
     })
   },
   mounted() {

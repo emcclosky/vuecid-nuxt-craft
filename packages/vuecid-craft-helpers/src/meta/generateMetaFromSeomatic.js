@@ -33,15 +33,17 @@ export default function generateMetaFromSeomatic({
       'You need to pass your frontend url into the generateMetaFromSeomatic!'
     )
 
-  if (debug) {
-    console.table(seomaticMeta)
-  }
-
   // // Apollo parses the first level of our seomatic object
   // // But unfortunately everything that is nested is just a JSON String and needs to be parsed
   const metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer)
   const metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer)
   const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer)
+
+  if (debug) {
+    console.log('metaTagContainer: ', metaTagContainer)
+    console.log('metaLinkContainer: ', metaLinkContainer)
+    console.log('metaTitleContainer: ', metaTitleContainer)
+  }
 
   // not needed at this point:
   // const metaJsonLdContainer = JSON.parse(seomaticMeta.metaJsonLdContainer)
@@ -56,15 +58,7 @@ export default function generateMetaFromSeomatic({
   const keywords = metaTagContainer.keywords.content || ''
   const referrer = metaTagContainer.referrer.content || ''
   const ogType = metaTagContainer['og:type'].content || ''
-
-  // SEOMatic allows to set a specific url pattern for every section
-  // Per default it sets '{entry.uri}' within the setting SEOMatic > Content SEO > Canonical URL
-  // This will point to the backend url, which is wrong.
-  // Because we don't want to change this for every section we extract the site's home url and replace it with the frontend url
-  const homeUrl = metaLinkContainer.home.href
-  const seomaticOgUrl = metaTagContainer['og:url'].content || ''
-  const ogUrl = seomaticOgUrl.replace(homeUrl, verifyTrailingSlash(frontendUrl))
-
+  const ogUrl = metaTagContainer['og:url'].content || ''
   const ogTitle = metaTagContainer['og:title'].content || title
   const ogDescription = metaTagContainer['og:description'].content || description
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
