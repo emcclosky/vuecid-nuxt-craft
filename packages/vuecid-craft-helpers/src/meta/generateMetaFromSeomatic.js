@@ -64,7 +64,7 @@ export default function generateMetaFromSeomatic({
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
   const seomaticOgImage = {
-    image: metaTagContainer['og:image'].content || false,
+    url: metaTagContainer['og:image'].content || false,
     width: metaTagContainer['og:image:width'].content || false,
     height: metaTagContainer['og:image:height'].content || false,
     alt: metaTagContainer['og:image:alt'].content || ''

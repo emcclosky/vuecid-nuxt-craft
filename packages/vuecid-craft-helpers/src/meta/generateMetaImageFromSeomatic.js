@@ -17,10 +17,12 @@ export default function generateMetaImageFromSeomatic({
   fallbackImage = {}
 } = {}) {
   // Check if we have a page specific OG image, where we can use a specific image size optimized for social sharing
-  const imageUrl = specificImage ? specificImage.url : fallbackImage
+  const imageUrl = specificImage ? specificImage.url : fallbackImage.url
   const imageWidth = specificImage ? '1280' : fallbackImage.width
   const imageHeight = specificImage ? '720' : fallbackImage.height
   const alt = specificImage ? specificImage.alt : fallbackImage.alt
+
+  console.log('imageUrl: ', imageUrl)
 
   return [
     { hid: 'og:image', property: 'og:image', content: imageUrl },
