@@ -8,7 +8,7 @@ import config from '~/config.js'
 
 const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
-export default function({ isDev }) {
+export default function({ isDev, env }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
@@ -22,8 +22,10 @@ export default function({ isDev }) {
   const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
   const cache = new InMemoryCache({ fragmentMatcher })
 
-  log('token: ', token.substring(0, 10))
-  log('endpoint: ', endpoint)
+  if (env.LOG_VERBOSE) {
+    log('token: ', token.substring(0, 10))
+    log('endpoint: ', endpoint)
+  }
 
   return {
     httpEndpoint: endpoint,

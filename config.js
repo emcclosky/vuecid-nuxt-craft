@@ -42,7 +42,7 @@ const homeSlug = 'home'
 
 const config = {
   env: {
-    LOG_VERBOSE: true,
+    LOG_VERBOSE: false,
     LANGS: langs,
     DEFAULTLANG: getDefaultLang(),
     BACKENDURLPRODUCTION: urls.backendUrlProduction,

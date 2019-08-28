@@ -8,9 +8,7 @@ export default {
       query: seomaticQuery,
       prefetch: ({ route }) => ({ slug: route.params.slug }),
       variables() {
-        console.log('this.$route.params.slug: ', this.$route.params.slug)
         const slug = this.$route.params.slug || config.env.HOMESLUG
-        console.log('slug: ', slug)
         return { slug }
       },
       result(result) {

@@ -11,34 +11,32 @@ export default {
     }
   },
   async asyncData ({ params, env, query }) {
-    console.log('params: ', query)
     if (query['x-craft-preview'] && query.token) {
-      const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
-      console.log('endpoint: ', endpoint)
+      console.info('Preview is displayed!') // eslint-disable-line
 
-      const { data } = await axios.post(
-        endpoint,
-        { query: `{ entries(section: [pages], slug: "bart-simpson-loves-skateboarding") {
-            slug
-            title
-            ...on Pages {
-              richtext {
-                totalPages
-                content
-              }
-            }
-            }
-          }`
-        },
-        { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
-      ).catch(error => {
-        console.log('error: ', error)
-      })
-      console.log('data: ', data.data.entries)
+      const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
+
+      const previewData = await axios
+        .post(
+          endpoint,
+          { query: page.loc.source.body, variables: { slug: params.slug } },
+          { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
+        ).then(result => {
+          if (result && result.data && result.data.data) {
+            return result.data.data.entries[0]
+          } else {
+            return false
+          }
+        })
+        .catch(error => {
+          console.log('error: ', error) // eslint-disable-line
+        })
       return {
-        preview: data.data.entries[0].title
+        page: previewData,
+        preview: true
       }
     }
+    return { preview: false }
   },
   apollo: {
     entries: {
@@ -48,19 +46,21 @@ export default {
         return { slug: this.$route.params.slug }
       },
       result(result) {
-        this.page = result.data.entries[0]
+        // Only set this.page to graphql data if we are not seeing a preview
+        if (!this.preview) {
+          this.page = result.data.entries[0]
+        }
       }
     }
   },
   mounted() {
-    this.log('page: ', this.page)
+    // this.log('page: ', this.page)
   }
 }
 </script>
 
 <template>
   <div class="Page">
-    {{ preview }}
     <BContentSection
       :modifiers="['centered']"
       style="background: #efefef; text-align: center; padding: 1em;"
@@ -76,9 +76,6 @@ export default {
       <BHeading v-if="page.title" :level="1">
         {{ page.title }}
       </BHeading>
-      <div v-if="page.richtext && page.richtext.content">
-        {{ page.richtext }}
-      </div>
       <BRichtext
         v-if="page.richtext && page.richtext.content"
         :content="page.richtext.content"
