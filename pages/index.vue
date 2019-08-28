@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios'
 import basePage from '~/components/_basePage.vue'
 import Examples from '~/components/Examples/Examples/Examples.vue'
 import page from '~/apollo/queries/page'
@@ -22,6 +23,35 @@ export default {
     page() {
       return this.entries && this.entries.length ? this.entries[0] : false
     }
+  },
+  async asyncData({ params, env, query }) {
+    if (query['x-craft-preview'] && query.token) {
+      console.info('Preview is displayed!') // eslint-disable-line
+
+      const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
+
+      const previewData = await axios
+        .post(
+          endpoint,
+          { query: page.loc.source.body, variables: { slug: env.HOMESLUG } },
+          { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
+        )
+        .then(result => {
+          if (result && result.data && result.data.data) {
+            return result.data.data.entries[0]
+          } else {
+            return false
+          }
+        })
+        .catch(error => {
+          console.log('error: ', error) // eslint-disable-line
+        })
+      return {
+        page: previewData,
+        preview: true
+      }
+    }
+    return { preview: false }
   },
   mounted() {
     this.log('this.page: ', this.page)

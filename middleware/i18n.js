@@ -1,3 +1,4 @@
+import { verifyLeadingSlash } from '@wearelucid/vuecid-helpers'
 import logV from '~/util/logV'
 const m = 'middleware/i18n'
 
@@ -49,7 +50,8 @@ export default function({ app, store, route, error, redirect, isHMR }) {
     if (path.endsWith(`/${process.env.HOMESLUG}`)) {
       return redirect(path.replace(`/${process.env.HOMESLUG}`, '/'))
     } else if (path.includes(`/${process.env.HOMESLUG}`)) {
-      return redirect(path.replace(`/${process.env.HOMESLUG}`, ''))
+      const newPath = path.replace(`/${process.env.HOMESLUG}`, '')
+      return redirect(verifyLeadingSlash(newPath))
     }
   }
 }

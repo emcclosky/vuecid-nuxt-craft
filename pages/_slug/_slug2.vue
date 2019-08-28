@@ -10,7 +10,7 @@ export default {
       page: false
     }
   },
-  async asyncData ({ params, env, query }) {
+  async asyncData({ params, env, query }) {
     if (query['x-craft-preview'] && query.token) {
       console.info('Preview is displayed!') // eslint-disable-line
 
@@ -21,7 +21,8 @@ export default {
           endpoint,
           { query: page.loc.source.body, variables: { slug: params.slug } },
           { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
-        ).then(result => {
+        )
+        .then(result => {
           if (result && result.data && result.data.data) {
             return result.data.data.entries[0]
           } else {
