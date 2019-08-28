@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios'
 import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 
@@ -7,6 +8,36 @@ export default {
   data: () => {
     return {
       page: false
+    }
+  },
+  async asyncData ({ params, env, query }) {
+    console.log('params: ', query)
+    if (query['x-craft-preview'] && query.token) {
+      const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
+      console.log('endpoint: ', endpoint)
+
+      const { data } = await axios.post(
+        endpoint,
+        { query: `{ entries(section: [pages], slug: "bart-simpson-loves-skateboarding") {
+            slug
+            title
+            ...on Pages {
+              richtext {
+                totalPages
+                content
+              }
+            }
+            }
+          }`
+        },
+        { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
+      ).catch(error => {
+        console.log('error: ', error)
+      })
+      console.log('data: ', data.data.entries)
+      return {
+        preview: data.data.entries[0].title
+      }
     }
   },
   apollo: {
@@ -29,6 +60,7 @@ export default {
 
 <template>
   <div class="Page">
+    {{ preview }}
     <BContentSection
       :modifiers="['centered']"
       style="background: #efefef; text-align: center; padding: 1em;"
