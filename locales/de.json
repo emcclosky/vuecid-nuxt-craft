@@ -37,6 +37,7 @@
     "titleFemale": "Frau",
     "mailAriaHint": "Gib hier Deine Email-Adresse ein",
     "nameAriaHint": "Gib hier Deinen Nachnamen ein",
-    "subscribe": "Anmelden"
+    "subscribe": "Anmelden",
+    "previewAlert": "Unfortunately the preview could not be displayed. If you have never saved our entry do it and return to the preview. If another problem prevents the preview from working... 🤷‍♂️"
   }
 }

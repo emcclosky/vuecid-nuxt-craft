@@ -2,8 +2,12 @@
 import basePage from '~/components/_basePage.vue'
 import page from '~/apollo/queries/page'
 import loadPreviewData from '~/util/loadPreviewData.js'
+import Loader from '~/components/Examples/Loader/Loader.vue'
 
 export default {
+  components: {
+    Loader
+  },
   extends: basePage,
   data: () => {
     return {
@@ -45,12 +49,6 @@ export default {
 
 <template>
   <div class="Page">
-    <div v-if="preview && !previewData">
-      Unfortunately the preview could not be displayed. If you have never saved
-      your entry do it and return to the preview. If another problem prevents
-      the preview from working... 🤷‍♂️
-    </div>
-
     <BContentSection
       :modifiers="['centered']"
       style="background: #efefef; text-align: center; padding: 1em;"
@@ -71,5 +69,6 @@ export default {
         :content="page.richtext.content"
       />
     </BContentSection>
+    <Loader v-else />
   </div>
 </template>

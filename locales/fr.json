@@ -37,6 +37,7 @@
     "titleFemale": "Madame",
     "mailAriaHint": "Entrez votre adress e-mail ici",
     "nameAriaHint": "Entrez votre nom ici",
-    "subscribe": "Abonnér"
+    "subscribe": "Abonnér",
+    "previewAlert": "Preview Alert FR"
   }
 }
