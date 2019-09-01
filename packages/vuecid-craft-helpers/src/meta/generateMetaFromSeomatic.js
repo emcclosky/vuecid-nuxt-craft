@@ -18,7 +18,7 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
  */
 
 export default function generateMetaFromSeomatic({
-  seomaticMeta = {},
+  seomaticMeta = false,
   specificOgImage = false,
   frontendUrl = false,
   debug = false
