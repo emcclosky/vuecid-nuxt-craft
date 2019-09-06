@@ -1,4 +1,4 @@
-import { verifyTrailingSlash } from '@wearelucid/vuecid-helpers'
+// import { verifyTrailingSlash } from '@wearelucid/vuecid-helpers'
 import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 
 /* eslint-disable no-console */
@@ -60,7 +60,7 @@ export default function generateMetaFromSeomatic({
   const ogType = metaTagContainer['og:type'].content || ''
   const ogUrl = metaTagContainer['og:url'].content || ''
   const ogTitle = metaTagContainer['og:title'].content || title
-  const ogDescription = metaTagContainer['og:description'].content || description
+  const ogDescription = metaTagContainer['og:description'].content || description // prettier-ignore
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
   const seomaticOgImage = {

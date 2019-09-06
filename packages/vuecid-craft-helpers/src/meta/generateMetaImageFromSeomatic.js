@@ -22,8 +22,6 @@ export default function generateMetaImageFromSeomatic({
   const imageHeight = specificImage ? '720' : fallbackImage.height
   const alt = specificImage ? specificImage.alt : fallbackImage.alt
 
-  console.log('imageUrl: ', imageUrl)
-
   return [
     { hid: 'og:image', property: 'og:image', content: imageUrl },
     { hid: 'og:image:width', name: 'og:image:width', content: imageWidth },
