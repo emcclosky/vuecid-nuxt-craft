@@ -1,5 +1,31 @@
-// Routes utilities
-import generateLocalizedRoutes from './routes/generateLocalizedRoutes';
-import generateRoutesFromData from './routes/generateRoutesFromData';
-import generateMetaFromSeomatic from './meta/generateMetaFromSeomatic';
-export { generateLocalizedRoutes, generateRoutesFromData, generateMetaFromSeomatic };
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "generateLocalizedRoutes", {
+  enumerable: true,
+  get: function get() {
+    return _generateLocalizedRoutes["default"];
+  }
+});
+Object.defineProperty(exports, "generateRoutesFromData", {
+  enumerable: true,
+  get: function get() {
+    return _generateRoutesFromData["default"];
+  }
+});
+Object.defineProperty(exports, "generateMetaFromSeomatic", {
+  enumerable: true,
+  get: function get() {
+    return _generateMetaFromSeomatic["default"];
+  }
+});
+
+var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generateLocalizedRoutes"));
+
+var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateRoutesFromData"));
+
+var _generateMetaFromSeomatic = _interopRequireDefault(require("./meta/generateMetaFromSeomatic"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

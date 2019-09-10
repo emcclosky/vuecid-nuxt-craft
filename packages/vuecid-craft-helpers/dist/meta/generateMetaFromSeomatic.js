@@ -1,5 +1,22 @@
-import { verifyTrailingSlash } from '@wearelucid/vuecid-helpers';
-import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = generateMetaFromSeomatic;
+
+var _generateMetaImageFromSeomatic = _interopRequireDefault(require("./generateMetaImageFromSeomatic"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 /* eslint-disable no-console */
 
 /**
@@ -15,71 +32,72 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic';
  * @param {String} frontendUrl
  * @return {Array}
  */
+function generateMetaFromSeomatic() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$seomaticMeta = _ref.seomaticMeta,
+      seomaticMeta = _ref$seomaticMeta === void 0 ? false : _ref$seomaticMeta,
+      _ref$specificOgImage = _ref.specificOgImage,
+      specificOgImage = _ref$specificOgImage === void 0 ? false : _ref$specificOgImage,
+      _ref$frontendUrl = _ref.frontendUrl,
+      frontendUrl = _ref$frontendUrl === void 0 ? false : _ref$frontendUrl,
+      _ref$debug = _ref.debug,
+      debug = _ref$debug === void 0 ? false : _ref$debug;
 
-export default function generateMetaFromSeomatic({
-  seomaticMeta = {},
-  specificOgImage = false,
-  frontendUrl = false,
-  debug = false
-} = {}) {
   if (!seomaticMeta) {
     console.warn('Your meta info cannot be generated, because the seomatic object is falsey.'); // prettier-ignore
 
     return;
   }
 
-  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!');
-
-  if (debug) {
-    console.table(seomaticMeta);
-  } // // Apollo parses the first level of our seomatic object
+  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // // Apollo parses the first level of our seomatic object
   // // But unfortunately everything that is nested is just a JSON String and needs to be parsed
 
+  var metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer);
+  var metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer);
+  var metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer);
 
-  const metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer);
-  const metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer);
-  const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer); // not needed at this point:
+  if (debug) {
+    console.log('metaTagContainer: ', metaTagContainer);
+    console.log('metaLinkContainer: ', metaLinkContainer);
+    console.log('metaTitleContainer: ', metaTitleContainer);
+  } // not needed at this point:
   // const metaJsonLdContainer = JSON.parse(seomaticMeta.metaJsonLdContainer)
   // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: e.g. 🚧
   // This can be changed in seomatics settings
 
-  const title = metaTitleContainer.title.title || '';
-  const locale = metaTagContainer['og:locale'].content || '';
-  const siteName = metaTagContainer['og:site_name'].content || '';
-  const description = metaTagContainer.description.content || '';
-  const keywords = metaTagContainer.keywords.content || '';
-  const referrer = metaTagContainer.referrer.content || '';
-  const ogType = metaTagContainer['og:type'].content || ''; // SEOMatic allows to set a specific url pattern for every section
-  // Per default it sets '{entry.uri}' within the setting SEOMatic > Content SEO > Canonical URL
-  // This will point to the backend url, which is wrong.
-  // Because we don't want to change this for every section we extract the site's home url and replace it with the frontend url
 
-  const homeUrl = metaLinkContainer.home.href;
-  const seomaticOgUrl = metaTagContainer['og:url'].content || '';
-  const ogUrl = seomaticOgUrl.replace(homeUrl, verifyTrailingSlash(frontendUrl));
-  const ogTitle = metaTagContainer['og:title'].content || title;
-  const ogDescription = metaTagContainer['og:description'].content || description; // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
+  var title = metaTitleContainer.title.title || '';
+  var locale = metaTagContainer['og:locale'].content || '';
+  var siteName = metaTagContainer['og:site_name'].content || '';
+  var description = metaTagContainer.description.content || '';
+  var keywords = metaTagContainer.keywords.content || '';
+  var referrer = metaTagContainer.referrer.content || '';
+  var ogType = metaTagContainer['og:type'].content || '';
+  var ogUrl = metaTagContainer['og:url'].content || '';
+  var ogTitle = metaTagContainer['og:title'].content || title;
+  var ogDescription = metaTagContainer['og:description'].content || description; // prettier-ignore
+  // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
-  const seomaticOgImage = {
-    image: metaTagContainer['og:image'].content || false,
+  var seomaticOgImage = {
+    url: metaTagContainer['og:image'].content || false,
     width: metaTagContainer['og:image:width'].content || false,
     height: metaTagContainer['og:image:height'].content || false,
     alt: metaTagContainer['og:image:alt'].content || ''
   };
-  const ogImage = generateMetaImageFromSeomatic({
+  var ogImage = (0, _generateMetaImageFromSeomatic["default"])({
     specificImage: specificOgImage,
     fallbackImage: seomaticOgImage
   });
-  const twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title; // prettier-ignore
+  var twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title; // prettier-ignore
 
-  const twitterDescription = metaTagContainer['twitter:description'] ? metaTagContainer['twitter:description'].content : description; // prettier-ignore
+  var twitterDescription = metaTagContainer['twitter:description'] ? metaTagContainer['twitter:description'].content : description; // prettier-ignore
 
-  const twitterSite = metaTagContainer['twitter:site'] ? metaTagContainer['twitter:site'].content : ''; // prettier-ignore
+  var twitterSite = metaTagContainer['twitter:site'] ? metaTagContainer['twitter:site'].content : ''; // prettier-ignore
 
-  const twitterCreator = metaTagContainer['twitter:creator'] ? metaTagContainer['twitter:creator'].content : ''; // prettier-ignore
+  var twitterCreator = metaTagContainer['twitter:creator'] ? metaTagContainer['twitter:creator'].content : ''; // prettier-ignore
 
-  const metaInfo = {
-    title,
+  var metaInfo = {
+    title: title,
     htmlAttrs: {
       lang: locale
     },
@@ -146,8 +164,7 @@ export default function generateMetaFromSeomatic({
       hid: 'referrer',
       property: 'referrer',
       content: referrer
-    }, // prettier-ignore
-    ...ogImage],
+    }].concat(_toConsumableArray(ogImage)),
     link: [{
       rel: 'canonical',
       href: ogUrl

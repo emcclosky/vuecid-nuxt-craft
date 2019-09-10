@@ -1,3 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = generateMetaImageFromSeomatic;
+
 /* eslint-disable no-console */
 
 /**
@@ -11,15 +18,18 @@
  * @param {Object|Boolean} specificImage
  * @param {Object} fallbackImage
  */
-export default function generateMetaImageFromSeomatic({
-  specificImage = false,
-  fallbackImage = {}
-} = {}) {
+function generateMetaImageFromSeomatic() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$specificImage = _ref.specificImage,
+      specificImage = _ref$specificImage === void 0 ? false : _ref$specificImage,
+      _ref$fallbackImage = _ref.fallbackImage,
+      fallbackImage = _ref$fallbackImage === void 0 ? {} : _ref$fallbackImage;
+
   // Check if we have a page specific OG image, where we can use a specific image size optimized for social sharing
-  const imageUrl = specificImage ? specificImage.url : fallbackImage;
-  const imageWidth = specificImage ? '1280' : fallbackImage.width;
-  const imageHeight = specificImage ? '720' : fallbackImage.height;
-  const alt = specificImage ? specificImage.alt : fallbackImage.alt;
+  var imageUrl = specificImage ? specificImage.url : fallbackImage.url;
+  var imageWidth = specificImage ? '1280' : fallbackImage.width;
+  var imageHeight = specificImage ? '720' : fallbackImage.height;
+  var alt = specificImage ? specificImage.alt : fallbackImage.alt;
   return [{
     hid: 'og:image',
     property: 'og:image',
