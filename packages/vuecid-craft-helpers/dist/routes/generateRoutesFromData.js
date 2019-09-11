@@ -41,14 +41,13 @@ function _generateRoutesFromData() {
               debug: false
             };
             token = options.token, endpoint = options.endpoint, section = options.section;
-            console.log('options: ', options);
 
             if (options.debug) {
-              console.log('options: ', options); // eslint-disable-line
+              console.log('📇 generateRoutesFromData options: ', options); // eslint-disable-line
             } // Fetch all sections with the specified section name from your GraphQL API
 
 
-            _context.next = 6;
+            _context.next = 5;
             return _axios["default"].post(endpoint, {
               query: "{ entries (section: [".concat(section, "]) { uri } }")
             }, {
@@ -57,7 +56,9 @@ function _generateRoutesFromData() {
               }
             }).then(function (result) {
               if (options.debug) {
-                console.log('result: ', result); // eslint-disable-line
+                console.log('📇 generateRoutesFromData: Response Status ', result.status); // eslint-disable-line
+
+                console.log('📇 generateRoutesFromData: Data ', result.data); // eslint-disable-line
               }
 
               if (result.data.data.entries) {
@@ -71,20 +72,20 @@ function _generateRoutesFromData() {
               console.log('error: ', error); // eslint-disable-line no-console
             });
 
-          case 6:
+          case 5:
             routes = _context.sent;
 
             if (routes) {
-              _context.next = 11;
+              _context.next = 10;
               break;
             }
 
-            throw new Error('❌ – No routes could be fetched');
+            throw new Error('📇❌ – No routes could be fetched');
+
+          case 10:
+            console.log('📇📩 – Successfully fetched routes: ', routes); // eslint-disable-line no-console
 
           case 11:
-            console.log('📩 – Successfully fetched routes: ', routes); // eslint-disable-line no-console
-
-          case 12:
             // Kick out all the pages containing the home slug
             // This could also delete a page that contains a string like '…/home…'
             // maybe a page with the permalink /pages/something/home-sweet-home
@@ -96,7 +97,7 @@ function _generateRoutesFromData() {
             });
             return _context.abrupt("return", routes);
 
-          case 14:
+          case 13:
           case "end":
             return _context.stop();
         }

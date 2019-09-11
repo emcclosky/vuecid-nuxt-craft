@@ -15,10 +15,8 @@ async function generateRoutesFromData(
 ) {
   const { token, endpoint, section } = options
 
-  console.log('options: ', options)
-
   if (options.debug) {
-    console.log('options: ', options) // eslint-disable-line
+    console.log('📇 generateRoutesFromData options: ', options) // eslint-disable-line
   }
 
   // Fetch all sections with the specified section name from your GraphQL API
@@ -30,7 +28,8 @@ async function generateRoutesFromData(
     )
     .then(result => {
       if (options.debug) {
-        console.log('result: ', result) // eslint-disable-line
+        console.log('📇 generateRoutesFromData: Response Status ', result.status) // eslint-disable-line
+        console.log('📇 generateRoutesFromData: Data ', result.data) // eslint-disable-line
       }
       if (result.data.data.entries) {
         return result.data.data.entries.map(r => r.uri)
@@ -46,9 +45,9 @@ async function generateRoutesFromData(
     })
 
   if (!routes) {
-    throw new Error('❌ – No routes could be fetched')
+    throw new Error('📇❌ – No routes could be fetched')
   } else {
-    console.log('📩 – Successfully fetched routes: ', routes) // eslint-disable-line no-console
+    console.log('📇📩 – Successfully fetched routes: ', routes) // eslint-disable-line no-console
   }
 
   // Kick out all the pages containing the home slug
