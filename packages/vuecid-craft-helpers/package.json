@@ -1,6 +1,6 @@
 {
   "name": "@wearelucid/vuecid-craft-helpers",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Helper functions to get your Vuecid-CraftCMS Frontend up and running.",
   "author": "Lucid <buero@wearelucid.ch> (https://www.wearelucid.ch)",
   "homepage": "https://github.com/wearelucid/vuecid-nuxt-craft.git",
