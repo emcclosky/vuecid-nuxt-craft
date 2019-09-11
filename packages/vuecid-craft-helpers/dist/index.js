@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -27,5 +29,3 @@ var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generate
 var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateRoutesFromData"));
 
 var _generateMetaFromSeomatic = _interopRequireDefault(require("./meta/generateMetaFromSeomatic"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

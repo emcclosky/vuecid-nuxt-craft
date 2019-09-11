@@ -1,35 +1,35 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
 var _axios = _interopRequireDefault(require("axios"));
 
 var _vuecidHelpers = require("@wearelucid/vuecid-helpers");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function generateRoutesFromData() {
   return _generateRoutesFromData.apply(this, arguments);
 }
 
 function _generateRoutesFromData() {
-  _generateRoutesFromData = _asyncToGenerator(
+  _generateRoutesFromData = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
+  _regenerator["default"].mark(function _callee() {
     var options,
         token,
         endpoint,
         section,
         routes,
         _args = arguments;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -41,13 +41,14 @@ function _generateRoutesFromData() {
               debug: false
             };
             token = options.token, endpoint = options.endpoint, section = options.section;
+            console.log('options: ', options);
 
             if (options.debug) {
               console.log('options: ', options); // eslint-disable-line
             } // Fetch all sections with the specified section name from your GraphQL API
 
 
-            _context.next = 5;
+            _context.next = 6;
             return _axios["default"].post(endpoint, {
               query: "{ entries (section: [".concat(section, "]) { uri } }")
             }, {
@@ -70,20 +71,20 @@ function _generateRoutesFromData() {
               console.log('error: ', error); // eslint-disable-line no-console
             });
 
-          case 5:
+          case 6:
             routes = _context.sent;
 
             if (routes) {
-              _context.next = 10;
+              _context.next = 11;
               break;
             }
 
             throw new Error('❌ – No routes could be fetched');
 
-          case 10:
+          case 11:
             console.log('📩 – Successfully fetched routes: ', routes); // eslint-disable-line no-console
 
-          case 11:
+          case 12:
             // Kick out all the pages containing the home slug
             // This could also delete a page that contains a string like '…/home…'
             // maybe a page with the permalink /pages/something/home-sweet-home
@@ -95,7 +96,7 @@ function _generateRoutesFromData() {
             });
             return _context.abrupt("return", routes);
 
-          case 13:
+          case 14:
           case "end":
             return _context.stop();
         }

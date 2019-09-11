@@ -15,6 +15,8 @@ async function generateRoutesFromData(
 ) {
   const { token, endpoint, section } = options
 
+  console.log('options: ', options)
+
   if (options.debug) {
     console.log('options: ', options) // eslint-disable-line
   }
