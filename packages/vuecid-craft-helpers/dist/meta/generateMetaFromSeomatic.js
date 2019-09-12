@@ -32,10 +32,12 @@ function generateMetaFromSeomatic() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$seomaticMeta = _ref.seomaticMeta,
       seomaticMeta = _ref$seomaticMeta === void 0 ? false : _ref$seomaticMeta,
-      _ref$specificOgImage = _ref.specificOgImage,
-      specificOgImage = _ref$specificOgImage === void 0 ? false : _ref$specificOgImage,
       _ref$frontendUrl = _ref.frontendUrl,
       frontendUrl = _ref$frontendUrl === void 0 ? false : _ref$frontendUrl,
+      _ref$specificOgImage = _ref.specificOgImage,
+      specificOgImage = _ref$specificOgImage === void 0 ? false : _ref$specificOgImage,
+      _ref$lang = _ref.lang,
+      lang = _ref$lang === void 0 ? 'de' : _ref$lang,
       _ref$debug = _ref.debug,
       debug = _ref$debug === void 0 ? false : _ref$debug;
 
@@ -62,7 +64,9 @@ function generateMetaFromSeomatic() {
   // This can be changed in seomatics settings
 
 
-  var title = metaTitleContainer.title.title || '';
+  var title = metaTitleContainer.title.title || ''; // using the locale is not possible, because lang="de_CH" is not a valid language
+
+  var language = lang;
   var locale = metaTagContainer['og:locale'].content || '';
   var siteName = metaTagContainer['og:site_name'].content || '';
   var description = metaTagContainer.description.content || '';
@@ -101,10 +105,13 @@ function generateMetaFromSeomatic() {
   var metaInfo = {
     title: title,
     htmlAttrs: {
-      lang: locale
+      lang: language
     },
     meta: [{
       name: 'application-name',
+      content: siteName
+    }, {
+      name: 'lang',
       content: siteName
     }, {
       hid: 'description',

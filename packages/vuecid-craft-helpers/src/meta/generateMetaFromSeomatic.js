@@ -19,8 +19,9 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 
 export default function generateMetaFromSeomatic({
   seomaticMeta = false,
-  specificOgImage = false,
   frontendUrl = false,
+  specificOgImage = false,
+  lang = 'de',
   debug = false
 } = {}) {
   if (!seomaticMeta) {
@@ -51,6 +52,9 @@ export default function generateMetaFromSeomatic({
   // sidenote: if Craft runs in dev mode we get a «construction» emoji in the site name: e.g. 🚧
   // This can be changed in seomatics settings
   const title = metaTitleContainer.title.title || ''
+
+  // using the locale is not possible, because lang="de_CH" is not a valid language
+  const language = lang
 
   const locale = metaTagContainer['og:locale'].content || ''
   const siteName = metaTagContainer['og:site_name'].content || ''
@@ -89,10 +93,11 @@ export default function generateMetaFromSeomatic({
   const metaInfo = {
     title,
     htmlAttrs: {
-      lang: locale
+      lang: language
     },
     meta: [
       { name: 'application-name', content: siteName },
+      { name: 'lang', content: siteName },
       { hid: 'description', name: 'description', content: description },
       { hid: 'keywords', name: 'keywords', content: keywords },
       { hid: 'og:title', property: 'og:title', content: ogTitle },
