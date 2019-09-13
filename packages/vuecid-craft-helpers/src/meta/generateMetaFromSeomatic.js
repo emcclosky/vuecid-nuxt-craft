@@ -12,7 +12,6 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
  * @param {Object} seomaticMeta
- * @param {String} specificOgImage
  * @param {String} frontendUrl
  * @return {Array}
  */
@@ -20,7 +19,6 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 export default function generateMetaFromSeomatic({
   seomaticMeta = false,
   frontendUrl = false,
-  specificOgImage = false,
   lang = 'de',
   debug = false
 } = {}) {
@@ -80,10 +78,7 @@ export default function generateMetaFromSeomatic({
     height: metaTagContainer['og:image:height'].content || false,
     alt: metaTagContainer['og:image:alt'].content || ''
   }
-  const ogImage = generateMetaImageFromSeomatic({
-    specificImage: specificOgImage,
-    fallbackImage: seomaticOgImage
-  })
+  const ogImage = generateMetaImageFromSeomatic(seomaticOgImage)
 
   const twitterTitle = metaTagContainer['twitter:title'] ? metaTagContainer['twitter:title'].content : title // prettier-ignore
   const twitterDescription = metaTagContainer['twitter:description'] ? metaTagContainer['twitter:description'].content : description // prettier-ignore

@@ -8,19 +8,13 @@
  * also they have to override nuxt.configs manifest infos, which sets an hid
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
- * @param {Object|Boolean} specificImage
- * @param {Object} fallbackImage
  */
 
-export default function generateMetaImageFromSeomatic({
-  specificImage = false,
-  fallbackImage = {}
-} = {}) {
-  // Check if we have a page specific OG image, where we can use a specific image size optimized for social sharing
-  const imageUrl = specificImage ? specificImage.url : fallbackImage.url
-  const imageWidth = specificImage ? '1280' : fallbackImage.width
-  const imageHeight = specificImage ? '720' : fallbackImage.height
-  const alt = specificImage ? specificImage.alt : fallbackImage.alt
+export default function generateMetaImageFromSeomatic(ogImage) {
+  const imageUrl = ogImage.url
+  const imageWidth = ogImage.width
+  const imageHeight = ogImage.height
+  const alt = ogImage.alt
 
   return [
     { hid: 'og:image', property: 'og:image', content: imageUrl },
