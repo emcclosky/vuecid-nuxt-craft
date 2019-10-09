@@ -32,12 +32,12 @@ $ yarn build --analyze
 Search for TODO's inside the project to get everything setup nicely for your new website.
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
 
-## Fetch Content
-The plugin [API Fetcher](https://github.com/wearelucid/api-fetcher) can fetch the data from WordPress
-``` bash
-# Fetch data
-$ yarn fetch
-```
+## Setup
+### Seomatic
+If you use the seomatic plugin for SEO, add the apollo query to the `_basePage.vue`.
+
+### Apollo queries
+Check the sections that are queried within `_basePage.vue` and `page.gql`.
 
 ## Scaffolding
 Components and store modules can be scaffolded

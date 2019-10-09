@@ -1,41 +1,67 @@
 <script>
+import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import config from '../config'
+import page from '~/apollo/queries/page'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
   apollo: {
-    seomatic: {
-      query: seomaticQuery,
-      prefetch: ({ route }) => ({ slug: route.params.slug }),
+    // seomatic: {
+    //   query: seomaticQuery,
+    //   prefetch: ({ route }) => ({
+    //     slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+    //   }),
+    //   variables() {
+    //     let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
+    //     slug = removeLeadingSlash(slug)
+    //     return { slug }
+    //   },
+    //   result(result) {
+    //     try {
+    //       this.seomatic = result.data.seomatic
+    //     } catch (error) {
+    //       console.log('Basepage: Apollo error: ', error) // eslint-disable-line no-console
+    //     }
+    //   }
+    // },
+    entries: {
+      query: page,
+      prefetch: ({ route }) => ({
+        slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+      }),
       variables() {
-        const slug = this.$route.params.slug || config.env.HOMESLUG
+        let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
+        slug = removeLeadingSlash(slug)
         return { slug }
       },
       result(result) {
-        this.seomatic = result.data.seomatic
-        this.ogImage =
-          result.data &&
-          result.data.entries &&
-          result.data.entries[0] &&
-          result.data.entries[0].ogImage &&
-          result.data.entries[0].ogImage[0]
-            ? result.data.entries[0].ogImage[0]
-            : false
+        // Only set this.page to graphql data if we are not seeing a preview
+        if (!this.preview) {
+          if (!result.data.entries || !result.data.entries[0]) {
+            this.$store.dispatch(
+              'throwError',
+              { statusCode: 404, message: 'Page not found' },
+              { root: true }
+            )
+          }
+          this.page = result.data.entries[0]
+          this.$store.commit('ui/PAGE_LOADED', true)
+        }
       }
     }
   },
   head() {
     if (!this.seomatic) {
-      console.warn('No SEO settings from GraphQL query returned.') // eslint-disable-line
+      this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
       if (!this.$route.params.slug) {
-        console.warn(`You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
+        this.log(`🏮 You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
       }
     }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      specificOgImage: this.ogImage
-      // ,debug: true
+      lang: 'de'
+      ,debug: true
     })
   },
   mounted() {

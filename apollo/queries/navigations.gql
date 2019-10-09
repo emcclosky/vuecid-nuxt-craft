@@ -1,0 +1,18 @@
+query Navigations($section: String) {
+  # only get the first level
+  entries(section: [$section], level: 1) {
+    slug
+    uri
+    title
+    children {
+      slug
+      uri
+      title
+      children {
+        slug
+        uri
+        title
+      }
+    }
+  }
+}

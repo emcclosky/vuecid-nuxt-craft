@@ -1,0 +1,12 @@
+{
+  globals {
+    globalSettings {
+      # gdprText {
+      #   content
+      # }
+      # cookieText {
+      #   content
+      # }
+    }
+  }
+}

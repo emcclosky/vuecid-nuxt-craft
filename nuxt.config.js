@@ -68,6 +68,18 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    // Make sure you handle user opt-in in your cookie-bar and make the correct settings in your GTM.
+    // [
+    //   '@nuxtjs/google-tag-manager',
+    //   {
+    //     id: config.googleTagManagerID,
+    //     // We only have opt in, but when the user opts-in we definitely track
+    //     // respectDoNotTrack: true,
+    //     pageTracking: true, // sends custom event 'nuxtRoute' to track route changes
+    //     pageViewEventName: 'nuxtRoute'
+    //   }
+    // ],
+
     // Google Analytics Module
     // Be aware that there is still a bug where the page title is not updated:
     // Demo: https://imgur.com/QSv4n12
@@ -162,11 +174,11 @@ export default {
     // Apply route generation magic:
     routes: async () => {
       const generatedRoutes = await generateRoutesFromData({
-        endpoint: `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`,
+        endpoint: `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`,
         section: 'pages', // depends on the name you put in your backend for this kind of section
         token: config.env.GRAPHQL_TOKEN,
         homeSlug: config.env.HOMESLUG
-        // ,debug: true
+        ,debug: true
       })
       return [...generatedRoutes]
     }

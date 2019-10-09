@@ -5,13 +5,4 @@ query Seomatic($slug: String!) {
     metaLinkContainer
     metaJsonLdContainer
   }
-
-  entries(section: [pages], slug: $slug) {
-    ...on Pages {
-      ogImage {
-        url: url(transform: ogImage)
-        title
-      }
-    }
-  }
 }
