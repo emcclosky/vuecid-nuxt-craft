@@ -172,34 +172,16 @@
 /*
  * Hocus Focus
  */
-@mixin hocus-focus($type: bgcolor, $color: $s-color-primary) {
-  @if $type == bgcolor {
-    &:focus {
-      outline: none;
-    }
 
-    &:hover,
-    &:active {
-      background-color: $color;
-    }
-
-    [data-whatinput='keyboard'] &:focus {
-      background-color: $color;
-    }
-  } @else if $type == textcolor {
-    &:focus {
-      outline: none;
-    }
-
-    &:hover,
-    &:active {
-      color: $color;
-    }
-
-    [data-whatinput='keyboard'] &:focus {
-      // color: $color;
+@mixin hocus-focus($type: outline, $color: $s-color-primary, $offset: 1rem) {
+  @if $type == outline {
+    [data-whatintent='keyboard'] &:focus {
       outline: 1px solid $color;
-      outline-offset: 10px;
+      outline-offset: $offset;
+    }
+  } @else if $type == bgcolor {
+    [data-whatintent='keyboard'] &:focus {
+      background-color: $color;
     }
   }
 }
