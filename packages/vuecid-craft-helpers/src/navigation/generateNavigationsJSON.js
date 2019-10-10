@@ -5,10 +5,11 @@ import saveFile from '../utilities/saveFile.js'
 export default async function generateNavigationsJSON({
   endpoint,
   graphQLQuery,
+  compressJSON = true,
   sections = [],
   fileName,
   savePath
-}) {
+} = {}) {
   const navigations = {}
 
   try {
@@ -30,9 +31,9 @@ export default async function generateNavigationsJSON({
       navigations[section] = pages
     }
 
-    console.log('📡 Fetched navigations: ', navigations)
+    console.log('📡 Fetched navigations: ', navigations) // eslint-disable-line
 
-    saveFile(navigations, fileName, savePath)
+    saveFile({ data: navigations, fileName, savePath, compressJSON })
 
     // // filter out sections which match ignoreProperties
     // if (payload.ignore) {

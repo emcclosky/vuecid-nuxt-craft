@@ -17,21 +17,38 @@ var _printer = require("graphql/language/printer");
 
 var _saveFile = _interopRequireDefault(require("../utilities/saveFile.js"));
 
-function generateNavigationsJSON(_x) {
+function generateNavigationsJSON() {
   return _generateNavigationsJSON.apply(this, arguments);
 }
 
 function _generateNavigationsJSON() {
   _generateNavigationsJSON = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(_ref) {
-    var endpoint, graphQLQuery, _ref$sections, sections, fileName, savePath, navigations, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, section, pages;
+  _regenerator["default"].mark(function _callee() {
+    var _ref,
+        endpoint,
+        graphQLQuery,
+        _ref$compressJSON,
+        compressJSON,
+        _ref$sections,
+        sections,
+        fileName,
+        savePath,
+        navigations,
+        _iteratorNormalCompletion,
+        _didIteratorError,
+        _iteratorError,
+        _iterator,
+        _step,
+        section,
+        pages,
+        _args = arguments;
 
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            endpoint = _ref.endpoint, graphQLQuery = _ref.graphQLQuery, _ref$sections = _ref.sections, sections = _ref$sections === void 0 ? [] : _ref$sections, fileName = _ref.fileName, savePath = _ref.savePath;
+            _ref = _args.length > 0 && _args[0] !== undefined ? _args[0] : {}, endpoint = _ref.endpoint, graphQLQuery = _ref.graphQLQuery, _ref$compressJSON = _ref.compressJSON, compressJSON = _ref$compressJSON === void 0 ? true : _ref$compressJSON, _ref$sections = _ref.sections, sections = _ref$sections === void 0 ? [] : _ref$sections, fileName = _ref.fileName, savePath = _ref.savePath;
             navigations = {};
             _context.prev = 2;
             // load all entries for each section
@@ -105,8 +122,14 @@ function _generateNavigationsJSON() {
             return _context.finish(23);
 
           case 31:
-            console.log('📡 Fetched navigations: ', navigations);
-            (0, _saveFile["default"])(navigations, fileName, savePath); // // filter out sections which match ignoreProperties
+            console.log('📡 Fetched navigations: ', navigations); // eslint-disable-line
+
+            (0, _saveFile["default"])({
+              data: navigations,
+              fileName: fileName,
+              savePath: savePath,
+              compressJSON: compressJSON
+            }); // // filter out sections which match ignoreProperties
             // if (payload.ignore) {
             //   payload.ignore.forEach(propertyToIgnore => {
             //     navigations[section] = pages.filter(page => {

@@ -15,11 +15,16 @@ function fetchNavigations() {
   const endpoint = `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
   const graphQLQuery = pages
 
-  generateNavigationsJSON({
-    sections,
+  const settings = {
     endpoint,
-    graphQLQuery
-  })
+    graphQLQuery,
+    compressJSON: true, // setting this to false may help debugging :-)
+    sections,
+    fileName: 'navigations.json',
+    savePath: './static/data'
+  }
+
+  generateNavigationsJSON(settings)
 }
 
 fetchNavigations()

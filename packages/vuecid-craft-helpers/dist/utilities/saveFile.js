@@ -9,18 +9,27 @@ exports["default"] = saveFile;
 
 var _fs = _interopRequireDefault(require("fs"));
 
-function saveFile(data, fileName, config, additionalNaming) {
-  console.log('save file'); // additionalNaming can for example be a number or a slug
+function saveFile() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      data = _ref.data,
+      fileName = _ref.fileName,
+      savePath = _ref.savePath,
+      compressJSON = _ref.compressJSON;
 
-  var json = JSON.stringify(data, null, config.compressJSON ? null : 2);
+  var json = JSON.stringify(data, null, compressJSON ? null : 2);
   var jsonSizeKB = Math.round(Buffer.byteLength(json, 'utf8') / 1024 * 100) / 100; // eslint-disable-next-line
 
   console.info("Writing ".concat(fileName, " (Length: ").concat(json.length, ", Size: ").concat(jsonSizeKB, "kB)"));
-  return _fs["default"].writeFile("".concat(config.savePath, "/").concat(fileName), json, 'utf-8', function (err) {
+
+  if (!_fs["default"].existsSync(savePath)) {
+    _fs["default"].mkdirSync(savePath);
+  }
+
+  return _fs["default"].writeFile("".concat(savePath, "/").concat(fileName), json, 'utf-8', function (err) {
     if (err) {
       throw err;
     } else {
-      console.log("Wrote to ".concat(config.savePath, "/").concat(fileName, " successfully!")); // eslint-disable-line
+      console.log("\u2705\uD83D\uDCBE Wrote to ".concat(savePath, "/").concat(fileName, " successfully!")); // eslint-disable-line
     }
   });
 }
