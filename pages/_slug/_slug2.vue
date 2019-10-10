@@ -1,48 +1,12 @@
 <script>
 import basePage from '~/components/_basePage.vue'
-import page from '~/apollo/queries/page'
-import loadPreviewData from '~/util/loadPreviewData.js'
-import Loader from '~/components/Examples/Loader/Loader.vue'
 
 export default {
-  components: {
-    Loader
-  },
   extends: basePage,
   data: () => {
     return {
       page: false
     }
-  },
-  async asyncData({ params, env, query }) {
-    const previewData = await loadPreviewData({
-      params,
-      env,
-      query,
-      graphQLQuery: page
-    })
-    if (previewData) {
-      return { ...previewData }
-    }
-    return { preview: false }
-  },
-  apollo: {
-    entries: {
-      query: page,
-      prefetch: ({ route }) => ({ slug: route.params.slug }),
-      variables() {
-        return { slug: this.$route.params.slug }
-      },
-      result(result) {
-        // Only set this.page to graphql data if we are not seeing a preview
-        if (!this.preview) {
-          this.page = result.data.entries[0]
-        }
-      }
-    }
-  },
-  mounted() {
-    // this.log('page: ', this.page)
   }
 }
 </script>
@@ -69,6 +33,6 @@ export default {
         :content="page.richtext.content"
       />
     </BContentSection>
-    <Loader v-else />
+    <BLoader v-else />
   </div>
 </template>

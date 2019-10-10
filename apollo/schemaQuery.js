@@ -11,9 +11,6 @@ const verbose = argv.verbose
 const endpoint = useLocalDB
   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
   : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
-const token = useLocalDB
-  ? config.env.GRAPHQL_TOKEN_LOCAL
-  : config.env.GRAPHQL_TOKEN
 
 if (verbose) {
   console.log('arguments: ', argv) // eslint-disable-line
@@ -24,8 +21,7 @@ if (verbose) {
 fetch(endpoint, {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
+    'Content-Type': 'application/json'
   },
   body: JSON.stringify({
     variables: {},

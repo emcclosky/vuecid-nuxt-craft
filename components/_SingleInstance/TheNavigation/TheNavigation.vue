@@ -38,6 +38,10 @@ export default {
         // Esc key
         this.closeMenu()
       }
+    },
+    generateUri(parentSlug, slug) {
+      const childPath = slug ? `/${slug}` : ''
+      return `${parentSlug}${childPath}`
     }
   }
 }
@@ -65,8 +69,8 @@ export default {
             >
               <nuxt-link
                 class="TheNavigation__link"
-                :to="$i18n.path(removeHomeSlug(item.uri))"
-                :exact="isHomeSlug(item.uri)"
+                :to="$i18n.path(removeHomeSlug(item.slug))"
+                :exact="isHomeSlug(item.slug)"
               >
                 <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-html="item.title" />
@@ -82,7 +86,7 @@ export default {
                   class="TheNavigation__item TheNavigation__item--child"
                   @click="closeMenu"
                 >
-                  <nuxt-link class="TheNavigation__link" :to="child.uri">
+                  <nuxt-link class="TheNavigation__link" :to="generateUri(item.slug, child.slug)">
                     <!-- eslint-disable-next-line vue/no-v-html -->
                     <span v-html="child.title" />
                   </nuxt-link>

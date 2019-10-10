@@ -1,0 +1,70 @@
+@import '~assets/css/global';
+
+$c: 'BLoader';
+
+$c-bloader-size: 30px;
+$c-bloader-border-size: 5px;
+$c-bloader-min-height: 100px;
+
+
+.#{$c} {
+  height: 100%;
+  width: 100%;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: px-to-rem($c-bloader-min-height);
+
+  &__animation {
+    border: px-to-rem($c-bloader-border-size) solid $s-color-primary;
+    display: block;
+    border-radius: px-to-rem($c-bloader-size);
+    height: px-to-rem($c-bloader-size);
+    width: px-to-rem($c-bloader-size);
+    top: 50%;
+    left: 50%;
+    margin: - px-to-rem($c-bloader-size / 2);
+    opacity: 0;
+    position: absolute;
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+
+    @keyframes pulsate {
+      0% {
+        transform: scale(0.1);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+    }
+  }
+
+  &--dark {
+    .#{$c}__animation {
+      border-color: $s-color-black;
+    }
+  }
+
+  &--inline {
+    min-height: 0;
+    display: inline-block;
+    height: auto; // should adapt to the text size of the element
+    width: px-to-rem($c-bloader-size);
+    bottom: px-to-rem($c-bloader-size / 2) - 0.35rem; // bloaders center would sit on the baseline
+    margin-left: 1rem;
+  }
+
+  &--white {
+    .#{$c}__animation {
+      border-color: $s-color-white;
+    }
+  }
+}

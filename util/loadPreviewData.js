@@ -12,9 +12,6 @@ export default async function(
 ) {
   const { query, params, env, graphQLQuery, specificSlug } = options
 
-  console.log('params: ', params)
-  console.log('specificSlug: ', specificSlug)
-
   // If we see a preview token we need axios to fetch the data
   // Because with apollo we can't send the bearer token AND the craft token at the same time
   if (query['x-craft-preview'] && query.token) {

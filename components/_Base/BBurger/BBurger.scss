@@ -5,9 +5,9 @@ $c: 'BBurger';
 
 $c-b-burger-size: 35px;
 $c-b-burger-padding: 0;
-$c-b-burger-border-size: 2px;
+$c-b-burger-border-size: 4px;
 $c-b-burger-gutter: 6px;
-$c-b-burger-container-size: $c-b-burger-size + ($c-b-burger-padding * 2);
+$c-b-burger-container-size: $c-b-burger-size+($c-b-burger-padding * 2);
 
 .#{$c} {
   @include hocus-focus($type: textcolor, $color: $s-color-primary);
@@ -19,21 +19,42 @@ $c-b-burger-container-size: $c-b-burger-size + ($c-b-burger-padding * 2);
   background: transparent;
   border: 0;
   position: absolute;
-  top: 50%;
+  top: $s-size-gutter-medium;
   transform: translateY(-50%);
   right: 0;
+  z-index: 1; // lift burger to  front
 
-  @include mq($from: medium) {
-    display: none;
+  &:hover {
+    .#{$c}__burger {
+
+      &,
+      &::before,
+      &::after {
+        background-color: $s-color-primary;
+      }
+    }
   }
+
 
   &__burger {
     @include burger($width: $c-b-burger-size, $height: $c-b-burger-border-size, $gutter: $c-b-burger-gutter, $color: $s-color-black, $border-radius: 0, $transition-duration: $s-animation-duration-default);
+
+    &:before {
+      transform: rotate(-7deg);
+    }
   }
 
   &.is-active {
     .#{$c}__burger {
-      @include burger-to-cross($color: $s-color-black);
+      @include burger-to-cross($color: $s-color-primary);
+
+      &:hover {
+
+        &::before,
+        &::after {
+          background-color: $s-color-primary;
+        }
+      }
     }
   }
 }

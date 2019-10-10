@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios'
 import { print } from 'graphql/language/printer'
 import gql from 'graphql-tag'

@@ -18,7 +18,7 @@
     "netlifyify": "yarn netlify && PORT=3000 serve",
     "lint": "sass-lint -c .sass-lint.yml '**/*.scss' -v -q -i 'node_modules/**/*.scss' && eslint --ext .js,.vue --ignore-path .eslintignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
-    "build-fragments": "babel-node --presets env -- apollo/schemaQuery.js",
+    "build-fragments": "babel-node -- apollo/schemaQuery.js",
     "fetch": "babel-node -- fetch.js",
     "scaffold": "plop"
   },

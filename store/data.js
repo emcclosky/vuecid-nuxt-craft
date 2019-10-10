@@ -1,25 +1,18 @@
-import axios from 'axios'
-
 import {
   cleanSlug,
   checkAndGetHomeSlug,
   getPathFromUrl,
   removeHomeSlug
 } from '@wearelucid/vuecid-helpers'
-
-import {
-  isWordPressPreview,
-  normalizeWordpress,
-  flattenACF
-} from '@wearelucid/vuecid-helpers/dist/wp'
+// import globalsQuery from '~/apollo/queries/globals'
 
 import logV from '~/util/logV'
 
 export const state = () => ({
-  previewActive: false,
   bundle: {
     language: null
   },
+  navigations: null,
   currentPage: null,
   loading: true,
   loaded: false
@@ -28,49 +21,20 @@ export const state = () => ({
 const m = 'store/loadData'
 
 export const actions = {
-  async loadData({ state, dispatch, commit, getters }, payload) {
+  async loadData({ state, dispatch, commit }) {
     logV(m, 'loadData() action start')
 
     // Initialize loading sequence
     commit('DATA_LOAD')
 
-    // Reset preview state
-    commit('PREVIEW_STATE_SAVE', false)
-
     // Check if we changed the language
-    if (state.bundle.language !== payload.lang) {
+    if (!state.navigations) {
       logV(m, 'Language has changed, gonna load new bundle')
 
       // If so, load the new bundle asynchronously and save it to state
       // eslint-disable-next-line prettier/prettier
-      commit('BUNDLE_SAVE', await dispatch('loadBundle', { lang: payload.lang }))
-      logV(m, '📦 New bundle saved 📦')
-    }
-
-    if (isWordPressPreview(payload.route)) {
-      logV(m, '👀 Looks like we have a preview!')
-      logV(m, "👋‍ I'm out, let's hope client will handle this one for you!")
-    } else if (payload.isInBundle) {
-      const pageFromGetter = getters.getPageBySlug(
-        payload.postType === 'pages'
-          ? payload.route.path
-          : payload.route.params.slug,
-        payload.postType
-      )
-      logV(m, 'Requested page should be in bundle, gonna use getter')
-      if (pageFromGetter) {
-        logV(m, 'Getter found a page with this slug: ', pageFromGetter.slug)
-        commit('CURRENT_PAGE_SAVE', pageFromGetter)
-        logV(m, 'Mutation saved this page as currentPage')
-      } else {
-        logV(m, '🚨 Getter no haz page, but haz 404‍ 🤪')
-        payload.error({ statusCode: 404 })
-      }
-    } else {
-      logV(m, 'Requested page not in bundle, will load async')
-      // eslint-disable-next-line prettier/prettier
-      commit('CURRENT_PAGE_SAVE', await dispatch('loadPost', { lang: payload.lang, postType: payload.postType, slug: payload.route.params.slug, error: payload.error }))
-      logV(m, 'Mutation saved this post as currentPage')
+      commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations'))
+      logV(m, '📦 New navigations saved 📦')
     }
 
     // I am done with this async stuff!
@@ -78,6 +42,32 @@ export const actions = {
 
     logV(m, 'loadData() action done')
   },
+  // async loadGlobalSettings({ state, commit }, payload) {
+  //   logV(m, 'loadGlobalSettings() action start')
+  //   commit('GLOBALS_LOAD')
+
+  //   try {
+  //     const apolloClient = this.app.apolloProvider.defaultClient
+
+  //     const globals = await apolloClient
+  //       .query({
+  //         query: gql`
+  //           ${globalsQuery}
+  //         `
+  //       })
+  //       .then(({ data }) => {
+  //         return data.globals.globalSettings
+  //           ? data.globals.globalSettings
+  //           : data.globals
+  //       })
+  //     commit('GLOBALS_SAVE', globals)
+  //     commit('GLOBALS_LOAD_DONE')
+  //   } catch (e) {
+  //     logV(m, '💾❌ loadGlobalSettings() action failed 😢: ', e)
+  //   }
+  //   logV(m, '📦 Globals saved 📦')
+  //   logV(m, 'loadGlobalSettings() action done')
+  // },
   async loadBundle(ctx, { lang, error }) {
     logV(m, 'loadBundle() action start')
 
@@ -96,6 +86,27 @@ export const actions = {
     }
     logV(m, 'loadBundle() action done')
     return bundle
+  },
+  async loadNavigations({ error }) {
+    logV(m, 'loadNavigations() action start')
+
+    let navigations = null
+    if (process.server) {
+      // eslint-disable-next-line prettier/prettier
+      navigations = JSON.parse(require('fs').readFileSync(`static/data/navigations.json`, 'utf8'))
+    } else {
+      try {
+        // eslint-disable-next-line prettier/prettier
+        navigations = await this.$axios.$get(`/navigations.json`, {
+          baseURL: '/data/'
+        })
+      } catch (e) {
+        logV(m, 'loadNavigations() action failed 😢: ', e)
+        return error(e)
+      }
+    }
+    logV(m, 'loadNavigations() action done')
+    return navigations
   },
   async loadPost(ctx, { lang, postType, slug, error }) {
     logV(m, 'loadPost() action start')
@@ -117,43 +128,6 @@ export const actions = {
     logV(m, 'loadPost() action loaded a post with this slug: ', post.slug)
     logV(m, 'loadPost() action done')
     return post
-  },
-  async loadPreview({ commit, rootState }) {
-    if (isWordPressPreview(rootState.route)) {
-      logV(m, 'loadPreview() action start')
-
-      // Initialize loading sequence
-      commit('DATA_LOAD')
-
-      const wpnonce = rootState.route.query.preview_nonce
-      const previewId = rootState.route.query.preview_id
-      const previewUrl = `/api/previews/v1/preview/?id=${previewId}&_wpnonce=${wpnonce}`
-
-      try {
-        commit(
-          'CURRENT_PAGE_SAVE',
-          await this.$axios.$get(previewUrl, {
-            baseURL: process.env.BACKENDURLPRODUCTION,
-            withCredentials: true,
-            transformResponse: [].concat(
-              axios.defaults.transformResponse,
-              normalizeWordpress,
-              flattenACF
-            )
-          })
-        )
-        logV(m, 'Yeah, preview found!')
-        logV(m, 'Mutation saved this preview as currentPage')
-        commit('PREVIEW_STATE_SAVE', true)
-        commit('DATA_LOAD_DONE')
-        logV(m, 'loadPreview() action done')
-      } catch (e) {
-        logV(m, 'loadPreview() action failed 😢: ', e)
-        throw e
-      }
-    } else {
-      logV(m, 'loadPreview() action failed 😢: This is not a preview')
-    }
   }
 }
 
@@ -166,14 +140,14 @@ export const mutations = {
     state.loading = false
     state.loaded = true
   },
+  NAVIGATIONS_SAVE(state, data) {
+    state.navigations = data
+  },
   BUNDLE_SAVE(state, data) {
     state.bundle = data
   },
   CURRENT_PAGE_SAVE(state, page) {
     state.currentPage = page
-  },
-  PREVIEW_STATE_SAVE(state, data) {
-    state.previewActive = data
   }
 }
 
@@ -199,14 +173,9 @@ export const getters = {
     }
   },
   getMenu: state => location => {
-    if (
-      !state.loaded ||
-      !state.bundle ||
-      !state.bundle.menus ||
-      !state.bundle.menus[location]
-    )
+    if (!state.loaded || !state.navigations || !state.navigations[location])
       return false
-    return state.bundle.menus[location].menu
+    return state.navigations[location]
   },
   getPageBySlug: (state, getters, rootState) => (slug, postType) => {
     logV(m, `slug: ${slug}`)
