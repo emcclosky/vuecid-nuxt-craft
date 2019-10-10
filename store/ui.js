@@ -3,7 +3,10 @@ const noScroll = require('no-scroll')
 
 const bps = () => {
   for (const key in breakpoints) {
-    if (breakpoints.hasOwnProperty(key)) {
+    // if (breakpoints.hasOwnProperty(key)) {
+    // ^ Did throw an error
+    // TODO: check if following works:
+    if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
       const val = breakpoints[key].replace('px', '')
       breakpoints[key] = val
     }

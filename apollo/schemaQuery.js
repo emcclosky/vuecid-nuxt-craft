@@ -65,8 +65,8 @@ fetch(endpoint, {
       }
     )
 
-    console.log('✅ – Successfully built "./apollo/fragmentTypes.json" 📟 ')
+    console.log('✅ – Successfully built "./apollo/fragmentTypes.json" 📟 ') // eslint-disable-line no-console
   })
   .catch(error => {
-    console.warn('❌ – Error while generating apollo fragmentTypes: ', error) // eslint-disable-line
+    console.warn('❌ – Error while generating apollo fragmentTypes: ', error) // eslint-disable-line no-console
   })

@@ -40,8 +40,11 @@ function generateMetaFromSeomatic() {
 
   if (!seomaticMeta) {
     console.warn('Your meta info cannot be generated, because the seomatic object is falsey.'); // prettier-ignore
+    // Just return anything to not have an empty head()
 
-    return;
+    return {
+      title: '❌ SEO: generateMetaFromSeomatic has failed!'
+    };
   }
 
   if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // // Apollo parses the first level of our seomatic object

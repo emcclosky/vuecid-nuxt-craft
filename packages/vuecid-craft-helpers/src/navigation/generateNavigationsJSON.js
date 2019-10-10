@@ -1,38 +1,38 @@
 import axios from 'axios'
 import { print } from 'graphql/language/printer'
+import saveFile from '../utilities/saveFile.js'
 
 export default async function generateNavigationsJSON({
   endpoint,
   graphQLQuery,
-  sections = []
+  sections = [],
+  fileName,
+  savePath
 }) {
-  console.log('📡 generate navigations JSON...')
   const navigations = {}
 
   try {
     // load all entries for each section
     for (const section of sections) {
       const pages = await axios
-        .post(
-          endpoint,
-          {
-            // have to retransform AST gql template literal back to query string:
-            // https://stackoverflow.com/a/57873339/1121268
-            query: print(graphQLQuery),
-            variables: { section }
+        .post(endpoint, {
+          // have to retransform AST gql template literal back to query string:
+          // https://stackoverflow.com/a/57873339/1121268
+          query: print(graphQLQuery),
+          variables: {
+            section
           }
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${env.GRAPHQL_TOKEN_LOCAL}`
-          //   }
-          // }
-        )
+        })
         .then(({ data }) => {
-          return data.entries
+          return data.data.entries
         })
 
       navigations[section] = pages
     }
+
+    console.log('📡 Fetched navigations: ', navigations)
+
+    saveFile(navigations, fileName, savePath)
 
     // // filter out sections which match ignoreProperties
     // if (payload.ignore) {

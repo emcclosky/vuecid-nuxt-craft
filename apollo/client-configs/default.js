@@ -1,6 +1,6 @@
 // import { createLogger } from '@wearelucid/vue-bows'
 import { onError } from 'apollo-link-error'
-import { RetryLink } from 'apollo-link-retry'
+// import { RetryLink } from 'apollo-link-retry'
 import {
   IntrospectionFragmentMatcher,
   InMemoryCache
@@ -15,20 +15,20 @@ export default function({ isDev, env }) {
     introspectionQueryResultData
   })
 
-  const retryLink = new RetryLink({
-    delay: {
-      initial: 300,
-      max: Infinity,
-      jitter: true
-    },
-    attempts: {
-      max: 5,
-      retryIf: (error, _operation) => !!error
-    }
-  })
-  const token = isDev
-    ? config.env.GRAPHQL_TOKEN_LOCAL
-    : config.env.GRAPHQL_TOKEN
+  // const retryLink = new RetryLink({
+  //   delay: {
+  //     initial: 300,
+  //     max: Infinity,
+  //     jitter: true
+  //   },
+  //   attempts: {
+  //     max: 5,
+  //     retryIf: (error, _operation) => !!error
+  //   }
+  // })
+  // const token = isDev
+  //   ? config.env.GRAPHQL_TOKEN_LOCAL
+  //   : config.env.GRAPHQL_TOKEN
   // const endpoint = isDev
   //   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
   //   : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`

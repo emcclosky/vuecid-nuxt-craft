@@ -11,7 +11,7 @@ export default {
       cookieName: 'cookies-accepted'
     }
   },
-    methods: {
+  methods: {
     /*
      * Google Analytics/Google Tag Manager
      * Depending on what you use you need to do different things.

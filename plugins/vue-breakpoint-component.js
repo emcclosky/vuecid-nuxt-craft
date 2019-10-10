@@ -3,7 +3,9 @@ import { Ctor } from 'vue-breakpoint-component'
 import breakpoints from '~/assets/css/_export.breakpoints.scss'
 
 for (const key in breakpoints) {
-  if (breakpoints.hasOwnProperty(key)) {
+  // Did throw an error:
+  // if (breakpoints.hasOwnProperty(key)) {
+  if (Object.prototype.hasOwnProperty.call(breakpoints, key)) {
     // We have to prefix those, otherwise the plugin get's confused with default names (susch as `small`) and stops working
     const prefixedName = `mq-${key}`
     const query = `(min-width: ${breakpoints[key]})`
