@@ -1,11 +1,7 @@
 @import '~assets/css/global';
 
 $c: 'TheFooter';
-$cookie: 'Cookie';
-$c-the-footer-shadow-color: rgba($s-color-black, 0.1);
-$c-the-footer-shadow-size: 5px;
 
-// sass-lint:disable nesting-depth
 .#{$c} {
   padding: 1em;
   background-color: $s-color-lightgrey;
@@ -13,38 +9,5 @@ $c-the-footer-shadow-size: 5px;
   &__content {
     @include set-gutter;
     text-align: center;
-  }
-
-  .#{$cookie} {
-    &--default-theme {
-      box-shadow: 0 px-to-rem(-$c-the-footer-shadow-size) px-to-rem($c-the-footer-shadow-size) $c-the-footer-shadow-color;
-      padding: px-to-rem($s-size-gutter-small);
-      background: $s-color-white;
-
-      @include mq($from: medium) {
-        padding: px-to-rem($s-size-gutter-medium);
-      }
-
-      .#{$cookie} {
-        &__content {
-          width: 100%;
-          margin: 0;
-        }
-
-        &__buttons {
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-        }
-
-        &__button {
-          margin: 1em 0 0;
-
-          &:not(:last-child) {
-            margin-right: 1em;
-          }
-        }
-      }
-    }
   }
 }

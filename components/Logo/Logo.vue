@@ -1,11 +1,22 @@
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'Logo'
+  name: 'Logo',
+  computed: {
+    ...mapGetters('ui', ['navMenuOpen'])
+  },
+  methods: {
+    ...mapActions('ui', ['closeMenu']),
+    close() {
+      this.closeMenu()
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="Logo">
+  <div class="Logo" @click="close">
     <nuxt-link
       class="Logo__link"
       :to="$i18n.path('/', false)"

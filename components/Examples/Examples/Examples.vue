@@ -1,12 +1,10 @@
 <script>
 import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
-// import Loader from '~/components/Examples/Loader/Loader.vue'
 
 export default {
   name: 'Examples',
   components: {
     Styleguide
-    // Loader
   },
   props: {
     page: {
@@ -17,8 +15,7 @@ export default {
   },
   mounted() {
     // Type `localStorage.debug = true` in your console to get fancy logs
-    this.log('Hello world')
-    this.log('this.$apollo: ', this.$apollo)
+    this.log('Hello universe')
   }
 }
 </script>

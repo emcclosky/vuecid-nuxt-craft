@@ -38,7 +38,9 @@ module.exports = {
     'vue/component-name-in-template-casing': [
       'warn',
       'PascalCase',
-      { ignores: ['nuxt', 'nuxt-link', 'no-ssr', 'component', 'transition'] }
+      {
+        ignores: ['nuxt', 'nuxt-link', 'client-only', 'component', 'transition']
+      }
     ]
   }
 }

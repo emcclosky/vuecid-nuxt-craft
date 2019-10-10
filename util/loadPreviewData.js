@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { print } from 'graphql/language/printer'
 
 export default async function(
   options = {
@@ -11,21 +12,33 @@ export default async function(
 ) {
   const { query, params, env, graphQLQuery, specificSlug } = options
 
+  console.log('params: ', params)
+  console.log('specificSlug: ', specificSlug)
+
   // If we see a preview token we need axios to fetch the data
   // Because with apollo we can't send the bearer token AND the craft token at the same time
   if (query['x-craft-preview'] && query.token) {
     console.info('Preview is displayed!') // eslint-disable-line
 
-    const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
+    // const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
+    const endpoint = `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}?token=${query.token}`
 
     const previewData = await axios
       .post(
         endpoint,
         {
-          query: graphQLQuery.loc.source.body,
-          variables: { slug: specificSlug || params.slug }
+          // have to retransform AST gql template literal back to query string:
+          // https://stackoverflow.com/a/57873339/1121268
+          query: print(graphQLQuery),
+          variables: {
+            slug: specificSlug || params.slug
+          }
         },
-        { headers: { Authorization: `Bearer ${env.GRAPHQL_TOKEN}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${env.GRAPHQL_TOKEN_LOCAL}`
+          }
+        }
       )
       .then(result => {
         if (

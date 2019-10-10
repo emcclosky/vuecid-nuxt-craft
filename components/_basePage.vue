@@ -6,24 +6,24 @@ import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
   apollo: {
-    // seomatic: {
-    //   query: seomaticQuery,
-    //   prefetch: ({ route }) => ({
-    //     slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
-    //   }),
-    //   variables() {
-    //     let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
-    //     slug = removeLeadingSlash(slug)
-    //     return { slug }
-    //   },
-    //   result(result) {
-    //     try {
-    //       this.seomatic = result.data.seomatic
-    //     } catch (error) {
-    //       console.log('Basepage: Apollo error: ', error) // eslint-disable-line no-console
-    //     }
-    //   }
-    // },
+    seomatic: {
+      query: seomaticQuery,
+      prefetch: ({ route }) => ({
+        slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+      }),
+      variables() {
+        let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
+        slug = removeLeadingSlash(slug)
+        return { slug }
+      },
+      result(result) {
+        try {
+          this.seomatic = result.data.seomatic
+        } catch (error) {
+          console.log('Basepage: Apollo error: ', error) // eslint-disable-line no-console
+        }
+      }
+    },
     entries: {
       query: page,
       prefetch: ({ route }) => ({
@@ -45,7 +45,6 @@ export default {
             )
           }
           this.page = result.data.entries[0]
-          this.$store.commit('ui/PAGE_LOADED', true)
         }
       }
     }
@@ -61,7 +60,7 @@ export default {
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
       lang: 'de'
-      ,debug: true
+      // ,debug: true
     })
   },
   mounted() {

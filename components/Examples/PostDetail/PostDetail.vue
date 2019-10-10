@@ -26,10 +26,6 @@ export default {
     <BContentSection v-if="post.content" :modifiers="['centered']">
       <BRichtext :content="post.content" />
     </BContentSection>
-    <BFlexContent
-      v-if="post.flex_content"
-      :component-data="post.flex_content"
-    />
     <div class="PostDetail__btn-container">
       <BBtn
         class="PostDetail__btn"

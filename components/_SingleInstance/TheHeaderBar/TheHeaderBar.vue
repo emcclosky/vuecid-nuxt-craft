@@ -1,4 +1,5 @@
 <script>
+import { mapGetters } from 'vuex'
 import TheNavigation from '~/components/_SingleInstance/TheNavigation/TheNavigation.vue'
 import Logo from '~/components/Logo/Logo.vue'
 
@@ -7,16 +8,19 @@ export default {
   components: {
     TheNavigation,
     Logo
+  },
+  computed: {
+    ...mapGetters('ui', ['navMenuOpen'])
   }
 }
 </script>
 
 <template>
-  <header class="TheHeaderBar">
+  <header :class="['TheHeaderBar', navMenuOpen ? 'has-open-nav' : '']">
     <div class="TheHeaderBar__item">
-      <Logo />
+      <Logo class="TheHeaderBar__logo TheHeaderBar__Logo" />
     </div>
-    <div class="TheHeaderBar__item">
+    <div class="TheHeaderBar__item TheHeaderBar__item--burger">
       <TheNavigation />
     </div>
   </header>
