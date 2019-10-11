@@ -6,7 +6,7 @@ $c-the-headerbar-shadow-size: 5px;
 
 .#{$c} {
   display: flex;
-  padding: $s-size-gutter-small $s-size-gutter-small * 2;
+  padding: $s-size-gutter-small;
   z-index: z('menu');
   position: fixed;
   top: 0;
@@ -17,10 +17,6 @@ $c-the-headerbar-shadow-size: 5px;
     &.#{$c}__Logo {
       position: relative;
       top: 0.7rem;
-
-      @include mq($from: medium) {
-        top: 1.1rem;
-      }
     }
   }
 

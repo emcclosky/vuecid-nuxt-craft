@@ -19,7 +19,7 @@ $c-b-burger-container-size: $c-b-burger-size+($c-b-burger-padding * 2);
   background: transparent;
   border: 0;
   position: absolute;
-  top: $s-size-gutter-medium;
+  top: $s-size-gutter-small;
   transform: translateY(-50%);
   right: 0;
   z-index: 1; // lift burger to  front
@@ -38,10 +38,6 @@ $c-b-burger-container-size: $c-b-burger-size+($c-b-burger-padding * 2);
 
   &__burger {
     @include burger($width: $c-b-burger-size, $height: $c-b-burger-border-size, $gutter: $c-b-burger-gutter, $color: $s-color-black, $border-radius: 0, $transition-duration: $s-animation-duration-default);
-
-    &:before {
-      transform: rotate(-7deg);
-    }
   }
 
   &.is-active {

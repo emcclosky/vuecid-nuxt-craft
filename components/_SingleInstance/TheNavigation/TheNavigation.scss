@@ -2,9 +2,14 @@
 $c: 'TheNavigation';
 
 $c-the-navigation-spacer-default: 1em;
+$c-the-navigation-margin-top: 10rem;
 
 .#{$c} {
   position: relative;
+
+  /*
+   * Styling for mobile nav.
+   */
 
   &__wrap {
     display: none;
@@ -14,7 +19,6 @@ $c-the-navigation-spacer-default: 1em;
     width: 100vw;
     height: 100%;
     background: $s-color-white;
-    opacity: 0.7;
 
     &.is-open {
       display: block;
@@ -23,9 +27,9 @@ $c-the-navigation-spacer-default: 1em;
 
   &__scroll-wrapper {
     width: 100%;
-    max-height: calc(100% - #{$s-the-header-bar-height-small});
-    min-height: calc(100% - #{$s-the-header-bar-height-small});
-    margin-top: 6rem;
+    max-height: calc(100% - #{$c-the-navigation-margin-top});
+    min-height: calc(100% - #{$c-the-navigation-margin-top});
+    margin-top: $c-the-navigation-margin-top;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes
     display: flex;
@@ -33,22 +37,11 @@ $c-the-navigation-spacer-default: 1em;
     padding: 0 $s-size-gutter-small $s-size-gutter-small;
   }
 
-  &__main-nav-wrap {
-    display: flex;
-    flex-direction: column;
-  }
-
   &__list {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
     padding-bottom: $s-size-spacer-small;
-
-    @include mq($from: medium) {
-      padding-left: $s-size-spacer-small;
-      padding-bottom: 0;
-      margin-bottom: $s-size-spacer-small;
-    }
   }
 
   &__item {
@@ -77,6 +70,7 @@ $c-the-navigation-spacer-default: 1em;
 
     &--child {
       display: block;
+      padding-left: 1rem;
       margin-bottom: $c-the-navigation-spacer-default / 2;
       white-space: nowrap;
     }
@@ -88,7 +82,7 @@ $c-the-navigation-spacer-default: 1em;
   }
 
   &__sub-list {
-    padding-top: $c-the-navigation-spacer-default;
+    padding-left: $c-the-navigation-spacer-default;
   }
 
   &__lang-item {
