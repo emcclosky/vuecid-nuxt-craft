@@ -19,9 +19,7 @@ export default {
 
 <template>
   <div v-if="page" :key="page.title" class="Page">
-    <BContentSection :modifiers="['centered']">
-      <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
-      <PostsList v-if="customPosts" :posts="customPosts" />
-    </BContentSection>
+    <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
+    <PostsList v-if="customPosts" :posts="customPosts" />
   </div>
 </template>

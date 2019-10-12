@@ -23,9 +23,9 @@ export default {
     <BHeading v-if="post.title" :level="1" class="PostDetail__title">
       {{ post.title }}
     </BHeading>
-    <BContentSection v-if="post.content" :modifiers="['centered']">
-      <BRichtext :content="post.content" />
-    </BContentSection>
+
+    <BRichtext :content="post.content" />
+
     <div class="PostDetail__btn-container">
       <BBtn
         class="PostDetail__btn"

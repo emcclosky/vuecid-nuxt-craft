@@ -69,3 +69,10 @@ The susy grid settings are saved in `tools.grid.scss`.
 To check if your layout is aligning with the grid, one can use: 
 `background: susy-svg-grid($colors: rgba(#c7eaee, 0.26)) no-repeat scroll;` 
 on any container to show the grid helper svg.
+
+#### Installation
+Use the setup client
+`$ yarn setup` and choose to install susy with the project.
+What it does:
+1. Installs susy.
+1. Sets up a grid settings file.

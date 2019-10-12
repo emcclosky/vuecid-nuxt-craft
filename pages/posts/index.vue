@@ -61,9 +61,7 @@ export default {
 
 <template>
   <div v-if="page" :key="page.title" class="Page">
-    <BContentSection :modifiers="['centered']">
-      <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
-    </BContentSection>
+    <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
     <!-- if there is a postsPerPage paginate posts -->
     <Paginate
       v-if="currentPostsList && currentPostsList.length && postsPerPage"

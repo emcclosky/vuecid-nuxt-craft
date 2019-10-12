@@ -13,18 +13,8 @@ export default {
 
 <template>
   <div class="Page">
-    <BContentSection
-      :modifiers="['centered']"
-      style="background: #efefef; text-align: center; padding: 1em;"
-    >
-      <em>This is a _slug page</em>
-    </BContentSection>
-    <BContentSection
-      v-if="page"
-      class="has-spacing"
-      type="div"
-      :modifiers="['centered']"
-    >
+    <em>This is a _slug page</em>
+    <div v-if="page">
       <BHeading v-if="page.title" :level="1">
         {{ page.title }}
       </BHeading>
@@ -32,7 +22,7 @@ export default {
         v-if="page.richtext && page.richtext.content"
         :content="page.richtext.content"
       />
-    </BContentSection>
+    </div>
     <BLoader v-else />
   </div>
 </template>

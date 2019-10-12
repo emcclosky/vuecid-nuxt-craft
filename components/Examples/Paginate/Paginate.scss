@@ -6,6 +6,6 @@ $c: 'Paginate';
   @include set-gutter('small');
 
   &__button-container {
-    margin-top: px-to-rem($s-size-spacer-medium);
+    margin-top: $s-size-spacer-medium;
   }
 }

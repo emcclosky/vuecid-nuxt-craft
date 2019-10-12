@@ -5,7 +5,7 @@ $c: 'PostsList';
 .#{$c} {
 
   &__item {
-    margin-bottom: px-to-rem($s-size-spacer-small);
+    margin-bottom: $s-size-spacer-small;
 
     &:last-child {
       margin-bottom: 0;

@@ -8,7 +8,7 @@ $c-b-alert-height: $s-size-spacer-medium;
   top: 0;
   right: 0;
   width: 100%;
-  height: px-to-rem($c-b-alert-height);
+  height: $c-b-alert-height;
   text-align: center;
   background-color: $s-color-alert;
   opacity: 0.5;
@@ -26,7 +26,7 @@ $c-b-alert-height: $s-size-spacer-medium;
   }
 
   &__message {
-    line-height: px-to-rem($c-b-alert-height);
+    line-height: $c-b-alert-height;
     color: $s-color-white;
   }
 }

@@ -44,16 +44,14 @@ export default {
 
 <template>
   <div class="Page Page--error">
-    <BContentSection :type="'div'" :modifiers="['centered']">
-      <BHeading :level="1">Error {{ statusCode }}</BHeading>
-      <BRichtext :content="message" />
-      <br />
-      <BBtn @click.native="clearError">{{ $t('error.link') }}</BBtn>
-      <br /><br />
-      <img
-        style="width:100%;height:auto;"
-        :src="`https://http.cat/${statusCode}.jpg`"
-      />
-    </BContentSection>
+    <BHeading :level="1">Error {{ statusCode }}</BHeading>
+    <BRichtext :content="message" />
+    <br />
+    <BBtn @click.native="clearError">{{ $t('error.link') }}</BBtn>
+    <br /><br />
+    <img
+      style="width:100%;height:auto;"
+      :src="`https://http.cat/${statusCode}.jpg`"
+    />
   </div>
 </template>

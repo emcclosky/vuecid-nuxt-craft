@@ -209,31 +209,31 @@
   // small is mainly for paragraphs and is calculated from font-size
   @if ($size == 'small') {
     width: 100%;
-    padding: 0 px-to-rem($s-size-gutter-small);
+    padding: 0 $s-size-gutter-small;
 
     @include mq($from: medium) {
-      padding: 0 px-to-rem($s-size-gutter-medium);
-      max-width: px-to-rem($s-size-content-max-width-small + 2 * ($s-size-gutter-medium));
+      padding: 0 $s-size-gutter-medium;
+      max-width: calc($s-size-content-max-width-small + 2 * ($s-size-gutter-medium));
       margin-left: auto;
       margin-right: auto;
     }
   } @else if ($size == 'medium') {
     width: 100%;
-    padding: 0 px-to-rem($s-size-gutter-small);
+    padding: 0 $s-size-gutter-small;
 
     @include mq($from: medium) {
-      padding: 0 px-to-rem($s-size-gutter-medium);
-      max-width: px-to-rem($s-size-content-max-width-medium + 2 * ($s-size-gutter-medium));
+      padding: 0 $s-size-gutter-medium;
+      max-width: calc($s-size-content-max-width-medium + 2 * ($s-size-gutter-medium));
       margin-left: auto;
       margin-right: auto;
     }
   } @else if ($size == 'large') {
     width: 100%;
-    padding: 0 px-to-rem($s-size-gutter-small);
+    padding: 0 $s-size-gutter-small;
 
     @include mq($from: medium) {
-      padding: 0 px-to-rem($s-size-gutter-medium);
-      max-width: px-to-rem($s-size-content-max-width-large + 2 * ($s-size-gutter-medium));
+      padding: 0 $s-size-gutter-medium;
+      max-width: calc($s-size-content-max-width-large + 2 * ($s-size-gutter-medium));
       margin-left: auto;
       margin-right: auto;
     }

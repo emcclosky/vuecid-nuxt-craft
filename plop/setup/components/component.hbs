@@ -1,0 +1,29 @@
+<script>
+// import SomeComponent from '~/components/SomeComponent/SomeComponent.vue'
+
+export default {
+  name: '{{ componentName}}'
+  // components: {
+  //   SomeComponent
+  // },
+  // props: {
+  //   someProp: {
+  //     type: Boolean,
+  //     required: true,
+  //     default: null
+  //   }
+  // },
+  // computed: {},
+  // created() {},
+  // mounted() {},
+  // methods: {}
+}
+</script>
+
+<template>
+  <div class="{{ componentName }}">
+    <slot />
+  </div>
+</template>
+
+<style src="./{{ componentName }}.scss" lang="scss" />

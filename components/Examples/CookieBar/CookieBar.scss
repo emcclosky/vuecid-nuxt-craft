@@ -3,17 +3,17 @@
 $c: 'CookieBar';
 $cookie: 'Cookie';
 $c-cookiebar-shadow-color: rgba($s-color-black, 0.1);
-$c-cookiebar-shadow-size: 5px;
+$c-cookiebar-shadow-size: 0.5rem;
 
 .#{$c} {
   .#{$cookie} {
     &--default-theme {
-      box-shadow: 0 px-to-rem(-$c-cookiebar-shadow-size) px-to-rem($c-cookiebar-shadow-size) $c-cookiebar-shadow-color;
-      padding: px-to-rem($s-size-gutter-small);
+      box-shadow: 0 -$c-cookiebar-shadow-size $c-cookiebar-shadow-size $c-cookiebar-shadow-color;
+      padding: $s-size-gutter-small;
       background: $s-color-white;
 
       @include mq($from: medium) {
-        padding: px-to-rem($s-size-gutter-medium);
+        padding: $s-size-gutter-medium;
       }
 
       .#{$cookie} {

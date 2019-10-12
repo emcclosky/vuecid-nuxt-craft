@@ -21,7 +21,7 @@ $c-b-btn-color-text-inverted: $s-color-white;
   text-decoration: none;
   background-color: $c-b-btn-color;
   border-radius: $c-b-btn-border-radius;
-  margin: 0 0 px-to-rem($s-size-spacer-small);
+  margin: 0 0 $s-size-spacer-small;
   transition: background-color $s-animation-duration-default $s-animation-easing-default, color $s-animation-duration-default $s-animation-easing-default;
 
   &:hover {
@@ -47,7 +47,7 @@ $c-b-btn-color-text-inverted: $s-color-white;
     text-decoration: none;
     background-color: transparent;
     border: 0;
-    margin: 0 0 px-to-rem($s-size-spacer-small);
+    margin: 0 0 $s-size-spacer-small;
 
     &:hover {
       color: $c-b-btn-color;

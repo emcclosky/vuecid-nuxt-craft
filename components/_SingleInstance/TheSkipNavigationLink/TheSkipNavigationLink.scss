@@ -26,13 +26,13 @@ $c: 'TheSkipNavigationLink';
   }
 
   &.#{$c}__BBtn.is-naked { // sass-lint:disable-line force-element-nesting
-    margin-left: px-to-rem($s-size-gutter-small);
+    margin-left: $s-size-gutter-small;
     background-color: rgba($s-color-white, 0.8); // sass-lint:disable-line no-color-literals
     padding: 0.3em 0.3em 0.3em 0;
     border-radius: 0;
 
     @include mq($from: medium) {
-      margin-left: px-to-rem($s-size-gutter-medium);
+      margin-left: $s-size-gutter-medium;
     }
   }
 }

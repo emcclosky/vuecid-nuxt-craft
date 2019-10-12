@@ -17,21 +17,14 @@ export default {
   <div class="Page">
     <div v-if="page">
       <client-only>
-        <BContentSection
-          class="has-spacing"
-          type="div"
-          :modifiers="['centered']"
-        >
-          <BHeading v-if="page.title" :level="1">
-            {{ page.title }}
-          </BHeading>
-        </BContentSection>
-
-        <Examples :page="page" />
+        <BHeading v-if="page.title" :level="1">
+          {{ page.title }}
+        </BHeading>
       </client-only>
     </div>
     <div v-else>
       Maybe you forgot to create a page with your home slug set in your config?
     </div>
+    <Examples :page="page" />
   </div>
 </template>

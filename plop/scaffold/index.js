@@ -23,4 +23,5 @@ module.exports = (plop, config) => {
   // require('./views')(plop, config)
   require('./modules')(plop, config)
   // require('./init')(plop, config)
+  require('../setup')(plop, config)
 }

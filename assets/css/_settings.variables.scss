@@ -30,7 +30,7 @@ $s-line-height-std: 1.2;
 // $s-size-spacer-atomic:
 // $s-size-spacer-micro:
 // $s-size-spacer-tiny:
-$s-size-spacer-small: 20px;
+$s-size-spacer-small: 2rem;
 // $s-size-spacer-reduced:
 $s-size-spacer-medium: $s-size-spacer-small * 2;
 $s-size-spacer-increased: $s-size-spacer-small * 3;
@@ -53,12 +53,6 @@ $s-size-content-max-width-large: 1440px;
 
 $s-the-header-bar-height-small: 70px;
 $s-the-header-bar-height: 110px;
-
-/*
- *  Settings – Susy Grid
- */
-
-$s-amount-columns: 12;
 
 /*
  *  Settings – Animations

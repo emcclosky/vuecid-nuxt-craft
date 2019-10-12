@@ -1,1 +1,1 @@
-module.exports = require('./scaffold')
+module.exports = require('./plop')

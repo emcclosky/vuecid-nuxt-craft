@@ -11,18 +11,14 @@ $p: 'Page';
 
   &__content {
     flex: 1;
-    padding-top: px-to-rem($s-size-spacer-small);
-
-    @include mq($from: medium) {
-      padding-top: px-to-rem($s-size-spacer-medium);
-    }
+    padding-top: $s-size-spacer-large;
   }
 }
 
 .#{$p} {
-  padding-bottom: px-to-rem($s-size-spacer-medium);
+  padding-bottom: $s-size-spacer-medium;
 
   @include mq($from: medium) {
-    padding-bottom: px-to-rem($s-size-spacer-increased);
+    padding-bottom: $s-size-spacer-increased;
   }
 }

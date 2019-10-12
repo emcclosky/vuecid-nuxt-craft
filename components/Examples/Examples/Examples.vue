@@ -1,9 +1,11 @@
 <script>
 import Styleguide from '~/components/Examples/Styleguide/Styleguide.vue'
+import DemoGrid from '~/components/Examples/DemoGrid/DemoGrid.vue'
 
 export default {
   name: 'Examples',
   components: {
+    DemoGrid,
     Styleguide
   },
   props: {
@@ -23,12 +25,9 @@ export default {
 <template>
   <div class="Examples">
     <!-- Styleguide -->
-    <BContentSection>
-      <BContentSection class="has-spacing" type="div" :modifiers="['centered']">
-        <BHeading :level="2" has-clickable-anchor>Styleguide</BHeading>
-        <Styleguide />
-      </BContentSection>
-    </BContentSection>
+    <BHeading :level="2" has-clickable-anchor>Styleguide</BHeading>
+    <DemoGrid />
+    <Styleguide />
   </div>
 </template>
 

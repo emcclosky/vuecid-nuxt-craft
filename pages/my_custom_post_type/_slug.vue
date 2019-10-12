@@ -17,11 +17,9 @@ export default {
 
 <template>
   <div v-if="page" :key="page.title" class="Page">
-    <BContentSection :modifiers="['centered']">
-      <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
-      <BBtn :to="postTypeSlug">
-        {{ $t('pagination.allPosts') }}
-      </BBtn>
-    </BContentSection>
+    <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
+    <BBtn :to="postTypeSlug">
+      {{ $t('pagination.allPosts') }}
+    </BBtn>
   </div>
 </template>
