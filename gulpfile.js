@@ -3,7 +3,6 @@
 const { exec } = require('child_process')
 const gulp = require('gulp')
 const inquirer = require('inquirer')
-const plop = require('plop')
 
 gulp.task('install-susy', function(cb) {
   console.log('Adding susy npm package...')
@@ -16,18 +15,34 @@ gulp.task('install-susy', function(cb) {
   })
 })
 
-gulp.task('add-files', function(cb) {
-  plop.setGenerator('controller', {
-    description: 'application controller logic',
+gulp.task('add-susy-files', function() {
+  console.log('Adding susy specific .scss files...')
+
+  const nodePlop = require('node-plop')
+  const plop = nodePlop()
+
+  const generator = plop.setGenerator('default', {
     prompts: [],
     actions: [
       {
         type: 'add',
-        path: '/{{name}}.js',
+        path: 'mae.js',
         templateFile: 'plop/scaffold/modules/module.hbs'
       }
     ]
   })
+
+  const runPlop = generator.runActions()
+
+  return runPlop
+    .then(results => {
+      console.log('results', results)
+
+      return results
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
 })
 
 gulp.task('setup', function(done) {
@@ -45,7 +60,7 @@ gulp.task('setup', function(done) {
     ])
     .then(answers => {
       if (answers.plugins.includes('susy')) {
-        return gulp.series('install-susy')(done)
+        return gulp.series('add-susy-files', 'install-susy')(done)
       }
     })
 })
