@@ -20,9 +20,7 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
     "build-fragments": "babel-node -- apollo/schemaQuery.js",
     "fetch": "babel-node -- fetch.js",
-    "testy": "pwd",
-    "scaffold": "plop",
-    "setup": "plop"
+    "scaffold": "plop"
   },
   "precommit": "lint",
   "dependencies": {
@@ -35,8 +33,11 @@
     "@wearelucid/vuecid-craft-helpers": "^0.2.1",
     "@wearelucid/vuecid-helpers": "v3.0.1",
     "apollo-link-retry": "^2.2.15",
+    "global": "^4.4.0",
     "graphql-import-node": "^0.0.4",
     "graphql-tag": "^2.10.1",
+    "gulp": "^4.0.2",
+    "gulp-exec": "^4.0.0",
     "inquirer": "^7.0.0",
     "minimist": "^1.2.0",
     "no-scroll": "^2.1.0",
