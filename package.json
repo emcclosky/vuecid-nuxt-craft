@@ -20,6 +20,7 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
     "build-fragments": "babel-node -- apollo/schemaQuery.js",
     "fetch": "babel-node -- fetch.js",
+    "testy": "pwd",
     "scaffold": "plop",
     "setup": "plop"
   },
@@ -36,6 +37,7 @@
     "apollo-link-retry": "^2.2.15",
     "graphql-import-node": "^0.0.4",
     "graphql-tag": "^2.10.1",
+    "inquirer": "^7.0.0",
     "minimist": "^1.2.0",
     "no-scroll": "^2.1.0",
     "node-fetch": "^2.6.0",
