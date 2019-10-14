@@ -1,18 +1,52 @@
 /* eslint-disable no-console */
 
-const { exec } = require('child_process')
+const { spawn } = require('child_process')
 const gulp = require('gulp')
 const inquirer = require('inquirer')
 
-gulp.task('install-susy', function(cb) {
-  console.log('Adding susy npm package...')
-  console.log('⏱ This may take a while. Just wait for it!')
-  // exec('yarn add susy', function(err, stdout, stderr) {
-  exec('yarn list global', function(err, stdout, stderr) {
-    console.log(stdout)
-    console.log(stderr)
-    cb(err)
+gulp.task('install-susy', function(done) {
+  const cmd = spawn('yarn list global', [], {
+    stdio: 'inherit'
   })
+
+  cmd.on('close', function(code) {
+    console.log('my-task exited with code ' + code)
+    // cb(code)
+    done()
+  })
+
+  cmd.stdin.on('data', data => {
+    console.log(`stdout: ${data}`)
+  })
+
+  cmd.stdout.on('data', data => {
+    console.log(`stdout: ${data}`)
+  })
+
+  cmd.stderr.on('data', data => {
+    console.error(`stderr: ${data}`)
+  })
+
+  cmd.on('error', err => {
+    console.error('Failed to start subprocess.', err)
+  })
+
+  return cmd
+
+  // console.log('Adding susy npm package...')
+  // console.log('⏱ This may take a while. Just wait for it!')
+  // const process = exec('yarn list global')
+  // exec('yarn add susy', function(err, stdout, stderr) {
+  // const process = exec('yarn list global', function(err, stdout, stderr) {
+  //   console.log(stdout)
+  //   console.log(stderr)
+  //   cb(err)
+  // })
+
+  // process.stdout.on('data', function(data) {
+  //   console.log('incoming process: ')
+  //   console.log(data)
+  // })
 })
 
 gulp.task('add-susy-files', function() {
@@ -26,19 +60,17 @@ gulp.task('add-susy-files', function() {
     actions: [
       {
         type: 'add',
-        path: 'mae.js',
+        path: 'mae12222221.js',
         templateFile: 'plop/scaffold/modules/module.hbs'
       }
     ]
   })
 
-  const runPlop = generator.runActions()
-
-  return runPlop
+  generator
+    .runActions()
     .then(results => {
       console.log('results', results)
-
-      return results
+      console.log('💾 Sucessfully generated susy .scss files.')
     })
     .catch(err => {
       console.log('err', err)
