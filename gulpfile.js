@@ -1,55 +1,17 @@
 /* eslint-disable no-console */
 
-const { spawn } = require('child_process')
 const gulp = require('gulp')
 const inquirer = require('inquirer')
 
 gulp.task('install-susy', function(done) {
-  const cmd = spawn('yarn list global', [], {
-    stdio: 'inherit'
-  })
-
-  cmd.on('close', function(code) {
-    console.log('my-task exited with code ' + code)
-    // cb(code)
-    done()
-  })
-
-  cmd.stdin.on('data', data => {
-    console.log(`stdout: ${data}`)
-  })
-
-  cmd.stdout.on('data', data => {
-    console.log(`stdout: ${data}`)
-  })
-
-  cmd.stderr.on('data', data => {
-    console.error(`stderr: ${data}`)
-  })
-
-  cmd.on('error', err => {
-    console.error('Failed to start subprocess.', err)
-  })
-
-  return cmd
-
-  // console.log('Adding susy npm package...')
-  // console.log('⏱ This may take a while. Just wait for it!')
-  // const process = exec('yarn list global')
-  // exec('yarn add susy', function(err, stdout, stderr) {
-  // const process = exec('yarn list global', function(err, stdout, stderr) {
-  //   console.log(stdout)
-  //   console.log(stderr)
-  //   cb(err)
-  // })
-
-  // process.stdout.on('data', function(data) {
-  //   console.log('incoming process: ')
-  //   console.log(data)
-  // })
+  const shell = require('gulp-shell')
+  return gulp
+    .src('gulpfile.js', { read: false })
+    .pipe(shell(['yarn add susy']))
+    .on('finish', done)
 })
 
-gulp.task('add-susy-files', function() {
+gulp.task('add-susy-files', function(done) {
   console.log('Adding susy specific .scss files...')
 
   const nodePlop = require('node-plop')
@@ -60,8 +22,9 @@ gulp.task('add-susy-files', function() {
     actions: [
       {
         type: 'add',
-        path: 'mae12222221.js',
-        templateFile: 'plop/scaffold/modules/module.hbs'
+        path: './assets/css/_tools.grid.scss',
+        templateFile: 'plop/setup/susy/grid-settings.scss.hbs',
+        force: true
       }
     ]
   })
@@ -75,6 +38,8 @@ gulp.task('add-susy-files', function() {
     .catch(err => {
       console.log('err', err)
     })
+
+  done()
 })
 
 gulp.task('setup', function(done) {

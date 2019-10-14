@@ -1,0 +1,16 @@
+@import '~susy/sass/susy';
+@import '~susy/sass/plugins/svg-grid';
+
+/**
+ * Susy Settings
+ * Read more about how Susy 3 works:
+ * https://medium.com/oddbird-web/welcome-to-susy3-a0127e594b53
+ * https://medium.com/oddbird-web/understanding-spread-in-susy3-228b2a36c444
+ */
+
+$s-amount-columns: 12;
+
+$susy: (
+  'columns': susy-repeat($s-amount-columns), // makes 12 fluid columns
+  'gutters': 0.5, // unitless gutter as fraction, on the same scale as any unitless columns
+);

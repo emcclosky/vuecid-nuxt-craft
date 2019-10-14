@@ -34,7 +34,6 @@ export default {
       return this.isHomeSlug(slug) ? '' : `${slug}`
     },
     handleKeyboardEvent(e) {
-      console.log('e: ', e)
       const key = e.which || e.keyCode
       if (key === 27) {
         // Esc key

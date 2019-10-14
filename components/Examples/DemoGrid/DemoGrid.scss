@@ -9,7 +9,8 @@ $c: 'DemoGrid';
   flex-flow: wrap;
   justify-content: space-between;
   padding-top: px-to-rem(30px);
-  background: susy-svg-grid($colors: rgba(#c7eaee, 0.7)) no-repeat scroll; // sass-lint:disable-line no-color-literals
+  // only use when susy is installed!
+  // background: susy-svg-grid($colors: rgba(#c7eaee, 0.7)) no-repeat scroll; // sass-lint:disable-line no-color-literals
 
   &__box {
     width: span(12 of 12);

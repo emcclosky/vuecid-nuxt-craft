@@ -6,6 +6,11 @@ export default {
 
 <template>
   <div class="DemoGrid">
+    <p>
+      If <a href="https://github.com/oddbird/susy">Susy</a> is installed you
+      should see a proper grid layout. If not you see all colored rectangles in
+      one line...
+    </p>
     <div class="DemoGrid__box DemoGrid__box--three-one">
       <span class="DemoGrid__label DemoGrid__label--mobile">3/12</span>
       <span class="DemoGrid__label DemoGrid__label--desk">1/12</span>
