@@ -54,6 +54,7 @@ export default {
    */
   plugins: [
     { src: '~/plugins/global.js' },
+    { src: '~/plugins/throwNuxtError.js' }, // throw errors outside of asyncData and fetch, e.g. in apollo request
     { src: '~/plugins/vuecid-helpers.js' },
     { src: '~/plugins/whatinput.js', ssr: false },
     { src: '~/plugins/i18n.js', injectAs: 'i18n' },
