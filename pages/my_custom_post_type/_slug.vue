@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="page" :key="page.title" class="Page">
+  <div :key="page.title" class="Page">
     <BHeading v-if="page" :level="1">{{ page.title }}</BHeading>
     <BBtn :to="postTypeSlug">
       {{ $t('pagination.allPosts') }}

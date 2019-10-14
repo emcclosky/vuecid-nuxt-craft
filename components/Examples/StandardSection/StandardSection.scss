@@ -1,0 +1,12 @@
+@import '~assets/css/global';
+
+$c: 'StandardSection';
+// $c-standardsection-some-variable: 'Some Value';
+
+.#{$c} {
+  padding: $s-size-spacer-small 0;
+
+  @include mq($from: medium) {
+    padding: $s-size-spacer-large 0;
+  }
+}

@@ -18,9 +18,9 @@ export default {
       <BHeading v-if="page.title" :level="1">
         {{ page.title }}
       </BHeading>
-      <BRichtext
-        v-if="page.richtext && page.richtext.content"
-        :content="page.richtext.content"
+      <BPageBuilder
+        v-if="page.pageBuilder"
+        :component-data="page.pageBuilder"
       />
     </div>
     <BLoader v-else />

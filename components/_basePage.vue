@@ -2,6 +2,7 @@
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import config from '../config'
 import page from '~/apollo/queries/page'
+import loadPreviewData from '~/util/loadPreviewData.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
@@ -48,6 +49,19 @@ export default {
         }
       }
     }
+  },
+  async asyncData({ params, env, query, route, store }) {
+    const previewData = await loadPreviewData({
+      params,
+      env,
+      query,
+      graphQLQuery: page
+      // specificSlug: env.HOMESLUG
+    })
+    if (previewData) {
+      return { ...previewData }
+    }
+    return { preview: false }
   },
   head() {
     if (!this.seomatic) {

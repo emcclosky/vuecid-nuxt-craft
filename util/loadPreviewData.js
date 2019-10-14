@@ -14,29 +14,21 @@ export default async function(
 
   // If we see a preview token we need axios to fetch the data
   // Because with apollo we can't send the bearer token AND the craft token at the same time
-  if (query['x-craft-preview'] && query.token) {
+  if (query['x-craft-live-preview'] && query.token) {
     console.info('Preview is displayed!') // eslint-disable-line
 
     // const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
-    const endpoint = `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}?token=${query.token}`
+    const endpoint = `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}?x-craft-live-preview={query['x-craft-live-preview]}&token=${query.token}`
 
     const previewData = await axios
-      .post(
-        endpoint,
-        {
-          // have to retransform AST gql template literal back to query string:
-          // https://stackoverflow.com/a/57873339/1121268
-          query: print(graphQLQuery),
-          variables: {
-            slug: specificSlug || params.slug
-          }
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${env.GRAPHQL_TOKEN_LOCAL}`
-          }
+      .post(endpoint, {
+        // have to retransform AST gql template literal back to query string:
+        // https://stackoverflow.com/a/57873339/1121268
+        query: print(graphQLQuery),
+        variables: {
+          slug: specificSlug || params.slug
         }
-      )
+      })
       .then(result => {
         if (
           result &&
@@ -53,7 +45,6 @@ export default async function(
       .catch(error => {
         console.log('error: ', error) // eslint-disable-line
       })
-
     return {
       page: previewData,
       preview: true

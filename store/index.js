@@ -9,6 +9,13 @@ export const actions = {
   async nuxtServerInit({ state, dispatch }) {
     // await dispatch('doSomethingOnInit', { arg: 'thing' })
     await dispatch('data/loadData')
+  },
+  throwError(context, payload) {
+    // Throw me an error, see '~/plugins/throwNuxtError'
+    this.$throwNuxtError({
+      message: payload.message ? payload.message : '',
+      statusCode: payload.statusCode ? payload.statusCode : ''
+    })
   }
 }
 

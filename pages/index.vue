@@ -20,6 +20,10 @@ export default {
         <BHeading v-if="page.title" :level="1">
           {{ page.title }}
         </BHeading>
+        <BPageBuilder
+          v-if="page.pageBuilder"
+          :component-data="page.pageBuilder"
+        />
       </client-only>
     </div>
     <div v-else>

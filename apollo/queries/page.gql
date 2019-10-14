@@ -2,5 +2,19 @@ query Page($slug: [String]) {
   entries(section: ["pages"], slug: $slug) {
     slug
     title
+    ...on pages_pages_Entry {
+    	pageBuilder {
+        ...on pageBuilder_standardSection_BlockType {
+          __typename
+          baseTitle
+          baseText
+        }
+      }
+    }
+  }
+  __schema {
+    types {
+      name
+    }
   }
 }
