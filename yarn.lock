@@ -2456,13 +2456,15 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.0"
 
-"@wearelucid/vuecid-craft-helpers@^0.2.1":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.2.7.tgz#8b3c2cb3125d2a32407f245d9be75d2bbcf8293e"
+"@wearelucid/vuecid-craft-helpers@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.3.0.tgz#6f1e9f150cab2b5cd8b282a07b0e998994537080"
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
     axios "^0.19.0"
+    fs "^0.0.1-security"
+    graphql-import-node "^0.0.4"
 
 "@wearelucid/vuecid-helpers@^3.0.0", "@wearelucid/vuecid-helpers@v3.0.1":
   version "3.0.1"
@@ -6420,6 +6422,10 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+
 fsevents@^1.2.7:
   version "1.2.9"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.9.tgz#3f5ed66583ccd6f400b5a00db6f7e861363e388f"
@@ -6838,14 +6844,6 @@ gulp-cli@^2.2.0:
     semver-greatest-satisfied-range "^1.1.0"
     v8flags "^3.0.1"
     yargs "^7.1.0"
-
-gulp-exec@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/gulp-exec/-/gulp-exec-4.0.0.tgz#4b6b67be0200d620143f3198a64257b68b146bb6"
-  dependencies:
-    lodash.template "^4.4.0"
-    plugin-error "^1.0.1"
-    through2 "^3.0.1"
 
 gulp-shell@^0.7.1:
   version "0.7.1"
@@ -12024,7 +12022,6 @@ supports-hyperlinks@^1.0.1:
 susy@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/susy/-/susy-3.0.5.tgz#92167b47e60d0c03e93569fc8695c6fa2067ea7d"
-  integrity sha512-Adc67mYO0n7eKn0lnyVOMN9lqA3JrHE/NAMfOQQnm2g8yvcZpmcrNfiHjfQXVodXdZE1PyluPnUjPhezaKGztA==
 
 sver-compat@^1.5.0:
   version "1.5.0"

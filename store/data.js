@@ -1,5 +1,6 @@
 import { verifyLeadingSlash, removeHomeSlug } from '@wearelucid/vuecid-helpers'
-import { flattenNavigation } from '../packages/vuecid-craft-helpers/dist/index.js'
+import { flattenNavigation } from '@wearelucid/vuecid-craft-helpers'
+
 import config from '~/config.js'
 
 import logV from '~/util/logV'
@@ -80,11 +81,8 @@ export const mutations = {
     state.loaded = true
   },
   NAVIGATIONS_SAVE(state, { navigations, flatNavigations }) {
-    console.log('1123 navigations: ', navigations)
-    console.log('1123 flatNavigations: ', flatNavigations)
     state.flatNavigations = flatNavigations
-    // state.navigations = navigations
-    console.log('state: ', state)
+    state.navigations = navigations
   },
   BUNDLE_SAVE(state, data) {
     state.bundle = data
@@ -124,44 +122,29 @@ export const getters = {
   langLinks: (state, getters, rootState) => (currentSlug, section) => {
     if (
       !state.loaded ||
-      !state.navigations ||
-      !state.navigations[rootState.currentLang] ||
-      !state.navigations[rootState.currentLang][section]
+      !state.flatNavigations ||
+      !state.flatNavigations[rootState.currentLang] ||
+      !state.flatNavigations[rootState.currentLang][section]
     )
       return false
 
-    // flatten navigations array to search nested pages as well
-    const flattenedNavigation = []
-    state.navigations[rootState.currentLang][section].forEach(entry => {
-      flattenedNavigation.push(entry)
-      if (entry.children && entry.children.length) {
-        entry.children.map(child => flattenedNavigation.push(child))
-      }
-    })
+    console.log('state.flatNavigations: ', state.flatNavigations)
 
     // Find the UID of the current slug, also check nested pages
-    const currentEntry = flattenedNavigation.find(
-      entry => entry.slug === currentSlug
-    )
-
-    console.log('currentEntry: ', currentEntry)
+    const currentEntry = state.flatNavigations[rootState.currentLang][section].find(entry => entry.slug === currentSlug) // prettier-ignore
 
     const currentUID = currentEntry ? currentEntry.uid : false
 
-    const translations = flattenedNavigation.find(
-      entry => entry.uid === currentUID
-    )
-
-    console.log('translations: ', translations)
-
     // go through all langs and find translations
     const items = rootState.langs.map(l => {
-
+      const translation = state.flatNavigations[l.lang][section].find(
+        entry => entry.uid === currentUID
+      )
       return {
         // Save path if there is a translation
         path:
-          translations && translations.uri
-            ? verifyLeadingSlash(removeHomeSlug(translations.uri))
+          translation && translation.uri
+            ? verifyLeadingSlash(removeHomeSlug(translation.uri))
             : false,
 
         lang: l.lang,
