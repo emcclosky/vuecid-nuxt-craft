@@ -12,12 +12,14 @@ var _fs = _interopRequireDefault(require("fs"));
 function saveFile() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       data = _ref.data,
-      fileName = _ref.fileName,
+      bundleName = _ref.bundleName,
       savePath = _ref.savePath,
-      compressJSON = _ref.compressJSON;
+      compressJSON = _ref.compressJSON,
+      lang = _ref.lang;
 
   var json = JSON.stringify(data, null, compressJSON ? null : 2);
-  var jsonSizeKB = Math.round(Buffer.byteLength(json, 'utf8') / 1024 * 100) / 100; // eslint-disable-next-line
+  var jsonSizeKB = Math.round(Buffer.byteLength(json, 'utf8') / 1024 * 100) / 100;
+  var fileName = "".concat(bundleName).concat(lang ? ".".concat(lang) : '', ".json"); // eslint-disable-next-line
 
   console.info("Writing ".concat(fileName, " (Length: ").concat(json.length, ", Size: ").concat(jsonSizeKB, "kB)"));
 

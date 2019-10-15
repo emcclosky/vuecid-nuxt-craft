@@ -8,15 +8,10 @@ export default function(ctx) {
   logV(m, '📞 Middleware called!')
 
   const payload = {
-    lang: ctx.app.i18n.locale,
-    route: ctx.route,
-    isInBundle: !!ctx.route.meta.find(x => x.isInBundle === true),
-    postType:
-      ctx.route.meta.find(x => x.isInBundle !== null).postType || 'pages',
-    error: ctx.error
+    lang: ctx.app.i18n.locale
   }
 
-  logV(m, 'route.path: ', payload.route.path)
+  logV(m, 'language: ', payload.lang)
 
   return ctx.store.dispatch('data/loadData', payload)
 }

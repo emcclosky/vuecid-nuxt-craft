@@ -23,4 +23,10 @@ export default ({ app, store }) => {
 
     return `/${app.i18n.locale}${slash ? '/' : ''}${link}`
   }
+
+  // save siteHandle in i18n object:
+  // siteHandle is needed to determine from which craft site we load the content from
+  // it is the craft way to tell which language we want to load.
+  const currentLang = process.env.LANGS.find(l => l.lang === app.i18n.locale)
+  app.i18n.siteHandle = currentLang ? currentLang.handle : 'default'
 }

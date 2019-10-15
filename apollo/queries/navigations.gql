@@ -1,15 +1,19 @@
-query Navigations($section: String) {
-  entries(section: [$section], level: 1) {
+query Navigations($section: String, $site: String) {
+  entries(site: [$site], section: [$section], level: 1) {
     slug
     uri
     title
+    # uid is the same for each translated entry in a multisite/multilang setup
+    uid
     children {
       slug
       uri
+      uid
       title
       children {
         slug
         uri
+        uid
         title
       }
     }

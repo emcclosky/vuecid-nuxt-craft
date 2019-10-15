@@ -21,20 +21,29 @@ export const state = () => ({
 const m = 'store/loadData'
 
 export const actions = {
-  async loadData({ state, dispatch, commit }) {
+  async loadData({ state, dispatch, commit }, payload) {
     logV(m, 'loadData() action start')
 
     // Initialize loading sequence
     commit('DATA_LOAD')
 
     // Check if we changed the language
-    if (!state.navigations) {
+    if (state.bundle.language !== payload.lang) {
       logV(m, 'Language has changed, gonna load new bundle')
 
       // If so, load the new bundle asynchronously and save it to state
       // eslint-disable-next-line prettier/prettier
-      commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations'))
-      logV(m, '📦 New navigations saved 📦')
+      commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations', {
+          lang: payload.lang
+        })
+      )
+
+      // save current language
+      commit('BUNDLE_SAVE', {
+        language: payload.lang
+      })
+
+      logV(m, `📦 New bundle for ${payload.lang} saved 📦`)
     }
 
     // I am done with this async stuff!
@@ -68,36 +77,36 @@ export const actions = {
   //   logV(m, '📦 Globals saved 📦')
   //   logV(m, 'loadGlobalSettings() action done')
   // },
-  async loadBundle(ctx, { lang, error }) {
-    logV(m, 'loadBundle() action start')
+  // async loadBundle(ctx, { lang, error }) {
+  //   logV(m, 'loadBundle() action start')
 
-    let bundle = null
-    if (process.server) {
-      // eslint-disable-next-line prettier/prettier
-      bundle = JSON.parse(require('fs').readFileSync(`static/data/basic.${lang}.json`, 'utf8'))
-    } else {
-      try {
-        // eslint-disable-next-line prettier/prettier
-        bundle = await this.$axios.$get(`/basic.${lang}.json`, { baseURL: '/data/' })
-      } catch (e) {
-        logV(m, 'loadBundle() action failed 😢: ', e)
-        return error(e)
-      }
-    }
-    logV(m, 'loadBundle() action done')
-    return bundle
-  },
-  async loadNavigations({ error }) {
+  //   let bundle = null
+  //   if (process.server) {
+  //     // eslint-disable-next-line prettier/prettier
+  //     bundle = JSON.parse(require('fs').readFileSync(`static/data/basic.${lang}.json`, 'utf8'))
+  //   } else {
+  //     try {
+  //       // eslint-disable-next-line prettier/prettier
+  //       bundle = await this.$axios.$get(`/basic.${lang}.json`, { baseURL: '/data/' })
+  //     } catch (e) {
+  //       logV(m, 'loadBundle() action failed 😢: ', e)
+  //       return error(e)
+  //     }
+  //   }
+  //   logV(m, 'loadBundle() action done')
+  //   return bundle
+  // },
+  async loadNavigations({ error }, { lang }) {
     logV(m, 'loadNavigations() action start')
 
     let navigations = null
     if (process.server) {
       // eslint-disable-next-line prettier/prettier
-      navigations = JSON.parse(require('fs').readFileSync(`static/data/navigations.json`, 'utf8'))
+      navigations = JSON.parse(require('fs').readFileSync(`static/data/navigations.${lang}.json`, 'utf8'))
     } else {
       try {
         // eslint-disable-next-line prettier/prettier
-        navigations = await this.$axios.$get(`/navigations.json`, {
+        navigations = await this.$axios.$get(`/navigations.${lang}.json`, {
           baseURL: '/data/'
         })
       } catch (e) {
@@ -155,10 +164,6 @@ export const getters = {
   /**
    * Getters that are a function must be called like this `this.getMenu('main')`
    */
-  page: state => {
-    if (!state.loaded || !state.currentPage) return false
-    return state.currentPage
-  },
   options: (state, getters, rootState) => {
     if (!state.loaded || !state.bundle) return false
     return {
@@ -176,13 +181,6 @@ export const getters = {
     if (!state.loaded || !state.navigations || !state.navigations[location])
       return false
     return state.navigations[location]
-  },
-  getPageBySlug: (state, getters, rootState) => (slug, postType) => {
-    logV(m, `slug: ${slug}`)
-    logV(m, `postType: ${postType}`)
-    const propertyToFind = postType === 'pages' ? 'uri' : 'slug'
-    // eslint-disable-next-line prettier/prettier
-    return state.bundle[postType].find(p => p[propertyToFind] === cleanSlug(checkAndGetHomeSlug(slug, rootState.currentLang, process.env.HOMESLUG)))
   },
   langLinks: (state, getters, rootState) => {
     // Go through all langs

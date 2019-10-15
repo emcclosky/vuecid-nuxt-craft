@@ -2,38 +2,49 @@ import axios from 'axios'
 import { print } from 'graphql/language/printer'
 import saveFile from '../utilities/saveFile.js'
 
+/* eslint-disable no-console */
+
 export default async function generateNavigationsJSON({
   endpoint,
   graphQLQuery,
   compressJSON = true,
   sections = [],
-  fileName,
-  savePath
+  bundleName,
+  savePath,
+  langs = []
 } = {}) {
   const navigations = {}
-
   try {
-    // load all entries for each section
-    for (const section of sections) {
-      const pages = await axios
-        .post(endpoint, {
-          // have to retransform AST gql template literal back to query string:
-          // https://stackoverflow.com/a/57873339/1121268
-          query: print(graphQLQuery),
-          variables: {
-            section
-          }
-        })
-        .then(({ data }) => {
-          return data.data.entries
-        })
+    for (const language of langs) {
+      // load all entries for each section
+      for (const section of sections) {
+        const pages = await axios
+          .post(endpoint, {
+            // have to retransform AST gql template literal back to query string:
+            // https://stackoverflow.com/a/57873339/1121268
+            query: print(graphQLQuery),
+            variables: {
+              section,
+              site: language.handle || 'default'
+            }
+          })
+          .then(({ data }) => {
+            return data.data.entries
+          })
 
-      navigations[section] = pages
+        navigations[section] = pages
+      }
+
+      console.log(`📡 Fetched ${language.lang} navigations: `, navigations)
+
+      saveFile({
+        data: navigations,
+        bundleName,
+        savePath,
+        compressJSON,
+        lang: language.lang
+      })
     }
-
-    console.log('📡 Fetched navigations: ', navigations) // eslint-disable-line
-
-    saveFile({ data: navigations, fileName, savePath, compressJSON })
 
     // // filter out sections which match ignoreProperties
     // if (payload.ignore) {

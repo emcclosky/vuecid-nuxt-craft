@@ -8,7 +8,6 @@ export const state = () => ({
 export const actions = {
   async nuxtServerInit({ state, dispatch }) {
     // await dispatch('doSomethingOnInit', { arg: 'thing' })
-    await dispatch('data/loadData')
   },
   throwError(context, payload) {
     // Throw me an error, see '~/plugins/throwNuxtError'

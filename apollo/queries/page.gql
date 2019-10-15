@@ -1,5 +1,5 @@
-query Page($slug: [String]) {
-  entries(section: ["pages"], slug: $slug) {
+query Page($slug: [String], $site: [String]) {
+  entries(site: $site, section: ["pages"], slug: $slug) {
     slug
     title
     ...on pages_pages_Entry {
@@ -10,11 +10,6 @@ query Page($slug: [String]) {
           baseText
         }
       }
-    }
-  }
-  __schema {
-    types {
-      name
     }
   }
 }

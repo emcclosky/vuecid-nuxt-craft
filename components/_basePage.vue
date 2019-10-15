@@ -15,7 +15,10 @@ export default {
       variables() {
         let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
         slug = removeLeadingSlash(slug)
-        return { slug }
+        const site = this.$i18n.siteHandle
+        // get craft site handle depending on language
+        // const site =
+        return { slug, site }
       },
       result(result) {
         try {
@@ -33,7 +36,10 @@ export default {
       variables() {
         let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
         slug = removeLeadingSlash(slug)
-        return { slug }
+        const site = this.$i18n.siteHandle
+        // get craft site handle depending on language
+        // const site =
+        return { slug, site }
       },
       result(result) {
         // Only set this.page to graphql data if we are not seeing a preview

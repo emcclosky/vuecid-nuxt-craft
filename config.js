@@ -10,24 +10,20 @@ const urls = {
 // TODO: Add your langs
 const langs = [
   {
-    default: true, // Specify default lang
     lang: 'de',
     slug: 'de',
     locale: 'de_CH',
-    name: 'Deutsch'
+    name: 'Deutsch',
+    handle: 'vuecidCraftDemoGerman' // Craft Site handle in multisite setup
   },
   {
+    default: true, // Specify default lang
     lang: 'en',
     slug: 'en',
     locale: 'en_US',
-    name: 'English'
+    name: 'English',
+    handle: 'default' // Craft Site handle – can be left out if it is default.
   }
-  // {
-  //   lang: 'fr',
-  //   slug: 'fr',
-  //   locale: 'fr_FR',
-  //   name: 'Français'
-  // }
 ]
 
 const getDefaultLang = () => {
@@ -59,6 +55,9 @@ const config = {
 
   // Optionally add Bing Site Verification
   bingSiteVerification: 'B2BFE4CC02FBB954E192488D1D844BCC',
+
+  // TODO: Add your craft sections (e.g. pages)
+  sections: ['pages'],
 
   // TODO: Add your post types
   postTypes: [
