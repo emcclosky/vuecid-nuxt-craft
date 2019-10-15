@@ -15,9 +15,8 @@ export default {
       variables() {
         let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
         slug = removeLeadingSlash(slug)
-        const site = this.$i18n.siteHandle
         // get craft site handle depending on language
-        // const site =
+        const site = this.$i18n.siteHandle
         return { slug, site }
       },
       result(result) {
@@ -54,6 +53,11 @@ export default {
           this.page = result.data.entries[0]
         }
       }
+    }
+  },
+  data: () => {
+    return {
+      page: null
     }
   },
   async asyncData({ params, env, query, route, store }) {

@@ -16,6 +16,7 @@ export default async function generateNavigationsJSON({
   const navigations = {}
   try {
     for (const language of langs) {
+      navigations[language.lang] = {}
       // load all entries for each section
       for (const section of sections) {
         const pages = await axios
@@ -32,19 +33,20 @@ export default async function generateNavigationsJSON({
             return data.data.entries
           })
 
-        navigations[section] = pages
+        // save sections in language object
+        navigations[language.lang][section] = pages
       }
-
-      console.log(`📡 Fetched ${language.lang} navigations: `, navigations)
-
-      saveFile({
-        data: navigations,
-        bundleName,
-        savePath,
-        compressJSON,
-        lang: language.lang
-      })
     }
+    console.log(`📡 Fetched navigations: `, navigations)
+
+    // save navigations for each site in one file
+    saveFile({
+      data: navigations,
+      bundleName,
+      savePath,
+      compressJSON
+    })
+
 
     // // filter out sections which match ignoreProperties
     // if (payload.ignore) {

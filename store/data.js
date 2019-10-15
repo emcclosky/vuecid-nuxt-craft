@@ -1,10 +1,6 @@
-import {
-  cleanSlug,
-  checkAndGetHomeSlug,
-  getPathFromUrl,
-  removeHomeSlug
-} from '@wearelucid/vuecid-helpers'
-// import globalsQuery from '~/apollo/queries/globals'
+import { verifyLeadingSlash, removeHomeSlug } from '@wearelucid/vuecid-helpers'
+import { flattenNavigation } from '../packages/vuecid-craft-helpers/dist/index.js'
+import config from '~/config.js'
 
 import logV from '~/util/logV'
 
@@ -13,6 +9,7 @@ export const state = () => ({
     language: null
   },
   navigations: null,
+  flatNavigations: null,
   currentPage: null,
   loading: true,
   loaded: false
@@ -21,29 +18,18 @@ export const state = () => ({
 const m = 'store/loadData'
 
 export const actions = {
-  async loadData({ state, dispatch, commit }, payload) {
+  async loadData({ state, dispatch, commit }) {
     logV(m, 'loadData() action start')
 
     // Initialize loading sequence
     commit('DATA_LOAD')
 
-    // Check if we changed the language
-    if (state.bundle.language !== payload.lang) {
-      logV(m, 'Language has changed, gonna load new bundle')
-
-      // If so, load the new bundle asynchronously and save it to state
+    // Check if we have some navigations in the store
+    if (!state.navigations || !state.flatNavigations) {
+      // If not, load the new bundle asynchronously and save it to state
       // eslint-disable-next-line prettier/prettier
-      commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations', {
-          lang: payload.lang
-        })
-      )
-
-      // save current language
-      commit('BUNDLE_SAVE', {
-        language: payload.lang
-      })
-
-      logV(m, `📦 New bundle for ${payload.lang} saved 📦`)
+      commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations'))
+      logV(m, '📦 New navigations saved 📦')
     }
 
     // I am done with this async stuff!
@@ -51,62 +37,17 @@ export const actions = {
 
     logV(m, 'loadData() action done')
   },
-  // async loadGlobalSettings({ state, commit }, payload) {
-  //   logV(m, 'loadGlobalSettings() action start')
-  //   commit('GLOBALS_LOAD')
-
-  //   try {
-  //     const apolloClient = this.app.apolloProvider.defaultClient
-
-  //     const globals = await apolloClient
-  //       .query({
-  //         query: gql`
-  //           ${globalsQuery}
-  //         `
-  //       })
-  //       .then(({ data }) => {
-  //         return data.globals.globalSettings
-  //           ? data.globals.globalSettings
-  //           : data.globals
-  //       })
-  //     commit('GLOBALS_SAVE', globals)
-  //     commit('GLOBALS_LOAD_DONE')
-  //   } catch (e) {
-  //     logV(m, '💾❌ loadGlobalSettings() action failed 😢: ', e)
-  //   }
-  //   logV(m, '📦 Globals saved 📦')
-  //   logV(m, 'loadGlobalSettings() action done')
-  // },
-  // async loadBundle(ctx, { lang, error }) {
-  //   logV(m, 'loadBundle() action start')
-
-  //   let bundle = null
-  //   if (process.server) {
-  //     // eslint-disable-next-line prettier/prettier
-  //     bundle = JSON.parse(require('fs').readFileSync(`static/data/basic.${lang}.json`, 'utf8'))
-  //   } else {
-  //     try {
-  //       // eslint-disable-next-line prettier/prettier
-  //       bundle = await this.$axios.$get(`/basic.${lang}.json`, { baseURL: '/data/' })
-  //     } catch (e) {
-  //       logV(m, 'loadBundle() action failed 😢: ', e)
-  //       return error(e)
-  //     }
-  //   }
-  //   logV(m, 'loadBundle() action done')
-  //   return bundle
-  // },
-  async loadNavigations({ error }, { lang }) {
+  async loadNavigations({ error }) {
     logV(m, 'loadNavigations() action start')
 
     let navigations = null
     if (process.server) {
       // eslint-disable-next-line prettier/prettier
-      navigations = JSON.parse(require('fs').readFileSync(`static/data/navigations.${lang}.json`, 'utf8'))
+      navigations = JSON.parse(require('fs').readFileSync(`static/data/navigations.json`, 'utf8'))
     } else {
       try {
         // eslint-disable-next-line prettier/prettier
-        navigations = await this.$axios.$get(`/navigations.${lang}.json`, {
+        navigations = await this.$axios.$get(`/navigations.json`, {
           baseURL: '/data/'
         })
       } catch (e) {
@@ -114,29 +55,18 @@ export const actions = {
         return error(e)
       }
     }
-    logV(m, 'loadNavigations() action done')
-    return navigations
-  },
-  async loadPost(ctx, { lang, postType, slug, error }) {
-    logV(m, 'loadPost() action start')
 
-    let post = null
-    if (process.server) {
-      // eslint-disable-next-line prettier/prettier
-      post = JSON.parse(require('fs').readFileSync(`static/data/${postType}/${postType}.${lang}.${slug}.json`, 'utf8'))
-    } else {
-      try {
-        // eslint-disable-next-line prettier/prettier
-        post = await this.$axios.$get(`${postType}.${lang}.${slug}.json`, { baseURL: `/data/${postType}/` })
-      } catch (e) {
-        logV(m, 'loadPost() action failed 😢: ', e)
-        return error(e)
-      }
+    // save navigations in a flat array to allow easy search for slugs (also in nested pages)
+    const flatNavigations = flattenNavigation({
+      navigationData: navigations,
+      sections: config.sections
+    })
+
+    logV(m, 'loadNavigations() action done')
+    return {
+      navigations,
+      flatNavigations
     }
-    post = post.items.find(x => x.slug === slug)
-    logV(m, 'loadPost() action loaded a post with this slug: ', post.slug)
-    logV(m, 'loadPost() action done')
-    return post
   }
 }
 
@@ -149,8 +79,12 @@ export const mutations = {
     state.loading = false
     state.loaded = true
   },
-  NAVIGATIONS_SAVE(state, data) {
-    state.navigations = data
+  NAVIGATIONS_SAVE(state, { navigations, flatNavigations }) {
+    console.log('1123 navigations: ', navigations)
+    console.log('1123 flatNavigations: ', flatNavigations)
+    state.flatNavigations = flatNavigations
+    // state.navigations = navigations
+    console.log('state: ', state)
   },
   BUNDLE_SAVE(state, data) {
     state.bundle = data
@@ -177,27 +111,57 @@ export const getters = {
           : false
     }
   },
-  getMenu: state => location => {
-    if (!state.loaded || !state.navigations || !state.navigations[location])
+  getMenu: (state, getters, rootState) => section => {
+    if (
+      !state.loaded ||
+      !state.navigations ||
+      !state.navigations[rootState.currentLang] ||
+      !state.navigations[rootState.currentLang][section]
+    )
       return false
-    return state.navigations[location]
+    return state.navigations[rootState.currentLang][section]
   },
-  langLinks: (state, getters, rootState) => {
-    // Go through all langs
+  langLinks: (state, getters, rootState) => (currentSlug, section) => {
+    if (
+      !state.loaded ||
+      !state.navigations ||
+      !state.navigations[rootState.currentLang] ||
+      !state.navigations[rootState.currentLang][section]
+    )
+      return false
+
+    // flatten navigations array to search nested pages as well
+    const flattenedNavigation = []
+    state.navigations[rootState.currentLang][section].forEach(entry => {
+      flattenedNavigation.push(entry)
+      if (entry.children && entry.children.length) {
+        entry.children.map(child => flattenedNavigation.push(child))
+      }
+    })
+
+    // Find the UID of the current slug, also check nested pages
+    const currentEntry = flattenedNavigation.find(
+      entry => entry.slug === currentSlug
+    )
+
+    console.log('currentEntry: ', currentEntry)
+
+    const currentUID = currentEntry ? currentEntry.uid : false
+
+    const translations = flattenedNavigation.find(
+      entry => entry.uid === currentUID
+    )
+
+    console.log('translations: ', translations)
+
+    // go through all langs and find translations
     const items = rootState.langs.map(l => {
-      const translation =
-        state.loaded &&
-        state.currentPage &&
-        state.currentPage.polylang &&
-        state.currentPage.polylang.translations
-          ? state.currentPage.polylang.translations.find(o => o.lang === l.lang)
-          : false
 
       return {
         // Save path if there is a translation
         path:
-          translation && translation.permalink
-            ? removeHomeSlug(getPathFromUrl(translation.permalink))
+          translations && translations.uri
+            ? verifyLeadingSlash(removeHomeSlug(translations.uri))
             : false,
 
         lang: l.lang,

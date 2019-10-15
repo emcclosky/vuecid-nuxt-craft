@@ -17,16 +17,22 @@ Object.defineProperty(exports, "generateRoutesFromData", {
     return _generateRoutesFromData["default"];
   }
 });
-Object.defineProperty(exports, "generateMetaFromSeomatic", {
-  enumerable: true,
-  get: function get() {
-    return _generateMetaFromSeomatic["default"];
-  }
-});
 Object.defineProperty(exports, "generateNavigationsJSON", {
   enumerable: true,
   get: function get() {
     return _generateNavigationsJSON["default"];
+  }
+});
+Object.defineProperty(exports, "flattenNavigation", {
+  enumerable: true,
+  get: function get() {
+    return _flattenNavigation["default"];
+  }
+});
+Object.defineProperty(exports, "generateMetaFromSeomatic", {
+  enumerable: true,
+  get: function get() {
+    return _generateMetaFromSeomatic["default"];
   }
 });
 
@@ -34,6 +40,8 @@ var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generate
 
 var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateRoutesFromData"));
 
-var _generateMetaFromSeomatic = _interopRequireDefault(require("./meta/generateMetaFromSeomatic"));
-
 var _generateNavigationsJSON = _interopRequireDefault(require("./navigation/generateNavigationsJSON"));
+
+var _flattenNavigation = _interopRequireDefault(require("./navigation/flattenNavigation"));
+
+var _generateMetaFromSeomatic = _interopRequireDefault(require("./meta/generateMetaFromSeomatic"));

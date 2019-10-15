@@ -8,13 +8,6 @@ export default {
     DemoGrid,
     Styleguide
   },
-  props: {
-    page: {
-      type: [Object, Array],
-      required: true,
-      default: null
-    }
-  },
   mounted() {
     // Type `localStorage.debug = true` in your console to get fancy logs
     this.log('Hello universe')

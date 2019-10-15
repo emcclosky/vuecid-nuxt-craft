@@ -5,11 +5,24 @@ import { isHomeSlug } from '@wearelucid/vuecid-helpers'
 
 export default {
   name: 'TheNavigation',
+  data: () => {
+    return {
+      section: 'pages'
+    }
+  },
   computed: {
-    ...mapGetters('data', ['getMenu']),
+    ...mapGetters('data', ['getMenu', 'langLinks']),
     ...mapGetters('ui', ['navMenuOpen']),
     menu() {
-      return this.getMenu('pages')
+      return this.getMenu(this.section)
+    },
+    currentSlug() {
+      // passed on to langlinks to get translation of current page
+      return (
+        this.$route.params.slug2 ||
+        this.$route.params.slug ||
+        process.env.HOMESLUG
+      )
     }
   },
   mounted() {
@@ -39,10 +52,6 @@ export default {
         // Esc key
         this.closeMenu()
       }
-    },
-    generateUri(parentSlug, slug) {
-      const childPath = slug ? `/${slug}` : ''
-      return `${parentSlug}${childPath}`
     }
   }
 }
@@ -71,8 +80,8 @@ export default {
           >
             <nuxt-link
               class="TheNavigation__link"
-              :to="$i18n.path(removeHomeSlug(item.slug))"
-              :exact="isHomeSlug(item.slug)"
+              :to="$i18n.path(removeHomeSlug(item.uri))"
+              :exact="isHomeSlug(item.uri)"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->
               <span v-html="item.title" />
@@ -88,13 +97,34 @@ export default {
                 class="TheNavigation__item TheNavigation__item--child"
                 @click="closeMenu"
               >
-                <nuxt-link class="TheNavigation__link" :to="generateUri(item.slug, child.slug)">
+                <nuxt-link class="TheNavigation__link" :to="`/${child.uri}`">
                   <!-- eslint-disable-next-line vue/no-v-html -->
                   <span v-html="child.title" />
                 </nuxt-link>
               </li>
             </ul>
           </li>
+          <client-only>
+            <li v-if="langLinks" class="TheNavigation__item">
+              <span
+                v-for="(item, key) in langLinks(currentSlug, section)"
+                :key="`nav-lang-${key}`"
+                class="TheNavigation__lang-item"
+                @click="closeMenu"
+              >
+                <BBtn
+                  class="TheNavigation__link TheNavigation__BBtn"
+                  naked
+                  :to="item.path"
+                  :exact="$route.name.includes('index')"
+                  :title="item.name"
+                  :disabled="!item.path"
+                >
+                  {{ item.lang }}
+                </BBtn>
+              </span>
+            </li>
+          </client-only>
         </ul>
       </div>
       <BLoader v-else />

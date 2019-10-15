@@ -68,26 +68,27 @@ function _generateNavigationsJSON() {
 
           case 8:
             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-              _context.next = 43;
+              _context.next = 42;
               break;
             }
 
             language = _step.value;
-            // load all entries for each section
+            navigations[language.lang] = {}; // load all entries for each section
+
             _iteratorNormalCompletion2 = true;
             _didIteratorError2 = false;
             _iteratorError2 = undefined;
-            _context.prev = 13;
+            _context.prev = 14;
             _iterator2 = sections[Symbol.iterator]();
 
-          case 15:
+          case 16:
             if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-              _context.next = 24;
+              _context.next = 25;
               break;
             }
 
             section = _step2.value;
-            _context.next = 19;
+            _context.next = 20;
             return _axios["default"].post(endpoint, {
               // have to retransform AST gql template literal back to query string:
               // https://stackoverflow.com/a/57873339/1121268
@@ -101,113 +102,125 @@ function _generateNavigationsJSON() {
               return data.data.entries;
             });
 
-          case 19:
+          case 20:
             pages = _context.sent;
-            navigations[section] = pages;
+            // save sections in language object
+            navigations[language.lang][section] = pages;
 
-          case 21:
+          case 22:
             _iteratorNormalCompletion2 = true;
-            _context.next = 15;
+            _context.next = 16;
             break;
 
-          case 24:
-            _context.next = 30;
+          case 25:
+            _context.next = 31;
             break;
 
-          case 26:
-            _context.prev = 26;
-            _context.t0 = _context["catch"](13);
+          case 27:
+            _context.prev = 27;
+            _context.t0 = _context["catch"](14);
             _didIteratorError2 = true;
             _iteratorError2 = _context.t0;
 
-          case 30:
-            _context.prev = 30;
+          case 31:
             _context.prev = 31;
+            _context.prev = 32;
 
             if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
               _iterator2["return"]();
             }
 
-          case 33:
-            _context.prev = 33;
+          case 34:
+            _context.prev = 34;
 
             if (!_didIteratorError2) {
-              _context.next = 36;
+              _context.next = 37;
               break;
             }
 
             throw _iteratorError2;
 
-          case 36:
-            return _context.finish(33);
-
           case 37:
-            return _context.finish(30);
+            return _context.finish(34);
 
           case 38:
-            console.log("\uD83D\uDCE1 Fetched ".concat(language.lang, " navigations: "), navigations);
-            (0, _saveFile["default"])({
-              data: navigations,
-              bundleName: bundleName,
-              savePath: savePath,
-              compressJSON: compressJSON,
-              lang: language.lang
-            });
+            return _context.finish(31);
 
-          case 40:
+          case 39:
             _iteratorNormalCompletion = true;
             _context.next = 8;
             break;
 
-          case 43:
-            _context.next = 49;
+          case 42:
+            _context.next = 48;
             break;
 
-          case 45:
-            _context.prev = 45;
+          case 44:
+            _context.prev = 44;
             _context.t1 = _context["catch"](6);
             _didIteratorError = true;
             _iteratorError = _context.t1;
 
-          case 49:
+          case 48:
+            _context.prev = 48;
             _context.prev = 49;
-            _context.prev = 50;
 
             if (!_iteratorNormalCompletion && _iterator["return"] != null) {
               _iterator["return"]();
             }
 
-          case 52:
-            _context.prev = 52;
+          case 51:
+            _context.prev = 51;
 
             if (!_didIteratorError) {
-              _context.next = 55;
+              _context.next = 54;
               break;
             }
 
             throw _iteratorError;
 
+          case 54:
+            return _context.finish(51);
+
           case 55:
-            return _context.finish(52);
+            return _context.finish(48);
 
           case 56:
-            return _context.finish(49);
+            console.log("\uD83D\uDCE1 Fetched navigations: ", navigations); // save navigations for each site in one file
 
-          case 57:
-            _context.next = 62;
+            (0, _saveFile["default"])({
+              data: navigations,
+              bundleName: bundleName,
+              savePath: savePath,
+              compressJSON: compressJSON
+            }); // // filter out sections which match ignoreProperties
+            // if (payload.ignore) {
+            //   payload.ignore.forEach(propertyToIgnore => {
+            //     navigations[section] = pages.filter(page => {
+            //       // if the entry does not even have the key we return
+            //       if (!(propertyToIgnore.key in page)) return true
+            //       // leave in array if the key is != the value
+            //       return page[propertyToIgnore.key] !== propertyToIgnore.value
+            //     })
+            //   })
+            // } else {
+            //   navigations[section] = pages
+            // }
+
+            _context.next = 63;
             break;
 
-          case 59:
-            _context.prev = 59;
+          case 60:
+            _context.prev = 60;
             _context.t2 = _context["catch"](2);
             console.log('generateNavigationJSON: 💾❌ loadNavigations() action failed 😢: ', _context.t2);
 
-          case 62:
+          case 63:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[2, 59], [6, 45, 49, 57], [13, 26, 30, 38], [31,, 33, 37], [50,, 52, 56]]);
+    }, _callee, null, [[2, 60], [6, 44, 48, 56], [14, 27, 31, 39], [32,, 34, 38], [49,, 51, 55]]);
   }));
   return _generateNavigationsJSON.apply(this, arguments);
 }

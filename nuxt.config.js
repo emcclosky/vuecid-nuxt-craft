@@ -204,7 +204,7 @@ export default {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active-exact',
-    middleware: ['i18n', 'loadData'],
+    middleware: ['i18n'],
     extendRoutes(routes) {
       // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
       const newRoutes = generateLocalizedRoutes({
