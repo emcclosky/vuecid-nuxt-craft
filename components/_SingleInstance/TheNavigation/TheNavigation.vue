@@ -1,8 +1,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 // prettier-ignore
-import { verifyLeadingSlash } from '@wearelucid/vuecid-helpers'
-import isHomeSlug from '~/packages/vuecid-craft-helpers/dist/url/isHomeSlug.js'
+import { verifyLeadingSlash, removeTrailingSlash } from '@wearelucid/vuecid-helpers'
+import { isHomeSlug } from '@wearelucid/vuecid-craft-helpers'
+import config from '~/config'
 
 
 export default {
@@ -46,7 +47,13 @@ export default {
       return isHomeSlug(slug)
     },
     removeHomeSlug(slug) {
-      return this.isHomeSlug(slug) ? '' : `${slug}`
+      if (!slug) return ''
+      if (this.isHomeSlug(slug)) {
+        let trimmedSlug = slug.replace(config.env.HOMESLUG, '')
+        if (trimmedSlug.length) trimmedSlug = removeTrailingSlash(trimmedSlug) // vuecid-helper does not accept empty strings...
+        return trimmedSlug
+      }
+      return slug
     },
     verifyLeadingSlash(slug) {
       return verifyLeadingSlash(slug)
