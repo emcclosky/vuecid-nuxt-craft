@@ -5,6 +5,12 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "isHomeSlug", {
+  enumerable: true,
+  get: function get() {
+    return _isHomeSlug["default"];
+  }
+});
 Object.defineProperty(exports, "generateLocalizedRoutes", {
   enumerable: true,
   get: function get() {
@@ -35,6 +41,8 @@ Object.defineProperty(exports, "generateMetaFromSeomatic", {
     return _generateMetaFromSeomatic["default"];
   }
 });
+
+var _isHomeSlug = _interopRequireDefault(require("./url/isHomeSlug"));
 
 var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generateLocalizedRoutes"));
 
