@@ -31,7 +31,7 @@ const getDefaultLang = () => {
   return dl.lang
 }
 
-// TODO: Add your home slug from WordPress
+// TODO: Add your home slug (all languages/sites in a multisite setup need to have the same slug!)
 const homeSlug = 'home'
 
 const config = {
@@ -58,13 +58,6 @@ const config = {
 
   // TODO: Add your craft sections (e.g. pages)
   sections: ['pages'],
-
-  // TODO: Add your post types
-  postTypes: [
-    { type: 'pages' },
-    { type: 'posts', paginated: true },
-    { type: 'my_custom_post_type' }
-  ],
 
   // TODO: Add your site title
   siteTitle: 'vuecid-nuxt-craft',
