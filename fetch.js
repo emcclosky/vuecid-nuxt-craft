@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
+import { generateNavigationsJSON } from '@wearelucid/vuecid-craft-helpers'
 import config from './config.js'
-// import { generateNavigationsJSON } from 'vuecid-craft-helpers'
-import { generateNavigationsJSON } from './packages/vuecid-craft-helpers/dist/index.js'
 
 // gql files can't just be imported in node: https://github.com/ardatan/graphql-import-node
 import 'graphql-import-node'

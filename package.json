@@ -30,7 +30,7 @@
     "@nuxtjs/pwa": "3.0.0-beta.16",
     "@nuxtjs/sitemap": "^2.0.0",
     "@wearelucid/vue-bows": "^1.2.0",
-    "@wearelucid/vuecid-craft-helpers": "^0.4.0",
+    "@wearelucid/vuecid-craft-helpers": "^0.5.0",
     "@wearelucid/vuecid-helpers": "v3.0.1",
     "apollo-link-retry": "^2.2.15",
     "global": "^4.4.0",
