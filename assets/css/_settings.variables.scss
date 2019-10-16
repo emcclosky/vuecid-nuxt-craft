@@ -24,7 +24,7 @@ $s-fz-huge: 64px;
 $s-line-height-std: 1.2;
 
 /*
- *  Settings – Spacing
+ * Settings – Spacing
  */
 
 // $s-size-spacer-atomic:
@@ -48,21 +48,22 @@ $s-size-content-max-width-large: 1440px;
 
 
 /*
- *  Settings – Specific sizes
+ * Settings – Specific sizes
  */
 
 $s-the-header-bar-height-small: 70px;
 $s-the-header-bar-height: 110px;
 
 /*
- *  Settings – Animations
+ * Settings – Animations
  */
 
 $s-animation-duration-default: 0.3s;
 $s-animation-easing-default: ease-in-out;
 
 /*
- *  Settings – Breakpoints
+ * Settings – Breakpoints
+ * Why we use px: https://adamwathan.me/dont-use-em-for-media-queries/
  */
 
 $s-size-breakpoint-initial: 1px;
@@ -77,7 +78,7 @@ $s-size-breakpoint-huge: 1920px;
 $s-size-breakpoint-giant: 2200px;
 
 /*
- *  Settings – z-Index
+ * Settings – z-Index
  */
 
 $s-zindex-map: (
