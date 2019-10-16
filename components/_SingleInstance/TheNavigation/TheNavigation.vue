@@ -1,7 +1,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 // prettier-ignore
-import { isHomeSlug } from '@wearelucid/vuecid-helpers'
+import { verifyLeadingSlash } from '@wearelucid/vuecid-helpers'
+import isHomeSlug from '~/packages/vuecid-craft-helpers/dist/url/isHomeSlug.js'
+
 
 export default {
   name: 'TheNavigation',
@@ -46,6 +48,9 @@ export default {
     removeHomeSlug(slug) {
       return this.isHomeSlug(slug) ? '' : `${slug}`
     },
+    verifyLeadingSlash(slug) {
+      return verifyLeadingSlash(slug)
+    },
     handleKeyboardEvent(e) {
       const key = e.which || e.keyCode
       if (key === 27) {
@@ -80,7 +85,7 @@ export default {
           >
             <nuxt-link
               class="TheNavigation__link"
-              :to="$i18n.path(removeHomeSlug(item.uri))"
+              :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
               :exact="isHomeSlug(item.uri)"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->

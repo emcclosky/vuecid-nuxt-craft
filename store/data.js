@@ -128,8 +128,6 @@ export const getters = {
     )
       return false
 
-    console.log('state.flatNavigations: ', state.flatNavigations)
-
     // Find the UID of the current slug, also check nested pages
     const currentEntry = state.flatNavigations[rootState.currentLang][section].find(entry => entry.slug === currentSlug) // prettier-ignore
 

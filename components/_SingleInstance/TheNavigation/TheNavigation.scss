@@ -76,6 +76,12 @@ $c-the-navigation-margin-top: 10rem;
     }
   }
 
+  &__link {
+    &.is-active-exact {
+      color: $s-color-primary;
+    }
+  }
+
   &__sub-list {
     padding-left: $c-the-navigation-spacer-default;
   }
