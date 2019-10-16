@@ -12,10 +12,20 @@ function flattenSection(data = []) {
   return flattenedData
 }
 
+function isObject(data) {
+  return typeof data === 'object' && data !== null
+}
+
 export default function flattenNavigation({
   navigationData = {},
   sections = ['pages']
 } = {}) {
+  if (!isObject(navigationData)) {
+    throw new Error(
+      'flattenNavigation: 👨🏽‍✈️❌ Your passed data is not an object!: ',
+      navigationData
+    )
+  }
   try {
     const flattenedNavigations = {}
 

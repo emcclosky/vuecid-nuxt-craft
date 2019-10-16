@@ -16,15 +16,13 @@ export default {
 <template>
   <div class="Page">
     <div v-if="page">
-      <client-only>
-        <BHeading v-if="page.title" :level="1">
-          {{ page.title }}
-        </BHeading>
-        <BPageBuilder
-          v-if="page.pageBuilder"
-          :component-data="page.pageBuilder"
-        />
-      </client-only>
+      <BHeading v-if="page.title" :level="1">
+        {{ page.title }}
+      </BHeading>
+      <BPageBuilder
+        v-if="page.pageBuilder"
+        :component-data="page.pageBuilder"
+      />
     </div>
     <div v-else>
       Maybe you forgot to create a page with your home slug set in your config?

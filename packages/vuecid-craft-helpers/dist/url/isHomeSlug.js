@@ -17,8 +17,15 @@ exports["default"] = isHomeSlug;
  */
 function isHomeSlug(slug) {
   var homeSlug = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'home';
-  var regex = new RegExp("([a-zA-Z0-9]{2}/)?(".concat(homeSlug, ")")); // https: //regex101.com/r/zoFFxg/2
 
-  var foundHomeSlug = slug.match(regex);
-  return !!foundHomeSlug;
+  if (typeof slug === 'string' || slug instanceof String) {
+    var regex = new RegExp("([a-zA-Z0-9]{2}/)?(".concat(homeSlug, ")")); // https: //regex101.com/r/zoFFxg/2
+
+    var foundHomeSlug = slug.match(regex);
+    return !!foundHomeSlug;
+  } // eslint-disable-next-line no-console
+
+
+  console.warn('removeHomeSlug(): Your slug was no string: ', slug);
+  return slug;
 }

@@ -11,6 +11,12 @@ Object.defineProperty(exports, "isHomeSlug", {
     return _isHomeSlug["default"];
   }
 });
+Object.defineProperty(exports, "stripTrailingHomeSlug", {
+  enumerable: true,
+  get: function get() {
+    return _stripTrailingHomeSlug["default"];
+  }
+});
 Object.defineProperty(exports, "generateLocalizedRoutes", {
   enumerable: true,
   get: function get() {
@@ -43,6 +49,8 @@ Object.defineProperty(exports, "generateMetaFromSeomatic", {
 });
 
 var _isHomeSlug = _interopRequireDefault(require("./url/isHomeSlug"));
+
+var _stripTrailingHomeSlug = _interopRequireDefault(require("./url/stripTrailingHomeSlug"));
 
 var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generateLocalizedRoutes"));
 

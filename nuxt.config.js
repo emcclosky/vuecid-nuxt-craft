@@ -173,15 +173,14 @@ export default {
     // https://nuxtjs.org/guide/routing#implementation-for-github-pages-and-netlify
     fallback: true,
     // Apply route generation magic:
-    routes: async () => {
-      const generatedRoutes = await generateRoutesFromData({
-        endpoint: `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`,
+    routes: () => {
+      const data = require('./static/data/navigations.json') // require file here, defining paths relative to node_module is a pain!
+      return generateRoutesFromData({
+        data,
         section: 'pages', // depends on the name you put in your backend for this kind of section
-        token: config.env.GRAPHQL_TOKEN,
         homeSlug: config.env.HOMESLUG
-        ,debug: true
+        // ,debug: true
       })
-      return [...generatedRoutes]
     }
   },
 
@@ -233,14 +232,15 @@ export default {
     //   '/secret',
     //   '/admin/**'
     // ],
-    routes: async () => {
-      const routes = await generateRoutesFromData({
-        endpoint: `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`,
+    routes: () => {
+      const data = require('./static/data/navigations.json') // require file here, defining paths relative to node_module is a pain!
+      const routes = generateRoutesFromData({
+        data,
         section: 'pages', // depends on the name you put in your backend for this kind of section
-        token: config.env.GRAPHQL_TOKEN,
-        langs: config.env.LANGS,
         homeSlug: config.env.HOMESLUG
+        // ,debug: true
       })
+      console.log('routes for sitemap', routes)
       return routes
     }
   }
