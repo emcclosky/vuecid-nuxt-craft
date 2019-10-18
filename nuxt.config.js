@@ -33,6 +33,10 @@ export default {
         name: 'msvalidate.01',
         content: config.bingSiteVerification
       }
+    ],
+    script: [
+      /* setup-autocomment-polyfill */
+      /* setup-autocomment-modernizr */
     ]
   },
 
