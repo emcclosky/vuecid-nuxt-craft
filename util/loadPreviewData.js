@@ -18,7 +18,7 @@ export default async function(
     console.info('Preview is displayed!') // eslint-disable-line
 
     // const endpoint = `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}?token=${query.token}`
-    const endpoint = `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}?x-craft-live-preview={query['x-craft-live-preview]}&token=${query.token}`
+    const endpoint = `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}?x-craft-live-preview=${query['x-craft-live-preview']}&token=${query.token}`
 
     const previewData = await axios
       .post(endpoint, {
@@ -36,6 +36,7 @@ export default async function(
           result.data.data &&
           result.data.data.entries[0]
         ) {
+          console.log('result.data.data.entries[0]: ', result.data.data.entries[0])
           return result.data.data.entries[0]
         } else {
           console.warn('Tried to fetch a preview, but no entries found from axios request') // eslint-disable-line

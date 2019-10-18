@@ -76,7 +76,7 @@ function generateRoutesFromData() {
 
     routes = routes.filter(function (r) {
       // Removing 'home' or '/home'
-      return r !== options.homeSlug && r !== "/".concat(options.homeSlug);
+      return r !== homeSlug && r !== "/".concat(homeSlug);
     }) // remove slashes and truncate 'de/home' to 'de' etc.
     .map(function (r) {
       return (0, _vuecidHelpers.verifyLeadingSlash)((0, _stripTrailingHomeSlug["default"])((0, _vuecidHelpers.removeTrailingSlash)(r)));

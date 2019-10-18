@@ -35,6 +35,12 @@ Object.defineProperty(exports, "generateNavigationsJSON", {
     return _generateNavigationsJSON["default"];
   }
 });
+Object.defineProperty(exports, "loadPreview", {
+  enumerable: true,
+  get: function get() {
+    return _loadPreview["default"];
+  }
+});
 Object.defineProperty(exports, "flattenNavigation", {
   enumerable: true,
   get: function get() {
@@ -57,6 +63,8 @@ var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generate
 var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateRoutesFromData"));
 
 var _generateNavigationsJSON = _interopRequireDefault(require("./navigation/generateNavigationsJSON"));
+
+var _loadPreview = _interopRequireDefault(require("./preview/loadPreview"));
 
 var _flattenNavigation = _interopRequireDefault(require("./navigation/flattenNavigation"));
 
