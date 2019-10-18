@@ -124,7 +124,7 @@ export default {
                 @click="closeMenu"
               >
                 <BBtn
-                  class="TheNavigation__link TheNavigation__BBtn"
+                  class="TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn"
                   naked
                   :to="item.path"
                   :exact="$route.name.includes('index')"

@@ -79,6 +79,13 @@ $c-the-navigation-margin-top: 10rem;
   &__link {
     &.is-active-exact {
       color: $s-color-primary;
+      font-weight: bold;
+    }
+
+    &--lang {
+      &.is-active {
+        font-weight: bold;
+      }
     }
   }
 
