@@ -11,6 +11,8 @@ export default {}
       will search for a folder having the same name as the template. In our case
       <code>/hasnuxtchild</code>.
     </p>
-    <NuxtChild />
+    <div class="nuxtchild">
+      <NuxtChild />
+    </div>
   </div>
 </template>

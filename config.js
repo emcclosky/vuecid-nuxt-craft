@@ -7,7 +7,8 @@ const urls = {
   graphqlPath: '/api'
 }
 
-// TODO: Add your langs
+// TODO: Add your langs (= different sites in Craft multisite setup)
+// Don't forget to add the site handle for each secondary site!
 const langs = [
   {
     lang: 'de',
@@ -53,7 +54,7 @@ const config = {
   // TODO: Add your Google Site Verification for Search Console
   googleSiteVerification: 'EvzhaYYBQ_6xTZ4EBRyKsvWETvSyivkiSOwJzpEzfqA',
 
-  // Optionally add Bing Site Verification
+  // TODO: Optionally add Bing Site Verification
   bingSiteVerification: 'B2BFE4CC02FBB954E192488D1D844BCC',
 
   // TODO: Add your craft sections (e.g. pages)

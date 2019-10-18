@@ -16,13 +16,14 @@ export default {
     </p>
     <p>
       Try to navigate a bit:<br />
-      <nuxt-link to="/hasnuxtchild/childslug">/hasnuxtchild/childslug</nuxt-link
+      <nuxt-link to="/examples/hasnuxtchild/childslug"
+        >/examples/hasnuxtchild/childslug</nuxt-link
       ><br />
-      <nuxt-link to="/hasnuxtchild/another-childslug"
-        >/hasnuxtchild/another-childslug</nuxt-link
+      <nuxt-link to="/examples/hasnuxtchild/another-childslug"
+        >/examples/hasnuxtchild/another-childslug</nuxt-link
       ><br />
-      <nuxt-link to="/hasnuxtchild/yet-another-childslug"
-        >/hasnuxtchild/yet-another-childslug</nuxt-link
+      <nuxt-link to="/examples/hasnuxtchild/yet-another-childslug"
+        >/examples/hasnuxtchild/yet-another-childslug</nuxt-link
       >
     </p>
   </div>
