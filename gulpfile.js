@@ -14,20 +14,60 @@ const strings = {
   `
 }
 
-function replaceComment(path, template, pattern, cb) {
-  console.log(`Replacing ${pattern} in ${path}...`)
+/*
+ * Replace specific comments with a string
+ * Using plop modify actions
+ */
+function replaceComment(path, template, pattern) {
+  return new Promise((resolve, reject) => {
+
+    console.log(`🧾 Replacing ${pattern} in ${path}...`)
+
+    const nodePlop = require('node-plop')
+    const plop = nodePlop()
+
+    const generator = plop.setGenerator('replace', {
+      prompts: [],
+      actions: [
+        {
+          type: 'modify',
+          path,
+          pattern,
+          template
+        }
+      ]
+    })
+
+    generator
+      .runActions()
+      .then(results => {
+        console.log(`💾✅ Sucessfully modified ${path} with ${template}`)
+        resolve()
+      })
+      .catch(err => {
+        console.log('err', err)
+        reject(err)
+      })
+  })
+}
+
+/*
+ * Add files to project using plop
+ */
+function addFiles(path, templateFile, force = false) {
+  console.log(`🧾 Adding ${templateFile} to ${path}...`)
 
   const nodePlop = require('node-plop')
   const plop = nodePlop()
 
-  const generator = plop.setGenerator('replace', {
+  const generator = plop.setGenerator('add', {
     prompts: [],
     actions: [
       {
-        type: 'modify',
+        type: 'add',
         path,
-        pattern,
-        template
+        templateFile,
+        force
       }
     ]
   })
@@ -35,22 +75,12 @@ function replaceComment(path, template, pattern, cb) {
   generator
     .runActions()
     .then(results => {
-      console.log(`💾 Sucessfully modified ${path}`)
-      cb()
+      console.log(`💾✅ Sucessfully added ${templateFile}.`)
     })
     .catch(err => {
       console.log('err', err)
     })
 }
-
-function testMe(input){
-  console.log('input: ', input)
-}
-
-gulp.task('test', function(done) {
-  testMe('hello')
-  done()
-})
 
 gulp.task('install-susy', function(done) {
   const shell = require('gulp-shell')
@@ -60,73 +90,49 @@ gulp.task('install-susy', function(done) {
     .on('finish', done)
 })
 
-gulp.task('replace-comment', function(done, { path, template, pattern }) {
-  console.log(`Replacing ${pattern} in ${path}...`)
-
-  const nodePlop = require('node-plop')
-  const plop = nodePlop()
-
-  const generator = plop.setGenerator('replace', {
-    prompts: [],
-    actions: [
-      {
-        type: 'modify',
-        path,
-        pattern,
-        template
-      }
-    ]
-  })
-
-  generator
-    .runActions()
-    .then(results => {
-      console.log(`💾 Sucessfully modified ${path}`)
-    })
-    .catch(err => {
-      console.log('err', err)
-    })
-
-  done()
-})
-
-gulp.task('add-polyfill', function(done, cb) {
+gulp.task('add-polyfill', async function(done) {
   console.log('Adding IE11 polyfill to nuxt.config.js ...')
 
   const path = './nuxt.config.js'
   const pattern = '\/\*\ setup-autocomment-polyfill\ \*\/' // eslint-disable-line
   const template = strings.polyfill
 
-  replaceComment(path, pattern, template, cb)(done)
+  await replaceComment(path, template, pattern)
+  console.log(' - - - -⚠️ finished polyfill')
+  done()
+})
+
+gulp.task('add-modernizr', async function(done) {
+  console.log('Adding modernizr script to nuxt.config.js ...')
+
+  const path = './nuxt.config.js'
+  const pattern = '\/\*\ setup-autocomment-modernizr\ \*\/' // eslint-disable-line
+  const template = strings.modernizr
+
+  await replaceComment(path, template, pattern)
+  console.log(' - - - -⚠️ finished modern')
+  done()
 })
 
 gulp.task('add-susy-files', function(done) {
   console.log('Adding susy specific .scss files...')
 
-  const nodePlop = require('node-plop')
-  const plop = nodePlop()
+  const path = './assets/css/_tools.grid.scss'
+  const templateFile = './plop/setup/susy/grid-settings.scss.hbs'
+  const force = true
 
-  const generator = plop.setGenerator('default', {
-    prompts: [],
-    actions: [
-      {
-        type: 'add',
-        path: './assets/css/_tools.grid.scss',
-        templateFile: 'plop/setup/susy/grid-settings.scss.hbs',
-        force: true
-      }
-    ]
-  })
+  addFiles(path, templateFile, force)
 
-  generator
-    .runActions()
-    .then(results => {
-      console.log('results', results)
-      console.log('💾 Sucessfully generated susy .scss files.')
-    })
-    .catch(err => {
-      console.log('err', err)
-    })
+  done()
+})
+
+gulp.task('add-modernizr-file', function (done) {
+  console.log('Adding custom modernizr...')
+
+  const path = './static/js/modernizr.js'
+  const templateFile = './plop/setup/modernizr/modernizr.hbs'
+
+  addFiles(path, templateFile)
 
   done()
 })
@@ -141,12 +147,24 @@ gulp.task('setup', function(done) {
         name: 'plugins',
         message:
           'What plugins and tools do you want to include into your project?',
-        choices: ['susy', 'plugin2']
+        choices: ['susy', 'modernizr', 'IE11-polyfill']
       }
     ])
     .then(answers => {
+      const tasks = []
+
       if (answers.plugins.includes('susy')) {
-        return gulp.series('add-susy-files', 'install-susy')(done)
+        tasks.push('add-susy-files')
+        tasks.push('install-susy')
       }
+      if (answers.plugins.includes('modernizr')) {
+        tasks.push('add-modernizr')
+        tasks.push('add-modernizr-file')
+      }
+      if (answers.plugins.includes('IE11-polyfill')) {
+        tasks.push('add-polyfill')
+      }
+
+      return gulp.series(tasks)(done)
     })
 })
