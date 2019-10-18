@@ -2,5 +2,8 @@
 
 $c: 'BRichtext';
 
-// .#{$c} {
-// }
+.#{$c} {
+  a {
+    @include hocus-focus($type: outline, $color: $s-color-primary, $offset: 0.1rem);
+  }
+}

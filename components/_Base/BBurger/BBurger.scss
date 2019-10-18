@@ -10,7 +10,7 @@ $c-b-burger-gutter: 6px;
 $c-b-burger-container-size: $c-b-burger-size+($c-b-burger-padding * 2);
 
 .#{$c} {
-  @include hocus-focus($type: textcolor, $color: $s-color-primary);
+  @include hocus-focus($type: outline, $color: $s-color-primary);
   width: px-to-rem($c-b-burger-container-size);
   height: px-to-rem($c-b-burger-container-size);
   padding: px-to-rem($c-b-burger-padding);

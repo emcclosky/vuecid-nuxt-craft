@@ -15,8 +15,8 @@ export default {
   <div class="Page">
     <em>This is a _nuxtchild page</em>
     <div v-if="page">
-      <BHeading v-if="page.title" :level="1">
-        {{ page.title }}
+      <BHeading v-if="page.title || page.alternativePageTitle" :level="1">
+        {{ page.alternativePageTitle || page.title }}
       </BHeading>
       <BPageBuilder
         v-if="page.pageBuilder"

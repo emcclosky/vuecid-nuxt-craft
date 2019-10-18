@@ -11,6 +11,6 @@ $c-logo-height: 30px;
   }
 
   a {
-    @include hocus-focus($type: textcolor, $color: $s-color-primary);
+    @include hocus-focus($type: outline, $color: $s-color-primary);
   }
 }

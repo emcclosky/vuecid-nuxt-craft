@@ -12,16 +12,18 @@ $c-the-navigation-margin-top: 10rem;
    */
 
   &__wrap {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100%;
+    @include visually-hidden;
     background: $s-color-white;
+    transition: opacity $s-animation-duration-default;
 
     &.is-open {
-      display: block;
+      @include visually-hidden-reset;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      opacity: 1;
     }
   }
 
@@ -71,7 +73,7 @@ $c-the-navigation-margin-top: 10rem;
     }
 
     a {
-      @include hocus-focus($type: textcolor, $color: $s-color-primary);
+      @include hocus-focus($type: outline, $color: $s-color-primary, $offset: 0.1rem);
       text-decoration: none;
     }
   }

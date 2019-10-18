@@ -11,14 +11,14 @@ $c: 'BHeading';
 
   &__content {
     a {
-      @include hocus-focus($type: textcolor, $color: $s-color-primary);
+      @include hocus-focus($type: outline, $color: $s-color-primary);
     }
   }
 
   &.has-clickable-anchor {
     .#{$c} {
       &__anchor {
-        @include hocus-focus($type: textcolor, $color: $s-color-primary);
+        @include hocus-focus($type: outline, $color: $s-color-primary);
         display: inline-block;
         margin-left: 0.5em;
         text-decoration: none;

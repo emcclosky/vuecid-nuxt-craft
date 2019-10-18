@@ -9,7 +9,7 @@ $c-b-btn-color-text: $s-color-text-default;
 $c-b-btn-color-text-inverted: $s-color-white;
 
 .#{$c} {
-  @include hocus-focus($type: textcolor, $color: $c-b-btn-color);
+  @include hocus-focus($type: outline, $color: $c-b-btn-color);
   @include reset-button;
   @include font-style-button;
   display: inline-block;

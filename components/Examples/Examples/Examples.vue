@@ -17,7 +17,12 @@ export default {
 
 <template>
   <div class="Examples">
-    <!-- Styleguide -->
+    <BHeading :level="2" has-clickable-anchor>Nuxt-Child example:</BHeading>
+    <p>
+      Have a look at
+      <nuxt-link to="/examples/hasnuxtchild/lucid">nuxt-child</nuxt-link> in
+      action.
+    </p>
     <BHeading :level="2" has-clickable-anchor>Styleguide</BHeading>
     <DemoGrid />
     <Styleguide />

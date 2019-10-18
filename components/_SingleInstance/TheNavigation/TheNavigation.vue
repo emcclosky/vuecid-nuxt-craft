@@ -74,9 +74,10 @@ export default {
       <BBurger :is-active="navMenuOpen" @click.native="toggleMenu" />
     </client-only>
 
+    <!-- TODO: Adjust tabIndex rules if your navigation is open all the time on desktop! Then you want them to be focusable all the time! -->
     <div :class="['TheNavigation__wrap', navMenuOpen ? 'is-open' : '']">
       <!-- scroll-wrapper is needed to guarantee correct scrolling if list is longer than window -->
-      <div v-if="menu" class="TheNavigation__scroll-wrapper">
+      <div v-if="menu" class="TheNavigation__scroll-wrapper" tabIndex="-1">
         <ul :class="['TheNavigation__list']">
           <li
             v-for="(item, key) in menu"
@@ -93,6 +94,7 @@ export default {
               class="TheNavigation__link"
               :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
               :exact="isHomeSlug(item.uri)"
+              :tabIndex="navMenuOpen ? 0 : -1"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->
               <span v-html="item.title" />
@@ -108,7 +110,7 @@ export default {
                 class="TheNavigation__item TheNavigation__item--child"
                 @click="closeMenu"
               >
-                <nuxt-link class="TheNavigation__link" :to="`/${child.uri}`">
+                <nuxt-link class="TheNavigation__link" :to="`/${child.uri}`" :tabIndex="navMenuOpen ? 0 : -1">
                   <!-- eslint-disable-next-line vue/no-v-html -->
                   <span v-html="child.title" />
                 </nuxt-link>
@@ -130,6 +132,7 @@ export default {
                   :exact="$route.name.includes('index')"
                   :title="item.name"
                   :disabled="!item.path"
+                  :tabIndex="navMenuOpen ? 0 : -1"
                 >
                   {{ item.lang }}
                 </BBtn>

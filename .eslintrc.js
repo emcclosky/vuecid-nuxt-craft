@@ -35,6 +35,9 @@ module.exports = {
     'vue/max-attributes-per-line': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
+    'vue/attribute-hyphenation': ["error", "always", {
+      "ignore": ['tabIndex']
+    }],
     'vue/component-name-in-template-casing': [
       'warn',
       'PascalCase',
