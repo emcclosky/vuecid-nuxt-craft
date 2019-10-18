@@ -13,7 +13,7 @@ export default {
 
 <template>
   <div class="Page">
-    <em>This is a _slug2 page</em>
+    <em>This is a _nuxtchild page</em>
     <div v-if="page">
       <BHeading v-if="page.title" :level="1">
         {{ page.title }}

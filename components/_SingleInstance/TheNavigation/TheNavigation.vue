@@ -5,12 +5,11 @@ import { verifyLeadingSlash, removeTrailingSlash } from '@wearelucid/vuecid-help
 import { isHomeSlug } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
 
-
 export default {
   name: 'TheNavigation',
   data: () => {
     return {
-      section: 'pages'
+      section: config.sectionsInNavigation
     }
   },
   computed: {

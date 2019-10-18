@@ -16,6 +16,10 @@ export default {
       return (this.error && this.error.statusCode) || 404
     },
     message() {
+      if (process.env.NODE_ENV === 'development') {
+        return this.error.message
+      }
+      // For production use less verbose and more controlled error messages
       return this.statusCode === 404
         ? this.$t('error.404')
         : this.$t('error.message')
@@ -48,10 +52,5 @@ export default {
     <BRichtext :content="message" />
     <br />
     <BBtn @click.native="clearError">{{ $t('error.link') }}</BBtn>
-    <br /><br />
-    <img
-      style="width:100%;height:auto;"
-      :src="`https://http.cat/${statusCode}.jpg`"
-    />
   </div>
 </template>

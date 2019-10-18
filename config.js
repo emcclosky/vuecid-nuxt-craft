@@ -59,6 +59,9 @@ const config = {
   // TODO: Add your craft sections (e.g. pages)
   sections: ['pages'],
 
+  // TODO: Add the sections that should be displayed within TheNavigation
+  sectionsInNavigation: 'pages',
+
   // TODO: Add your site title
   siteTitle: 'vuecid-nuxt-craft',
   shortTitle: 'Vuecid Demo with CraftCMS',

@@ -44,9 +44,17 @@ export default {
         // Only set this.page to graphql data if we are not seeing a preview
         if (!this.preview) {
           if (!result.data.entries || !result.data.entries[0]) {
+            if (!this.$route.params.slug) {
+              console.error(`🏮 You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
+            }
+
             this.$store.dispatch(
               'throwError',
-              { statusCode: 404, message: 'Page not found' },
+              {
+                statusCode: 404,
+                message: `Page with slug «${this.$route.params.slug ||
+                  config.env.HOMESLUG}» was not found`
+              },
               { root: true }
             )
           }
@@ -76,9 +84,6 @@ export default {
   head() {
     if (!this.seomatic) {
       this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
-      if (!this.$route.params.slug) {
-        this.log(`🏮 You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
-      }
     }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,

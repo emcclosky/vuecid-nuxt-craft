@@ -65,7 +65,7 @@ function generateRoutesFromData(
     routes = routes
       .filter(r => {
         // Removing 'home' or '/home'
-        return r !== options.homeSlug && r !== `/${options.homeSlug}`
+        return r !== homeSlug && r !== `/${homeSlug}`
       })
       // remove slashes and truncate 'de/home' to 'de' etc.
       .map(r => {
