@@ -2,7 +2,7 @@
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import config from '../config'
 import page from '~/apollo/queries/page'
-import loadPreviewData from '~/util/loadPreviewData.js'
+import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
@@ -68,8 +68,8 @@ export default {
       page: null
     }
   },
-  async asyncData({ params, env, query, route, store }) {
-    const previewData = await loadPreviewData({
+  async asyncData({ params, env, query, route, app }) {
+    const previewData = await loadPreview({
       params,
       env,
       query,
