@@ -33,6 +33,8 @@
     "@wearelucid/vuecid-craft-helpers": "^0.5.0",
     "@wearelucid/vuecid-helpers": "v3.0.1",
     "apollo-link-retry": "^2.2.15",
+    "focus-trap": "^5.0.2",
+    "focus-trap-vue": "^0.0.4",
     "global": "^4.4.0",
     "graphql-import-node": "^0.0.4",
     "graphql-tag": "^2.10.1",

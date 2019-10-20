@@ -66,6 +66,7 @@ export default {
     { src: '~/plugins/whatinput.js', ssr: false },
     { src: '~/plugins/i18n.js', injectAs: 'i18n' },
     { src: '~/plugins/vuex-router-sync' },
+    { src: '~/plugins/vue-focus-trap' },
     { src: '~/plugins/vue-bows' }
     // { src: '~/plugins/vue-breakpoint-component', ssr: false }
   ],
