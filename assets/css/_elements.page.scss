@@ -25,29 +25,7 @@ main {
   outline: none;
 }
 
-h1 {
-  @include font-style-heading1;
-}
-
-h2 {
-  @include font-style-heading2;
-}
-
-h3 {
-  @include font-style-heading3;
-}
-
-h4 {
-  @include font-style-heading4;
-}
-
-h5 {
-  @include font-style-heading5;
-}
-
-h6 {
-  @include font-style-heading6;
-}
+// TODO: Defined h1-h6 heading styles
 
 p {
   @include font-style-base;

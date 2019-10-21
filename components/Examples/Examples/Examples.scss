@@ -3,8 +3,9 @@
 $c: 'Examples';
 
 .#{$c} {
+  @include set-gutter('medium');
+
   &__info {
-    @include font-style-small;
     @include font-style-italic;
     margin-bottom: 0;
   }

@@ -1,11 +1,23 @@
 <script>
+import GridOverlay from '~/components/Examples/GridOverlay/GridOverlay.vue'
+
 export default {
-  name: 'DemoGrid'
+  name: 'DemoGrid',
+  components: {
+    GridOverlay
+  }
 }
 </script>
 
 <template>
   <div class="DemoGrid">
+    <p>
+      If you have susy installed try pressing:<br />
+      <code>Ctrl + G</code>.<br />This should show a grid-overlay. You can use
+      this by adding the component:<br />
+      <code>/Examples/GridOverlay</code>
+    </p>
+    <GridOverlay />
     <p>
       If <a href="https://github.com/oddbird/susy">Susy</a> is installed you
       should see a proper grid layout. If not you see all colored rectangles in

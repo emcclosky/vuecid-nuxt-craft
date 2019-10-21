@@ -3,7 +3,7 @@ export default {}
 </script>
 
 <template>
-  <div class="Page">
+  <div class="Page examples--center">
     <em>This is a nuxt-child example page</em>
     <p>
       Whenever <code>/hasnuxtchild</code> is called it loads the

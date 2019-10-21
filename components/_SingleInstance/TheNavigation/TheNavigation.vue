@@ -111,7 +111,11 @@ export default {
                   class="TheNavigation__item TheNavigation__item--child"
                   @click="closeMenu"
                 >
-                  <nuxt-link class="TheNavigation__link" :to="`/${child.uri}`" :tabIndex="navMenuOpen ? 0 : -1">
+                  <nuxt-link
+                    class="TheNavigation__link"
+                    :to="`/${child.uri}`"
+                    :tabIndex="navMenuOpen ? 0 : -1"
+                  >
                     <!-- eslint-disable-next-line vue/no-v-html -->
                     <span v-html="child.title" />
                   </nuxt-link>

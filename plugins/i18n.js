@@ -9,6 +9,7 @@ export default ({ app, store }) => {
   app.i18n = new VueI18n({
     locale: store.state.currentLang,
     fallbackLocale: process.env.DEFAULTLANG,
+    // TODO: Remove locales you don't need
     messages: {
       de: require('~/locales/de.json'),
       en: require('~/locales/en.json'),

@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <div class="Page">
+  <div class="Page examples--center">
     <em>This is a is the nuxt-child</em>
     <p>
       It is called with the childslug: <strong>{{ slug }}</strong>

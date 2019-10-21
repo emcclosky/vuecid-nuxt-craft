@@ -35,27 +35,28 @@ $c: 'BHeading';
     }
   }
 
-  &--level-1 {
-    @include font-style-heading1;
-  }
+  // TODO: Define heading font styles
+  // &--level-1 {
+  //   @include font-style-heading1;
+  // }
 
-  &--level-2 {
-    @include font-style-heading2;
-  }
+  // &--level-2 {
+  //   @include font-style-heading2;
+  // }
 
-  &--level-3 {
-    @include font-style-heading3;
-  }
+  // &--level-3 {
+  //   @include font-style-heading3;
+  // }
 
-  &--level-4 {
-    @include font-style-heading4;
-  }
+  // &--level-4 {
+  //   @include font-style-heading4;
+  // }
 
-  &--level-5 {
-    @include font-style-heading5;
-  }
+  // &--level-5 {
+  //   @include font-style-heading5;
+  // }
 
-  &--level-6 {
-    @include font-style-heading6;
-  }
+  // &--level-6 {
+  //   @include font-style-heading6;
+  // }
 }

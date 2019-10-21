@@ -1,0 +1,21 @@
+@import '~assets/css/global';
+
+$c: 'GridOverlay';
+// $c-gridoverlay-some-variable: 'Some Value';
+
+.#{$c} {
+  position: fixed;
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+
+  &__grid-wrap {
+    @include set-gutter('medium');
+    height: 100vh;
+  }
+
+  &__grid {
+    height: 100vh;
+    background: susy-svg-grid(rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals
+  }
+}

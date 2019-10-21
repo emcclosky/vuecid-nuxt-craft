@@ -13,7 +13,7 @@ export default {
       </a>
       &nbsp;&nbsp;/&nbsp;&nbsp; Fork on
       <a
-        href="https://github.com/wearelucid/vuecid-nuxt"
+        href="https://github.com/wearelucid/vuecid-nuxt-craft"
         target="_blank"
         rel="noopener"
       >
