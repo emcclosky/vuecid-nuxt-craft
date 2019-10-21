@@ -80,7 +80,7 @@ function _loadPreview() {
               // https://stackoverflow.com/a/57873339/1121268
               query: (0, _printer.print)(graphQLQuery),
               variables: {
-                slug: specificSlug || params.slug,
+                slug: specificSlug || params.slug2 || params.slug,
                 site: query.site || 'default'
               }
             }).then(function (result) {

@@ -2456,15 +2456,16 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.0"
 
-"@wearelucid/vuecid-craft-helpers@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.5.0.tgz#e98151f92f987ece7dad7ac39867feecb71a1349"
+"@wearelucid/vuecid-craft-helpers@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.6.0.tgz#0ef43c49faeaac83a76c51aa12f61e675e5453b1"
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
     axios "^0.19.0"
     fs "^0.0.1-security"
     graphql-import-node "^0.0.4"
+    graphql-tag "^2.10.1"
 
 "@wearelucid/vuecid-helpers@^3.0.0", "@wearelucid/vuecid-helpers@v3.0.1":
   version "3.0.1"

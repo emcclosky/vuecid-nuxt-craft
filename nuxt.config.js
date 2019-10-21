@@ -185,7 +185,7 @@ export default {
       const data = require('./static/data/navigations.json') // require file here, defining paths relative to node_module is a pain!
       return generateRoutesFromData({
         data,
-        section: 'pages', // depends on the name you put in your backend for this kind of section
+        section: config.sectionsInNavigation, // depends on the name you put in your backend for this kind of section
         homeSlug: config.env.HOMESLUG
         // ,debug: true
       })

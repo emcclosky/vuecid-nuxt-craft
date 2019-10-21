@@ -1,8 +1,9 @@
 <script>
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
+import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '../config'
 import page from '~/apollo/queries/page'
-import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
+// import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
