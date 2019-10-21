@@ -89,3 +89,6 @@ See [docs/Nuxt_Child.md](docs/Nuxt_Child.md)
 
 ## Tools
 - Susy Grid System: [docs/Susy_Grid.md](docs/Susy_Grid.md)
+
+## Lerna & Managing a Mono-Repo
+- Susy Lerna: [docs/Lerna.md](docs/Lerna.md)
