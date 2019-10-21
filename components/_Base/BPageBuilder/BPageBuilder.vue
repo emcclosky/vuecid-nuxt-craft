@@ -1,11 +1,13 @@
 <script>
 import StandardSection from '~/components/Examples/StandardSection/StandardSection.vue'
+import { linkHelpersMixin } from '~/mixins/link-helpers'
 
 export default {
   name: 'BPageBuilder',
   components: {
     StandardSection
   },
+  mixins: [linkHelpersMixin],
   props: {
     componentData: {
       type: Array,
@@ -23,6 +25,16 @@ export default {
         v-if="component.__typename === 'pageBuilder_standardSection_BlockType'"
         :component="component"
       />
+      <!-- eslint-disable prettier/prettier-->
+      <BBtn
+        v-if="component.__typename === 'pageBuilder_button_BlockType'"
+        :to="link(component.button.url, component.button.type)"
+        :target="component.button.type === 'tel' || component.button.type === 'email' ? '_self' : true"
+        :external="isExternal(component.button.url, component.button.type)"
+      >
+        <!-- eslint-enable prettier/prettier-->
+        {{ component.button.customText }}
+      </BBtn>
     </div>
   </div>
 </template>

@@ -77,6 +77,9 @@ export default {
       }
       return this.type
     }
+  },
+  mounted() {
+    console.log('target: ', this.target, ' to ', this.to)
   }
 }
 </script>
@@ -90,6 +93,7 @@ export default {
     :exact="!external ? exact : false"
     :aria-controls="ariaControls"
     :aria-expanded="ariaExpanded"
+    :href="external ? to : false"
     :target="!target && external ? '_blank' : target"
     :type="computedType === 'button' ? buttonType : false"
     :rel="external ? 'noopener' : false"

@@ -31,6 +31,12 @@ export const linkHelpersMixin = {
       const nuxtLinkURL = url.replace(regex, '')
       return `${nuxtLinkURL}`
     },
+    removeFrontendDomain(url) {
+      if (!url) return
+      const regex = new RegExp(`(${process.env.FRONTENDURLPRODUCTION})|(${process.env.FRONTENDURLLOCAL})`) // prettier-ignore
+      const nuxtLinkURL = url.replace(regex, '')
+      return `${nuxtLinkURL}`
+    },
     isExternal(url, type) {
       if (!url) return
       // https://github.com/sebastian-lenz/craft-linkfield
@@ -40,10 +46,11 @@ export const linkHelpersMixin = {
     },
     link(url, type) {
       // If we know that the link should be internal, remove the backend absolute part
+      // these are very specific checks which are used together with craft linkfield:
+      // https://github.com/sebastian-lenz/craft-linkfield
       if (type === 'entry') {
-        return this.changeBackendLinkToFrontendLink(url)
-      }
-      if (url && this.checkLinkIfInternal(url)) {
+        return this.removeFrontendDomain(url)
+      } else if (url && this.checkLinkIfInternal(url)) {
         return this.prepareNuxtLink(url)
       }
       return url

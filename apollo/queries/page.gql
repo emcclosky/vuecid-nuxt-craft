@@ -10,6 +10,16 @@ query Page($slug: [String], $site: [String]) {
           baseTitle
           baseText
         }
+        ...on pageBuilder_button_BlockType {
+          __typename
+          button {
+            url
+            customText
+            text
+            type
+            title
+          }
+        }
       }
     }
   }

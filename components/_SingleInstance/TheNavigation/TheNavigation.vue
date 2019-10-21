@@ -69,7 +69,7 @@ export default {
 </script>
 
 <template>
-  <focus-trap v-model="navMenuOpen">
+  <focus-trap :active="navMenuOpen">
     <nav id="navigation" :class="[$options.name, navMenuOpen ? 'is-open' : '']">
       <client-only>
         <BBurger :is-active="navMenuOpen" @click.native="toggleMenu" />
