@@ -57,7 +57,7 @@ $c-the-navigation-margin-top: 10rem;
     &--has-children {
       position: relative;
 
-      // todo we should be able to access the sub-list by tab (a11-y)
+      // TODO: we should be able to access the sub-list by tab (a11-y)
       &:hover {
         .#{$c}__sub-list {
           visibility: visible;

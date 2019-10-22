@@ -38,7 +38,6 @@ export default {
         slug = removeLeadingSlash(slug)
         const site = this.$i18n.siteHandle
         // get craft site handle depending on language
-        // const site =
         return { slug, site }
       },
       result(result) {

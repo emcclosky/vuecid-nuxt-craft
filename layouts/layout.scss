@@ -6,7 +6,7 @@ $p: 'Page';
 .#{$l} {
   margin: auto;
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh; // needed to make footer sticky
   flex-direction: column;
 
   &__content {

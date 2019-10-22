@@ -5,6 +5,9 @@ $c: 'GridOverlay';
 
 .#{$c} {
   position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
   margin: 0 auto;
   width: 100%;
   height: 100vh;
@@ -16,6 +19,6 @@ $c: 'GridOverlay';
 
   &__grid {
     height: 100vh;
-    background: susy-svg-grid(rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals
+    background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals
   }
 }

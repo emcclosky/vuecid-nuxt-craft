@@ -20,6 +20,7 @@ export default {
   },
   methods: {
     toggleGrid() {
+      console.log('toggle')
       this.isHidden = !this.isHidden
     }
   }

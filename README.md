@@ -9,13 +9,13 @@ Follow these steps to quickly set up your Vuecid-Nuxt-CraftCMS project:
 
 1. Setup a local Craft CMS installation by using the [Vuecid-Craft Boilerplate](https://github.com/wearelucid/vuecid-craft/).
 1. Install all npm packages `$ yarn`
-1. Install further plugins/tools to your liking: `$ gulp setup`
-1. Fetch the data needed to set up your navigation `$ yarn fetch`
+1. Install further plugins/tools to your liking: `$ gulp setup` (See [Tools](#Tools))
 1. Go to `/config.js` and add the necessary settings.
-  - Your languages (also make sure not to forget the siteHandle for a craft multisite setup)
   - Your local Craft installation URL
+  - Your languages (also make sure not to forget the siteHandle for a craft multisite setup)
   - Your GraphQL endpoint
   - Your home slug
+1. Fetch the data needed to set up your navigation `$ yarn fetch`
 1. Run `$ yarn dev` to start the nuxt server
 1. Find `TODO` comments and setup your project. This might include:
   - Delete example styling (`/assets/css/_export.breakpoints.scss`)
@@ -66,6 +66,7 @@ This opinionated boilerplate uses the seomatic plugin for SEO. Therefore we have
 
 ### Apollo queries
 Check the sections that are queried within `_basePage.vue` and `page.gql`.
+Why the schemaQuery, you ask? [Medium: Heuristic Fragment matcher warning! How to fix it?](https://medium.com/commutatus/whats-going-on-with-the-heuristic-fragment-matcher-in-graphql-apollo-client-e721075e92be)
 
 ### Google Analytics/Google Tag Manager
 The `components/Examples/CookieBar/CookieBar.vue` includes two methods to enable either Google Analytics or Google Tag Manager after the user accepts the cookies.
