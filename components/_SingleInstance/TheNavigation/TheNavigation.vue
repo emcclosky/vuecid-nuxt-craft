@@ -138,7 +138,6 @@ export default {
                     :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
                     naked
                     :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : item.path"
-                    :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"
                     :tabIndex="navMenuOpen ? 0 : -1"
