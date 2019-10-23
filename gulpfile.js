@@ -11,7 +11,8 @@ const strings = {
   `,
   modernizr: `/* setup-autocomment-modernizr */
       { src: '/js/modernizr-custom.js', async: true, defer: true },
-  `
+  `,
+  susygrid: `background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals`
 }
 
 /*
@@ -112,6 +113,17 @@ gulp.task('add-modernizr', async function(done) {
   done()
 })
 
+gulp.task('add-susy-svg-grid', async function (done) {
+  console.log('Adding susy svg grid to GridOverlay...')
+
+  const path = './components/examples/GridOverlay/GridOverlay.scss'
+  const pattern = '\/\/ setup-autocomment-susy' // eslint-disable-line
+  const template = strings.susygrid
+
+  await replaceComment(path, template, pattern)
+  done()
+})
+
 gulp.task('add-susy-files', function(done) {
   console.log('Adding susy specific .scss files...')
 
@@ -158,6 +170,7 @@ gulp.task('setup', function(done) {
       if (answers.plugins.includes('susy')) {
         tasks.push('add-susy-files')
         tasks.push('install-susy')
+        tasks.push('add-susy-svg-grid')
       }
       if (answers.plugins.includes('modernizr')) {
         tasks.push('add-modernizr')
