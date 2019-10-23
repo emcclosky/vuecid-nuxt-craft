@@ -2467,9 +2467,9 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.0"
 
-"@wearelucid/vuecid-craft-helpers@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.6.1.tgz#64eb16026a8ff1a24ff8316268ae69e6f1fad7ff"
+"@wearelucid/vuecid-craft-helpers@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.7.0.tgz#c6cf4d36a58e649160658909fcc06e553284ade3"
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
