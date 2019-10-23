@@ -1,0 +1,7 @@
+query News($site: [String]) {
+  entries(site: $site, section: ["news"]) {
+    slug
+    title
+    uri
+  }
+}

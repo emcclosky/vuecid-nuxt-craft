@@ -79,13 +79,21 @@ $c-the-navigation-margin-top: 10rem;
   }
 
   &__link {
+    &.is-active {
+      font-weight: bold;
+    }
+
     &.is-active-exact {
       color: $s-color-primary;
       font-weight: bold;
     }
 
     &--lang {
-      &.is-active {
+      &.custom-active {
+        font-weight: bold;
+      }
+
+      &.is-active-exact {
         font-weight: bold;
       }
     }
