@@ -105,12 +105,7 @@ $c-the-navigation-margin-top: 10rem;
 
   &__lang-item {
     text-transform: capitalize;
-
-    &:not(:last-child) {
-      &::after {
-        content: ' / ';
-      }
-    }
+    margin-right: 1em;
   }
 }
 
