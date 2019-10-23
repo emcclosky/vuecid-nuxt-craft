@@ -8,7 +8,6 @@ $c: 'DemoGrid';
   flex-direction: column;
   flex-flow: wrap;
   justify-content: space-between;
-  padding-top: px-to-rem(30px);
   // only use when susy is installed!
   // background: susy-svg-grid($colors: rgba(#c7eaee, 0.7)) no-repeat scroll; // sass-lint:disable-line no-color-literals
 

@@ -17,7 +17,11 @@ export default {
   <div class="Page">
     <div v-if="page">
       <div class="examples--center">
-        <BHeading v-if="page.title || page.alternativePageTitle" :level="1">
+        <BHeading
+          v-if="page.title || page.alternativePageTitle"
+          :no-margin-top="true"
+          :level="1"
+        >
           {{ page.alternativePageTitle || page.title }}
         </BHeading>
         <em>PageBuilder component, loading content from Craft CMS:</em>

@@ -18,7 +18,7 @@ $s-font-family-base: 'Arial', sans-serif;
 /* Font-Sizes */
 $s-fz-small: 14px;
 $s-fz-medium: 18px; // base
-$s-fz-increased: 24px;
+$s-fz-increased: 20px;
 $s-fz-large: 36px;
 $s-fz-huge: 64px;
 $s-line-height-std: 1.2;
@@ -35,7 +35,7 @@ $s-size-spacer-small: 2rem;
 $s-size-spacer-medium: $s-size-spacer-small * 2;
 $s-size-spacer-increased: $s-size-spacer-small * 3;
 $s-size-spacer-large: $s-size-spacer-small * 4;
-// $s-size-spacer-huge:
+$s-size-spacer-huge: $s-size-spacer-small * 6;
 // $s-size-spacer-giant:
 
 $s-size-gutter-small: $s-size-spacer-small;

@@ -4,23 +4,23 @@ query Page($slug: [String], $site: [String]) {
     title
     ...on pages_pages_Entry {
       alternativePageTitle
-    	pageBuilder {
-        ...on pageBuilder_standardSection_BlockType {
-          __typename
-          baseTitle
-          baseText
-        }
-        ...on pageBuilder_button_BlockType {
-          __typename
-          button {
-            url
-            customText
-            text
-            type
-            title
-          }
-        }
-      }
+    	# pageBuilder {
+      #   ...on pageBuilder_standardSection_BlockType {
+      #     __typename
+      #     baseTitle
+      #     baseText
+      #   }
+      #   ...on pageBuilder_button_BlockType {
+      #     __typename
+      #     button {
+      #       url
+      #       customText
+      #       text
+      #       type
+      #       title
+      #     }
+      #   }
+      # }
     }
   }
 }

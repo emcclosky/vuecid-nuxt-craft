@@ -31,6 +31,11 @@ export default Vue.component('BHeading', {
     hasClickableAnchor: {
       type: Boolean,
       default: false
+    },
+    // Removes top margin
+    noMarginTop: {
+      type: Boolean,
+      default: false
     }
   },
   render(createElement) {
@@ -45,6 +50,7 @@ export default Vue.component('BHeading', {
 
     // Workaround: create modifier class
     const modifierClassLevel = `BHeading--level-${this.level}`
+    const modifierClassMargin = `BHeading--no-margin-top`
 
     // Create the actual HTML element: h1, h2, etc.
     return createElement(
@@ -53,6 +59,7 @@ export default Vue.component('BHeading', {
         class: {
           BHeading: true,
           [modifierClassLevel]: true,
+          [modifierClassMargin]: this.noMarginTop,
           'has-clickable-anchor': this.hasClickableAnchor
         },
         attrs: {

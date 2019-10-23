@@ -1,7 +1,7 @@
 // TODO: Add your urls
 const urls = {
   backendUrlProduction: 'https://cms.lucid.build',
-  backendUrlLocal: 'http://cms.lucid.test',
+  backendUrlLocal: 'http://cms.stack-test.test/',
   frontendUrlProduction: 'https://vuecid-nuxt-craft.lucid.build',
   frontendUrlLocal: 'http://localhost:3000',
   graphqlPath: '/api'
