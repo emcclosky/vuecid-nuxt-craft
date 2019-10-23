@@ -4,19 +4,20 @@ import saveFile from '../utilities/saveFile.js'
 
 /* eslint-disable no-console */
 
-export default async function generateNavigationsJSON({
+export default async function generateDataJSON({
   endpoint,
   graphQLQuery,
   compressJSON = true,
   sections = [],
-  bundleName,
   savePath,
+  bundleName,
   langs = []
 } = {}) {
-  const navigations = {}
+  const entries = {}
   try {
+    // Actually for each language is equal to each craft site in a multisite setup!
     for (const language of langs) {
-      navigations[language.lang] = {}
+      entries[language.lang] = {}
       // load all entries for each section
       for (const section of sections) {
         const pages = await axios
@@ -34,24 +35,23 @@ export default async function generateNavigationsJSON({
           })
 
         // save sections in language object
-        navigations[language.lang][section] = pages
+        entries[language.lang][section] = pages
       }
     }
-    console.log(`📡 Fetched navigations: `, navigations)
+    console.log(`📡 Fetched entries: `, entries)
 
-    // save navigations for each site in one file
+    // save entries for each site in one file
     saveFile({
-      data: navigations,
+      data: entries,
       bundleName,
       savePath,
       compressJSON
     })
 
-
     // // filter out sections which match ignoreProperties
     // if (payload.ignore) {
     //   payload.ignore.forEach(propertyToIgnore => {
-    //     navigations[section] = pages.filter(page => {
+    //     entries[section] = pages.filter(page => {
     //       // if the entry does not even have the key we return
     //       if (!(propertyToIgnore.key in page)) return true
     //       // leave in array if the key is != the value
@@ -59,12 +59,9 @@ export default async function generateNavigationsJSON({
     //     })
     //   })
     // } else {
-    //   navigations[section] = pages
+    //   entries[section] = pages
     // }
   } catch (e) {
-    console.log(
-      'generateNavigationJSON: 💾❌ loadNavigations() action failed 😢: ',
-      e
-    )
+    console.log('generateDataJSON: 💾❌ loadentries() action failed 😢: ', e)
   }
 }

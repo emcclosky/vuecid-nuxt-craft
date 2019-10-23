@@ -60,6 +60,9 @@ const config = {
   // TODO: Add your craft sections (e.g. pages)
   sections: ['pages'],
 
+  // TODO: Add your craft sections (e.g. pages, news) which should have a route
+  sectionsWithRoute: ['pages', 'news'],
+
   // TODO: Add the sections that should be displayed within TheNavigation
   sectionsInNavigation: 'pages',
 
@@ -72,41 +75,7 @@ const config = {
   // TODO: Replace favicon source file in /static/icon.png (512px x 512px)
   iconSizes: [32, 57, 60, 72, 76, 120, 144, 152, 167, 180, 192, 512],
 
-  // TODO: Add route aliases (for example for posts)
-  routeAliases: {
-    posts: {
-      locales: {
-        de: '/beitraege',
-        en: '/posts'
-        // fr: '/articles'
-      }
-    }
-    // 'posts-slug': {
-    //   locales: {
-    //     de: '/beitraege/:slug',
-    //     en: '/posts/:slug',
-    //     fr: '/articles/:slug'
-    //   },
-    //   isInBundle: false,
-    //   postType: 'posts'
-    // },
-    // my_custom_post_type: {
-    //   locales: {
-    //     de: '/custom-post-type-slug-de',
-    //     en: '/custom-post-type-slug-en',
-    //     fr: '/custom-post-type-slug-fr'
-    //   }
-    // },
-    // 'my_custom_post_type-slug': {
-    //   locales: {
-    //     de: '/custom-post-type-slug-de/:slug',
-    //     en: '/custom-post-type-slug-en/:slug',
-    //     fr: '/custom-post-type-slug-fr/:slug'
-    //   },
-    //   isInBundle: true,
-    //   postType: 'my_custom_post_type'
-    // }
-  }
+  // Route Aliases are now set within the translated vue templates (e.g. /pages/news/index.vue)
 }
 
 export default config

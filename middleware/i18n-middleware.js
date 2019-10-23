@@ -1,8 +1,11 @@
+// i18n-middleware.js can't be called `i18n.js` only
+// It won't be executed, probably because of nuxt-i18n.
 import { verifyLeadingSlash } from '@wearelucid/vuecid-helpers'
 import logV from '~/util/logV'
 const m = 'middleware/i18n'
 
 export default function({ app, store, route, error, redirect, isHMR }) {
+
   // Check if middleware called from hot-reloading, ignore
   if (isHMR) return
 
@@ -13,6 +16,7 @@ export default function({ app, store, route, error, redirect, isHMR }) {
   const defaultLang = store.state.defaultLang
   let locale = defaultLang
 
+  // At this point in time app.i18n is not updated yet
   if (!langs) return
 
   // Iterate over all langs
@@ -34,12 +38,11 @@ export default function({ app, store, route, error, redirect, isHMR }) {
   logV(m, 'This is your locale: ', locale)
 
   // Set i18n locale and commit mutation
-  app.i18n.locale = locale
   store.commit('LANG_SAVE', locale)
 
   // Update siteHandle to request apollo slugs from correct site
-  const currentLang = process.env.LANGS.find(l => l.lang === app.i18n.locale)
-  app.i18n.siteHandle = currentLang ? currentLang.handle : 'default'
+  const currentLang = process.env.LANGS.find(l => l.lang === locale)
+  store.commit('SITEHANDLE_SAVE', currentLang ? currentLang.handle : 'default')
 
   if (!process.static) {
     // Some important redirects (redirect does not work when generating):

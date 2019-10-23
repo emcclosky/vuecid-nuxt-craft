@@ -1,33 +1,25 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+/*
+ * Execute a few things before making a language switch.
+ * https: //nuxt-community.github.io/nuxt-i18n/callbacks.html#usage
+ */
 
-Vue.use(VueI18n)
+export default function({ app }) {
+  // beforeLanguageSwitch called right before setting a new locale
+  app.i18n.beforeLanguageSwitch = (oldLocale, newLocale) => {
+    console.log('locales: 💀 ', oldLocale, newLocale)
 
-export default ({ app, store }) => {
-  // Set i18n instance on app
-  // This way we can use it in middleware and pages asyncData/fetch
-  app.i18n = new VueI18n({
-    locale: store.state.currentLang,
-    fallbackLocale: process.env.DEFAULTLANG,
-    // TODO: Remove locales you don't need
-    messages: {
-      de: require('~/locales/de.json'),
-      en: require('~/locales/en.json'),
-      fr: require('~/locales/fr.json')
-    }
-  })
+    // Set i18n locale and commit mutation
+    store.commit('LANG_SAVE', newLocale)
 
-  app.i18n.path = (link, slash = true) => {
-    if (app.i18n.locale === app.i18n.fallbackLocale) {
-      return `${slash ? '/' : ''}${link}`
-    }
-
-    return `/${app.i18n.locale}${slash ? '/' : ''}${link}`
+    // Update siteHandle to request apollo slugs from correct site
+    const currentLang = process.env.LANGS.find(l => l.lang === newLocale)
+    store.commit(
+      'SITEHANDLE_SAVE',
+      currentLang ? currentLang.handle : 'default'
+    )
   }
-
-  // save siteHandle in i18n object:
-  // siteHandle is needed to determine from which craft site we load the content from
-  // it is the craft way to tell which language we want to load.
-  const currentLang = process.env.LANGS.find(l => l.lang === app.i18n.locale)
-  app.i18n.siteHandle = currentLang ? currentLang.handle : 'default'
+  // onLanguageSwitched called right after a new locale has been set
+  app.i18n.onLanguageSwitched = (oldLocale, newLocale) => {
+    console.log('locales: 💀ON ', oldLocale, newLocale)
+  }
 }

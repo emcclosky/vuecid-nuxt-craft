@@ -1,7 +1,7 @@
 <script>
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
-import config from '../config'
+import config from '~/config'
 import page from '~/apollo/queries/page'
 // import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
@@ -17,7 +17,7 @@ export default {
         let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
         slug = removeLeadingSlash(slug)
         // get craft site handle depending on language
-        const site = this.$i18n.siteHandle
+        const site = this.$store.state.currentSiteHandle
         return { slug, site }
       },
       result(result) {
@@ -36,8 +36,8 @@ export default {
       variables() {
         let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
         slug = removeLeadingSlash(slug)
-        const site = this.$i18n.siteHandle
         // get craft site handle depending on language
+        const site = this.$store.state.currentSiteHandle
         return { slug, site }
       },
       result(result) {

@@ -10,7 +10,7 @@ import config from '~/config.js'
 
 // const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
-export default function({ isDev, env }) {
+export default function({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
@@ -26,15 +26,10 @@ export default function({ isDev, env }) {
   //     retryIf: (error, _operation) => !!error
   //   }
   // })
-  // const token = isDev
-  //   ? config.env.GRAPHQL_TOKEN_LOCAL
-  //   : config.env.GRAPHQL_TOKEN
-  // const endpoint = isDev
-  //   ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
-  //   : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
-  // const token = config.env.GRAPHQL_TOKEN
-  const endpoint = `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
-  // const endpoint = `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+
+  const endpoint = isDev
+    ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
+    : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
 
   const cache = new InMemoryCache({
     fragmentMatcher

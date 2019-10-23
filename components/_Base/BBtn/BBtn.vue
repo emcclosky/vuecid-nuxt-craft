@@ -77,9 +77,6 @@ export default {
       }
       return this.type
     }
-  },
-  mounted() {
-    console.log('target: ', this.target, ' to ', this.to)
   }
 }
 </script>
