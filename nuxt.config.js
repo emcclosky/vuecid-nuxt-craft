@@ -65,7 +65,6 @@ export default {
     { src: '~/plugins/throwNuxtError.js' }, // throw errors outside of asyncData and fetch, e.g. in apollo request
     { src: '~/plugins/vuecid-helpers.js' },
     { src: '~/plugins/whatinput.js', ssr: false },
-    // { src: '~/plugins/i18n.js' },
     { src: '~/plugins/vuex-router-sync' },
     { src: '~/plugins/vue-focus-trap' },
     { src: '~/plugins/vue-bows' }
