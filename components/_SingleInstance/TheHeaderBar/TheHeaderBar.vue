@@ -20,7 +20,7 @@ export default {
     <div class="TheHeaderBar__item">
       <Logo class="TheHeaderBar__logo TheHeaderBar__Logo" />
     </div>
-    <div class="TheHeaderBar__item TheHeaderBar__item--burger">
+    <div class="TheHeaderBar__item TheHeaderBar__item--nav">
       <TheNavigation />
     </div>
   </header>

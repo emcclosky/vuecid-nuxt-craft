@@ -72,7 +72,11 @@ export default {
   <focus-trap :active="navMenuOpen">
     <nav id="navigation" :class="[$options.name, navMenuOpen ? 'is-open' : '']">
       <client-only>
-        <BBurger :is-active="navMenuOpen" @click.native="toggleMenu" />
+        <BBurger
+          :is-active="navMenuOpen"
+          class="TheNavigation__burger"
+          @click.native="toggleMenu"
+        />
       </client-only>
 
       <!-- TODO: Adjust tabIndex rules if your navigation is open all the time on desktop! Then you want them to be focusable all the time! -->
