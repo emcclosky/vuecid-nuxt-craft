@@ -146,14 +146,11 @@ export default {
    ** Nuxt i18n config
    */
   i18n: {
-    locales: ['en', 'de'],
-    defaultLocale: 'en',
+    locales: config.env.LOCALES,
+    defaultLocale: config.env.DEFAULTLANG,
     vueI18n: {
-      fallbackLocale: 'en',
-      messages: {
-        de: require('./locales/de.json'),
-        en: require('./locales/en.json')
-      }
+      fallbackLocale: config.env.DEFAULTLANG,
+      messages: config.env.I18N_MESSAGES
     }
   },
 
