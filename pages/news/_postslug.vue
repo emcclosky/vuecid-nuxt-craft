@@ -23,7 +23,7 @@ export default {
       }),
       variables() {
         const slug = removeLeadingSlash(this.$route.params.postslug) // prettier-ignore
-        const site = this.$store.state.currentSiteHandle
+        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
         // get craft site handle depending on language
         return { slug, site }
       },

@@ -42,10 +42,6 @@ export default function({ app, store, route, error, redirect, isHMR }) {
   // Set i18n locale and commit mutation
   store.commit('LANG_SAVE', locale)
 
-  // Update siteHandle to request apollo slugs from correct site
-  const currentLang = process.env.LANGS.find(l => l.lang === locale)
-  store.commit('SITEHANDLE_SAVE', currentLang ? currentLang.handle : 'default')
-
   if (!process.static) {
     // Some important redirects (redirect does not work when generating):
     // Remove default lang slug

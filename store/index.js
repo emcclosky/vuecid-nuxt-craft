@@ -2,8 +2,7 @@ export const state = () => ({
   // Get a list of all languages
   langs: process.env.LANGS,
   defaultLang: process.env.DEFAULTLANG,
-  currentLang: null,
-  currentSiteHandle: 'default'
+  currentLang: null
 })
 
 export const actions = {
@@ -23,9 +22,6 @@ export const actions = {
 export const mutations = {
   LANG_SAVE(state, lang) {
     state.currentLang = lang
-  },
-  SITEHANDLE_SAVE(state, handle) {
-    state.currentSiteHandle = handle
   }
 }
 
