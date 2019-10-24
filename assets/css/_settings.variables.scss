@@ -69,7 +69,8 @@ $s-animation-easing-default: ease-in-out;
 $s-size-breakpoint-initial: 1px;
 $s-size-breakpoint-tiny: 320px;
 $s-size-breakpoint-small: 375px;
-// $s-size-breakpoint-small-01: 400px; (This is how you would add a new breakpoint)
+// Add a new breakpoint like this:
+// $s-size-breakpoint-small-01: 400px;
 $s-size-breakpoint-reduced: 420px;
 $s-size-breakpoint-medium: 768px;
 $s-size-breakpoint-increased: 1024px;
