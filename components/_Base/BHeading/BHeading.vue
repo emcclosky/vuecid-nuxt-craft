@@ -32,7 +32,6 @@ export default Vue.component('BHeading', {
       type: Boolean,
       default: false
     },
-    // Removes top margin
     noMarginTop: {
       type: Boolean,
       default: false

@@ -19,6 +19,7 @@ $c: 'GridOverlay';
 
   &__grid {
     height: 100vh;
-    background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals
+    // Don't take me. Take the other when merging!
+    // background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals
   }
 }
