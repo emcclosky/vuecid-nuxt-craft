@@ -6,6 +6,8 @@ $c-the-headerbar-shadow-size: 5px;
 
 .#{$c} {
   display: flex;
+  align-items: center;
+  background-color: $s-color-white;
   padding: $s-size-gutter-small;
   z-index: z('menu');
   position: fixed;
@@ -13,22 +15,21 @@ $c-the-headerbar-shadow-size: 5px;
   width: 100%;
   transition: background-color $s-animation-duration-default, top $s-animation-duration-default, padding $s-animation-duration-default;
 
-  .#{$c}__logo {
-    &.#{$c}__Logo {
-      position: relative;
-      top: 0.7rem;
-    }
-  }
-
   &__item {
     &:first-child {
-      flex: 0 1 100%;
-      z-index: 1; // lift it above nav (second item)
+      @include mq($to: medium) {
+        flex: 0 1 100%;
+        z-index: 1; // lift it above nav (second item)
+      }
     }
 
     &--nav {
-      position: absolute;
-      right: $s-size-gutter-small;
+      @include mq($from: medium) {
+        flex: 0 1 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
     }
   }
 }

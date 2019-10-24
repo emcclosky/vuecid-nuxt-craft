@@ -4,6 +4,10 @@ $c: 'Styleguide';
 
 .#{$c} {
   &__heading {
-    margin: 5em 0 1em;
+    margin: 3em 0 1em;
+
+    @include mq($from: medium) {
+      margin: 5em 0 1em;
+    }
   }
 }

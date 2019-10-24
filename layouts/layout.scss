@@ -12,13 +12,17 @@ $p: 'Page';
   &__content {
     flex: 1;
     padding-top: $s-size-spacer-large;
+
+    @include mq($from: medium) {
+      padding-top: $s-size-spacer-huge;
+    }
   }
 }
 
 .#{$p} {
-  padding-bottom: $s-size-spacer-medium;
+  padding-bottom: $s-size-spacer-large;
 
   @include mq($from: medium) {
-    padding-bottom: $s-size-spacer-increased;
+    padding-bottom: $s-size-spacer-huge;
   }
 }

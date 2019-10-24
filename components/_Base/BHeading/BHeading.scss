@@ -3,7 +3,11 @@
 $c: 'BHeading';
 
 .#{$c} {
-  margin-bottom: 1em;
+  margin: 1.5em 0 0.5em;
+
+  &--no-margin-top {
+    margin: 0 0 0.5em;
+  }
 
   &__anchor {
     display: none;

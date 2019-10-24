@@ -2,7 +2,7 @@
 $c: 'TheNavigation';
 
 $c-the-navigation-spacer-default: 1em;
-$c-the-navigation-margin-top: 10rem;
+$c-the-navigation-margin-top: 8rem;
 
 .#{$c} {
   position: relative;
@@ -11,43 +11,53 @@ $c-the-navigation-margin-top: 10rem;
    * Styling for mobile nav.
    */
 
-  &__wrap {
-    @include visually-hidden;
-    background: $s-color-white;
-    transition: opacity $s-animation-duration-default;
+  &__burger {
+    @include mq($from: medium) {
+      display: none;
+    }
+  }
 
-    &.is-open {
-      @include visually-hidden-reset;
+  &__wrap {
+    @include mq($to: medium) {
+      visibility: hidden;
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100%;
-      opacity: 1;
+      opacity: 0;
+      background: $s-color-white;
+      transition: opacity $s-animation-duration-default, visibility $s-animation-duration-default 0s;
+
+      &.is-open {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity $s-animation-duration-default, visibility 0s;
+      }
     }
   }
 
   &__scroll-wrapper {
-    width: 100%;
-    max-height: calc(100% - #{$c-the-navigation-margin-top});
-    min-height: calc(100% - #{$c-the-navigation-margin-top});
-    margin-top: $c-the-navigation-margin-top;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes
-    display: flex;
-    flex-direction: column;
-    padding: 0 $s-size-gutter-small $s-size-gutter-small;
+    @include mq($to: medium) {
+      width: 100%;
+      max-height: calc(100% - #{$c-the-navigation-margin-top});
+      min-height: calc(100% - #{$c-the-navigation-margin-top});
+      margin-top: $c-the-navigation-margin-top;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes
+      display: flex;
+      flex-direction: column;
+      padding: 0 $s-size-gutter-small $s-size-gutter-small;
+    }
   }
 
   &__list {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    padding-bottom: $s-size-spacer-small;
   }
 
   &__item {
-    width: 100%;
     text-align: left;
 
     &:last-child {
@@ -76,6 +86,11 @@ $c-the-navigation-margin-top: 10rem;
       @include hocus-focus($type: outline, $color: $s-color-primary, $offset: 0.1rem);
       text-decoration: none;
     }
+
+    @include mq($from: medium) {
+      display: inline-block;
+      margin: 0 1rem;
+    }
   }
 
   &__link {
@@ -88,19 +103,40 @@ $c-the-navigation-margin-top: 10rem;
       font-weight: bold;
     }
 
+    &.is-active {
+      color: $s-color-primary;
+    }
+
     &--lang {
-      &.custom-active {
+      &.is-active-exact {
+        color: $s-color-primary;
         font-weight: bold;
       }
 
-      &.is-active-exact {
-        font-weight: bold;
+      &.is-active {
+        color: $s-color-primary;
+      }
+
+      &--lang {
+        margin: 0;
+
+        &.is-active {
+          font-weight: bold;
+        }
       }
     }
   }
 
   &__sub-list {
     padding-left: $c-the-navigation-spacer-default;
+
+    @include mq($from: medium) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0;
+      visibility: hidden;
+    }
   }
 
   &__lang-item {

@@ -19,9 +19,9 @@ $c-b-burger-container-size: $c-b-burger-size+($c-b-burger-padding * 2);
   background: transparent;
   border: 0;
   position: absolute;
-  top: $s-size-gutter-small;
-  transform: translateY(-50%);
+  top: 0;
   right: 0;
+  transform: translateY(-50%);
   z-index: 1; // lift burger to  front
 
   &:hover {
