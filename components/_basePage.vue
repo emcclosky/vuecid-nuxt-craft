@@ -1,9 +1,9 @@
 <script>
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
-import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
+// import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
 import page from '~/apollo/queries/page'
-// import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
+import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 export default {
@@ -68,13 +68,14 @@ export default {
       page: null
     }
   },
-  async asyncData({ params, env, query, route, app }) {
+  async asyncData({ params, env, query, route, app, isDev }) {
+    const slug = removeLeadingSlash(params.slug2 || params.slug || env.HOMESLUG)
     const previewData = await loadPreview({
-      params,
+      slug,
       env,
       query,
+      isDev,
       graphQLQuery: page
-      // specificSlug: env.HOMESLUG
     })
     if (previewData) {
       return { ...previewData }
