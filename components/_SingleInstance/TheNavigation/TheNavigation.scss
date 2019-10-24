@@ -99,6 +99,10 @@ $c-the-navigation-margin-top: 8rem;
       font-weight: bold;
     }
 
+    &.is-active {
+      color: $s-color-primary;
+    }
+
     &--lang {
       margin: 0;
 
@@ -110,6 +114,14 @@ $c-the-navigation-margin-top: 8rem;
 
   &__sub-list {
     padding-left: $c-the-navigation-spacer-default;
+
+    @include mq($from: medium) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 0;
+      visibility: hidden;
+    }
   }
 
   &__lang-item {
