@@ -3,7 +3,7 @@ import isHomeSlug from './url/isHomeSlug'
 import stripTrailingHomeSlug from './url/stripTrailingHomeSlug'
 import generateLocalizedRoutes from './routes/generateLocalizedRoutes'
 import generateRoutesFromData from './routes/generateRoutesFromData'
-import generateNavigationsJSON from './navigation/generateNavigationsJSON'
+import generateDataJSON from './data/generateDataJSON'
 import loadPreview from './preview/loadPreview'
 import flattenNavigation from './navigation/flattenNavigation'
 import generateMetaFromSeomatic from './meta/generateMetaFromSeomatic'
@@ -15,6 +15,6 @@ export {
   generateRoutesFromData,
   flattenNavigation,
   loadPreview,
-  generateNavigationsJSON,
+  generateDataJSON,
   generateMetaFromSeomatic
 }

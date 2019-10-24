@@ -1,6 +1,5 @@
 // eslint-disable-next-line prettier/prettier
 import {
-  generateLocalizedRoutes,
   generateRoutesFromData
 } from '@wearelucid/vuecid-craft-helpers'
 // import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
@@ -64,7 +63,6 @@ export default {
     { src: '~/plugins/throwNuxtError.js' }, // throw errors outside of asyncData and fetch, e.g. in apollo request
     { src: '~/plugins/vuecid-helpers.js' },
     { src: '~/plugins/whatinput.js', ssr: false },
-    { src: '~/plugins/i18n.js', injectAs: 'i18n' },
     { src: '~/plugins/vuex-router-sync' },
     { src: '~/plugins/vue-focus-trap' },
     { src: '~/plugins/vue-bows' }
@@ -77,6 +75,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    'nuxt-i18n',
     // Make sure you handle user opt-in in your cookie-bar and make the correct settings in your GTM.
     // [
     //   '@nuxtjs/google-tag-manager',
@@ -144,6 +143,18 @@ export default {
   ],
 
   /*
+   ** Nuxt i18n config
+   */
+  i18n: {
+    locales: config.env.LOCALES,
+    defaultLocale: config.env.DEFAULTLANG,
+    vueI18n: {
+      fallbackLocale: config.env.DEFAULTLANG,
+      messages: config.env.I18N_MESSAGES
+    }
+  },
+
+  /*
    ** Workbox config
    */
   workbox: {
@@ -182,10 +193,10 @@ export default {
     fallback: true,
     // Apply route generation magic:
     routes: () => {
-      const data = require('./static/data/navigations.json') // require file here, defining paths relative to node_module is a pain!
+      const data = require('./static/data/allEntries.json') // require file here, defining paths relative to node_module is a pain!
       return generateRoutesFromData({
         data,
-        section: config.sectionsInNavigation, // depends on the name you put in your backend for this kind of section
+        sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
         homeSlug: config.env.HOMESLUG
         // ,debug: true
       })
@@ -196,6 +207,11 @@ export default {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        'cssnano': { preset: 'default' }
+      },
+    },
     extend(config, { isDev, isClient }) {
       // Add this when using file system
       // https://github.com/webpack-contrib/css-loader/issues/447#issuecomment-285598881
@@ -211,22 +227,22 @@ export default {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active-exact',
-    middleware: ['i18n'],
-    extendRoutes(routes) {
-      // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
-      const newRoutes = generateLocalizedRoutes({
-        baseRoutes: routes,
-        defaultLang: config.env.DEFAULTLANG,
-        langs: config.env.LANGS,
-        routeAliases: config.routeAliases
-      })
+    middleware: ['i18n-middleware']
+    // extendRoutes(routes) {
+    //   // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
+    //   const newRoutes = generateLocalizedRoutes({
+    //     baseRoutes: routes,
+    //     defaultLang: config.env.DEFAULTLANG,
+    //     langs: config.env.LANGS,
+    //     routeAliases: config.routeAliases
+    //   })
 
-      // Clear array
-      routes.splice(0, routes.length)
+    //   // Clear array
+    //   routes.splice(0, routes.length)
 
-      // Push newly created routes
-      routes.push(...newRoutes)
-    }
+    //   // Push newly created routes
+    //   routes.push(...newRoutes)
+    // }
   },
 
   /*
@@ -241,10 +257,10 @@ export default {
     //   '/admin/**'
     // ],
     routes: () => {
-      const data = require('./static/data/navigations.json') // require file here, defining paths relative to node_module is a pain!
+      const data = require('./static/data/allEntries.json') // require file here, defining paths relative to node_module is a pain!
       const routes = generateRoutesFromData({
         data,
-        section: 'pages', // depends on the name you put in your backend for this kind of section
+        sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
         homeSlug: config.env.HOMESLUG
         // ,debug: true
       })

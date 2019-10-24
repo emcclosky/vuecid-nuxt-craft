@@ -94,6 +94,10 @@ $c-the-navigation-margin-top: 8rem;
   }
 
   &__link {
+    &.is-active {
+      font-weight: bold;
+    }
+
     &.is-active-exact {
       color: $s-color-primary;
       font-weight: bold;
@@ -104,10 +108,21 @@ $c-the-navigation-margin-top: 8rem;
     }
 
     &--lang {
-      margin: 0;
+      &.is-active-exact {
+        color: $s-color-primary;
+        font-weight: bold;
+      }
 
       &.is-active {
-        font-weight: bold;
+        color: $s-color-primary;
+      }
+
+      &--lang {
+        margin: 0;
+
+        &.is-active {
+          font-weight: bold;
+        }
       }
     }
   }
@@ -126,12 +141,7 @@ $c-the-navigation-margin-top: 8rem;
 
   &__lang-item {
     text-transform: capitalize;
-
-    &:not(:last-child) {
-      &::after {
-        content: ' / ';
-      }
-    }
+    margin-right: 1em;
   }
 }
 

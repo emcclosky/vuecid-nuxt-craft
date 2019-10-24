@@ -29,10 +29,10 @@ Object.defineProperty(exports, "generateRoutesFromData", {
     return _generateRoutesFromData["default"];
   }
 });
-Object.defineProperty(exports, "generateNavigationsJSON", {
+Object.defineProperty(exports, "generateDataJSON", {
   enumerable: true,
   get: function get() {
-    return _generateNavigationsJSON["default"];
+    return _generateDataJSON["default"];
   }
 });
 Object.defineProperty(exports, "loadPreview", {
@@ -62,7 +62,7 @@ var _generateLocalizedRoutes = _interopRequireDefault(require("./routes/generate
 
 var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateRoutesFromData"));
 
-var _generateNavigationsJSON = _interopRequireDefault(require("./navigation/generateNavigationsJSON"));
+var _generateDataJSON = _interopRequireDefault(require("./data/generateDataJSON"));
 
 var _loadPreview = _interopRequireDefault(require("./preview/loadPreview"));
 

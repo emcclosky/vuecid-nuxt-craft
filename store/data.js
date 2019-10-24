@@ -119,7 +119,31 @@ export const getters = {
       return false
     return state.navigations[rootState.currentLang][section]
   },
-  langLinks: (state, getters, rootState) => (currentSlug, section) => {
+  langLinks: (state, getters, rootState) => (slugs, section) => {
+    // langLinks tries to return a translation for a given slug
+    // Craft saves for each translation the same UID.
+    // So for any given slug we search for each language a translated slug by comparing the UID. (further down)
+    // But if the slug is not present, for example for home and other special nuxt page templates
+    // we need to handle things differently.
+    // nuxt-i18n can handle certain translated slugs by itself. for example if i18n knows that `news` has a translation of `de/neuigkeiten`
+    // unfortunately nuxt.i18n is not available in getters, so we return a boolean to tell the navigation to use
+    // the nuxt.i18n locales switch.
+    if (!slugs.slug && !slugs.hasNoTranslation) {
+      return rootState.langs.map(l => {
+        return { i18nHandlesRoute: true, lang: l.lang }
+      })
+    }
+
+    if (slugs.hasNoTranslation) {
+      return rootState.langs.map(l => {
+        return {
+          path: verifyLeadingSlash(l.lang),
+          lang: l.lang,
+          name: l.name
+        }
+      })
+    }
+
     if (
       !state.loaded ||
       !state.flatNavigations ||
@@ -129,7 +153,7 @@ export const getters = {
       return false
 
     // Find the UID of the current slug, also check nested pages
-    const currentEntry = state.flatNavigations[rootState.currentLang][section].find(entry => entry.slug === currentSlug) // prettier-ignore
+    const currentEntry = state.flatNavigations[rootState.currentLang][section].find(entry => entry.slug === slugs.slug) // prettier-ignore
 
     const currentUID = currentEntry ? currentEntry.uid : false
 

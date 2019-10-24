@@ -43,7 +43,7 @@ export default async function loadPreview(
         // https://stackoverflow.com/a/57873339/1121268
         query: print(graphQLQuery),
         variables: {
-          slug: specificSlug || params.slug2 || params.slug,
+          slug: specificSlug || params.childslug || params.slug,
           site: query.site || 'default'
         }
       })

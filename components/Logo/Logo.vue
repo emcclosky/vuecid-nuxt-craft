@@ -19,7 +19,7 @@ export default {
   <div class="Logo" @click="close">
     <nuxt-link
       class="Logo__link"
-      :to="$i18n.path('/', false)"
+      :to="localePath('index')"
       aria-label="Go to home page"
     >
       <img

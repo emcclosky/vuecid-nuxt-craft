@@ -2,6 +2,7 @@
 import basePage from '~/components/_basePage.vue'
 
 export default {
+  name: 'Slug2', // '_slug2 throws a warning that this is an invalid component name, because of the underline _'
   extends: basePage,
   data: () => {
     return {

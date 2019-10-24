@@ -1,0 +1,8 @@
+query allEntries($site: String, $section: String) {
+  entries(site: [$site], section: [$section]) {
+    slug
+    uri
+    title
+    url
+  }
+}

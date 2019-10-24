@@ -18,13 +18,16 @@ export default {
     menu() {
       return this.getMenu(this.section)
     },
-    currentSlug() {
+    currentSlugs() {
       // passed on to langlinks to get translation of current page
-      return (
-        this.$route.params.slug2 ||
-        this.$route.params.slug ||
-        process.env.HOMESLUG
-      )
+      // news don't have a translation, so we don't have to check for postslugs
+      const slug = this.$route.params.slug2 || this.$route.params.slug
+      const hasNoTranslation = this.$route.params.postslug
+
+      return {
+        slug,
+        hasNoTranslation
+      }
     }
   },
   mounted() {
@@ -129,22 +132,24 @@ export default {
             <client-only>
               <li v-if="langLinks" class="TheNavigation__item">
                 <span
-                  v-for="(item, key) in langLinks(currentSlug, section)"
+                  v-for="(item, key) in langLinks(currentSlugs, section)"
                   :key="`nav-lang-${key}`"
                   class="TheNavigation__lang-item"
                   @click="closeMenu"
                 >
+                  <!-- eslint-disable prettier/prettier -->
                   <BBtn
-                    class="TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn"
+                    :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
                     naked
-                    :to="item.path"
+                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : item.path"
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
-                    :disabled="!item.path"
+                    :disabled="!item.path && !item.i18nHandlesRoute"
                     :tabIndex="navMenuOpen ? 0 : -1"
                   >
                     {{ item.lang }}
                   </BBtn>
+                  <!-- eslint-enable prettier/prettier -->
                 </span>
               </li>
             </client-only>
