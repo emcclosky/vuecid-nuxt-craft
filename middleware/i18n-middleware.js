@@ -22,7 +22,9 @@ export default function({ app, store, route, error, redirect, isHMR }) {
   // Iterate over all langs
   langs.forEach(l => {
     // Save regex to check if it matches a lang slug (-> '/en')
-    const regexp = new RegExp(`^/${l.slug}`)
+    // Pay attention that an english page with a slug like "/denzel-washington" does not trigger "/de"
+    // https: //regex101.com/r/KNbRbN/2
+    const regexp = new RegExp(`(^\/${l.slug}\/)|(^\/${l.slug}$)`) // eslint-disable-line
 
     // Get locale from params
     if (route.path.match(regexp)) {

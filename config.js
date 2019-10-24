@@ -32,6 +32,18 @@ const getDefaultLang = () => {
   return dl.lang
 }
 
+const getAllLocales = () => {
+  return langs.map(l => l.lang)
+}
+
+const getLocalizedMessages = () => {
+  const messages = {}
+  langs.forEach(l => {
+    messages[l.lang] = require(`./locales/${l.lang}.json`)
+  })
+  return messages
+}
+
 // TODO: Add your home slug (all languages/sites in a multisite setup need to have the same slug!)
 const homeSlug = 'home'
 
@@ -39,7 +51,9 @@ const config = {
   env: {
     LOG_VERBOSE: false,
     LANGS: langs,
+    LOCALES: getAllLocales(),
     DEFAULTLANG: getDefaultLang(),
+    I18N_MESSAGES: getLocalizedMessages(),
     BACKENDURLPRODUCTION: urls.backendUrlProduction,
     BACKENDURLLOCAL: urls.backendUrlLocal,
     FRONTENDURLPRODUCTION: urls.frontendUrlProduction,
