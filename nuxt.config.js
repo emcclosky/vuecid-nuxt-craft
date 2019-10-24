@@ -210,6 +210,11 @@ export default {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        'cssnano': { preset: 'default' }
+      },
+    },
     extend(config, { isDev, isClient }) {
       // Add this when using file system
       // https://github.com/webpack-contrib/css-loader/issues/447#issuecomment-285598881
