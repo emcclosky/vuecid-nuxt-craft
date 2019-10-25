@@ -6,6 +6,14 @@ import page from '~/apollo/queries/page'
 // import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
+const routeSlug = context => {
+  return (
+    context.$route.params.slug2 ||
+    context.$route.params.slug ||
+    config.env.HOMESLUG
+  )
+}
+
 export default {
   apollo: {
     seomatic: {
@@ -14,7 +22,7 @@ export default {
         slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
-        let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
+        let slug = routeSlug(this)
         slug = removeLeadingSlash(slug)
         // get craft site handle depending on language
         const site = this.$store.state.currentSiteHandle
@@ -34,7 +42,7 @@ export default {
         slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
-        let slug = this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG // prettier-ignore
+        let slug = routeSlug(this)
         slug = removeLeadingSlash(slug)
         // get craft site handle depending on language
         const site = this.$store.state.currentSiteHandle
