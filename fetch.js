@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
-// import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
+// import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
+import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
 import config from './config.js'
 
 // gql files can't just be imported in node: https://github.com/ardatan/graphql-import-node
@@ -30,6 +30,7 @@ function fetchNavigations() {
     graphQLQuery,
     compressJSON: true, // setting this to false may help debugging :-)
     sections,
+    propertiesToFilter: ['appearsInNavigation'],
     bundleName: 'navigations',
     savePath: './static/data',
     langs
