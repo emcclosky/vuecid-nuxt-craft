@@ -109,6 +109,7 @@ export default {
     }
 
     console.log('process.env.NETLIFY: ', process.env.NETLIFY)
+    console.log('process.env.BRANCH: ', process.env.BRANCH)
   }
 }
 </script>
