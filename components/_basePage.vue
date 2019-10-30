@@ -98,7 +98,7 @@ export default {
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
       lang: this.$i18n.locale
-      ,debug: true
+      // ,debug: true
     })
   },
   mounted() {
@@ -107,6 +107,8 @@ export default {
     if (this.preview && !this.page) {
       alert(this.$t('ui.previewAlert'))
     }
+
+    console.log('process.env.NETLIFY: ', process.env.NETLIFY)
   }
 }
 </script>

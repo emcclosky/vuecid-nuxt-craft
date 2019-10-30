@@ -42,7 +42,10 @@ export default {
   /*
    ** env: lets you create environment variables that will be shared for the client and server-side.
    */
-  env: config.env,
+  env: {
+    ...config.env,
+    NETLIFY: process.env.NETLIFY // make Netlify env variable available to app
+  },
 
   /*
    ** Customize the progress-bar color
@@ -209,8 +212,8 @@ export default {
   build: {
     postcss: {
       plugins: {
-        'cssnano': { preset: 'default' }
-      },
+        cssnano: { preset: 'default' }
+      }
     },
     extend(config, { isDev, isClient }) {
       // Add this when using file system

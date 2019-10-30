@@ -11,8 +11,8 @@ import config from '~/config.js'
 // const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
 export default function(ctx) {
-  console.log('process.env: ', process.env)
-  console.log('process.env.NETLIFY: ', process.env.NETLIFY)
+
+  console.log('process.env.BRANCH: ', process.env.BRANCH, process.env.NETLIFY)
 
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
