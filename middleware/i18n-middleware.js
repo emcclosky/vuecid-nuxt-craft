@@ -5,7 +5,6 @@ import logV from '~/util/logV'
 const m = 'middleware/i18n'
 
 export default function({ app, store, route, error, redirect, isHMR }) {
-
   // Check if middleware called from hot-reloading, ignore
   if (isHMR) return
 

@@ -44,7 +44,9 @@ export default {
    */
   env: {
     ...config.env,
-    NETLIFY: process.env.NETLIFY // make Netlify env variable available to app
+    // make Netlify ENV variable available to components
+    // List of Netlify ENV vars: https://gist.github.com/sw-yx/c53634e7e63f0015e43c16bc26832283
+    NETLIFY: process.env.NETLIFY
   },
 
   /*

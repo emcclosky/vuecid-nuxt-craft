@@ -92,7 +92,7 @@ const config = {
   themeColor: '#ffffff',
 
   // TODO: Replace favicon source file in /static/icon.png (512px x 512px)
-  iconSizes: [32, 57, 60, 72, 76, 120, 144, 152, 167, 180, 192, 512],
+  iconSizes: [32, 57, 60, 72, 76, 120, 144, 152, 167, 180, 192, 512]
 
   // Route Aliases are now set within the translated vue templates (e.g. /pages/news/index.vue)
 }
