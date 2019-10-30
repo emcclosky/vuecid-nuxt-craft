@@ -15,7 +15,6 @@ const endpoint = useLocalDB
 if (verbose) {
   console.log('arguments: ', argv) // eslint-disable-line
   console.log('endpoint: ', endpoint) // eslint-disable-line
-  console.log('token: ', token) // eslint-disable-line
 }
 
 fetch(endpoint, {

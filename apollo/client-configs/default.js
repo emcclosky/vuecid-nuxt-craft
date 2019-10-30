@@ -10,7 +10,9 @@ import config from '~/config.js'
 
 // const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
-export default function({ isDev }) {
+export default function(ctx) {
+  console.log('ctx: ', ctx)
+
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
@@ -27,7 +29,7 @@ export default function({ isDev }) {
   //   }
   // })
 
-  const endpoint = isDev
+  const endpoint = ctx.isDev
     ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
     : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
 
