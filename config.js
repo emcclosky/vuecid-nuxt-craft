@@ -33,7 +33,12 @@ const getDefaultLang = () => {
 }
 
 const getAllLocales = () => {
-  return langs.map(l => l.lang)
+  return langs.map(l => {
+    return {
+      code: l.lang,
+      siteHandle: l.handle
+    }
+  })
 }
 
 const getLocalizedMessages = () => {

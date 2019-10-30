@@ -15,7 +15,7 @@ export default {
       query: allNews,
       variables() {
         // get craft site handle depending on language
-        const site = this.$store.state.currentSiteHandle
+        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
         return { site }
       },
       result(result) {
