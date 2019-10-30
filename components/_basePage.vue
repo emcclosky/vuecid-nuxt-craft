@@ -97,8 +97,8 @@ export default {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      lang: 'de'
-      // ,debug: true
+      lang: this.$i18n.locale
+      ,debug: true
     })
   },
   mounted() {
