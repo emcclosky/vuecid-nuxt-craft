@@ -5,17 +5,37 @@ query Navigations($section: String, $site: String) {
     title
     # uid is the same for each translated entry in a multisite/multilang setup
     uid
+    ...on pages_pages_Entry {
+      appearsInNavigation
+    }
+    ...on news_news_Entry {
+      appearsInNavigation
+    }
     children {
       slug
       uri
       uid
+      ...on pages_pages_Entry {
+        appearsInNavigation
+      }
+      ...on news_news_Entry {
+        appearsInNavigation
+      }
       title
       children {
         slug
         uri
         uid
+        ...on pages_pages_Entry {
+          appearsInNavigation
+        }
+        ...on news_news_Entry {
+          appearsInNavigation
+        }
         title
       }
     }
   }
 }
+
+

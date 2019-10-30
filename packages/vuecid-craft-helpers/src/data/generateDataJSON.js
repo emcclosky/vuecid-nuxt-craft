@@ -9,6 +9,7 @@ export default async function generateDataJSON({
   graphQLQuery,
   compressJSON = true,
   sections = [],
+  propertiesToFilter = [],
   savePath,
   bundleName,
   langs = []
@@ -20,7 +21,7 @@ export default async function generateDataJSON({
       entries[language.lang] = {}
       // load all entries for each section
       for (const section of sections) {
-        const pages = await axios
+        let pages = await axios
           .post(endpoint, {
             // have to retransform AST gql template literal back to query string:
             // https://stackoverflow.com/a/57873339/1121268
@@ -33,6 +34,20 @@ export default async function generateDataJSON({
           .then(({ data }) => {
             return data.data.entries
           })
+
+        // filter out entries, that should not appear in JSON
+        // Assuming that the property is a checkbox, where craft returns an empty array if false.
+        // e.g.: "appearsInNavigation": [] || "appearsInNavigation": ["true"],
+        if (propertiesToFilter && propertiesToFilter.length) {
+          propertiesToFilter.forEach(property => {
+            pages = pages.filter(page => {
+              // if the entry does not even have the key we return
+              if (!page[property]) return true
+              // check if first array item is true, then leave entry in array
+              return page[property][0] ? page[property][0] : false
+            })
+          })
+        }
 
         // save sections in language object
         entries[language.lang][section] = pages
@@ -47,20 +62,6 @@ export default async function generateDataJSON({
       savePath,
       compressJSON
     })
-
-    // // filter out sections which match ignoreProperties
-    // if (payload.ignore) {
-    //   payload.ignore.forEach(propertyToIgnore => {
-    //     entries[section] = pages.filter(page => {
-    //       // if the entry does not even have the key we return
-    //       if (!(propertyToIgnore.key in page)) return true
-    //       // leave in array if the key is != the value
-    //       return page[propertyToIgnore.key] !== propertyToIgnore.value
-    //     })
-    //   })
-    // } else {
-    //   entries[section] = pages
-    // }
   } catch (e) {
     console.log('generateDataJSON: 💾❌ loadentries() action failed 😢: ', e)
   }
