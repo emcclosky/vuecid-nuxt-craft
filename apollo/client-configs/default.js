@@ -10,10 +10,7 @@ import config from '~/config.js'
 
 // const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
-export default function(ctx) {
-
-  console.log('process.env.BRANCH: ', process.env.BRANCH, process.env.NETLIFY)
-
+export default function({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
@@ -30,9 +27,11 @@ export default function(ctx) {
   //   }
   // })
 
-  const endpoint = ctx.isDev
-    ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
-    : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
+  // if we are in NODE_ENV=dev or we are on netlify we always want to use the production backend
+  const endpoint =
+    isDev || !process.env.NETLIFY
+      ? `${config.env.BACKENDURLLOCAL}${config.env.GRAPHQL_PATH}`
+      : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
 
   const cache = new InMemoryCache({
     fragmentMatcher
