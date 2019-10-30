@@ -54,6 +54,13 @@ export const linkHelpersMixin = {
         return this.prepareNuxtLink(url)
       }
       return url
+    },
+    prepareTarget(type, target) {
+      // for telephones and emails we always want _self
+      if (type === 'tel' || type === 'email') {
+        return '_self'
+      }
+      return target || '_blank'
     }
   }
 }

@@ -29,7 +29,7 @@ export default {
       <BBtn
         v-if="component.__typename === 'pageBuilder_button_BlockType'"
         :to="link(component.button.url, component.button.type)"
-        :target="component.button.type === 'tel' || component.button.type === 'email' ? '_self' : true"
+        :target="prepareTarget(component.button.type, component.button.target)"
         :external="isExternal(component.button.url, component.button.type)"
       >
         <!-- eslint-enable prettier/prettier-->

@@ -18,6 +18,7 @@ query Page($slug: [String], $site: [String]) {
             text
             type
             title
+            target
           }
         }
       }
