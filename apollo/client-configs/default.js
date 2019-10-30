@@ -13,6 +13,9 @@ import config from '~/config.js'
 export default function(ctx) {
   console.log('ctx: ', ctx)
 
+  console.log('process.env: ', process.env)
+  console.log('process.env.NETLIFY: ', process.env.NETLIFY)
+
   const fragmentMatcher = new IntrospectionFragmentMatcher({
     introspectionQueryResultData
   })
