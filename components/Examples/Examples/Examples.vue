@@ -17,6 +17,7 @@ export default {
 
 <template>
   <div class="Examples">
+    <BLazyMedia />
     <BHeading :level="2" has-clickable-anchor>Nuxt-Child example:</BHeading>
     <p>
       Have a look at

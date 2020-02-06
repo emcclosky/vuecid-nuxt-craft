@@ -1,0 +1,60 @@
+@import '~assets/css/global';
+
+$c: 'BLazyMedia';
+
+.#{$c} {
+  margin-bottom: 2em;
+
+  &__image-wrap {
+    position: relative;
+    display: block;
+    height: 0;
+    padding-bottom: 66.6667%;
+    overflow: hidden;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 2em;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    font-family: 'blur-up: always', 'object-fit: cover';
+    object-fit: cover;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .ls-blur-up-is-loading,
+  .lazyload:not([src]) {
+    visibility: hidden;
+  }
+
+  .ls-blur-up-img {
+    opacity: 1;
+    transform: scale(1.1);
+    transition: opacity 0.25s,
+    filter 0.25s;
+    filter: blur(20px);
+  }
+
+  .ls-blur-up-img.ls-inview.ls-original-loaded {
+    opacity: 0;
+  }
+
+  &__video-wrap {
+    padding-top: 56.25%;
+    position: relative;
+  }
+
+  &__video,
+  &__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

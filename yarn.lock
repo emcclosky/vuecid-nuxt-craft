@@ -2467,9 +2467,10 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.0"
 
-"@wearelucid/vuecid-craft-helpers@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.7.1.tgz#17a492bffd576480b8c1e6f9d53d1b461c6a0b6e"
+"@wearelucid/vuecid-craft-helpers@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.7.2.tgz#aa050e5b373b09fd2f7942f3205fbddc40ff5315"
+  integrity sha512-8stHlnzjBwjZv1wyvxP74nvN4XsA7quQUpBzfh8NgcqbS9M5VAwdqEEmUnc8YyTDCfcfZRgC2xKM6zAuKKo3eg==
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
@@ -8085,6 +8086,11 @@ launch-editor@^2.2.1:
   dependencies:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
+
+lazysizes@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/lazysizes/-/lazysizes-5.2.0.tgz#352c2f095e1528b190f61178c140522dcf9ffce4"
+  integrity sha512-931KnHwsdCm7U7/S0GDj6FSkPvQ3ugGw65J5Plp2Mq1gBTPl9VShU+cIIX6uRr+dit+APDLmvx1FwjDll5bHLQ==
 
 lazystream@^1.0.0:
   version "1.0.0"
