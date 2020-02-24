@@ -33,6 +33,7 @@ module.exports = {
     'nuxt/no-cjs-in-config': 'off',
     'vue/no-unused-components': 'warn',
     'vue/max-attributes-per-line': 'off',
+    'vue/require-component-is': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/attribute-hyphenation': ["error", "always", {
