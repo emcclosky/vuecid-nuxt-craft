@@ -71,11 +71,6 @@ export default {
       }
     }
   },
-  data: () => {
-    return {
-      page: null
-    }
-  },
   async asyncData({ params, env, query, route, app, isDev }) {
     const slug = removeLeadingSlash(params.slug2 || params.slug || env.HOMESLUG)
     const previewData = await loadPreview({
@@ -90,16 +85,10 @@ export default {
     }
     return { preview: false }
   },
-  head() {
-    if (!this.seomatic) {
-      this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
+  data: () => {
+    return {
+      page: null
     }
-    return this.$generateMetaFromSeomatic({
-      seomaticMeta: this.seomatic,
-      frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      lang: this.$i18n.locale
-      // ,debug: true
-    })
   },
   mounted() {
     // Check if we should be displaying a preview but for some reason did not get any data.
@@ -110,6 +99,17 @@ export default {
 
     console.log('process.env.NETLIFY: ', process.env.NETLIFY)
     console.log('process.env.BRANCH: ', process.env.BRANCH)
+  },
+  head() {
+    if (!this.seomatic) {
+      this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
+    }
+    return this.$generateMetaFromSeomatic({
+      seomaticMeta: this.seomatic,
+      frontendUrl: config.env.FRONTENDURLPRODUCTION,
+      lang: this.$i18n.locale
+      // ,debug: true
+    })
   }
 }
 </script>

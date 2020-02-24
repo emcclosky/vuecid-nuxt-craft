@@ -21,7 +21,6 @@ const strings = {
  */
 function replaceComment(path, template, pattern) {
   return new Promise((resolve, reject) => {
-
     console.log(`🧾 Replacing ${pattern} in ${path}...`)
 
     const nodePlop = require('node-plop')
@@ -113,7 +112,7 @@ gulp.task('add-modernizr', async function(done) {
   done()
 })
 
-gulp.task('add-susy-svg-grid', async function (done) {
+gulp.task('add-susy-svg-grid', async function(done) {
   console.log('Adding susy svg grid to GridOverlay...')
 
   const path = './components/examples/GridOverlay/GridOverlay.scss'
@@ -136,7 +135,7 @@ gulp.task('add-susy-files', function(done) {
   done()
 })
 
-gulp.task('add-modernizr-file', function (done) {
+gulp.task('add-modernizr-file', function(done) {
   console.log('Adding custom modernizr...')
 
   const path = './static/js/modernizr.js'

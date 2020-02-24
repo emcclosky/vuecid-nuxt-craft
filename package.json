@@ -39,7 +39,7 @@
     "graphql-import-node": "^0.0.4",
     "graphql-tag": "^2.10.1",
     "gulp": "^4.0.2",
-    "gulp-shell": "^0.7.1",
+    "gulp-shell": "^0.8.0",
     "minimist": "^1.2.0",
     "no-scroll": "^2.1.0",
     "node-fetch": "^2.6.0",

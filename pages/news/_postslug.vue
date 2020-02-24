@@ -45,11 +45,6 @@ export default {
       }
     }
   },
-  data: () => {
-    return {
-      page: null
-    }
-  },
   async asyncData({ params, env, query, route, app }) {
     const previewData = await loadPreview({
       params,
@@ -62,6 +57,18 @@ export default {
     }
     return { preview: false }
   },
+  data: () => {
+    return {
+      page: null
+    }
+  },
+  mounted() {
+    // Check if we should be displaying a preview but for some reason did not get any data.
+    // Use an alert because this can be used within the template-less basePage
+    if (this.preview && !this.page) {
+      alert(this.$t('ui.previewAlert'))
+    }
+  },
   head() {
     if (!this.seomatic) {
       this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
@@ -72,13 +79,6 @@ export default {
       lang: this.$i18n.locale
       // ,debug: true
     })
-  },
-  mounted() {
-    // Check if we should be displaying a preview but for some reason did not get any data.
-    // Use an alert because this can be used within the template-less basePage
-    if (this.preview && !this.page) {
-      alert(this.$t('ui.previewAlert'))
-    }
   }
 }
 </script>

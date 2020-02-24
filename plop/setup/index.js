@@ -27,15 +27,16 @@ module.exports = function(plop) {
 
       // If user wants to add susy
       if (data.setupConfig.includes === 'susy') {
-        actions = actions.concat([{
+        actions = actions.concat([
+          {
             type: 'add',
             path: 'app/modules/{{camelCase name}}.model.js',
-            templateFile: 'plop-templates/model.js',
+            templateFile: 'plop-templates/model.js'
           },
           {
             type: 'add',
             path: 'app/tests/{{camelCase name}}.model.tests.js',
-            templateFile: 'plop-templates/model.tests.js',
+            templateFile: 'plop-templates/model.tests.js'
           }
         ])
       }

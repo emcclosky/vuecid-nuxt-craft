@@ -9,7 +9,6 @@
 
 export default function stripTrailingHomeSlug(slug, homeSlug = 'home') {
   if (typeof slug === 'string' || slug instanceof String) {
-
     // https://regex101.com/r/KbNmJj/2
     const regex = new RegExp(`^([a-zA-Z-0-9]*)(/)(${homeSlug})$`)
     const match = slug.match(regex)
