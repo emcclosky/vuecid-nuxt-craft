@@ -11,6 +11,7 @@ export const state = () => ({
   },
   navigations: null,
   flatNavigations: null,
+  globals: null,
   currentPage: null,
   loading: true,
   loaded: false
@@ -30,6 +31,7 @@ export const actions = {
       // If not, load the new bundle asynchronously and save it to state
       // eslint-disable-next-line prettier/prettier
       commit('NAVIGATIONS_SAVE', await dispatch('loadNavigations'))
+      commit('GLOBALS_SAVE', await dispatch('loadGlobals'))
       logV(m, '📦 New navigations saved 📦')
     }
 
@@ -68,6 +70,28 @@ export const actions = {
       navigations,
       flatNavigations
     }
+  },
+  async loadGlobals({ error }) {
+    logV(m, 'loadGlobals() action start')
+
+    let globals = null
+    if (process.server) {
+      // eslint-disable-next-line prettier/prettier
+      globals = JSON.parse(require('fs').readFileSync(`static/data/globals.json`, 'utf8'))
+    } else {
+      try {
+        // eslint-disable-next-line prettier/prettier
+        globals = await this.$axios.$get(`/globals.json`, {
+          baseURL: '/data/'
+        })
+      } catch (e) {
+        logV(m, 'loadGlobals() action failed 😢: ', e)
+        return error(e)
+      }
+    }
+
+    logV(m, 'loadGlobals() action done')
+    return globals
   }
 }
 
@@ -83,6 +107,10 @@ export const mutations = {
   NAVIGATIONS_SAVE(state, { navigations, flatNavigations }) {
     state.flatNavigations = flatNavigations
     state.navigations = navigations
+  },
+  GLOBALS_SAVE(state, data) {
+    console.log('data: ', data)
+    state.globals = data
   },
   BUNDLE_SAVE(state, data) {
     state.bundle = data
