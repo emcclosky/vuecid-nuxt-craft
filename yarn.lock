@@ -2967,10 +2967,10 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.1"
 
-"@wearelucid/vuecid-craft-helpers@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.7.2.tgz#aa050e5b373b09fd2f7942f3205fbddc40ff5315"
-  integrity sha512-8stHlnzjBwjZv1wyvxP74nvN4XsA7quQUpBzfh8NgcqbS9M5VAwdqEEmUnc8YyTDCfcfZRgC2xKM6zAuKKo3eg==
+"@wearelucid/vuecid-craft-helpers@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.8.0.tgz#5acfa96535ddf80f29af687cfee63233a1d40800"
+  integrity sha512-SbLVitErvoa5jdmZzHuFB6nUhCO3pepJAaOKsolidiPu+0eKsi5I3g6efx3uCnOXe3lu1HHKh6Gk3/ZRKZLvJg==
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
