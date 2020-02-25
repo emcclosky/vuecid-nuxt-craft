@@ -23,7 +23,7 @@ export default function generateMetaFromSeomatic({
   debug = false
 } = {}) {
   if (!seomaticMeta) {
-    console.warn('Your meta info cannot be generated, because the seomatic object is falsey.') // prettier-ignore
+    // For a short moment when changing the route seomatic is undefined all the time...
     // Just return anything to not have an empty head()
     return {
       title: '❌ SEO: generateMetaFromSeomatic has failed!'

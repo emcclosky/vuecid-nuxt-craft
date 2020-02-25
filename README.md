@@ -12,7 +12,7 @@ Follow these steps to quickly set up your Vuecid-Nuxt-CraftCMS project:
 1. Install further plugins/tools to your liking: `$ gulp setup` (See [Tools](#Tools))
 1. Go to `/config.js` and add the necessary settings.
   - Your local Craft installation URL
-  - Your languages (also make sure not to forget the siteHandle for a craft multisite setup)
+  - Your languages (also make sure not to forget the siteHandle/siteId for a craft multisite setup)
   - Your GraphQL endpoint
   - Your home slug
 1. Fetch the data needed to set up your navigation `$ yarn fetch`

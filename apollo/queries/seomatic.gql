@@ -1,5 +1,5 @@
-query Seomatic($slug: String!) {
-  seomatic(uri: $slug, asArray: true) {
+query Seomatic($uri: String!, $siteId: Int!) {
+  seomatic(uri: $uri, asArray: true, siteId: $siteId) {
     metaTitleContainer
     metaTagContainer
     metaLinkContainer

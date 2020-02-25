@@ -1,5 +1,8 @@
 <script>
-import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
+import {
+  removeLeadingSlash,
+  verifyTrailingSlash
+} from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
 import page from '~/apollo/queries/page'
@@ -7,6 +10,7 @@ import page from '~/apollo/queries/page'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
 const routeSlug = context => {
+  // function up here for DRY reasons
   return (
     context.$route.params.slug2 ||
     context.$route.params.slug ||
@@ -22,11 +26,21 @@ export default {
         slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
-        let slug = routeSlug(this)
-        slug = removeLeadingSlash(slug)
+        let uri
+        // check if we are on home slugs, if so we need to build our URI to pass onto seomatic
+        if (!this.$route.params.slug2 && !this.$route.params.slug) {
+          uri = `${verifyTrailingSlash(this.$route.fullPath)}${
+            config.env.HOMESLUG
+          }`
+        } else {
+          // if there is a slug we can just take the fullPath as URI to pass to seomatic
+          uri = this.$route.fullPath
+        }
         // get craft site handle depending on language
-        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
-        return { slug, site }
+        const { siteId } = this.$i18n.locales.find(
+          l => l.code === this.$i18n.locale
+        )
+        return { uri, siteId }
       },
       result(result) {
         try {

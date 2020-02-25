@@ -15,6 +15,9 @@ const langs = [
     slug: 'de',
     locale: 'de_CH',
     name: 'Deutsch',
+    // siteId: this can be found in [CRAFT]/admin/settings/sites when hovering over the links,
+    // it is needed for seomatic, when we need to distinguish which page we want to fetch content for
+    siteId: 2,
     handle: 'vuecidCraftDemoGerman' // Craft Site handle in multisite setup
   },
   {
@@ -23,6 +26,9 @@ const langs = [
     slug: 'en',
     locale: 'en_US',
     name: 'English',
+    // siteId: this can be found in [CRAFT]/admin/settings/sites when hovering over the links,
+    // it is needed for seomatic, when we need to distinguish which page we want to fetch content for
+    siteId: 1,
     handle: 'default' // Craft Site handle – can be left out if it is default.
   }
 ]
@@ -32,11 +38,13 @@ const getDefaultLang = () => {
   return dl.lang
 }
 
+// The following properties are passed to the i18n plugin and can be accessed via this.$i18n.locales
 const getAllLocales = () => {
   return langs.map(l => {
     return {
       code: l.lang,
-      siteHandle: l.handle
+      siteHandle: l.handle,
+      siteId: l.siteId
     }
   })
 }
