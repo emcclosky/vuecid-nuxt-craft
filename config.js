@@ -79,7 +79,7 @@ const config = {
   googleAnalyticsId: 'UA-74285401-2',
 
   // TODO: Add your Google Site Verification for Search Console
-  googleSiteVerification: 'EvzhaYYBQ_6xTZ4EBRyKsvWETvSyivkiSOwJzpEzfqA',
+  googleSiteVerification: 'zG1pVeaKBCYigt69I2cr3ANselSObMYBSnRcDmirZrc',
 
   // TODO: Optionally add Bing Site Verification
   bingSiteVerification: 'B2BFE4CC02FBB954E192488D1D844BCC',
