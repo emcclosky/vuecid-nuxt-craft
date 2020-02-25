@@ -25,7 +25,7 @@ function generateDataJSON() {
 function _generateDataJSON() {
   _generateDataJSON = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  _regenerator["default"].mark(function _callee() {
+  _regenerator["default"].mark(function _callee2() {
     var _ref,
         endpoint,
         graphQLQuery,
@@ -33,6 +33,8 @@ function _generateDataJSON() {
         compressJSON,
         _ref$sections,
         sections,
+        _ref$graphQLQueryName,
+        graphQLQueryName,
         _ref$propertiesToFilt,
         propertiesToFilter,
         savePath,
@@ -52,35 +54,41 @@ function _generateDataJSON() {
         _loop,
         _iterator2,
         _step2,
-        _args2 = arguments;
+        _args3 = arguments;
 
-    return _regenerator["default"].wrap(function _callee$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            _ref = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {}, endpoint = _ref.endpoint, graphQLQuery = _ref.graphQLQuery, _ref$compressJSON = _ref.compressJSON, compressJSON = _ref$compressJSON === void 0 ? true : _ref$compressJSON, _ref$sections = _ref.sections, sections = _ref$sections === void 0 ? [] : _ref$sections, _ref$propertiesToFilt = _ref.propertiesToFilter, propertiesToFilter = _ref$propertiesToFilt === void 0 ? [] : _ref$propertiesToFilt, savePath = _ref.savePath, bundleName = _ref.bundleName, _ref$langs = _ref.langs, langs = _ref$langs === void 0 ? [] : _ref$langs;
+            _ref = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : {}, endpoint = _ref.endpoint, graphQLQuery = _ref.graphQLQuery, _ref$compressJSON = _ref.compressJSON, compressJSON = _ref$compressJSON === void 0 ? true : _ref$compressJSON, _ref$sections = _ref.sections, sections = _ref$sections === void 0 ? [] : _ref$sections, _ref$graphQLQueryName = _ref.graphQLQueryName, graphQLQueryName = _ref$graphQLQueryName === void 0 ? 'entries' : _ref$graphQLQueryName, _ref$propertiesToFilt = _ref.propertiesToFilter, propertiesToFilter = _ref$propertiesToFilt === void 0 ? [] : _ref$propertiesToFilt, savePath = _ref.savePath, bundleName = _ref.bundleName, _ref$langs = _ref.langs, langs = _ref$langs === void 0 ? [] : _ref$langs;
             entries = {};
-            _context2.prev = 2;
+            _context3.prev = 2;
             // Actually for each language is equal to each craft site in a multisite setup!
             _iteratorNormalCompletion = true;
             _didIteratorError = false;
             _iteratorError = undefined;
-            _context2.prev = 6;
+            _context3.prev = 6;
             _iterator = langs[Symbol.iterator]();
 
           case 8:
             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-              _context2.next = 39;
+              _context3.next = 43;
               break;
             }
 
             language = _step.value;
-            entries[language.lang] = {}; // load all entries for each section
+            entries[language.lang] = {}; // check if we have to fetch section specific content
 
+            if (!sections.length) {
+              _context3.next = 39;
+              break;
+            }
+
+            // load all entries for each section
             _iteratorNormalCompletion2 = true;
             _didIteratorError2 = false;
             _iteratorError2 = undefined;
-            _context2.prev = 14;
+            _context3.prev = 15;
             _loop =
             /*#__PURE__*/
             _regenerator["default"].mark(function _loop() {
@@ -101,7 +109,7 @@ function _generateDataJSON() {
                         }
                       }).then(function (_ref2) {
                         var data = _ref2.data;
-                        return data.data.entries;
+                        return data.data[graphQLQueryName];
                       });
 
                     case 3:
@@ -133,93 +141,147 @@ function _generateDataJSON() {
             });
             _iterator2 = sections[Symbol.iterator]();
 
-          case 17:
+          case 18:
             if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-              _context2.next = 22;
+              _context3.next = 23;
               break;
             }
 
-            return _context2.delegateYield(_loop(), "t0", 19);
+            return _context3.delegateYield(_loop(), "t0", 20);
 
-          case 19:
+          case 20:
             _iteratorNormalCompletion2 = true;
-            _context2.next = 17;
+            _context3.next = 18;
             break;
 
-          case 22:
-            _context2.next = 28;
+          case 23:
+            _context3.next = 29;
             break;
 
-          case 24:
-            _context2.prev = 24;
-            _context2.t1 = _context2["catch"](14);
+          case 25:
+            _context3.prev = 25;
+            _context3.t1 = _context3["catch"](15);
             _didIteratorError2 = true;
-            _iteratorError2 = _context2.t1;
+            _iteratorError2 = _context3.t1;
 
-          case 28:
-            _context2.prev = 28;
-            _context2.prev = 29;
+          case 29:
+            _context3.prev = 29;
+            _context3.prev = 30;
 
             if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
               _iterator2["return"]();
             }
 
-          case 31:
-            _context2.prev = 31;
+          case 32:
+            _context3.prev = 32;
 
             if (!_didIteratorError2) {
-              _context2.next = 34;
+              _context3.next = 35;
               break;
             }
 
             throw _iteratorError2;
 
-          case 34:
-            return _context2.finish(31);
-
           case 35:
-            return _context2.finish(28);
+            return _context3.finish(32);
 
           case 36:
-            _iteratorNormalCompletion = true;
-            _context2.next = 8;
+            return _context3.finish(29);
+
+          case 37:
+            _context3.next = 40;
             break;
 
           case 39:
-            _context2.next = 45;
+            return _context3.delegateYield(
+            /*#__PURE__*/
+            _regenerator["default"].mark(function _callee() {
+              var result;
+              return _regenerator["default"].wrap(function _callee$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return _axios["default"].post(endpoint, {
+                        // have to retransform AST gql template literal back to query string:
+                        // https://stackoverflow.com/a/57873339/1121268
+                        query: (0, _printer.print)(graphQLQuery),
+                        variables: {
+                          site: language.handle || 'default'
+                        }
+                      }).then(function (_ref3) {
+                        var data = _ref3.data;
+                        return data.data[graphQLQueryName];
+                      });
+
+                    case 2:
+                      result = _context2.sent;
+
+                      // filter out entries, that should not appear in JSON
+                      // Assuming that the property is a checkbox, where craft returns an empty array if false.
+                      // e.g.: "appearsInNavigation": [] || "appearsInNavigation": ["true"],
+                      if (propertiesToFilter && propertiesToFilter.length) {
+                        propertiesToFilter.forEach(function (property) {
+                          result = result.filter(function (entry) {
+                            // if the entry does not even have the key we return
+                            if (!entry[property]) return true; // check if first array item is true, then leave entry in array
+
+                            return entry[property][0] ? entry[property][0] : false;
+                          });
+                        });
+                      } // save sections in language object
+
+
+                      entries[language.lang] = result;
+
+                    case 5:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee);
+            })(), "t2", 40);
+
+          case 40:
+            _iteratorNormalCompletion = true;
+            _context3.next = 8;
             break;
 
-          case 41:
-            _context2.prev = 41;
-            _context2.t2 = _context2["catch"](6);
-            _didIteratorError = true;
-            _iteratorError = _context2.t2;
+          case 43:
+            _context3.next = 49;
+            break;
 
           case 45:
-            _context2.prev = 45;
-            _context2.prev = 46;
+            _context3.prev = 45;
+            _context3.t3 = _context3["catch"](6);
+            _didIteratorError = true;
+            _iteratorError = _context3.t3;
+
+          case 49:
+            _context3.prev = 49;
+            _context3.prev = 50;
 
             if (!_iteratorNormalCompletion && _iterator["return"] != null) {
               _iterator["return"]();
             }
 
-          case 48:
-            _context2.prev = 48;
+          case 52:
+            _context3.prev = 52;
 
             if (!_didIteratorError) {
-              _context2.next = 51;
+              _context3.next = 55;
               break;
             }
 
             throw _iteratorError;
 
-          case 51:
-            return _context2.finish(48);
+          case 55:
+            return _context3.finish(52);
 
-          case 52:
-            return _context2.finish(45);
+          case 56:
+            return _context3.finish(49);
 
-          case 53:
+          case 57:
             console.log("\uD83D\uDCE1 Fetched entries: ", entries); // save entries for each site in one file
 
             (0, _saveFile["default"])({
@@ -228,20 +290,20 @@ function _generateDataJSON() {
               savePath: savePath,
               compressJSON: compressJSON
             });
-            _context2.next = 60;
+            _context3.next = 64;
             break;
 
-          case 57:
-            _context2.prev = 57;
-            _context2.t3 = _context2["catch"](2);
-            console.log('generateDataJSON: 💾❌ loadentries() action failed 😢: ', _context2.t3);
+          case 61:
+            _context3.prev = 61;
+            _context3.t4 = _context3["catch"](2);
+            console.log('generateDataJSON: 💾❌ loadentries() action failed 😢: ', _context3.t4);
 
-          case 60:
+          case 64:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee, null, [[2, 57], [6, 41, 45, 53], [14, 24, 28, 36], [29,, 31, 35], [46,, 48, 52]]);
+    }, _callee2, null, [[2, 61], [6, 45, 49, 57], [15, 25, 29, 37], [30,, 32, 36], [50,, 52, 56]]);
   }));
   return _generateDataJSON.apply(this, arguments);
 }
