@@ -57,6 +57,9 @@ export default function generateMetaFromSeomatic({
   // using the locale is not possible, because lang="de_CH" is not a valid language
   const language = lang
 
+  // generate alternate links for each language
+  const hrefLangLinks = metaLinkContainer.alternate || false
+
   const locale = metaTagContainer['og:locale'].content || ''
   const siteName = metaTagContainer['og:site_name'].content || ''
   const description = metaTagContainer.description.content || ''
@@ -112,7 +115,7 @@ export default function generateMetaFromSeomatic({
       { hid: 'referrer', property: 'referrer', content: referrer }, // prettier-ignore
       ...ogImage
     ],
-    link: [{ rel: 'canonical', href: ogUrl }]
+    link: [{ rel: 'canonical', href: ogUrl }, ...hrefLangLinks]
   }
 
   if (debug) {

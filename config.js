@@ -2,7 +2,7 @@
 const urls = {
   backendUrlProduction: 'https://cms.lucid.build',
   backendUrlLocal: 'http://cms.lucid.test',
-  frontendUrlProduction: 'https://vuecid-nuxt-craft.lucid.build',
+  frontendUrlProduction: 'https://vuecid-nuxt-craft.netlify.com',
   frontendUrlLocal: 'http://localhost:3000',
   graphqlPath: '/api'
 }

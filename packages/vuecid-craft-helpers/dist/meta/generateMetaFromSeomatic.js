@@ -65,7 +65,9 @@ function generateMetaFromSeomatic() {
 
   var title = metaTitleContainer.title.title || ''; // using the locale is not possible, because lang="de_CH" is not a valid language
 
-  var language = lang;
+  var language = lang; // generate alternate links for each language
+
+  var hrefLangLinks = metaLinkContainer.alternate || false;
   var locale = metaTagContainer['og:locale'].content || '';
   var siteName = metaTagContainer['og:site_name'].content || '';
   var description = metaTagContainer.description.content || '';
@@ -173,7 +175,7 @@ function generateMetaFromSeomatic() {
     link: [{
       rel: 'canonical',
       href: ogUrl
-    }]
+    }].concat((0, _toConsumableArray2["default"])(hrefLangLinks))
   };
 
   if (debug) {
