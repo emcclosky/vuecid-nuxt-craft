@@ -7,6 +7,7 @@ import config from './config.js'
 import 'graphql-import-node'
 import pages from './apollo/queries/navigations.gql'
 import allEntries from './apollo/queries/allEntries.gql'
+import globals from './apollo/queries/globals.gql'
 
 // Parse terminal arguments with minimist
 const argv = require('minimist')(process.argv.slice(2))
@@ -41,6 +42,25 @@ function fetchNavigations() {
   generateDataJSON(settings)
 }
 
+function fetchGlobalSettings() {
+  console.log('📡 Fetch global settings...')
+  // List the craft sections that should be fetched to generate the navigations JSON
+  const langs = config.env.LANGS
+  const graphQLQuery = globals
+
+  const settings = {
+    endpoint,
+    graphQLQuery,
+    compressJSON: true, // setting this to false may help debugging :-)
+    bundleName: 'globals',
+    graphQLQueryName: 'globalSet', // if passed specifically this property of object is returned, if not defined 'entries' is taken
+    savePath: './static/data',
+    langs
+  }
+
+  generateDataJSON(settings)
+}
+
 function fetchAllEntriesWithRoute() {
   console.log('📡 Fetch all entries...')
   // List the craft sections that should be fetched to generate the navigations JSON
@@ -62,4 +82,5 @@ function fetchAllEntriesWithRoute() {
 }
 
 fetchNavigations()
+fetchGlobalSettings()
 fetchAllEntriesWithRoute()

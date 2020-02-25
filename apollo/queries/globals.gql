@@ -1,12 +1,10 @@
-{
-  globals {
-    globalSettings {
-      # gdprText {
-      #   content
-      # }
-      # cookieText {
-      #   content
-      # }
+query GlobalSettings($site: [String]) {
+  globalSet(site: $site) {
+    __typename
+    ... on globalSettings_GlobalSet {
+      address
+      cookieText
+      gdprText
     }
-  }
+	}
 }
