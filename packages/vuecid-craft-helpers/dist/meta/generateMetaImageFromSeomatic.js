@@ -49,7 +49,7 @@ function generateMetaImageFromSeomatic(ogImage) {
   {
     hid: 'twitter:image:height',
     name: 'twitter:image:height',
-    content: imageHeight // prettier-ignore
-
-  }];
+    content: imageHeight
+  } // prettier-ignore
+  ];
 }
