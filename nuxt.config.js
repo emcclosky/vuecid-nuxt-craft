@@ -7,7 +7,9 @@ import config from './config'
 
 export default {
   server: {
-    host: '0.0.0.0' // Default: localhost
+    // it is served by default on http://localhost
+    // setting the following will result in serving on your IP like 192.168.1.2 or similar
+    // host: '0.0.0.0'
   },
 
   /*
