@@ -35,8 +35,8 @@ export default function generateMetaFromSeomatic({
       'You need to pass your frontend url into the generateMetaFromSeomatic!'
     )
 
-  // // Apollo parses the first level of our seomatic object
-  // // But unfortunately everything that is nested is just a JSON String and needs to be parsed
+  // Apollo parses the first level of our seomatic object
+  // But unfortunately everything that is nested is just a JSON String and needs to be parsed
   const metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer)
   const metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer)
   const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer)

@@ -109,7 +109,6 @@ export const mutations = {
     state.navigations = navigations
   },
   GLOBALS_SAVE(state, data) {
-    console.log('data: ', data)
     state.globals = data
   },
   BUNDLE_SAVE(state, data) {
@@ -130,6 +129,7 @@ export const getters = {
       global:
         state.bundle && state.bundle['options-global']
           ? state.bundle['options-global']
+
           : false,
       localized:
         state.bundle && state.bundle[`options-${rootState.currentLang}`]

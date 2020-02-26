@@ -26,12 +26,11 @@ export default {
         slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
-        let uri
+        let uri = routeSlug(this)
+        uri = removeLeadingSlash(uri)
         // check if we are on home slugs, if so we need to build our URI to pass onto seomatic
         if (!this.$route.params.slug2 && !this.$route.params.slug) {
-          uri = `${verifyTrailingSlash(this.$route.fullPath)}${
-            config.env.HOMESLUG
-          }`
+          uri = `${config.env.HOMESLUG}`
         } else {
           // if there is a slug we can just take the fullPath as URI to pass to seomatic
           uri = this.$route.fullPath
@@ -117,6 +116,11 @@ export default {
   head() {
     if (!this.seomatic) {
       this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
+    } else {
+      this.log(
+        'this.seomatic.metaLinkContainer: ',
+        JSON.parse(this.seomatic.metaLinkContainer).alternate
+      )
     }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
