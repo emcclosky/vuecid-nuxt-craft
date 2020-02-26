@@ -114,14 +114,6 @@ export default {
     console.log('process.env.BRANCH: ', process.env.BRANCH)
   },
   head() {
-    if (!this.seomatic) {
-      this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
-    } else {
-      this.log(
-        'this.seomatic.metaLinkContainer: ',
-        JSON.parse(this.seomatic.metaLinkContainer).alternate
-      )
-    }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
