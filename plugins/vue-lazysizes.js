@@ -1,4 +1,4 @@
-import 'lazysizes' // (github)[https://github.com/aFarkas/lazysizes]
+import 'lazysizes' // https://github.com/aFarkas/lazysizes
 import 'lazysizes/plugins/parent-fit/ls.parent-fit' // Caluculates sizes for responsive image srcset automatically.
 import 'lazysizes/plugins/respimg/ls.respimg' // Polyfill for srcset and sizes.
 import 'lazysizes/plugins/object-fit/ls.object-fit' // Polyfill for object-fit and object-position.

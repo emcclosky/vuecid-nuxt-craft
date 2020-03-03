@@ -10,7 +10,7 @@ export default {
   },
   data() {
     // This is an example on how we want an image object coming from craft to look like.
-    // See more about the transforms in the (README)[https://github.com/wearelucid/vuecid-nuxt-craft#image-transforms].
+    // More about the transforms in craft: https://github.com/wearelucid/vuecid-craft#image-transforms.
     // For our srcset we idealy have 3 sizes (small, medium, large).
     // To use the lazyloading blur effect, we want to have a really low quality image (10-100px in size) from craft.
     // For videos, use the embed link youtube or vimeo provides you like below. // TODO: Make this easier for the end user to fill in.
