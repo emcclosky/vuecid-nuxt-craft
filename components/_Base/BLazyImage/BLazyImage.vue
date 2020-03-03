@@ -32,7 +32,11 @@ export default {
       />
       <!-- this slot will be shown server side but not client side, for better SEO https://nuxtjs.org/api/components-client-only/-->
       <template slot="placeholder">
-        <img :src="image.src" :alt="image.alt" class="BLazyImage__image" />
+        <img
+          :src="image.src"
+          :alt="image.alt"
+          class="BLazyImage__image lazyload"
+        />
       </template>
     </client-only>
   </div>
