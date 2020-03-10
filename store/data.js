@@ -129,7 +129,6 @@ export const getters = {
       global:
         state.bundle && state.bundle['options-global']
           ? state.bundle['options-global']
-
           : false,
       localized:
         state.bundle && state.bundle[`options-${rootState.currentLang}`]

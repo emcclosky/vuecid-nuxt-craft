@@ -1,8 +1,5 @@
 <script>
-import {
-  removeLeadingSlash,
-  verifyTrailingSlash
-} from '@wearelucid/vuecid-helpers'
+import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
 import page from '~/apollo/queries/page'
@@ -66,7 +63,8 @@ export default {
         if (!this.preview) {
           if (!result.data.entries || !result.data.entries[0]) {
             if (!this.$route.params.slug) {
-              console.error(`🏮 You seem to try to call the index of the page. Did you maybe forget to add a page with your defined homeslug: "${config.env.HOMESLUG}" ?`) // eslint-disable-line
+              console.error(`🏮 Do you have an entry with slug == ${config.env.HOMESLUG}? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results`) // eslint-disable-line
+              console.error(`🏮🏮 Or maybe you forgot to allow an entry type to be accessed via GraphQL? (Public Schema)? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results-2`) // eslint-disable-line
             }
 
             this.$store.dispatch(
@@ -109,14 +107,14 @@ export default {
     if (this.preview && !this.page) {
       alert(this.$t('ui.previewAlert'))
     }
-
-    console.log('process.env.NETLIFY: ', process.env.NETLIFY)
-    console.log('process.env.BRANCH: ', process.env.BRANCH)
   },
   head() {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
-      frontendUrl: config.env.FRONTENDURLPRODUCTION,
+      frontendUrl:
+        process.env.NODE_ENV === 'development'
+          ? config.env.FRONTENDURLLOCAL
+          : config.env.FRONTENDURLPRODUCTION,
       lang: this.$i18n.locale
       // ,debug: true
     })
