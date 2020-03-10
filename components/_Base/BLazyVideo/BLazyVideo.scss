@@ -1,0 +1,19 @@
+@import '~assets/css/global';
+
+$c: 'BLazyVideo';
+// Lazysizes animations are handled inside _utility.animations.scss
+// $c-blazyvideo-some-variable: 'Some Value';
+
+.#{$c} {
+  padding-top: 56.25%;
+  position: relative;
+
+  &__video,
+  &__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

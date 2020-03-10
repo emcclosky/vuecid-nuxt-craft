@@ -24,3 +24,39 @@
 .u-anim-fade-leave-active {
   opacity: 0;
 }
+
+/*
+** lazysizes – loading and blur animations.
+*/
+
+.ls-blur-up-is-loading {
+  visibility: hidden;
+}
+
+.lazyload {
+  &:not([src]) {
+    visibility: hidden;
+  }
+}
+
+.ls-blur-up-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transform: scale(1.1);
+  transition: opacity $s-animation-duration-default,
+  filter $s-animation-duration-default;
+  filter: blur(20px);
+  display: block;
+  font-family: 'blur-up: always', 'object-fit: cover'; // Polifill for non supporting browsers https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/object-fit
+  object-fit: cover;
+
+  &.ls-inview {
+    &.ls-original-loaded {
+      opacity: 0;
+    }
+  }
+}

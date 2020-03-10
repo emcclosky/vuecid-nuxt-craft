@@ -6,6 +6,8 @@ import BHeading from '~/components/_Base/BHeading/BHeading.vue'
 import BRichtext from '~/components/_Base/BRichtext/BRichtext.vue'
 import BLoader from '~/components/_Base/BLoader/BLoader.vue'
 import BPageBuilder from '~/components/_Base/BPageBuilder/BPageBuilder.vue'
+import BLazyImage from '~/components/_Base/BLazyImage/BLazyImage.vue'
+import BLazyVideo from '~/components/_Base/BLazyVideo/BLazyVideo.vue'
 
 Vue.component('BAlert', BAlert)
 Vue.component('BBtn', BBtn)
@@ -14,3 +16,5 @@ Vue.component('BHeading', BHeading)
 Vue.component('BRichtext', BRichtext)
 Vue.component('BLoader', BLoader)
 Vue.component('BPageBuilder', BPageBuilder)
+Vue.component('BLazyImage', BLazyImage)
+Vue.component('BLazyVideo', BLazyVideo)

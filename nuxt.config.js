@@ -1,7 +1,4 @@
-// eslint-disable-next-line prettier/prettier
-import {
-  generateRoutesFromData
-} from '@wearelucid/vuecid-craft-helpers'
+import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
 // import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
 import config from './config'
 
@@ -66,6 +63,7 @@ export default {
    ** Plugins
    */
   plugins: [
+    { src: '~/plugins/vue-lazysizes', ssr: false },
     { src: '~/plugins/global.js' },
     { src: '~/plugins/throwNuxtError.js' }, // throw errors outside of asyncData and fetch, e.g. in apollo request
     { src: '~/plugins/vuecid-helpers.js' },
