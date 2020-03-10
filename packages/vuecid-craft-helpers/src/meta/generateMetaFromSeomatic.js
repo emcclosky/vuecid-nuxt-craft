@@ -98,7 +98,7 @@ export default function generateMetaFromSeomatic({
     },
     meta: [
       { name: 'application-name', content: siteName },
-      { name: 'lang', content: siteName },
+      { name: 'lang', content: language },
       { hid: 'description', name: 'description', content: description },
       { hid: 'keywords', name: 'keywords', content: keywords },
       { hid: 'og:title', property: 'og:title', content: ogTitle },

@@ -46,8 +46,8 @@ function generateMetaFromSeomatic() {
     };
   }
 
-  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // // Apollo parses the first level of our seomatic object
-  // // But unfortunately everything that is nested is just a JSON String and needs to be parsed
+  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // Apollo parses the first level of our seomatic object
+  // But unfortunately everything that is nested is just a JSON String and needs to be parsed
 
   var metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer);
   var metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer);
@@ -110,7 +110,7 @@ function generateMetaFromSeomatic() {
       content: siteName
     }, {
       name: 'lang',
-      content: siteName
+      content: language
     }, {
       hid: 'description',
       name: 'description',
