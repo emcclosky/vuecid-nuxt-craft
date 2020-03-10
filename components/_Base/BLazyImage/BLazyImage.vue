@@ -30,7 +30,7 @@ export default {
         alt="test"
         class="BLazyImage__image lazyload"
       />
-      <!-- this slot will be shown server side but not client side, for better SEO https://nuxtjs.org/api/components-client-only/-->
+      <!-- this slot will be shown on server side but not on client side for better SEO https://nuxtjs.org/api/components-client-only/-->
       <template slot="placeholder">
         <img
           :src="image.src"

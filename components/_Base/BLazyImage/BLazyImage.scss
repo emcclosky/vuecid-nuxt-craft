@@ -20,7 +20,7 @@ $c: 'BLazyImage';
     width: 100%;
     height: 100%;
     display: block;
-    font-family: 'blur-up: always', 'object-fit: cover'; // Polifill for non supporting browsers https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/object-fit
+    font-family: 'blur-up: always', 'object-fit: cover'; // Polyfill for non supporting browsers https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/object-fit
     object-fit: cover;
   }
 }
