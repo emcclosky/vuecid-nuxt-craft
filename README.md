@@ -93,3 +93,9 @@ See [docs/Nuxt_Child.md](docs/Nuxt_Child.md)
 
 ## Lerna & Managing a Mono-Repo
 - Susy Lerna: [docs/Lerna.md](docs/Lerna.md)
+
+## Good to know
+- `process.env.NETLIFY` is true if served by netlify.
+
+## Troubleshooting
+See [docs/Troubleshooting.md](docs/Troubleshooting.md)
