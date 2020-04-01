@@ -44,6 +44,9 @@ $mq-static-breakpoint: small;
 
 /*
  * Main media query function
+ * Usage Examples:
+ * @include mq($from: medium) {…}
+ * @include mq($from: 1150, $and: '(orientation: portrait)') {…}
  */
 @mixin mq($from: false, $to: false, $and: false, $height: false, $media: all) {
 
