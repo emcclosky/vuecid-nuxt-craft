@@ -1,10 +1,10 @@
 // TODO: Add your urls
 const urls = {
-  backendUrlProduction: 'https://cms.lucid.build',
-  backendUrlLocal: 'http://cms.lucid.test',
+  backendUrlProduction: 'https://api.lucid.build',
+  backendUrlLocal: 'http://api.lucid.test',
   frontendUrlProduction: 'https://vuecid-nuxt-craft.netlify.com',
   frontendUrlLocal: 'http://localhost:3000',
-  graphqlPath: '/api'
+  graphqlPath: ''
 }
 
 // TODO: Add your langs (= different sites in Craft multisite setup)
