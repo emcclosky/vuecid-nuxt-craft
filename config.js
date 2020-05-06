@@ -2,7 +2,7 @@
 const urls = {
   backendUrlProduction: 'https://api.lucid.build',
   backendUrlLocal: 'http://api.lucid.test',
-  frontendUrlProduction: 'https://vuecid-nuxt-craft.netlify.com',
+  frontendUrlProduction: 'https://vuecid-nuxt-craft.netlify.app',
   frontendUrlLocal: 'http://localhost:3000',
   graphqlPath: ''
 }
@@ -10,16 +10,6 @@ const urls = {
 // TODO: Add your langs (= different sites in Craft multisite setup)
 // Don't forget to add the site handle for each secondary site!
 const langs = [
-  {
-    lang: 'de',
-    slug: 'de',
-    locale: 'de_CH',
-    name: 'Deutsch',
-    // siteId: this can be found in [CRAFT]/admin/settings/sites when hovering over the links,
-    // it is needed for seomatic, when we need to distinguish which page we want to fetch content for
-    siteId: 2,
-    handle: 'vuecidCraftDemoGerman' // Craft Site handle in multisite setup
-  },
   {
     default: true, // Specify default lang
     lang: 'en',
@@ -30,12 +20,25 @@ const langs = [
     // it is needed for seomatic, when we need to distinguish which page we want to fetch content for
     siteId: 1,
     handle: 'default' // Craft Site handle – can be left out if it is default.
+  },
+  {
+    lang: 'de',
+    slug: 'de',
+    locale: 'de_CH',
+    name: 'Deutsch',
+    // siteId: this can be found in [CRAFT]/admin/settings/sites when hovering over the links,
+    // it is needed for seomatic, when we need to distinguish which page we want to fetch content for
+    siteId: 2,
+    handle: 'vuecidCraftDemoGerman' // Craft Site handle in multisite setup
   }
 ]
 
 const getDefaultLang = () => {
-  const dl = langs.find(l => l.default === true)
-  return dl.lang
+  const defaultLanguage = langs.find(l => l.default === true)
+  if (!defaultLanguage) {
+    console.warn('Did you forget to specify one language as the default lang?: "default: true"') // eslint-disable-line
+  }
+  return defaultLanguage.lang
 }
 
 // The following properties are passed to the i18n plugin and can be accessed via this.$i18n.locales

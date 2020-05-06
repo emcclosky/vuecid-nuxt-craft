@@ -92,6 +92,7 @@ export default {
       graphQLQuery: page
     })
     if (previewData) {
+      console.log('previewData: ', previewData)
       return { ...previewData }
     }
     return { preview: false }
@@ -102,6 +103,7 @@ export default {
     }
   },
   mounted() {
+    console.log('this.page: ', this.page)
     // Check if we should be displaying a preview but for some reason did not get any data.
     // Use an alert because this can be used within the template-less basePage
     if (this.preview && !this.page) {

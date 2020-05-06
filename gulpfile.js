@@ -138,7 +138,7 @@ gulp.task('add-susy-files', function(done) {
 gulp.task('add-modernizr-file', function(done) {
   console.log('Adding custom modernizr...')
 
-  const path = './static/js/modernizr.js'
+  const path = './static/js/modernizr-custom.js'
   const templateFile = './plop/setup/modernizr/modernizr.hbs'
 
   addFiles(path, templateFile)

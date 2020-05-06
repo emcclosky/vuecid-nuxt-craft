@@ -35,6 +35,10 @@ $ yarn
 # like modernizr, susy, ie11 polyfills
 $ gulp setup
 
+# Serving will fail without first fetching the static data like globals and navigation
+# To make this happen make sure all settings are correct in your config.js (including langs settings)
+$ yarn fetch
+
 # Serve with hot reload at localhost:3000
 $ yarn dev
 
