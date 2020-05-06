@@ -155,6 +155,10 @@ export const getters = {
     // nuxt-i18n can handle certain translated slugs by itself. for example if i18n knows that `news` has a translation of `de/neuigkeiten`
     // unfortunately nuxt.i18n is not available in getters, so we return a boolean to tell the navigation to use
     // the nuxt.i18n locales switch.
+    if (rootState.langs.length <= 1) {
+      // if we only have one lang return false
+      return false
+    }
     if (!slugs.slug && !slugs.hasNoTranslation) {
       return rootState.langs.map(l => {
         return { i18nHandlesRoute: true, lang: l.lang }
