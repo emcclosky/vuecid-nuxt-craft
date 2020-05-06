@@ -57,7 +57,6 @@ export default function({ isDev }) {
     // link: retryLink,
     httpEndpoint: endpoint,
     httpLinkOptions: {
-      credentials: 'include',
       fetchOptions: {
         mode: 'cors' // Cors Needed for external Cross origins, need to allow headers from server
       }
