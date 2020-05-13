@@ -14,7 +14,8 @@ export const state = () => ({
   globals: null,
   currentPage: null,
   loading: true,
-  loaded: false
+  loaded: false,
+  preview: false
 })
 
 const m = 'store/loadData'
@@ -116,6 +117,10 @@ export const mutations = {
   },
   CURRENT_PAGE_SAVE(state, page) {
     state.currentPage = page
+  },
+  PREVIEW_SAVE(state, data) {
+    console.log('data: ', data)
+    state.preview = data
   }
 }
 

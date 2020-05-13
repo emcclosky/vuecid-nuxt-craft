@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
@@ -82,25 +83,31 @@ export default {
       }
     }
   },
-  async asyncData({ params, env, query, route, app, isDev }) {
-    const slug = removeLeadingSlash(params.slug2 || params.slug || env.HOMESLUG)
-    const previewData = await loadPreview({
-      slug,
-      env,
-      query,
-      isDev,
-      graphQLQuery: page
-    })
-    if (previewData) {
-      console.log('previewData: ', previewData)
-      return { ...previewData }
-    }
-    return { preview: false }
+  computed: {
+    ...mapState(['preview'])
   },
+  // async asyncData({ params, env, query, route, app, isDev }) {
+  //   const slug = removeLeadingSlash(params.slug2 || params.slug || env.HOMESLUG)
+  //   const previewData = await loadPreview({
+  //     slug,
+  //     env,
+  //     query,
+  //     isDev,
+  //     graphQLQuery: page
+  //   })
+  //   if (previewData) {
+  //     console.log('previewData: ', previewData)
+  //     return { ...previewData }
+  //   }
+  //   return { preview: false }
+  // },
   data: () => {
     return {
       page: null
     }
+  },
+  beforeMount() {
+    console.log('this.preview: ', this.preview)
   },
   mounted() {
     console.log('this.page: ', this.page)
