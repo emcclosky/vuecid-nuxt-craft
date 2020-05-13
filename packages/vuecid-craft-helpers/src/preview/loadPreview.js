@@ -12,7 +12,6 @@
  * @param {Object} options.env – includes env variables like backend url and graphql endpoint
  * @param {boolean} options.isDev – when true we fetch from local endpoint
  * @param {string} options.graphQLQuery – includes, what should be fetched from the graphql service
- * @param {string} [options.debug]
  * @return {(Object|boolean)} - including preview data or returns false
  */
 
@@ -35,11 +34,14 @@ export default async function loadPreview(
   if (query['x-craft-live-preview'] && query.token) {
     console.info('Preview is displayed!')
 
+    // ⚠️ If you use `nuxt generate` to test live preview locally
+    // isDev is undefined and it will try to fetch from remote (which will fail)
+    // to test this, use the BACKENDURLLOCAL in all cases
     const endpointBase = isDev
       ? `${env.BACKENDURLLOCAL}${env.GRAPHQL_PATH}`
       : `${env.BACKENDURLPRODUCTION}${env.GRAPHQL_PATH}`
 
-    const endpoint = `${endpointBase}?x-craft-live-preview={query['x-craft-live-preview]}&token=${query.token}`
+    const endpoint = `${endpointBase}?x-craft-live-preview=${query['x-craft-live-preview']}&token=${query.token}`
 
     const previewData = await axios
       .post(endpoint, {
@@ -70,9 +72,10 @@ export default async function loadPreview(
         console.log('error: ', error)
       })
     return {
-      page: previewData,
+      ...previewData,
       preview: true
     }
   }
+
   return false
 }

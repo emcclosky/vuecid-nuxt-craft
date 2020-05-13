@@ -9,29 +9,18 @@ exports["default"] = loadPreview;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
 var _printer = require("graphql/language/printer");
 
-/* eslint-disable no-console */
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-/*
- * Load preview data from Craft CMS.
- * Craft CMS opens an iframe in the LivePreview window
- * and sends two extra url parameters: 'x-craft-live-preview'' & 'token'.
- * If we send these parameters with our axios call, we get back the latest draft of the entry.
- *
- * @param {Object} options - The options object to pass in
- * @param {string} options.slug – includes the slug of the entry
- * @param {string} options.query – the graphql query that loads the data of the page
- * @param {Object} options.env – includes env variables like backend url and graphql endpoint
- * @param {boolean} options.isDev – when true we fetch from local endpoint
- * @param {string} options.graphQLQuery – includes, what should be fetched from the graphql service
- * @param {string} [options.debug]
- * @return {(Object|boolean)} - including preview data or returns false
- */
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function loadPreview() {
   return _loadPreview.apply(this, arguments);
 }
@@ -71,9 +60,12 @@ function _loadPreview() {
               break;
             }
 
-            console.info('Preview is displayed!');
+            console.info('Preview is displayed!'); // ⚠️ If you use `nuxt generate` to test live preview locally
+            // isDev is undefined and it will try to fetch from remote (which will fail)
+            // to test this, use the BACKENDURLLOCAL in all cases
+
             endpointBase = isDev ? "".concat(env.BACKENDURLLOCAL).concat(env.GRAPHQL_PATH) : "".concat(env.BACKENDURLPRODUCTION).concat(env.GRAPHQL_PATH);
-            endpoint = "".concat(endpointBase, "?x-craft-live-preview={query['x-craft-live-preview]}&token=").concat(query.token);
+            endpoint = "".concat(endpointBase, "?x-craft-live-preview=").concat(query['x-craft-live-preview'], "&token=").concat(query.token);
             _context.next = 8;
             return _axios["default"].post(endpoint, {
               // have to retransform AST gql template literal back to query string:
@@ -96,10 +88,9 @@ function _loadPreview() {
 
           case 8:
             previewData = _context.sent;
-            return _context.abrupt("return", {
-              page: previewData,
+            return _context.abrupt("return", _objectSpread({}, previewData, {
               preview: true
-            });
+            }));
 
           case 10:
             return _context.abrupt("return", false);
