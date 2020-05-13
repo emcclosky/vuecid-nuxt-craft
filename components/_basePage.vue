@@ -1,5 +1,4 @@
 <script>
-import { mapState } from 'vuex'
 import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import config from '~/config'
@@ -61,18 +60,20 @@ export default {
       },
       result(result) {
         // Only set this.page to graphql data if we are not seeing a preview
-        if (!this.preview) {
+        // because previewData is not ready at this point in time, we check for the preview url param
+        if (!this.$route.query['x-craft-live-preview']) {
           if (!result.data.entries || !result.data.entries[0]) {
             if (!this.$route.params.slug) {
               console.error(`🏮 Do you have an entry with slug == ${config.env.HOMESLUG}? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results`) // eslint-disable-line
               console.error(`🏮🏮 Or maybe you forgot to allow an entry type to be accessed via GraphQL? (Public Schema)? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results-2`) // eslint-disable-line
             }
-
             this.$store.dispatch(
               'throwError',
               {
                 statusCode: 404,
-                message: `Page with slug «${this.$route.params.slug ||
+                message: `Page with slug «${this.$route.params.slug3 ||
+                  this.$route.params.slug2 ||
+                  this.$route.params.slug ||
                   config.env.HOMESLUG}» was not found`
               },
               { root: true }
@@ -83,38 +84,32 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapState(['preview'])
-  },
-  // async asyncData({ params, env, query, route, app, isDev }) {
-  //   const slug = removeLeadingSlash(params.slug2 || params.slug || env.HOMESLUG)
-  //   const previewData = await loadPreview({
-  //     slug,
-  //     env,
-  //     query,
-  //     isDev,
-  //     graphQLQuery: page
-  //   })
-  //   if (previewData) {
-  //     console.log('previewData: ', previewData)
-  //     return { ...previewData }
-  //   }
-  //   return { preview: false }
-  // },
   data: () => {
     return {
-      page: null
+      page: null,
+      previewData: null,
+      hidePage: false
     }
   },
-  beforeMount() {
-    console.log('this.preview: ', this.preview)
+  computed: {
+    pageData() {
+      return this.previewData || this.page
+    }
   },
-  mounted() {
-    console.log('this.page: ', this.page)
-    // Check if we should be displaying a preview but for some reason did not get any data.
-    // Use an alert because this can be used within the template-less basePage
-    if (this.preview && !this.page) {
-      alert(this.$t('ui.previewAlert'))
+  // We need to load the preview within beforeMount, because asyncData and middleware are NOT executed on initial load
+  // after having used `nuxt generate`, because there is no server that is run
+  beforeMount: async function() { // eslint-disable-line
+    // check preview and fetch actual data
+    const slug = removeLeadingSlash(this.$route.params.slug3 || this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG) // eslint-disable-line
+    this.previewData = await loadPreview({
+      slug,
+      env: config.env,
+      query: this.$route.query,
+      isDev: process.env.NODE_ENV === 'development',
+      graphQLQuery: page
+    })
+    if (this.previewData) {
+      this.$store.dispatch('ui/activatePreviewAlert')
     }
   },
   head() {

@@ -6,7 +6,7 @@ export default {
   extends: basePage,
   data: () => {
     return {
-      page: false
+      // page: false
     }
   }
 }
@@ -16,13 +16,16 @@ export default {
   <div class="Page">
     <div class="examples--center">
       <em>This is a _slug2 page</em>
-      <div v-if="page">
-        <BHeading v-if="page.title || page.alternativePageTitle" :level="1">
-          {{ page.alternativePageTitle || page.title }}
+      <div v-if="pageData">
+        <BHeading
+          v-if="pageData.title || pageData.alternativePageTitle"
+          :level="1"
+        >
+          {{ pageData.title || pageData.alternativePageTitle }}
         </BHeading>
         <BPageBuilder
-          v-if="page.pageBuilder"
-          :component-data="page.pageBuilder"
+          v-if="pageData.pageBuilder"
+          :component-data="pageData.pageBuilder"
         />
       </div>
       <BLoader v-else />

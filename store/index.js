@@ -28,5 +28,5 @@ export const mutations = {
 export const getters = {
   langs: state => (state.langs ? state.langs : false),
   defaultLang: state => (state.defaultLang ? state.defaultLang : false),
-  currentLang: state => (state.currentLang ? state.currentLang : false),
+  currentLang: state => (state.currentLang ? state.currentLang : false)
 }

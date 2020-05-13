@@ -12,6 +12,8 @@ $c-b-alert-height: $s-size-spacer-medium;
   text-align: center;
   background-color: $s-color-alert;
   opacity: 0.5;
+  z-index: z('alert');
+  pointer-events: none;
 
   &.is-error {
     background-color: $s-color-error;

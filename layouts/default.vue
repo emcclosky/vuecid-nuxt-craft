@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import TheSkipNavigationLink from '~/components/_SingleInstance/TheSkipNavigationLink/TheSkipNavigationLink.vue'
 import TheHeaderBar from '~/components/_SingleInstance/TheHeaderBar/TheHeaderBar.vue'
 import TheFooter from '~/components/_SingleInstance/TheFooter/TheFooter.vue'
@@ -8,6 +9,9 @@ export default {
     TheSkipNavigationLink,
     TheHeaderBar,
     TheFooter
+  },
+  computed: {
+    ...mapState('ui', ['previewActive'])
   },
   methods: {
     setFocusOnMain() {
@@ -38,6 +42,7 @@ export default {
     <main id="main" ref="main" class="Layout__content">
       <nuxt />
     </main>
+    <BAlert v-if="previewActive" message="Preview" />
     <TheFooter />
   </div>
 </template>

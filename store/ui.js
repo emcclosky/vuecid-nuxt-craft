@@ -26,7 +26,8 @@ export const state = () => ({
   breakpointCurrent: {
     name: null
   },
-  currentPaginationPage: 1
+  currentPaginationPage: 1,
+  previewActive: false
 })
 
 export const actions = {
@@ -38,6 +39,11 @@ export const actions = {
   },
   saveCurrentPaginationPage({ commit }, payload) {
     commit('CURRENT_PAGINATION_PAGE_SAVE', payload)
+  },
+  activatePreviewAlert({ state, commit }) {
+    if (!state.previewActive) {
+      commit('ACTIVATE_PREVIEW_ALERT')
+    }
   }
 }
 
@@ -72,6 +78,9 @@ export const mutations = {
   },
   CURRENT_PAGINATION_PAGE_SAVE(state, data) {
     state.currentPaginationPage = data
+  },
+  ACTIVATE_PREVIEW_ALERT(state) {
+    state.previewActive = true
   }
 }
 
