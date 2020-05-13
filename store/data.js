@@ -144,7 +144,15 @@ export const getters = {
       !state.navigations[rootState.currentLang][section]
     )
       return false
-    return state.navigations[rootState.currentLang][section]
+    return {
+      data: state.navigations[rootState.currentLang][section],
+      // we pass the language along because the URI of the entries do not know their language prefix
+      // but because the default lang does not need any url lang prefixes we only pass it whenever the prefix is needed
+      lang:
+        config.env.DEFAULTLANG === rootState.currentLang
+          ? false
+          : rootState.currentLang
+    }
   },
   langLinks: (state, getters, rootState) => (slugs, section) => {
     // langLinks tries to return a translation for a given slug

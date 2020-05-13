@@ -57,6 +57,22 @@ export default {
       }
       return slug
     },
+    prepareNuxtLink(uri) {
+      const route = this.verifyLeadingSlash(this.removeHomeSlug(uri))
+      const langPrefix = this.menu?.lang
+        ? this.verifyLeadingSlash(this.menu.lang)
+        : ''
+      // because craft languages are not represented in URIs we need to add them here
+      return `${langPrefix}${route}`
+    },
+    prepareTranslatedNuxtLink(uri, lang) {
+      // because all the entries do not know their language, we need to add the lang prefix manually
+      // BUT, only for the non-default languages
+      const route = this.verifyLeadingSlash(this.removeHomeSlug(uri))
+      const langPrefix =
+        lang !== config.env.DEFAULTLANG ? this.verifyLeadingSlash(lang) : ''
+      return `${langPrefix}${route}`
+    },
     verifyLeadingSlash(slug) {
       return verifyLeadingSlash(slug)
     },
@@ -88,7 +104,7 @@ export default {
         <div v-if="menu" class="TheNavigation__scroll-wrapper" tabIndex="-1">
           <ul :class="['TheNavigation__list']">
             <li
-              v-for="(item, key) in menu"
+              v-for="(item, key) in menu.data"
               :key="`nav-item-${key}`"
               :class="[
                 'TheNavigation__item',
@@ -100,7 +116,7 @@ export default {
             >
               <nuxt-link
                 class="TheNavigation__link"
-                :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
+                :to="prepareNuxtLink(item.uri)"
                 :exact="isHomeSlug(item.uri)"
                 :tabIndex="navMenuOpen ? 0 : -1"
               >
@@ -120,7 +136,7 @@ export default {
                 >
                   <nuxt-link
                     class="TheNavigation__link"
-                    :to="`/${child.uri}`"
+                    :to="prepareNuxtLink(child.uri)"
                     :tabIndex="navMenuOpen ? 0 : -1"
                   >
                     <!-- eslint-disable-next-line vue/no-v-html -->
@@ -141,7 +157,7 @@ export default {
                   <BBtn
                     :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
                     naked
-                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : item.path"
+                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : prepareTranslatedNuxtLink(item.path, item.lang)"
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"

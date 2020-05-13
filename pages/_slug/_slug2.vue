@@ -18,10 +18,10 @@ export default {
       <em>This is a _slug2 page</em>
       <div v-if="pageData">
         <BHeading
-          v-if="pageData.title || pageData.alternativePageTitle"
+          v-if="pageData.alternativePageTitle || pageData.title"
           :level="1"
         >
-          {{ pageData.title || pageData.alternativePageTitle }}
+          {{ pageData.alternativePageTitle || pageData.title }}
         </BHeading>
         <BPageBuilder
           v-if="pageData.pageBuilder"
