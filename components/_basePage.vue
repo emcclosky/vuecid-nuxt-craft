@@ -87,8 +87,7 @@ export default {
   data: () => {
     return {
       page: null,
-      previewData: null,
-      hidePage: false
+      previewData: null
     }
   },
   computed: {

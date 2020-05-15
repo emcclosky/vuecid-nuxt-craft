@@ -1,5 +1,5 @@
-import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
-// import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
+// import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
+import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
 import config from './config'
 
 export default {
@@ -202,7 +202,8 @@ export default {
       return generateRoutesFromData({
         data,
         sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
-        homeSlug: config.env.HOMESLUG
+        homeSlug: config.env.HOMESLUG,
+        defaultLanguage: config.env.DEFAULTLANG
         // ,debug: true
       })
     }
@@ -266,7 +267,8 @@ export default {
       const routes = generateRoutesFromData({
         data,
         sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
-        homeSlug: config.env.HOMESLUG
+        homeSlug: config.env.HOMESLUG,
+        defaultLanguage: config.env.DEFAULTLANG
         // ,debug: true
       })
       // console.log('routes for sitemap', routes)

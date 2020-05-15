@@ -21,12 +21,14 @@
 
 /* eslint-disable no-console */
 
+import _cloneDeep from 'lodash.clonedeep'
 import {
   removeTrailingSlash,
   verifyLeadingSlash
 } from '@wearelucid/vuecid-helpers'
 
 import flattenNavigation from '../navigation/flattenNavigation'
+import addLanguagePrefixes from '../navigation/addLanguagePrefixes'
 import stripTrailingHomeSlug from '../url/stripTrailingHomeSlug'
 
 function generateRoutesFromData(
@@ -34,11 +36,14 @@ function generateRoutesFromData(
     data: {},
     sections: ['pages'],
     homeSlug: 'home',
+    defaultLanguage: 'de',
     debug: false
   }
 ) {
   try {
-    const { data, sections, homeSlug } = options
+    const { data, sections, homeSlug, defaultLanguage } = options
+
+    const clonedData = _cloneDeep(data)
 
     if (options.debug) {
       console.log('📇 generateRoutesFromData options: ', options)
@@ -49,17 +54,29 @@ function generateRoutesFromData(
     // which has nested pages, to be represented in the navigation
     // if your data is on one level only, even better.
     const flattenedData = flattenNavigation({
-      navigationData: data,
+      navigationData: clonedData,
       sections
     })
+
+    // add language prefixes like:
+    // uri: 'parent-page/nested-page' ==> uri: 'en/parent-page/nested-page'
+    // for every language except the default language
+    // (we have to do this because on entry level in craft we don't know the language (or the prefix))
+    // but for that we need to know the default language
+    const prefixedData = addLanguagePrefixes({
+      navigationData: flattenedData,
+      defaultLanguage
+    })
+
+    console.log('prefixedData: ', prefixedData)
 
     let routes = []
 
     // go through each language
-    Object.keys(flattenedData).map(lang => {
+    Object.keys(prefixedData).map(lang => {
       // and through each section
       sections.forEach(section => {
-        const entryURIs = flattenedData[lang][section].map(entry => entry.uri)
+        const entryURIs = prefixedData[lang][section].map(entry => entry.uri)
         routes.push(...entryURIs)
       })
     })
@@ -84,7 +101,7 @@ function generateRoutesFromData(
     return routes
   } catch (e) {
     console.log(
-      'generateRoutesFromData: 🗃 ❌ generateRoutesFromDatas() failed: ',
+      'generateRoutesFromData: 🗃 ❌ generateRoutesFromData() failed: ',
       e
     )
   }
