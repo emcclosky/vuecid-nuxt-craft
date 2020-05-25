@@ -9,9 +9,13 @@ exports["default"] = void 0;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
+var _lodash = _interopRequireDefault(require("lodash.clonedeep"));
+
 var _vuecidHelpers = require("@wearelucid/vuecid-helpers");
 
 var _flattenNavigation = _interopRequireDefault(require("../navigation/flattenNavigation"));
+
+var _addLanguagePrefixes = _interopRequireDefault(require("../navigation/addLanguagePrefixes"));
 
 var _stripTrailingHomeSlug = _interopRequireDefault(require("../url/stripTrailingHomeSlug"));
 
@@ -42,13 +46,16 @@ function generateRoutesFromData() {
     data: {},
     sections: ['pages'],
     homeSlug: 'home',
+    defaultLanguage: 'de',
     debug: false
   };
 
   try {
     var data = options.data,
         sections = options.sections,
-        homeSlug = options.homeSlug;
+        homeSlug = options.homeSlug,
+        defaultLanguage = options.defaultLanguage;
+    var clonedData = (0, _lodash["default"])(data);
 
     if (options.debug) {
       console.log('📇 generateRoutesFromData options: ', options);
@@ -59,17 +66,27 @@ function generateRoutesFromData() {
 
 
     var flattenedData = (0, _flattenNavigation["default"])({
-      navigationData: data,
+      navigationData: clonedData,
       sections: sections
+    }); // add language prefixes like:
+    // uri: 'parent-page/nested-page' ==> uri: 'en/parent-page/nested-page'
+    // for every language except the default language
+    // (we have to do this because on entry level in craft we don't know the language (or the prefix))
+    // but for that we need to know the default language
+
+    var prefixedData = (0, _addLanguagePrefixes["default"])({
+      data: flattenedData,
+      defaultLanguage: defaultLanguage
     });
+    console.log('prefixedData: ', prefixedData);
     var routes = []; // go through each language
 
-    Object.keys(flattenedData).map(function (lang) {
+    Object.keys(prefixedData).map(function (lang) {
       // and through each section
       sections.forEach(function (section) {
         var _routes;
 
-        var entryURIs = flattenedData[lang][section].map(function (entry) {
+        var entryURIs = prefixedData[lang][section].map(function (entry) {
           return entry.uri;
         });
 
@@ -94,7 +111,7 @@ function generateRoutesFromData() {
 
     return routes;
   } catch (e) {
-    console.log('generateRoutesFromData: 🗃 ❌ generateRoutesFromDatas() failed: ', e);
+    console.log('generateRoutesFromData: 🗃 ❌ generateRoutesFromData() failed: ', e);
   }
 }
 

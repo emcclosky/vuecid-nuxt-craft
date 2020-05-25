@@ -35,6 +35,12 @@ Object.defineProperty(exports, "generateDataJSON", {
     return _generateDataJSON["default"];
   }
 });
+Object.defineProperty(exports, "fetchFromGraphQL", {
+  enumerable: true,
+  get: function get() {
+    return _fetchFromGraphQL["default"];
+  }
+});
 Object.defineProperty(exports, "loadPreview", {
   enumerable: true,
   get: function get() {
@@ -47,10 +53,22 @@ Object.defineProperty(exports, "flattenNavigation", {
     return _flattenNavigation["default"];
   }
 });
+Object.defineProperty(exports, "addLanguagePrefixes", {
+  enumerable: true,
+  get: function get() {
+    return _addLanguagePrefixes["default"];
+  }
+});
 Object.defineProperty(exports, "generateMetaFromSeomatic", {
   enumerable: true,
   get: function get() {
     return _generateMetaFromSeomatic["default"];
+  }
+});
+Object.defineProperty(exports, "saveFile", {
+  enumerable: true,
+  get: function get() {
+    return _saveFile["default"];
   }
 });
 
@@ -64,8 +82,14 @@ var _generateRoutesFromData = _interopRequireDefault(require("./routes/generateR
 
 var _generateDataJSON = _interopRequireDefault(require("./data/generateDataJSON"));
 
+var _fetchFromGraphQL = _interopRequireDefault(require("./data/fetchFromGraphQL"));
+
 var _loadPreview = _interopRequireDefault(require("./preview/loadPreview"));
 
 var _flattenNavigation = _interopRequireDefault(require("./navigation/flattenNavigation"));
 
+var _addLanguagePrefixes = _interopRequireDefault(require("./navigation/addLanguagePrefixes"));
+
 var _generateMetaFromSeomatic = _interopRequireDefault(require("./meta/generateMetaFromSeomatic"));
+
+var _saveFile = _interopRequireDefault(require("./utilities/saveFile"));

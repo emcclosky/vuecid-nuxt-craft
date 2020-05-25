@@ -64,7 +64,7 @@ function generateRoutesFromData(
     // (we have to do this because on entry level in craft we don't know the language (or the prefix))
     // but for that we need to know the default language
     const prefixedData = addLanguagePrefixes({
-      navigationData: flattenedData,
+      data: flattenedData,
       defaultLanguage
     })
 
