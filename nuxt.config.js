@@ -234,21 +234,6 @@ export default {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active-exact',
     middleware: ['i18n-middleware']
-    // extendRoutes(routes) {
-    //   // extends basic routes (based on your files/folders in pages directory) with i18n locales (from our config.js)
-    //   const newRoutes = generateLocalizedRoutes({
-    //     baseRoutes: routes,
-    //     defaultLang: config.env.DEFAULTLANG,
-    //     langs: config.env.LANGS,
-    //     routeAliases: config.routeAliases
-    //   })
-
-    //   // Clear array
-    //   routes.splice(0, routes.length)
-
-    //   // Push newly created routes
-    //   routes.push(...newRoutes)
-    // }
   },
 
   /*

@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
-import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
-// import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
+// import { saveFile } from '@wearelucid/vuecid-craft-helpers'
+import saveFile from './packages/vuecid-craft-helpers/dist/utilities/saveFile.js'
+// import { fetchFromGraphQL } from '@wearelucid/vuecid-craft-helpers'
+import fetchFromGraphQL from './packages/vuecid-craft-helpers/dist/data/fetchFromGraphQL.js'
+// import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
+import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
+// import { addLanguagePrefixes } from '@wearelucid/vuecid-craft-helpers'
+import addLanguagePrefixes from './packages/vuecid-craft-helpers/dist/navigation/addLanguagePrefixes.js'
 import config from './config.js'
 
 // gql files can't just be imported in node: https://github.com/ardatan/graphql-import-node
@@ -21,7 +27,7 @@ const endpoint = useLocalDB
 
 console.log('endpoint: ', endpoint)
 
-function fetchNavigations() {
+async function fetchNavigations() {
   console.log('📡 Fetch navigations...')
   // List the craft sections that should be fetched to generate the navigations JSON
   const sections = config.sections
@@ -31,15 +37,30 @@ function fetchNavigations() {
   const settings = {
     endpoint,
     graphQLQuery,
-    compressJSON: true, // setting this to false may help debugging :-)
     sections,
     propertiesToFilter: ['appearsInNavigation'],
-    bundleName: 'navigations',
-    savePath: './static/data',
     langs
   }
 
-  generateDataJSON(settings)
+  // fetch data without saving (we need to run some specific transforms first)
+  // also it is impossible to pass on the transforms to the generateDataJSON function,
+  // because some options that we need to pass are very speficic
+  let data = await fetchFromGraphQL(settings)
+
+  // transform the data
+  // all the entries which belong non-default language, should be prefixed with the locale
+  data = addLanguagePrefixes({
+    data,
+    defaultLanguage: config.env.DEFAULTLANG
+  })
+
+  // and now save file to .json, which is normally done by generateDataJSON()
+  saveFile({
+    data,
+    bundleName: 'navigations',
+    savePath: './static/data',
+    compressJSON: true // setting this to false may help debugging :-)
+  })
 }
 
 function fetchGlobalSettings() {
@@ -58,6 +79,7 @@ function fetchGlobalSettings() {
     langs
   }
 
+  // fetch and save
   generateDataJSON(settings)
 }
 
@@ -78,6 +100,7 @@ function fetchAllEntriesWithRoute() {
     langs
   }
 
+  // fetch and save
   generateDataJSON(settings)
 }
 

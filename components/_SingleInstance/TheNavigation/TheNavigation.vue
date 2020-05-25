@@ -74,7 +74,10 @@ export default {
       return `${langPrefix}${route}`
     },
     verifyLeadingSlash(slug) {
-      return verifyLeadingSlash(slug)
+      if (slug) {
+        return verifyLeadingSlash(slug)
+      }
+      return slug
     },
     handleKeyboardEvent(e) {
       const key = e.which || e.keyCode
@@ -116,7 +119,7 @@ export default {
             >
               <nuxt-link
                 class="TheNavigation__link"
-                :to="prepareNuxtLink(item.uri)"
+                :to="verifyLeadingSlash(item.uri)"
                 :exact="isHomeSlug(item.uri)"
                 :tabIndex="navMenuOpen ? 0 : -1"
               >
@@ -136,7 +139,7 @@ export default {
                 >
                   <nuxt-link
                     class="TheNavigation__link"
-                    :to="prepareNuxtLink(child.uri)"
+                    :to="verifyLeadingSlash(child.uri)"
                     :tabIndex="navMenuOpen ? 0 : -1"
                   >
                     <!-- eslint-disable-next-line vue/no-v-html -->
@@ -157,7 +160,7 @@ export default {
                   <BBtn
                     :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
                     naked
-                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : prepareTranslatedNuxtLink(item.path, item.lang)"
+                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : verifyLeadingSlash(item.path)"
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"
