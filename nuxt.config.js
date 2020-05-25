@@ -1,5 +1,5 @@
-// import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
-import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
+import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
+// import generateRoutesFromData from './packages/vuecid-craft-helpers/src/routes/generateRoutesFromData.js'
 import config from './config'
 
 export default {

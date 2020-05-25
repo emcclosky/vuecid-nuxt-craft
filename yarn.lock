@@ -3010,10 +3010,10 @@
     "@babel/core" "^7.1.0"
     bows "^1.7.1"
 
-"@wearelucid/vuecid-craft-helpers@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.9.0.tgz#43f02a7d95d8f5254ea93887eaee95e58c2a2658"
-  integrity sha512-WcAODRI1u0FMKWiiZd8kTA5RkoaU1O+dTJpJNVAssoFbvcLtpq1q/U9uEU3E4T1ZLfFqqqiELjMETeJ7k7j/VA==
+"@wearelucid/vuecid-craft-helpers@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@wearelucid/vuecid-craft-helpers/-/vuecid-craft-helpers-0.10.0.tgz#f9a9e443adfc8b5685dfc803da500b96d437a35d"
+  integrity sha512-3lujinHQ7k3lK/iNxufY3iV1Ke62gb10CUNryFRFMe7kRJenOtxizWEivxiLSUmkeOHDj7P5U5X1rrqRcQ45DA==
   dependencies:
     "@babel/core" "^7.5.5"
     "@wearelucid/vuecid-helpers" "^3.0.0"
@@ -3021,6 +3021,7 @@
     fs "^0.0.1-security"
     graphql-import-node "^0.0.4"
     graphql-tag "^2.10.1"
+    lodash.clonedeep "^4.5.0"
 
 "@wearelucid/vuecid-helpers@^3.0.0", "@wearelucid/vuecid-helpers@v3.0.1":
   version "3.0.1"

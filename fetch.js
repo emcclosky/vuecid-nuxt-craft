@@ -1,12 +1,17 @@
-/* eslint-disable no-console */
-// import { saveFile } from '@wearelucid/vuecid-craft-helpers'
-import saveFile from './packages/vuecid-craft-helpers/dist/utilities/saveFile.js'
-// import { fetchFromGraphQL } from '@wearelucid/vuecid-craft-helpers'
-import fetchFromGraphQL from './packages/vuecid-craft-helpers/dist/data/fetchFromGraphQL.js'
-// import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
-import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
-// import { addLanguagePrefixes } from '@wearelucid/vuecid-craft-helpers'
-import addLanguagePrefixes from './packages/vuecid-craft-helpers/dist/navigation/addLanguagePrefixes.js'
+/* eslint-disable no-console, import/no-duplicates */
+
+import { saveFile } from '@wearelucid/vuecid-craft-helpers'
+// import saveFile from './packages/vuecid-craft-helpers/dist/utilities/saveFile.js'
+
+import { fetchFromGraphQL } from '@wearelucid/vuecid-craft-helpers'
+// import fetchFromGraphQL from './packages/vuecid-craft-helpers/dist/data/fetchFromGraphQL.js'
+
+import { generateDataJSON } from '@wearelucid/vuecid-craft-helpers'
+// import generateDataJSON from './packages/vuecid-craft-helpers/dist/data/generateDataJSON.js'
+
+import { addLanguagePrefixes } from '@wearelucid/vuecid-craft-helpers'
+// import addLanguagePrefixes from './packages/vuecid-craft-helpers/dist/navigation/addLanguagePrefixes.js'
+
 import config from './config.js'
 
 // gql files can't just be imported in node: https://github.com/ardatan/graphql-import-node
