@@ -65,6 +65,9 @@ export default async function loadPreview(
           console.warn(
             'Tried to fetch a preview, but no entries found from axios request'
           )
+          if (!isDev && endpointBase.startsWith(env.BACKENDURLPRODUCTION)) {
+            console.warn('You seem to fetch from remote. Are you you requesting the remote frontend as well?...') // prettier-ignore
+          }
           return false
         }
       })

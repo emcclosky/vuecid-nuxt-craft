@@ -100,6 +100,7 @@ export default {
   beforeMount: async function() { // eslint-disable-line
     // check preview and fetch actual data
     const slug = removeLeadingSlash(this.$route.params.slug3 || this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG) // eslint-disable-line
+    this.log('Fetching preview for slug: ', slug, ' – with queries: ', this.$route.query, ' ...') // prettier-ignore
     this.previewData = await loadPreview({
       slug,
       env: config.env,
