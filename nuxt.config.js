@@ -138,7 +138,7 @@ export default {
           short_name: config.shortTitle,
           theme_color: config.themeColor,
           start_url: '/',
-          display: 'standalone',
+          display: 'browser',
           background_color: '#fff',
           description: config.siteDescription,
         },
