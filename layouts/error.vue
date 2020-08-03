@@ -4,7 +4,7 @@
  * https://nuxtjs.org/guide/views/#error-page
  */
 import { mapState } from 'vuex'
-import CenterContent from '~/components/examples/CenterContent/CenterContent.vue'
+import CenterContent from '~/components/Examples/CenterContent/CenterContent.vue'
 
 export default {
   components: {
