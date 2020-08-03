@@ -79,7 +79,7 @@ function _loadPreview() {
               if (result && result.data && result.data.data && result.data.data.entries[0]) {
                 return result.data.data.entries[0];
               } else {
-                console.warn('Tried to fetch a preview, but no entries found from axios request');
+                console.warn('Tried to fetch a preview, but no entries found from axios request. Doublecheck your env (local vs remote).', 'You are now trying to fetch from: ', endpoint);
                 return false;
               }
             })["catch"](function (error) {
