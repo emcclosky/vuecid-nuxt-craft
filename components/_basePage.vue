@@ -9,6 +9,7 @@ import seomaticQuery from '~/apollo/queries/seomatic'
 const routeSlug = context => {
   // function up here for DRY reasons
   return (
+    context.$route.params.slug3 ||
     context.$route.params.slug2 ||
     context.$route.params.slug ||
     config.env.HOMESLUG
@@ -20,13 +21,17 @@ export default {
     seomatic: {
       query: seomaticQuery,
       prefetch: ({ route }) => ({
-        slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+        slug: removeLeadingSlash(route.params.slug3 || route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
         let uri = routeSlug(this)
         uri = removeLeadingSlash(uri)
         // check if we are on home slugs, if so we need to build our URI to pass onto seomatic
-        if (!this.$route.params.slug2 && !this.$route.params.slug) {
+        if (
+          !this.$route.params.slug3 &&
+          !this.$route.params.slug2 &&
+          !this.$route.params.slug
+        ) {
           uri = `${config.env.HOMESLUG}`
         } else {
           // if there is a slug we can just take the fullPath as URI to pass to seomatic

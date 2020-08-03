@@ -3,8 +3,13 @@
  * Warning: Though this file is placed in the layouts folder, it should be treated as a page.
  * https://nuxtjs.org/guide/views/#error-page
  */
+import { mapState } from 'vuex'
+import CenterContent from '~/components/examples/CenterContent/CenterContent.vue'
 
 export default {
+  components: {
+    CenterContent
+  },
   props: {
     error: {
       type: Object,
@@ -12,6 +17,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('ui', ['previewActive']),
     statusCode() {
       return (this.error && this.error.statusCode) || 404
     },
@@ -23,6 +29,14 @@ export default {
       return this.statusCode === 404
         ? this.$t('error.404')
         : this.$t('error.message')
+    },
+    // for newly created pages that are not deployed the user sees a 404
+    // let's give him a hint that he needs to deploy first to make previews work.
+    previewHint() {
+      if (this.previewActive && this.statusCode === 404) {
+        return this.$t('error.previewHint404')
+      }
+      return false
     }
   },
   methods: {
@@ -48,9 +62,15 @@ export default {
 
 <template>
   <div class="Page Page--error">
-    <BHeading :level="1">Error {{ statusCode }}</BHeading>
-    <BRichtext :content="message" />
-    <br />
-    <BBtn @click.native="clearError">{{ $t('error.link') }}</BBtn>
+    <CenterContent :modifiers="['centered']">
+      <BHeading :level="1">Error {{ statusCode }}</BHeading>
+      <BRichtext :content="message" />
+      <BHeading v-if="previewHint" :level="2">{{
+        $t('error.previewHintTitle')
+      }}</BHeading>
+      <BRichtext v-if="previewHint" :content="previewHint" />
+      <br />
+      <BBtn @click.native="clearError">{{ $t('error.link') }}</BBtn>
+    </CenterContent>
   </div>
 </template>

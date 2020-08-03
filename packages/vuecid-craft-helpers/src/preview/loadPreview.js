@@ -63,11 +63,10 @@ export default async function loadPreview(
           return result.data.data.entries[0]
         } else {
           console.warn(
-            'Tried to fetch a preview, but no entries found from axios request'
+            'Tried to fetch a preview, but no entries found from axios request. Doublecheck your env (local vs remote).',
+            'You are now trying to fetch from: ',
+            endpoint
           )
-          if (!isDev && endpointBase.startsWith(env.BACKENDURLPRODUCTION)) {
-            console.warn('You seem to fetch from remote. Are you you requesting the remote frontend as well?...') // prettier-ignore
-          }
           return false
         }
       })
