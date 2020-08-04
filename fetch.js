@@ -44,7 +44,7 @@ async function fetchNavigations() {
     graphQLQuery,
     sections,
     propertiesToFilter: ['appearsInNavigation'],
-    langs
+    langs,
   }
 
   // fetch data without saving (we need to run some specific transforms first)
@@ -56,7 +56,7 @@ async function fetchNavigations() {
   // all the entries which belong non-default language, should be prefixed with the locale
   data = addLanguagePrefixes({
     data,
-    defaultLanguage: config.env.DEFAULTLANG
+    defaultLanguage: config.env.DEFAULTLANG,
   })
 
   // and now save file to .json, which is normally done by generateDataJSON()
@@ -64,7 +64,7 @@ async function fetchNavigations() {
     data,
     bundleName: 'navigations',
     savePath: './static/data',
-    compressJSON: true // setting this to false may help debugging :-)
+    compressJSON: true, // setting this to false may help debugging :-)
   })
 }
 
@@ -81,7 +81,7 @@ function fetchGlobalSettings() {
     bundleName: 'globals',
     graphQLQueryName: 'globalSet', // if passed specifically this property of object is returned, if not defined 'entries' is taken
     savePath: './static/data',
-    langs
+    langs,
   }
 
   // fetch and save
@@ -102,7 +102,7 @@ function fetchAllEntriesWithRoute() {
     sections,
     bundleName: 'allEntries',
     savePath: './static/data',
-    langs
+    langs,
   }
 
   // fetch and save

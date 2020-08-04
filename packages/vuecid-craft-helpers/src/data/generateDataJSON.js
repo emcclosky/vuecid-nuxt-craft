@@ -12,7 +12,7 @@ export default async function generateDataJSON({
   savePath,
   bundleName,
   langs = [],
-  transforms = []
+  transforms = [],
 } = {}) {
   let entries = {}
 
@@ -23,7 +23,7 @@ export default async function generateDataJSON({
       sections,
       graphQLQueryName,
       langs,
-      propertiesToFilter
+      propertiesToFilter,
     })
 
     // save entries for each site in one file
@@ -31,7 +31,7 @@ export default async function generateDataJSON({
       data: entries,
       bundleName,
       savePath,
-      compressJSON
+      compressJSON,
     })
   } catch (e) {
     console.log('generateDataJSON: 📡💾❌ fetching and generating data json failed 😢: ', e) // prettier-ignore

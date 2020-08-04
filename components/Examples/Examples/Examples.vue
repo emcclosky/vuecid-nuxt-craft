@@ -6,7 +6,7 @@ export default {
   name: 'Examples',
   components: {
     DemoGrid,
-    Styleguide
+    Styleguide,
   },
   data() {
     // This is an example on how we want an image object coming from craft to look like.
@@ -27,18 +27,18 @@ export default {
         sizes: {
           small: testImageSmall,
           medium: testImageMedium,
-          large: testImageLarge
-        }
+          large: testImageLarge,
+        },
       },
       lazyLoadedVideoExample: {
-        data_src: 'https://www.youtube.com/embed/3e4nQTFhieo'
-      }
+        data_src: 'https://www.youtube.com/embed/3e4nQTFhieo',
+      },
     }
   },
   mounted() {
     // Type `localStorage.debug = true` in your console to get fancy logs
     this.log('Hello universe')
-  }
+  },
 }
 </script>
 

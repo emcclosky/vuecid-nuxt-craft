@@ -20,7 +20,7 @@ if (verbose) {
 fetch(endpoint, {
   method: 'POST',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     variables: {},
@@ -36,14 +36,14 @@ fetch(endpoint, {
           }
         }
       }
-    `
-  })
+    `,
+  }),
 })
-  .then(result => result.json())
-  .then(result => {
+  .then((result) => result.json())
+  .then((result) => {
     // here we're filtering out any type information unrelated to unions or interfaces
     const filteredData = result.data.__schema.types.filter(
-      type => type.possibleTypes !== null
+      (type) => type.possibleTypes !== null
     )
 
     result.data.__schema.types = filteredData
@@ -51,7 +51,7 @@ fetch(endpoint, {
     fs.writeFileSync(
       './apollo/fragmentTypes.json',
       JSON.stringify(result.data),
-      err => {
+      (err) => {
         if (err) {
           console.error('Error writing fragmentTypes file', err) // eslint-disable-line no-console
         } else {
@@ -62,6 +62,6 @@ fetch(endpoint, {
 
     console.log('✅ – Successfully built "./apollo/fragmentTypes.json" 📟 ') // eslint-disable-line no-console
   })
-  .catch(error => {
+  .catch((error) => {
     console.warn('❌ – Error while generating apollo fragmentTypes: ', error) // eslint-disable-line no-console
   })

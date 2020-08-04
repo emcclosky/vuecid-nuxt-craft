@@ -4,25 +4,25 @@ import PostsList from '~/components/Examples/PostsList/PostsList.vue'
 export default {
   name: 'Paginate',
   components: {
-    PostsList
+    PostsList,
   },
   props: {
     itemList: {
       type: Array,
       default: () => [],
-      required: true
+      required: true,
     },
     pagesTotal: {
       type: Number,
       default: 0,
-      required: true
+      required: true,
     },
     currentPaginationPage: {
       type: Number,
       default: 1,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

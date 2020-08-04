@@ -11,8 +11,8 @@ export default {
     // If you change these settings, you need to rerun `$ yarn dev`
     paths: {
       en: '/news/:postslug',
-      de: '/neuigkeiten/:postslug'
-    }
+      de: '/neuigkeiten/:postslug',
+    },
   },
   apollo: {
     // TODO: Add seomatic, get inspired in _basePage.vue
@@ -23,7 +23,9 @@ export default {
       }),
       variables() {
         const slug = removeLeadingSlash(this.$route.params.postslug) // prettier-ignore
-        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
+        const site = this.$i18n.locales.find(
+          (l) => l.code === this.$i18n.locale
+        )
         // get craft site handle depending on language
         return { slug, site }
       },
@@ -35,22 +37,22 @@ export default {
               'throwError',
               {
                 statusCode: 404,
-                message: `Newspage with slug «${this.$route.params.postslug}» was not found`
+                message: `Newspage with slug «${this.$route.params.postslug}» was not found`,
               },
               { root: true }
             )
           }
           this.page = result.data.entries[0]
         }
-      }
-    }
+      },
+    },
   },
   async asyncData({ params, env, query, route, app }) {
     const previewData = await loadPreview({
       params,
       env,
       query,
-      graphQLQuery: news
+      graphQLQuery: news,
     })
     if (previewData) {
       return { ...previewData }
@@ -59,7 +61,7 @@ export default {
   },
   data: () => {
     return {
-      page: null
+      page: null,
     }
   },
   mounted() {
@@ -76,10 +78,10 @@ export default {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       frontendUrl: config.env.FRONTENDURLPRODUCTION,
-      lang: this.$i18n.locale
+      lang: this.$i18n.locale,
       // ,debug: true
     })
-  }
+  },
 }
 </script>
 

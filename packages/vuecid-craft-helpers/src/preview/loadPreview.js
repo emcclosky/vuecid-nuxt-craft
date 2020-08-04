@@ -24,7 +24,7 @@ export default async function loadPreview(
     query: '', // query params, we are looking for tokens
     env: {},
     isDev: false,
-    graphQLQuery: '' // the passed .gql files content
+    graphQLQuery: '', // the passed .gql files content
   }
 ) {
   const { query, slug, env, graphQLQuery, isDev } = options
@@ -50,10 +50,10 @@ export default async function loadPreview(
         query: print(graphQLQuery),
         variables: {
           slug,
-          site: query.site || 'default'
-        }
+          site: query.site || 'default',
+        },
       })
-      .then(result => {
+      .then((result) => {
         if (
           result &&
           result.data &&
@@ -70,12 +70,12 @@ export default async function loadPreview(
           return false
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('error: ', error)
       })
     return {
       ...previewData,
-      preview: true
+      preview: true,
     }
   }
 

@@ -8,7 +8,7 @@ async function fetch({
   section,
   graphQLQueryName,
   language,
-  propertiesToFilter
+  propertiesToFilter,
 }) {
   let result = await axios
     .post(endpoint, {
@@ -17,8 +17,8 @@ async function fetch({
       query: print(graphQLQuery),
       variables: {
         section, // may be undefined...
-        site: language.handle || 'default'
-      }
+        site: language.handle || 'default',
+      },
     })
     .then(({ data }) => {
       return data.data[graphQLQueryName]
@@ -28,8 +28,8 @@ async function fetch({
   // Assuming that the property is a checkbox, where craft returns an empty array if false.
   // e.g.: "appearsInNavigation": [] || "appearsInNavigation": ["true"],
   if (propertiesToFilter && propertiesToFilter.length) {
-    propertiesToFilter.forEach(property => {
-      result = result.filter(entry => {
+    propertiesToFilter.forEach((property) => {
+      result = result.filter((entry) => {
         // if the entry does not even have the key we return
         if (!entry[property]) return true
         // check if first array item is true, then leave entry in array
@@ -48,7 +48,7 @@ export default async function fetchFromGraphQL({
   graphQLQueryName = 'entries', // normally 'entries' are returned, but in other cases we need to pass the query name like 'globalSet'
   langs = [],
   transforms = [],
-  propertiesToFilter
+  propertiesToFilter,
 } = {}) {
   const entries = {}
   try {
@@ -67,7 +67,7 @@ export default async function fetchFromGraphQL({
             section,
             graphQLQueryName,
             language,
-            propertiesToFilter
+            propertiesToFilter,
           })
         }
       } else {
@@ -78,7 +78,7 @@ export default async function fetchFromGraphQL({
           graphQLQuery,
           graphQLQueryName,
           language,
-          propertiesToFilter
+          propertiesToFilter,
         })
       }
     }

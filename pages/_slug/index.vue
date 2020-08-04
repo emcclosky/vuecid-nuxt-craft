@@ -12,7 +12,7 @@ export default {
     return {
       // page: false
     }
-  }
+  },
 }
 </script>
 

@@ -45,12 +45,12 @@ export default {
       nameFieldName: this.$t('ui.name'),
       firstNameFieldName: this.$t('ui.firstName'),
       titleFieldName: this.$t('ui.salutation'),
-      subscription_link: false
+      subscription_link: false,
     }
   },
   computed: {
     ...mapGetters(['currentLang']),
-    ...mapGetters('data', ['options'])
+    ...mapGetters('data', ['options']),
   },
   mounted() {
     // Prepare Mailchimp List URL
@@ -92,8 +92,8 @@ export default {
           LNAME: this.name,
           FNAME: this.firstName,
           callbackQuery: 'c',
-          callbackName: 'jsonpFunc'
-        }).then(json => {
+          callbackName: 'jsonpFunc',
+        }).then((json) => {
           this.loading = false
           if (json.result === 'success') {
             this.formSuccess = true
@@ -106,8 +106,8 @@ export default {
       } else {
         this.loading = false
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -177,8 +177,8 @@ export default {
               'NewsletterForm__input NewsletterForm__input--text',
               {
                 'NewsletterForm__input--error': errors.has(firstNameFieldName),
-                'has-content': firstName.length
-              }
+                'has-content': firstName.length,
+              },
             ]"
             :name="firstNameFieldName"
             :placeholder="$t('ui.firstName')"
@@ -211,8 +211,8 @@ export default {
               'NewsletterForm__input NewsletterForm__input--text',
               {
                 'NewsletterForm__input--error': errors.has(nameFieldName),
-                'has-content': name.length
-              }
+                'has-content': name.length,
+              },
             ]"
             :name="nameFieldName"
             :placeholder="$t('ui.name')"
@@ -245,8 +245,8 @@ export default {
               'NewsletterForm__input',
               {
                 'NewsletterForm__input--error': errors.has(emailFieldName),
-                'has-content': emailString.length
-              }
+                'has-content': emailString.length,
+              },
             ]"
             :name="emailFieldName"
             :placeholder="$t('ui.mail')"
@@ -293,8 +293,8 @@ export default {
             {
               'NewsletterForm__message-container--success': formSuccess,
               'NewsletterForm__message-container--error':
-                !formSuccess && formMessage
-            }
+                !formSuccess && formMessage,
+            },
           ]"
         >
           <!-- vhtml is needed to properly display return message from Mailchimp -->

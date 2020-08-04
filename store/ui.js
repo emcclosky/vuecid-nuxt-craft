@@ -21,13 +21,13 @@ export const state = () => ({
   navMenuOpen: false,
   breakpoints: bps(),
   breakpointPrevious: {
-    name: null
+    name: null,
   },
   breakpointCurrent: {
-    name: null
+    name: null,
   },
   currentPaginationPage: 1,
-  previewActive: false
+  previewActive: false,
 })
 
 export const actions = {
@@ -44,7 +44,7 @@ export const actions = {
     if (!state.previewActive) {
       commit('ACTIVATE_PREVIEW_ALERT')
     }
-  }
+  },
 }
 
 export const mutations = {
@@ -81,13 +81,13 @@ export const mutations = {
   },
   ACTIVATE_PREVIEW_ALERT(state) {
     state.previewActive = true
-  }
+  },
 }
 
 export const getters = {
-  currentPaginationPage: state =>
+  currentPaginationPage: (state) =>
     state && state.currentPaginationPage ? state.currentPaginationPage : 1,
-  navMenuOpen: state => state.navMenuOpen,
-  showMobileNavigation: state =>
-    state.breakpointCurrent.innerWidth < state.breakpoints.medium
+  navMenuOpen: (state) => state.navMenuOpen,
+  showMobileNavigation: (state) =>
+    state.breakpointCurrent.innerWidth < state.breakpoints.medium,
 }

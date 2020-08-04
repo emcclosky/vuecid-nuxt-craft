@@ -3,8 +3,8 @@ export default {
   computed: {
     slug() {
       return this.$route.params.childslug
-    }
-  }
+    },
+  },
 }
 </script>
 

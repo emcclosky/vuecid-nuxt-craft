@@ -61,6 +61,6 @@ export const linkHelpersMixin = {
         return '_self'
       }
       return target || '_blank'
-    }
-  }
+    },
+  },
 }

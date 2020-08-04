@@ -5,8 +5,8 @@ export default {
     component: {
       type: [Boolean, Object],
       required: true,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     title() {
@@ -14,8 +14,8 @@ export default {
     },
     text() {
       return this.component.baseText || false
-    }
-  }
+    },
+  },
 }
 </script>
 

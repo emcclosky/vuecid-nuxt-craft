@@ -7,10 +7,10 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
   },
   extends: [
     'eslint:recommended',
@@ -18,12 +18,10 @@ module.exports = {
     'plugin:nuxt/recommended',
     'plugin:prettier/recommended',
     'prettier',
-    'prettier/vue'
+    'prettier/vue',
   ],
   // required to lint *.vue files
-  plugins: [
-    'prettier'
-  ],
+  plugins: ['prettier'],
   rules: {
     'prettier/prettier': 'warn',
     semi: [2, 'never'],
@@ -36,15 +34,25 @@ module.exports = {
     'vue/require-component-is': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
-    'vue/attribute-hyphenation': ["error", "always", {
-      "ignore": ['tabIndex']
-    }],
+    'vue/attribute-hyphenation': [
+      'error',
+      'always',
+      {
+        ignore: ['tabIndex'],
+      },
+    ],
     'vue/component-name-in-template-casing': [
       'warn',
       'PascalCase',
       {
-        ignores: ['nuxt', 'nuxt-link', 'client-only', 'component', 'transition']
-      }
-    ]
-  }
+        ignores: [
+          'nuxt',
+          'nuxt-link',
+          'client-only',
+          'component',
+          'transition',
+        ],
+      },
+    ],
+  },
 }

@@ -19,7 +19,7 @@ for (const key in breakpoints) {
 const config = {
   debounceTime: 20,
   experimental: false,
-  breakpoints
+  breakpoints,
 }
 
 const components = { ...new Ctor(Vue, config) }

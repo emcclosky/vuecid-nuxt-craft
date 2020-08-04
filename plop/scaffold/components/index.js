@@ -2,7 +2,7 @@ const path = require('path')
 const changeCase = require('change-case')
 
 module.exports = (plop, config) => {
-  plop.setHelper('toLowerCase', function(text) {
+  plop.setHelper('toLowerCase', function (text) {
     return text.toLowerCase()
   })
 
@@ -13,17 +13,17 @@ module.exports = (plop, config) => {
         type: 'input',
         message: 'Component name',
         name: 'componentName',
-        validate: value => {
+        validate: (value) => {
           if (!value.length) return 'A component name is required.'
           if (!value.match(/^[a-zA-Z]+$/))
             return 'A component name can only contain letters.'
           if (changeCase.pascalCase(value) !== value)
             return 'A component name must be written in PascalCase.'
           return true
-        }
-      }
+        },
+      },
     ],
-    actions: answers => {
+    actions: (answers) => {
       const actions = [
         {
           type: 'add',
@@ -33,7 +33,7 @@ module.exports = (plop, config) => {
             answers.componentName,
             answers.componentName + '.vue'
           ),
-          templateFile: path.resolve(__dirname, 'component.hbs')
+          templateFile: path.resolve(__dirname, 'component.hbs'),
         },
         {
           type: 'add',
@@ -43,11 +43,11 @@ module.exports = (plop, config) => {
             answers.componentName,
             answers.componentName + '.scss'
           ),
-          templateFile: path.resolve(__dirname, 'component.scss.hbs')
-        }
+          templateFile: path.resolve(__dirname, 'component.scss.hbs'),
+        },
       ]
 
       return actions
-    }
+    },
   })
 }

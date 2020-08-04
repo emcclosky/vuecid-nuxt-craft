@@ -1,6 +1,6 @@
 // Inspired by https://www.npmjs.com/package/plop-generator-redux
 
-module.exports = function(plop) {
+module.exports = function (plop) {
   // controller generator
   plop.setGenerator('setup', {
     description: 'Setup your project to your liking:',
@@ -13,16 +13,16 @@ module.exports = function(plop) {
         choices: [
           {
             name: 'Susy',
-            value: 'susy'
+            value: 'susy',
           },
           {
             name: 'Nothing',
-            value: 'nothing'
-          }
-        ]
-      }
+            value: 'nothing',
+          },
+        ],
+      },
     ],
-    actions: data => {
+    actions: (data) => {
       let actions = []
 
       // If user wants to add susy
@@ -31,17 +31,17 @@ module.exports = function(plop) {
           {
             type: 'add',
             path: 'app/modules/{{camelCase name}}.model.js',
-            templateFile: 'plop-templates/model.js'
+            templateFile: 'plop-templates/model.js',
           },
           {
             type: 'add',
             path: 'app/tests/{{camelCase name}}.model.tests.js',
-            templateFile: 'plop-templates/model.tests.js'
-          }
+            templateFile: 'plop-templates/model.tests.js',
+          },
         ])
       }
 
       return actions
-    }
+    },
   })
 }

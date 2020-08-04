@@ -9,7 +9,7 @@ export default {
   name: 'TheNavigation',
   data: () => {
     return {
-      section: config.sectionsInNavigation
+      section: config.sectionsInNavigation,
     }
   },
   computed: {
@@ -26,9 +26,9 @@ export default {
 
       return {
         slug,
-        hasNoTranslation
+        hasNoTranslation,
       }
-    }
+    },
   },
   mounted() {
     if (process.browser) {
@@ -85,8 +85,8 @@ export default {
         // Esc key
         this.closeMenu()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -113,7 +113,7 @@ export default {
                 'TheNavigation__item',
                 item.children && item.children.length
                   ? 'TheNavigation__item--has-children'
-                  : ''
+                  : '',
               ]"
               @click="closeMenu"
             >

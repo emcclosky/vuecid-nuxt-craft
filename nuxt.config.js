@@ -16,7 +16,7 @@ export default {
     title: '…', // Indicate loading during navigation
     htmlAttrs: {
       lang: config.env.DEFAULTLANG,
-      dir: 'ltr'
+      dir: 'ltr',
     },
     meta: [
       { charset: 'utf-8' },
@@ -25,17 +25,17 @@ export default {
       { name: 'theme-color', content: config.themeColor },
       {
         name: 'google-site-verification',
-        content: config.googleSiteVerification
+        content: config.googleSiteVerification,
       },
       {
         name: 'msvalidate.01',
-        content: config.bingSiteVerification
-      }
+        content: config.bingSiteVerification,
+      },
     ],
     script: [
       /* setup-autocomment-polyfill */
       /* setup-autocomment-modernizr */
-    ]
+    ],
   },
 
   /*
@@ -45,7 +45,7 @@ export default {
     ...config.env,
     // make Netlify ENV variable available to components
     // List of Netlify ENV vars: https://gist.github.com/sw-yx/c53634e7e63f0015e43c16bc26832283
-    NETLIFY: process.env.NETLIFY
+    NETLIFY: process.env.NETLIFY,
   },
 
   /*
@@ -70,7 +70,7 @@ export default {
     { src: '~/plugins/whatinput.js', ssr: false },
     { src: '~/plugins/vuex-router-sync' },
     { src: '~/plugins/vue-focus-trap' },
-    { src: '~/plugins/vue-bows' }
+    { src: '~/plugins/vue-bows' },
     // { src: '~/plugins/vue-breakpoint-component', ssr: false }
   ],
 
@@ -124,12 +124,12 @@ export default {
       '@nuxtjs/pwa',
       {
         icon: {
-          sizes: config.iconSizes
+          sizes: config.iconSizes,
         },
         // Override certain meta tags
         meta: {
           viewport: 'width=device-width, initial-scale=1',
-          favicon: true // Generates only apple-touch-icon
+          favicon: true, // Generates only apple-touch-icon
         },
         manifest: {
           name: config.siteTitle,
@@ -140,11 +140,11 @@ export default {
           start_url: '/',
           display: 'standalone',
           background_color: '#fff',
-          description: config.siteDescription
-        }
-      }
+          description: config.siteDescription,
+        },
+      },
     ],
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
   ],
 
   /*
@@ -155,8 +155,8 @@ export default {
     defaultLocale: config.env.DEFAULTLANG,
     vueI18n: {
       fallbackLocale: config.env.DEFAULTLANG,
-      messages: config.env.I18N_MESSAGES
-    }
+      messages: config.env.I18N_MESSAGES,
+    },
   },
 
   /*
@@ -165,15 +165,15 @@ export default {
   workbox: {
     config: {
       debug: false,
-      cacheId: config.siteTitle
-    }
+      cacheId: config.siteTitle,
+    },
   },
 
   /*
    ** Axios config
    */
   axios: {
-    baseURL: '/'
+    baseURL: '/',
   },
 
   /*
@@ -183,10 +183,10 @@ export default {
     includeNodeModules: true,
     errorHandler: '~/apollo/plugins/apolloErrorHandler.js',
     clientConfigs: {
-      default: '~/apollo/client-configs/default.js'
+      default: '~/apollo/client-configs/default.js',
       // If you want to connect to a your local backend use this config instead:
       // default: '~/apollo/client-configs/local.js'
-    }
+    },
   },
 
   /*
@@ -203,10 +203,10 @@ export default {
         data,
         sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
         homeSlug: config.env.HOMESLUG,
-        defaultLanguage: config.env.DEFAULTLANG
+        defaultLanguage: config.env.DEFAULTLANG,
         // ,debug: true
       })
-    }
+    },
   },
 
   /*
@@ -215,16 +215,16 @@ export default {
   build: {
     postcss: {
       plugins: {
-        cssnano: { preset: 'default' }
-      }
+        cssnano: { preset: 'default' },
+      },
     },
     extend(config, { isDev, isClient }) {
       // Add this when using file system
       // https://github.com/webpack-contrib/css-loader/issues/447#issuecomment-285598881
       config.node = {
-        fs: 'empty'
+        fs: 'empty',
       }
-    }
+    },
   },
 
   /*
@@ -233,7 +233,7 @@ export default {
   router: {
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-active-exact',
-    middleware: ['i18n-middleware']
+    middleware: ['i18n-middleware'],
   },
 
   /*
@@ -253,11 +253,11 @@ export default {
         data,
         sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
         homeSlug: config.env.HOMESLUG,
-        defaultLanguage: config.env.DEFAULTLANG
+        defaultLanguage: config.env.DEFAULTLANG,
         // ,debug: true
       })
       // console.log('routes for sitemap', routes)
       return routes
-    }
-  }
+    },
+  },
 }

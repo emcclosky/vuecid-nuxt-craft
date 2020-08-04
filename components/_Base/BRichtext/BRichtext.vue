@@ -5,9 +5,9 @@ export default {
     content: {
       type: String,
       required: true,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 }
 </script>
 

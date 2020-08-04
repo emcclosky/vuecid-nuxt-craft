@@ -9,17 +9,17 @@ module.exports = (plop, config) => {
         type: 'input',
         message: 'Store Module Name (camelCase)',
         name: 'moduleName',
-        validate: value => {
+        validate: (value) => {
           if (!value.length) return 'A module name is required.'
           if (!value.match(/^[a-zA-Z]+$/))
             return 'A module name can only contain letters.'
           if (changeCase.camelCase(value) !== value)
             return 'A module name must be written in camelCase.'
           return true
-        }
-      }
+        },
+      },
     ],
-    actions: answers => {
+    actions: (answers) => {
       const actions = [
         {
           type: 'add',
@@ -28,11 +28,11 @@ module.exports = (plop, config) => {
             'store',
             answers.moduleName + '.js'
           ),
-          templateFile: path.resolve(__dirname, 'module.hbs')
-        }
+          templateFile: path.resolve(__dirname, 'module.hbs'),
+        },
       ]
 
       return actions
-    }
+    },
   })
 }

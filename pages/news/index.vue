@@ -6,8 +6,8 @@ export default {
     // If you change these settings, you need to rerun `$ yarn dev`
     paths: {
       en: '/news', // -> accessible at /news (no prefix since it's the default locale)
-      de: '/neuigkeiten' // -> accessible at /de/neuigkeiten
-    }
+      de: '/neuigkeiten', // -> accessible at /de/neuigkeiten
+    },
   },
   apollo: {
     // TODO add some seomatic
@@ -15,7 +15,9 @@ export default {
       query: allNews,
       variables() {
         // get craft site handle depending on language
-        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
+        const site = this.$i18n.locales.find(
+          (l) => l.code === this.$i18n.locale
+        )
         return { site }
       },
       result(result) {
@@ -26,21 +28,21 @@ export default {
               'throwError',
               {
                 statusCode: 404,
-                message: `News could not be fetched`
+                message: `News could not be fetched`,
               },
               { root: true }
             )
           }
           this.news = result.data.entries
         }
-      }
-    }
+      },
+    },
   },
   data: () => {
     return {
-      news: null
+      news: null,
     }
-  }
+  },
 }
 </script>
 

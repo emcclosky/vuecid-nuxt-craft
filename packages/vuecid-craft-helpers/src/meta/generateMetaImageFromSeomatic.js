@@ -23,6 +23,6 @@ export default function generateMetaImageFromSeomatic(ogImage) {
     { hid: 'og:image:alt', name: 'og:image:alt', content: alt },
     { hid: 'twitter:image', name: 'twitter:image', content: imageUrl },
     { hid: 'twitter:image:width', name: 'twitter:image:width', content: imageWidth }, // prettier-ignore
-    { hid: 'twitter:image:height', name: 'twitter:image:height', content: imageHeight } // prettier-ignore
+    { hid: 'twitter:image:height', name: 'twitter:image:height', content: imageHeight }, // prettier-ignore
   ]
 }

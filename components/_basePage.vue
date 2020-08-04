@@ -6,7 +6,7 @@ import page from '~/apollo/queries/page'
 // import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
-const routeSlug = context => {
+const routeSlug = (context) => {
   // function up here for DRY reasons
   return (
     context.$route.params.slug3 ||
@@ -39,7 +39,7 @@ export default {
         }
         // get craft site handle depending on language
         const { siteId } = this.$i18n.locales.find(
-          l => l.code === this.$i18n.locale
+          (l) => l.code === this.$i18n.locale
         )
         return { uri, siteId }
       },
@@ -49,7 +49,7 @@ export default {
         } catch (error) {
           console.log('Basepage: Apollo error: ', error) // eslint-disable-line no-console
         }
-      }
+      },
     },
     entries: {
       query: page,
@@ -60,7 +60,9 @@ export default {
         let slug = routeSlug(this)
         slug = removeLeadingSlash(slug)
         // get craft site handle depending on language
-        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
+        const site = this.$i18n.locales.find(
+          (l) => l.code === this.$i18n.locale
+        )
         return { slug, site }
       },
       result(result) {
@@ -76,29 +78,31 @@ export default {
               'throwError',
               {
                 statusCode: 404,
-                message: `Page with slug «${this.$route.params.slug3 ||
+                message: `Page with slug «${
+                  this.$route.params.slug3 ||
                   this.$route.params.slug2 ||
                   this.$route.params.slug ||
-                  config.env.HOMESLUG}» was not found`
+                  config.env.HOMESLUG
+                }» was not found`,
               },
               { root: true }
             )
           }
           this.page = result.data.entries[0]
         }
-      }
-    }
+      },
+    },
   },
   data: () => {
     return {
       page: null,
-      previewData: null
+      previewData: null,
     }
   },
   computed: {
     pageData() {
       return this.previewData || this.page
-    }
+    },
   },
   // We need to load the preview within beforeMount, because asyncData and middleware are NOT executed on initial load
   // after having used `nuxt generate`, because there is no server that is run
@@ -111,7 +115,7 @@ export default {
       env: config.env,
       query: this.$route.query,
       isDev: process.env.NODE_ENV === 'development',
-      graphQLQuery: page
+      graphQLQuery: page,
     })
     if (this.previewData) {
       this.$store.dispatch('ui/activatePreviewAlert')
@@ -124,9 +128,9 @@ export default {
         process.env.NODE_ENV === 'development'
           ? config.env.FRONTENDURLLOCAL
           : config.env.FRONTENDURLPRODUCTION,
-      lang: this.$i18n.locale
+      lang: this.$i18n.locale,
       // ,debug: true
     })
-  }
+  },
 }
 </script>

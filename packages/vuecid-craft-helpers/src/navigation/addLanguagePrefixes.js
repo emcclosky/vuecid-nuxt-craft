@@ -28,7 +28,7 @@
 /* eslint-disable no-console */
 export default function addLanguagePrefixes({
   data = {},
-  defaultLanguage = false
+  defaultLanguage = false,
 } = {}) {
   if (!isObject(data)) {
     throw new Error(
@@ -82,7 +82,7 @@ function addLanguagePrefix(entry, prefix) {
 }
 
 function changeEntries(data, prefix) {
-  return data.map(entry => {
+  return data.map((entry) => {
     // some files are not flattened. e.g. navigations.js
     if (entry.children && entry.children.length) {
       entry.children = changeEntries(entry.children, prefix)

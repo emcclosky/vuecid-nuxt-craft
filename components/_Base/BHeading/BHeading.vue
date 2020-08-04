@@ -6,9 +6,9 @@
 import Vue from 'vue'
 import { cleanString } from '@wearelucid/vuecid-helpers'
 
-const getChildrenTextContent = children => {
+const getChildrenTextContent = (children) => {
   return children
-    .map(node => {
+    .map((node) => {
       return node.children ? getChildrenTextContent(node.children) : node.text
     })
     .join('')
@@ -20,22 +20,22 @@ export default Vue.component('BHeading', {
     level: {
       type: Number,
       required: true,
-      default: 1
+      default: 1,
     },
     // If heading is not a simple string use richText property to set the content with domProps.innerHTML
     richText: {
       type: String,
-      default: ''
+      default: '',
     },
     // If you want to show a little anchor icon on hover and set the window location to the anchor when clicked
     hasClickableAnchor: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noMarginTop: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   render(createElement) {
     // First: check whether we deal with rich text
@@ -59,41 +59,41 @@ export default Vue.component('BHeading', {
           BHeading: true,
           [modifierClassLevel]: true,
           [modifierClassMargin]: this.noMarginTop,
-          'has-clickable-anchor': this.hasClickableAnchor
+          'has-clickable-anchor': this.hasClickableAnchor,
         },
         attrs: {
-          id: headingId
-        }
+          id: headingId,
+        },
       },
       [
         // Create span with content
         createElement('span', {
           class: {
-            BHeading__content: true
+            BHeading__content: true,
           },
           domProps: {
             innerHTML: isRichText
               ? this.richText
-              : getChildrenTextContent(this.$slots.default)
-          }
+              : getChildrenTextContent(this.$slots.default),
+          },
         }),
         // Create anchor with id
         createElement(
           'a',
           {
             class: {
-              BHeading__anchor: true
+              BHeading__anchor: true,
             },
             attrs: {
               href: `#${headingId}`,
-              'aria-hidden': true
-            }
+              'aria-hidden': true,
+            },
           },
           '#'
-        )
+        ),
       ]
     )
-  }
+  },
 })
 </script>
 

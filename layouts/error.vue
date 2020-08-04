@@ -8,13 +8,13 @@ import CenterContent from '~/components/Examples/CenterContent/CenterContent.vue
 
 export default {
   components: {
-    CenterContent
+    CenterContent,
   },
   props: {
     error: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   computed: {
     ...mapState('ui', ['previewActive']),
@@ -29,13 +29,13 @@ export default {
       return this.statusCode === 404
         ? this.$t('error.404')
         : this.$t('error.message')
-    }
+    },
   },
   methods: {
     clearError() {
       this.$nuxt.error(null) // Clear error
       this.$router.push({ name: `index-${this.$i18n.locale}` }) // Go home
-    }
+    },
   },
   head() {
     return {
@@ -44,11 +44,11 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.$t('error.message')
-        }
-      ]
+          content: this.$t('error.message'),
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

@@ -20,13 +20,13 @@ export default function generateMetaFromSeomatic({
   seomaticMeta = false,
   frontendUrl = false,
   lang = 'de',
-  debug = false
+  debug = false,
 } = {}) {
   if (!seomaticMeta) {
     // For a short moment when changing the route seomatic is undefined all the time...
     // Just return anything to not have an empty head()
     return {
-      title: 'Loading…'
+      title: 'Loading…',
     }
   }
 
@@ -82,7 +82,7 @@ export default function generateMetaFromSeomatic({
     url: metaTagContainer['og:image'].content || false,
     width: metaTagContainer['og:image:width'].content || false,
     height: metaTagContainer['og:image:height'].content || false,
-    alt: metaTagContainer['og:image:alt'].content || ''
+    alt: metaTagContainer['og:image:alt'].content || '',
   }
   const ogImage = generateMetaImageFromSeomatic(seomaticOgImage)
 
@@ -94,7 +94,7 @@ export default function generateMetaFromSeomatic({
   const metaInfo = {
     title,
     htmlAttrs: {
-      lang: language
+      lang: language,
     },
     meta: [
       { name: 'application-name', content: siteName },
@@ -113,9 +113,9 @@ export default function generateMetaFromSeomatic({
       { hid: 'twitter:site', name: 'twitter:site', content: twitterSite },
       { hid: 'twitter:creator', property: 'twitter:creator', content: twitterCreator }, // prettier-ignore
       { hid: 'referrer', property: 'referrer', content: referrer }, // prettier-ignore
-      ...ogImage
+      ...ogImage,
     ],
-    link: [{ rel: 'canonical', href: ogUrl }, ...hrefLangLinks]
+    link: [{ rel: 'canonical', href: ogUrl }, ...hrefLangLinks],
   }
 
   if (debug) {

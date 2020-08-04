@@ -8,9 +8,9 @@ export default {
     type: {
       type: String,
       default: 'section',
-      required: false
-    }
-  }
+      required: false,
+    },
+  },
 }
 </script>
 

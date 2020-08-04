@@ -24,7 +24,7 @@
 import _cloneDeep from 'lodash.clonedeep'
 import {
   removeTrailingSlash,
-  verifyLeadingSlash
+  verifyLeadingSlash,
 } from '@wearelucid/vuecid-helpers'
 
 import flattenNavigation from '../navigation/flattenNavigation'
@@ -37,7 +37,7 @@ function generateRoutesFromData(
     sections: ['pages'],
     homeSlug: 'home',
     defaultLanguage: 'de',
-    debug: false
+    debug: false,
   }
 ) {
   try {
@@ -55,7 +55,7 @@ function generateRoutesFromData(
     // if your data is on one level only, even better.
     const flattenedData = flattenNavigation({
       navigationData: clonedData,
-      sections
+      sections,
     })
 
     // add language prefixes like:
@@ -65,7 +65,7 @@ function generateRoutesFromData(
     // but for that we need to know the default language
     const prefixedData = addLanguagePrefixes({
       data: flattenedData,
-      defaultLanguage
+      defaultLanguage,
     })
 
     console.log('prefixedData: ', prefixedData)
@@ -73,10 +73,10 @@ function generateRoutesFromData(
     let routes = []
 
     // go through each language
-    Object.keys(prefixedData).map(lang => {
+    Object.keys(prefixedData).map((lang) => {
       // and through each section
-      sections.forEach(section => {
-        const entryURIs = prefixedData[lang][section].map(entry => entry.uri)
+      sections.forEach((section) => {
+        const entryURIs = prefixedData[lang][section].map((entry) => entry.uri)
         routes.push(...entryURIs)
       })
     })
@@ -86,12 +86,12 @@ function generateRoutesFromData(
     // it also means we can't have nested pages in home
     // Sadly this step is necessary since we can not redirect() with our middleware during generate
     routes = routes
-      .filter(r => {
+      .filter((r) => {
         // Removing 'home' or '/home'
         return r !== homeSlug && r !== `/${homeSlug}`
       })
       // remove slashes and truncate 'de/home' to 'de' etc.
-      .map(r => {
+      .map((r) => {
         return verifyLeadingSlash(stripTrailingHomeSlug(removeTrailingSlash(r)))
       })
 

@@ -4,12 +4,12 @@ import Examples from '~/components/Examples/Examples/Examples.vue'
 
 export default {
   components: {
-    Examples
+    Examples,
   },
   extends: basePage, // this is where we fetch SEO and page data
   mounted() {
     this.log('this.pageData: ', this.pageData)
-  }
+  },
 }
 </script>
 

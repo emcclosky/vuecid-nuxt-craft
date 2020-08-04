@@ -22,5 +22,5 @@ export {
   generateDataJSON,
   fetchFromGraphQL,
   generateMetaFromSeomatic,
-  saveFile
+  saveFile,
 }
