@@ -96,6 +96,7 @@ $c-the-navigation-margin-top: 8rem;
   &__link {
     &.is-active {
       font-weight: bold;
+      color: $s-color-primary;
     }
 
     &.is-active-exact {
@@ -103,8 +104,8 @@ $c-the-navigation-margin-top: 8rem;
       font-weight: bold;
     }
 
-    &.is-active {
-      color: $s-color-primary;
+    &.custom-inactive {
+      font-weight: normal;
     }
 
     &--lang {

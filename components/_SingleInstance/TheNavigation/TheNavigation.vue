@@ -29,6 +29,9 @@ export default {
         hasNoTranslation,
       }
     },
+    defaultLang() {
+      return config.env.DEFAULTLANG
+    },
   },
   mounted() {
     if (process.browser) {
@@ -156,11 +159,23 @@ export default {
                   class="TheNavigation__lang-item"
                   @click="closeMenu"
                 >
-                  <!-- eslint-disable prettier/prettier -->
+                  <!-- When using news posts or other untranslatable entries, we just link back to '/' or '/de'
+                  This means the lang link for the default language is always 'active', because every link starts with a '/'
+                  That is why we need to manually deactivate the styling with 'custom-inactive' -->
                   <BBtn
-                    :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
+                    :class="[
+                      'TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn',
+                      {
+                        'custom-inactive':
+                          item.path === '/' && $i18n.locale !== defaultLang,
+                      },
+                    ]"
                     naked
-                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : verifyLeadingSlash(item.path)"
+                    :to="
+                      item.i18nHandlesRoute
+                        ? switchLocalePath(item.lang)
+                        : verifyLeadingSlash(item.path)
+                    "
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"
@@ -168,7 +183,6 @@ export default {
                   >
                     {{ item.lang }}
                   </BBtn>
-                  <!-- eslint-enable prettier/prettier -->
                 </span>
               </li>
             </client-only>

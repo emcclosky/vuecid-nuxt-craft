@@ -176,7 +176,10 @@ export const getters = {
     if (slugs.hasNoTranslation) {
       return rootState.langs.map((l) => {
         return {
-          path: verifyLeadingSlash(l.lang),
+          path:
+            l.lang === config.env.DEFAULTLANG // for untranslated links we also don't want to point the langlink to '/en'
+              ? '/'
+              : verifyLeadingSlash(l.lang),
           lang: l.lang,
           name: l.name,
         }
