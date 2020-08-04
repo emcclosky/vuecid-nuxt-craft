@@ -8,7 +8,7 @@ export default {
     // If you change these settings, you need to rerun `$ yarn dev`
     paths: {
       en: '/news', // -> accessible at /news (no prefix since it's the default locale)
-      de: '/de/neuigkeiten', // -> accessible at /de/neuigkeiten
+      de: '/neuigkeiten', // -> accessible at /de/neuigkeiten
     },
   },
   apollo: {
