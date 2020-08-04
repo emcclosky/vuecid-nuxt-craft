@@ -119,7 +119,7 @@ export default {
             >
               <nuxt-link
                 class="TheNavigation__link"
-                :to="verifyLeadingSlash(item.uri)"
+                :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
                 :exact="isHomeSlug(item.uri)"
                 :tabIndex="navMenuOpen ? 0 : -1"
               >
