@@ -4,11 +4,11 @@ import CookieLaw from 'vue-cookie-law'
 export default {
   name: 'CookieBar',
   components: {
-    CookieLaw
+    CookieLaw,
   },
   data: () => {
     return {
-      cookieName: 'cookies-accepted'
+      cookieName: 'cookies-accepted',
     }
   },
   methods: {
@@ -41,10 +41,10 @@ export default {
         event: 'nuxtRoute',
         pageType: 'PageView',
         pageUrl: this.$route.fullPath,
-        routeName: this.$route.name
+        routeName: this.$route.name,
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

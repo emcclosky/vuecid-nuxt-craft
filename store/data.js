@@ -7,14 +7,14 @@ import logV from '~/util/logV'
 
 export const state = () => ({
   bundle: {
-    language: null
+    language: null,
   },
   navigations: null,
   flatNavigations: null,
   globals: null,
   currentPage: null,
   loading: true,
-  loaded: false
+  loaded: false,
 })
 
 const m = 'store/loadData'
@@ -51,7 +51,7 @@ export const actions = {
       try {
         // eslint-disable-next-line prettier/prettier
         navigations = await this.$axios.$get(`/navigations.json`, {
-          baseURL: '/data/'
+          baseURL: '/data/',
         })
       } catch (e) {
         logV(m, 'loadNavigations() action failed 😢: ', e)
@@ -62,13 +62,13 @@ export const actions = {
     // save navigations in a flat array to allow easy search for slugs (also in nested pages)
     const flatNavigations = flattenNavigation({
       navigationData: navigations,
-      sections: config.sections
+      sections: config.sections,
     })
 
     logV(m, 'loadNavigations() action done')
     return {
       navigations,
-      flatNavigations
+      flatNavigations,
     }
   },
   async loadGlobals({ error }) {
@@ -82,7 +82,7 @@ export const actions = {
       try {
         // eslint-disable-next-line prettier/prettier
         globals = await this.$axios.$get(`/globals.json`, {
-          baseURL: '/data/'
+          baseURL: '/data/',
         })
       } catch (e) {
         logV(m, 'loadGlobals() action failed 😢: ', e)
@@ -92,7 +92,7 @@ export const actions = {
 
     logV(m, 'loadGlobals() action done')
     return globals
-  }
+  },
 }
 
 export const mutations = {
@@ -116,7 +116,7 @@ export const mutations = {
   },
   CURRENT_PAGE_SAVE(state, page) {
     state.currentPage = page
-  }
+  },
 }
 
 export const getters = {
@@ -133,10 +133,10 @@ export const getters = {
       localized:
         state.bundle && state.bundle[`options-${rootState.currentLang}`]
           ? state.bundle[`options-${rootState.currentLang}`]
-          : false
+          : false,
     }
   },
-  getMenu: (state, getters, rootState) => section => {
+  getMenu: (state, getters, rootState) => (section) => {
     if (
       !state.loaded ||
       !state.navigations ||
@@ -151,7 +151,7 @@ export const getters = {
       lang:
         config.env.DEFAULTLANG === rootState.currentLang
           ? false
-          : rootState.currentLang
+          : rootState.currentLang,
     }
   },
   langLinks: (state, getters, rootState) => (slugs, section) => {
@@ -168,17 +168,20 @@ export const getters = {
       return false
     }
     if (!slugs.slug && !slugs.hasNoTranslation) {
-      return rootState.langs.map(l => {
+      return rootState.langs.map((l) => {
         return { i18nHandlesRoute: true, lang: l.lang }
       })
     }
 
     if (slugs.hasNoTranslation) {
-      return rootState.langs.map(l => {
+      return rootState.langs.map((l) => {
         return {
-          path: verifyLeadingSlash(l.lang),
+          path:
+            l.lang === config.env.DEFAULTLANG // for untranslated links we also don't want to point the langlink to '/en'
+              ? '/'
+              : verifyLeadingSlash(l.lang),
           lang: l.lang,
-          name: l.name
+          name: l.name,
         }
       })
     }
@@ -197,9 +200,9 @@ export const getters = {
     const currentUID = currentEntry ? currentEntry.uid : false
 
     // go through all langs and find translations
-    const items = rootState.langs.map(l => {
+    const items = rootState.langs.map((l) => {
       const translation = state.flatNavigations[l.lang][section].find(
-        entry => entry.uid === currentUID
+        (entry) => entry.uid === currentUID
       )
       return {
         // Save path if there is a translation
@@ -209,9 +212,9 @@ export const getters = {
             : false,
 
         lang: l.lang,
-        name: l.name
+        name: l.name,
       }
     })
     return items
-  }
+  },
 }

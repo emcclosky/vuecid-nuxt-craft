@@ -4,9 +4,9 @@ export default {
   props: {
     image: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

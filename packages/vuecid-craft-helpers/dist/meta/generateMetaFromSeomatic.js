@@ -42,7 +42,7 @@ function generateMetaFromSeomatic() {
     // For a short moment when changing the route seomatic is undefined all the time...
     // Just return anything to not have an empty head()
     return {
-      title: '❌ SEO: generateMetaFromSeomatic has failed!'
+      title: 'Loading…'
     };
   }
 

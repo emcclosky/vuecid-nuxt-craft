@@ -6,9 +6,10 @@ import page from '~/apollo/queries/page'
 // import loadPreview from '~/packages/vuecid-craft-helpers/src/preview/loadPreview.js'
 import seomaticQuery from '~/apollo/queries/seomatic'
 
-const routeSlug = context => {
+const routeSlug = (context) => {
   // function up here for DRY reasons
   return (
+    context.$route.params.slug3 ||
     context.$route.params.slug2 ||
     context.$route.params.slug ||
     config.env.HOMESLUG
@@ -20,13 +21,17 @@ export default {
     seomatic: {
       query: seomaticQuery,
       prefetch: ({ route }) => ({
-        slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+        slug: removeLeadingSlash(route.params.slug3 || route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
       }),
       variables() {
         let uri = routeSlug(this)
         uri = removeLeadingSlash(uri)
         // check if we are on home slugs, if so we need to build our URI to pass onto seomatic
-        if (!this.$route.params.slug2 && !this.$route.params.slug) {
+        if (
+          !this.$route.params.slug3 &&
+          !this.$route.params.slug2 &&
+          !this.$route.params.slug
+        ) {
           uri = `${config.env.HOMESLUG}`
         } else {
           // if there is a slug we can just take the fullPath as URI to pass to seomatic
@@ -34,7 +39,7 @@ export default {
         }
         // get craft site handle depending on language
         const { siteId } = this.$i18n.locales.find(
-          l => l.code === this.$i18n.locale
+          (l) => l.code === this.$i18n.locale
         )
         return { uri, siteId }
       },
@@ -44,7 +49,7 @@ export default {
         } catch (error) {
           console.log('Basepage: Apollo error: ', error) // eslint-disable-line no-console
         }
-      }
+      },
     },
     entries: {
       query: page,
@@ -55,7 +60,9 @@ export default {
         let slug = routeSlug(this)
         slug = removeLeadingSlash(slug)
         // get craft site handle depending on language
-        const site = this.$i18n.locales.find(l => l.code === this.$i18n.locale)
+        const site = this.$i18n.locales.find(
+          (l) => l.code === this.$i18n.locale
+        )
         return { slug, site }
       },
       result(result) {
@@ -71,41 +78,44 @@ export default {
               'throwError',
               {
                 statusCode: 404,
-                message: `Page with slug «${this.$route.params.slug3 ||
+                message: `Page with slug «${
+                  this.$route.params.slug3 ||
                   this.$route.params.slug2 ||
                   this.$route.params.slug ||
-                  config.env.HOMESLUG}» was not found`
+                  config.env.HOMESLUG
+                }» was not found`,
               },
               { root: true }
             )
           }
           this.page = result.data.entries[0]
         }
-      }
-    }
+      },
+    },
   },
   data: () => {
     return {
       page: null,
-      previewData: null
+      previewData: null,
     }
   },
   computed: {
     pageData() {
       return this.previewData || this.page
-    }
+    },
   },
   // We need to load the preview within beforeMount, because asyncData and middleware are NOT executed on initial load
   // after having used `nuxt generate`, because there is no server that is run
   beforeMount: async function() { // eslint-disable-line
     // check preview and fetch actual data
     const slug = removeLeadingSlash(this.$route.params.slug3 || this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG) // eslint-disable-line
+    this.log('Fetching preview for slug: ', slug, ' – with queries: ', this.$route.query, ' ...') // prettier-ignore
     this.previewData = await loadPreview({
       slug,
       env: config.env,
       query: this.$route.query,
       isDev: process.env.NODE_ENV === 'development',
-      graphQLQuery: page
+      graphQLQuery: page,
     })
     if (this.previewData) {
       this.$store.dispatch('ui/activatePreviewAlert')
@@ -118,9 +128,9 @@ export default {
         process.env.NODE_ENV === 'development'
           ? config.env.FRONTENDURLLOCAL
           : config.env.FRONTENDURLPRODUCTION,
-      lang: this.$i18n.locale
+      lang: this.$i18n.locale,
       // ,debug: true
     })
-  }
+  },
 }
 </script>

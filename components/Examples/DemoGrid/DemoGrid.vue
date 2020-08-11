@@ -4,8 +4,8 @@ import GridOverlay from '~/components/Examples/GridOverlay/GridOverlay.vue'
 export default {
   name: 'DemoGrid',
   components: {
-    GridOverlay
-  }
+    GridOverlay,
+  },
 }
 </script>
 

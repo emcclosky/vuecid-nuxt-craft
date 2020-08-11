@@ -4,10 +4,10 @@ import generateMetaFromSeomatic from '~/packages/vuecid-craft-helpers/src/meta/g
 
 const VuecidHelpers = {
   install(Vue) {
-    Vue.prototype.$generateMetaFromSeomatic = options => {
+    Vue.prototype.$generateMetaFromSeomatic = (options) => {
       return generateMetaFromSeomatic({ ...options })
     }
-  }
+  },
 }
 
 Vue.use(VuecidHelpers)

@@ -3,7 +3,7 @@ import { generateModifiers } from '~/mixins/modifiers'
 
 export default {
   name: 'BLoader',
-  mixins: [generateModifiers]
+  mixins: [generateModifiers],
 }
 </script>
 

@@ -5,7 +5,7 @@ query Navigations($section: String, $site: String) {
     title
     # uid is the same for each translated entry in a multisite/multilang setup
     uid
-    ...on pages_pages_Entry {
+    ...on pages_regularPages_Entry {
       appearsInNavigation
     }
     ...on news_news_Entry {
@@ -15,7 +15,7 @@ query Navigations($section: String, $site: String) {
       slug
       uri
       uid
-      ...on pages_pages_Entry {
+      ...on pages_regularPages_Entry {
         appearsInNavigation
       }
       ...on news_news_Entry {
@@ -26,7 +26,7 @@ query Navigations($section: String, $site: String) {
         slug
         uri
         uid
-        ...on pages_pages_Entry {
+        ...on pages_regularPages_Entry {
           appearsInNavigation
         }
         ...on news_news_Entry {

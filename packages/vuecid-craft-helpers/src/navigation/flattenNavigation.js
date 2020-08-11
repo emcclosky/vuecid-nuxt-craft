@@ -2,10 +2,10 @@
 function flattenSection(data = []) {
   const flattenedData = []
 
-  data.forEach(entry => {
+  data.forEach((entry) => {
     flattenedData.push(entry)
     if (entry.children && entry.children.length) {
-      entry.children.map(child => flattenedData.push(child))
+      entry.children.map((child) => flattenedData.push(child))
     }
   })
 
@@ -18,7 +18,7 @@ function isObject(data) {
 
 export default function flattenNavigation({
   navigationData = {},
-  sections = ['pages']
+  sections = ['pages'],
 } = {}) {
   if (!isObject(navigationData)) {
     throw new Error(
@@ -34,7 +34,7 @@ export default function flattenNavigation({
       const localizedNavigation = navigationData[lang]
       flattenedNavigations[lang] = {}
 
-      sections.forEach(section => {
+      sections.forEach((section) => {
         const flattenedNavigation = flattenSection(localizedNavigation[section])
         flattenedNavigations[lang][section] = flattenedNavigation
         return flattenedNavigation

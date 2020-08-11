@@ -3,13 +3,13 @@ export const generateModifiers = {
     modifiers: {
       type: Array,
       default: () => [],
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     classnames() {
       return this.className(this.$options.name, this.modifiers)
-    }
+    },
   },
   methods: {
     className(componentName, modifiers, stateClasses) {
@@ -23,6 +23,6 @@ export const generateModifiers = {
           : stateClasses || ''
 
       return componentName + mods + stateC
-    }
-  }
+    },
+  },
 }

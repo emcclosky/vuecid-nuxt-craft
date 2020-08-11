@@ -4,17 +4,17 @@ export default {
   props: {
     post: {
       type: Object,
-      required: true
+      required: true,
     },
     currentPaginationPage: {
       default: 0,
-      type: Number
+      type: Number,
     },
     pageSlug: {
       default: '',
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 }
 </script>
 

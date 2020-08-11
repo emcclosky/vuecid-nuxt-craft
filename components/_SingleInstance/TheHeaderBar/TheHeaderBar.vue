@@ -7,11 +7,11 @@ export default {
   name: 'TheHeaderBar',
   components: {
     TheNavigation,
-    Logo
+    Logo,
   },
   computed: {
-    ...mapGetters('ui', ['navMenuOpen'])
-  }
+    ...mapGetters('ui', ['navMenuOpen']),
+  },
 }
 </script>
 

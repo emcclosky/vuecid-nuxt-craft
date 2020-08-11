@@ -7,14 +7,14 @@ export default {
     posts: {
       type: Array,
       default: () => [],
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     getPathFromUrl(url) {
       return getPathFromUrl(url)
-    }
-  }
+    },
+  },
 }
 </script>
 

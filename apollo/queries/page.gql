@@ -2,7 +2,7 @@ query Page($slug: [String], $site: [String]) {
   entries(site: $site, section: ["pages"], slug: $slug) {
     slug
     title
-    ...on pages_pages_Entry {
+    ...on pages_regularPages_Entry {
       alternativePageTitle
     	pageBuilder {
         ...on pageBuilder_standardSection_BlockType {

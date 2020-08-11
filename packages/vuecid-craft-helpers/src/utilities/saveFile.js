@@ -5,7 +5,7 @@ export default function saveFile({
   bundleName,
   savePath,
   compressJSON,
-  lang
+  lang,
 } = {}) {
   const json = JSON.stringify(data, null, compressJSON ? null : 2)
   const jsonSizeKB =
@@ -21,7 +21,7 @@ export default function saveFile({
     fs.mkdirSync(savePath)
   }
 
-  return fs.writeFile(`${savePath}/${fileName}`, json, 'utf-8', function(err) {
+  return fs.writeFile(`${savePath}/${fileName}`, json, 'utf-8', function (err) {
     if (err) {
       throw err
     } else {

@@ -5,15 +5,15 @@ import { linkHelpersMixin } from '~/mixins/link-helpers'
 export default {
   name: 'BPageBuilder',
   components: {
-    StandardSection
+    StandardSection,
   },
   mixins: [linkHelpersMixin],
   props: {
     componentData: {
       type: Array,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

@@ -3,16 +3,16 @@ import { onError } from 'apollo-link-error'
 // import { RetryLink } from 'apollo-link-retry'
 import {
   IntrospectionFragmentMatcher,
-  InMemoryCache
+  InMemoryCache,
 } from 'apollo-cache-inmemory'
 import introspectionQueryResultData from '../fragmentTypes.json'
 import config from '~/config.js'
 
 // const log = createLogger('Default Apollo Config') // replace name with something meaningful
 
-export default function({ isDev }) {
+export default function ({ isDev }) {
   const fragmentMatcher = new IntrospectionFragmentMatcher({
-    introspectionQueryResultData
+    introspectionQueryResultData,
   })
 
   // const retryLink = new RetryLink({
@@ -34,7 +34,7 @@ export default function({ isDev }) {
       : `${config.env.BACKENDURLPRODUCTION}${config.env.GRAPHQL_PATH}`
 
   const cache = new InMemoryCache({
-    fragmentMatcher
+    fragmentMatcher,
   })
 
   const errorLink = onError(
@@ -58,10 +58,10 @@ export default function({ isDev }) {
     httpEndpoint: endpoint,
     httpLinkOptions: {
       fetchOptions: {
-        mode: 'cors' // Cors Needed for external Cross origins, need to allow headers from server
-      }
+        mode: 'cors', // Cors Needed for external Cross origins, need to allow headers from server
+      },
     },
     // getAuth: () => `Bearer ${token}`,
-    cache
+    cache,
   }
 }

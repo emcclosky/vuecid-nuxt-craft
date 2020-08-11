@@ -4,7 +4,7 @@ import { verifyLeadingSlash } from '@wearelucid/vuecid-helpers'
 import logV from '~/util/logV'
 const m = 'middleware/i18n'
 
-export default function({ app, store, route, error, redirect, isHMR }) {
+export default function ({ app, store, route, error, redirect, isHMR }) {
   // Check if middleware called from hot-reloading, ignore
   if (isHMR) return
 
@@ -19,7 +19,7 @@ export default function({ app, store, route, error, redirect, isHMR }) {
   if (!langs) return
 
   // Iterate over all langs
-  langs.forEach(l => {
+  langs.forEach((l) => {
     // Save regex to check if it matches a lang slug (-> '/en')
     // Pay attention that an english page with a slug like "/denzel-washington" does not trigger "/de"
     // https: //regex101.com/r/KNbRbN/2
@@ -31,7 +31,7 @@ export default function({ app, store, route, error, redirect, isHMR }) {
     }
   })
 
-  if (langs.findIndex(l => l.slug === locale) === -1) {
+  if (langs.findIndex((l) => l.slug === locale) === -1) {
     logV(m, `No haz your lang (${locale}), will throw an error at you`)
     return error({ message: 'Page not found.', statusCode: 404 })
   }

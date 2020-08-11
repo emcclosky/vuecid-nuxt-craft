@@ -9,7 +9,7 @@ export default {
   name: 'TheNavigation',
   data: () => {
     return {
-      section: config.sectionsInNavigation
+      section: config.sectionsInNavigation,
     }
   },
   computed: {
@@ -26,9 +26,12 @@ export default {
 
       return {
         slug,
-        hasNoTranslation
+        hasNoTranslation,
       }
-    }
+    },
+    defaultLang() {
+      return config.env.DEFAULTLANG
+    },
   },
   mounted() {
     if (process.browser) {
@@ -74,7 +77,10 @@ export default {
       return `${langPrefix}${route}`
     },
     verifyLeadingSlash(slug) {
-      return verifyLeadingSlash(slug)
+      if (slug) {
+        return verifyLeadingSlash(slug)
+      }
+      return slug
     },
     handleKeyboardEvent(e) {
       const key = e.which || e.keyCode
@@ -82,8 +88,8 @@ export default {
         // Esc key
         this.closeMenu()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -110,13 +116,13 @@ export default {
                 'TheNavigation__item',
                 item.children && item.children.length
                   ? 'TheNavigation__item--has-children'
-                  : ''
+                  : '',
               ]"
               @click="closeMenu"
             >
               <nuxt-link
                 class="TheNavigation__link"
-                :to="prepareNuxtLink(item.uri)"
+                :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
                 :exact="isHomeSlug(item.uri)"
                 :tabIndex="navMenuOpen ? 0 : -1"
               >
@@ -136,7 +142,7 @@ export default {
                 >
                   <nuxt-link
                     class="TheNavigation__link"
-                    :to="prepareNuxtLink(child.uri)"
+                    :to="verifyLeadingSlash(child.uri)"
                     :tabIndex="navMenuOpen ? 0 : -1"
                   >
                     <!-- eslint-disable-next-line vue/no-v-html -->
@@ -153,11 +159,23 @@ export default {
                   class="TheNavigation__lang-item"
                   @click="closeMenu"
                 >
-                  <!-- eslint-disable prettier/prettier -->
+                  <!-- When using news posts or other untranslatable entries, we just link back to '/' or '/de'
+                  This means the lang link for the default language is always 'active', because every link starts with a '/'
+                  That is why we need to manually deactivate the styling with 'custom-inactive' -->
                   <BBtn
-                    :class="['TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn', $i18n.locale === item.lang ? 'custom-active' : '']"
+                    :class="[
+                      'TheNavigation__link TheNavigation__link--lang TheNavigation__BBtn',
+                      {
+                        'custom-inactive':
+                          item.path === '/' && $i18n.locale !== defaultLang,
+                      },
+                    ]"
                     naked
-                    :to="item.i18nHandlesRoute ? switchLocalePath(item.lang) : prepareTranslatedNuxtLink(item.path, item.lang)"
+                    :to="
+                      item.i18nHandlesRoute
+                        ? switchLocalePath(item.lang)
+                        : verifyLeadingSlash(item.path)
+                    "
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"
@@ -165,7 +183,6 @@ export default {
                   >
                     {{ item.lang }}
                   </BBtn>
-                  <!-- eslint-enable prettier/prettier -->
                 </span>
               </li>
             </client-only>

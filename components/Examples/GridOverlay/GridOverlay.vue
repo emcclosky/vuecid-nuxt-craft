@@ -3,13 +3,13 @@ export default {
   name: 'GridOverlay',
   data: () => {
     return {
-      isHidden: true
+      isHidden: true,
     }
   },
   mounted() {
     if (process.env.NODE_ENV) {
       // Keyboard triggered helpers
-      document.onkeydown = e => {
+      document.onkeydown = (e) => {
         const event = e || window.event
 
         if (e.keyCode === 71 && event.ctrlKey) {
@@ -21,8 +21,8 @@ export default {
   methods: {
     toggleGrid() {
       this.isHidden = !this.isHidden
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -12,15 +12,15 @@ export default function generateLocalizedRoutes(
     defaultLang: '',
     langs: [],
     routesAliases: {},
-    isChild: false
+    isChild: false,
   }
 ) {
   const localizedRoutes = []
 
   // Loop through all generated routes
-  options.baseRoutes.forEach(baseRoute => {
+  options.baseRoutes.forEach((baseRoute) => {
     // Loop through all configured languages
-    options.langs.forEach(lang => {
+    options.langs.forEach((lang) => {
       // Get values from baseRoute
       const { component } = baseRoute
       let { path, children } = baseRoute
@@ -33,7 +33,7 @@ export default function generateLocalizedRoutes(
           langs: [lang],
           defaultLang: options.defaultLang,
           routesAliases: options.routesAliases,
-          isChild: true
+          isChild: true,
         })
       }
 
@@ -57,7 +57,7 @@ export default function generateLocalizedRoutes(
         path,
         component,
         ...(name ? { name: `${name}-${lang.slug}` } : {}),
-        ...(children ? { children } : {})
+        ...(children ? { children } : {}),
       }
 
       // Push route to array

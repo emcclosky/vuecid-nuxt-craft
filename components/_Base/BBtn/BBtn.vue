@@ -5,17 +5,17 @@ export default {
     to: {
       type: [Object, String, Boolean],
       default: false,
-      required: false
+      required: false,
     },
     exact: {
       type: Boolean,
       default: false,
-      required: false
+      required: false,
     },
     type: {
       type: String,
       default: 'button',
-      required: false
+      required: false,
     },
     /**
      * A word about external links: Why not handle hrefs inside this component I hear you ask.
@@ -26,43 +26,43 @@ export default {
     external: {
       type: Boolean,
       default: false,
-      required: false
+      required: false,
     },
     buttonType: {
       type: [String, Boolean],
       default: 'button',
-      required: false
+      required: false,
     },
     naked: {
       type: Boolean,
       default: false,
-      required: false
+      required: false,
     },
     click: {
       type: Function,
       default: () => {},
-      required: false
+      required: false,
     },
     disabled: {
       type: Boolean,
       default: false,
-      required: false
+      required: false,
     },
     target: {
       type: [String, Boolean],
       default: false,
-      required: false
+      required: false,
     },
     ariaControls: {
       type: [String, Boolean],
       default: false,
-      required: false
+      required: false,
     },
     ariaExpanded: {
       type: [String, Boolean],
       default: false,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     computedType() {
@@ -76,8 +76,8 @@ export default {
         return 'a'
       }
       return this.type
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -4,14 +4,14 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Logo',
   computed: {
-    ...mapGetters('ui', ['navMenuOpen'])
+    ...mapGetters('ui', ['navMenuOpen']),
   },
   methods: {
     ...mapActions('ui', ['closeMenu']),
     close() {
       this.closeMenu()
-    }
-  }
+    },
+  },
 }
 </script>
 

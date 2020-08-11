@@ -12,7 +12,7 @@ const strings = {
   modernizr: `/* setup-autocomment-modernizr */
       { src: '/js/modernizr-custom.js', async: true, defer: true },
   `,
-  susygrid: `background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals`
+  susygrid: `background: susy-svg-grid($colors: rgba(#c7eaee, 0.5)) no-repeat scroll; // sass-lint:disable-line no-color-literals`,
 }
 
 /*
@@ -33,18 +33,18 @@ function replaceComment(path, template, pattern) {
           type: 'modify',
           path,
           pattern,
-          template
-        }
-      ]
+          template,
+        },
+      ],
     })
 
     generator
       .runActions()
-      .then(results => {
+      .then((results) => {
         console.log(`💾✅ Sucessfully modified ${path} with ${template}`)
         resolve()
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('err', err)
         reject(err)
       })
@@ -67,22 +67,22 @@ function addFiles(path, templateFile, force = false) {
         type: 'add',
         path,
         templateFile,
-        force
-      }
-    ]
+        force,
+      },
+    ],
   })
 
   generator
     .runActions()
-    .then(results => {
+    .then((results) => {
       console.log(`💾✅ Sucessfully added ${templateFile}.`)
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('err', err)
     })
 }
 
-gulp.task('install-susy', function(done) {
+gulp.task('install-susy', function (done) {
   const shell = require('gulp-shell')
   return gulp
     .src('gulpfile.js', { read: false })
@@ -90,7 +90,7 @@ gulp.task('install-susy', function(done) {
     .on('finish', done)
 })
 
-gulp.task('add-polyfill', async function(done) {
+gulp.task('add-polyfill', async function (done) {
   console.log('Adding IE11 polyfill to nuxt.config.js ...')
 
   const path = './nuxt.config.js'
@@ -101,7 +101,7 @@ gulp.task('add-polyfill', async function(done) {
   done()
 })
 
-gulp.task('add-modernizr', async function(done) {
+gulp.task('add-modernizr', async function (done) {
   console.log('Adding modernizr script to nuxt.config.js ...')
 
   const path = './nuxt.config.js'
@@ -112,7 +112,7 @@ gulp.task('add-modernizr', async function(done) {
   done()
 })
 
-gulp.task('add-susy-svg-grid', async function(done) {
+gulp.task('add-susy-svg-grid', async function (done) {
   console.log('Adding susy svg grid to GridOverlay...')
 
   const path = './components/examples/GridOverlay/GridOverlay.scss'
@@ -123,7 +123,7 @@ gulp.task('add-susy-svg-grid', async function(done) {
   done()
 })
 
-gulp.task('add-susy-files', function(done) {
+gulp.task('add-susy-files', function (done) {
   console.log('Adding susy specific .scss files...')
 
   const path = './assets/css/_tools.grid.scss'
@@ -135,7 +135,7 @@ gulp.task('add-susy-files', function(done) {
   done()
 })
 
-gulp.task('add-modernizr-file', function(done) {
+gulp.task('add-modernizr-file', function (done) {
   console.log('Adding custom modernizr...')
 
   const path = './static/js/modernizr-custom.js'
@@ -150,8 +150,8 @@ gulp.task('add-modernizr-file', function(done) {
  * Setup task
  * Uses inquirer to prompt the user which tools or plugins should be installed
  */
-gulp.task('setup', function(done) {
-  let readEnv = new Promise(resolve => resolve()) // eslint-disable-line no-unused-vars
+gulp.task('setup', function (done) {
+  let readEnv = new Promise((resolve) => resolve()) // eslint-disable-line no-unused-vars
 
   readEnv = inquirer
     .prompt([
@@ -160,10 +160,10 @@ gulp.task('setup', function(done) {
         name: 'plugins',
         message:
           'What plugins and tools do you want to include into your project?',
-        choices: ['susy', 'modernizr', 'IE11-polyfill']
-      }
+        choices: ['susy', 'modernizr', 'IE11-polyfill'],
+      },
     ])
-    .then(answers => {
+    .then((answers) => {
       const tasks = []
 
       if (answers.plugins.includes('susy')) {

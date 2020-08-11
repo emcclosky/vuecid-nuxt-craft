@@ -8,10 +8,10 @@ export default {
   components: {
     TheSkipNavigationLink,
     TheHeaderBar,
-    TheFooter
+    TheFooter,
   },
   computed: {
-    ...mapState('ui', ['previewActive'])
+    ...mapState('ui', ['previewActive']),
   },
   methods: {
     setFocusOnMain() {
@@ -21,12 +21,12 @@ export default {
         this.$refs.skipnavigationlink.removeAttr('tabindex')
       })
       this.$refs.main.focus()
-    }
+    },
     // Update current breakpoint in ui store if you use vue-breakpoint-component:
     // updateBreakpoint(breakpoint) {
     //   this.$store.commit('ui/UPDATE_BREAKPOINT', breakpoint)
     // }
-  }
+  },
 }
 </script>
 

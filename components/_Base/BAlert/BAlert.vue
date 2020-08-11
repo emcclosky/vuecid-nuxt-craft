@@ -4,17 +4,17 @@ export default {
   props: {
     message: {
       type: String,
-      required: true
+      required: true,
     },
     isError: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isSuccess: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>
 
