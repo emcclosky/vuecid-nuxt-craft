@@ -240,24 +240,6 @@ export default {
    ** Sitemap Configuration
    */
   sitemap: {
-    path: '/sitemap.xml',
     hostname: config.env.FRONTENDURLPRODUCTION,
-    cacheTime: 1000 * 60 * 15,
-    // exclude: [
-    //   '/secret',
-    //   '/admin/**'
-    // ],
-    routes: () => {
-      const data = require('./static/data/allEntries.json') // require file here, defining paths relative to node_module is a pain!
-      const routes = generateRoutesFromData({
-        data,
-        sections: config.sectionsWithRoute, // depends on the name you put in your backend for this kind of section
-        homeSlug: config.env.HOMESLUG,
-        defaultLanguage: config.env.DEFAULTLANG,
-        // ,debug: true
-      })
-      // console.log('routes for sitemap', routes)
-      return routes
-    },
   },
 }
