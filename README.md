@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8bce6adc-e879-43fd-a818-82195c4cc572/deploy-status)](https://app.netlify.com/sites/vuecid-nuxt/deploys)
 
-> Vuecid Nuxt Stack with Nuxt.js [vuecid-nuxt.lucid.build](https://vuecid-nuxt.lucid.build)
+> Vuecid Nuxt Stack with Nuxt.js [vuecid-nuxt-craft.netlify.app](https://vuecid-nuxt-craft.netlify.app)
 
 ## Quickstart
 Follow these steps to quickly set up your Vuecid-Nuxt-CraftCMS project:
