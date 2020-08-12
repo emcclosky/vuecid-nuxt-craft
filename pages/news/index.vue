@@ -1,6 +1,7 @@
 <script>
 import allNews from '~/apollo/queries/allNews'
 import config from '~/config'
+import seomaticOptions from '~/apollo/options/seomaticOptions'
 
 export default {
   name: 'News',
@@ -12,7 +13,9 @@ export default {
     },
   },
   apollo: {
-    // TODO add some seomatic
+    seomatic() {
+      return seomaticOptions({ ctx: this, baseSlug: 'news' })
+    },
     entries: {
       query: allNews,
       variables() {
@@ -54,6 +57,17 @@ export default {
       // because craft languages are not represented in URIs we need to add them here
       return `${langPrefix}/${uri}`
     },
+  },
+  head() {
+    return this.$generateMetaFromSeomatic({
+      seomaticMeta: this.seomatic,
+      frontendUrl:
+        process.env.NODE_ENV === 'development'
+          ? config.env.FRONTENDURLLOCAL
+          : config.env.FRONTENDURLPRODUCTION,
+      lang: this.$i18n.locale,
+      // ,debug: true
+    })
   },
 }
 </script>

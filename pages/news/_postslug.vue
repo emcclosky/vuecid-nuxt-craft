@@ -3,8 +3,7 @@ import { removeLeadingSlash } from '@wearelucid/vuecid-helpers'
 import { loadPreview } from '@wearelucid/vuecid-craft-helpers'
 import news from '~/apollo/queries/news'
 import config from '~/config'
-
-// import seomaticQuery from '~/apollo/queries/seomatic'
+import seomaticOptions from '~/apollo/options/seomaticOptions'
 
 export default {
   nuxtI18n: {
@@ -15,7 +14,9 @@ export default {
     },
   },
   apollo: {
-    // TODO: Add seomatic, get inspired in _basePage.vue
+    seomatic() {
+      return seomaticOptions({ ctx: this, baseSlug: 'news' })
+    },
     entries: {
       query: news,
       prefetch: ({ route }) => ({
@@ -72,12 +73,12 @@ export default {
     }
   },
   head() {
-    if (!this.seomatic) {
-      this.log('🏮 No SEO settings from GraphQL query returned.') // eslint-disable-line
-    }
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
-      frontendUrl: config.env.FRONTENDURLPRODUCTION,
+      frontendUrl:
+        process.env.NODE_ENV === 'development'
+          ? config.env.FRONTENDURLLOCAL
+          : config.env.FRONTENDURLPRODUCTION,
       lang: this.$i18n.locale,
       // ,debug: true
     })
