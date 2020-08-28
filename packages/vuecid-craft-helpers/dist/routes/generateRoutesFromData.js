@@ -82,16 +82,20 @@ function generateRoutesFromData() {
     var routes = []; // go through each language
 
     Object.keys(prefixedData).map(function (lang) {
-      // and through each section
-      sections.forEach(function (section) {
-        var _routes;
+      if (!sections) {
+        console.error('👹 GenerateRoutesFromData: You have not provided any sections');
+      } else {
+        // and through each section
+        sections.forEach(function (section) {
+          var _routes;
 
-        var entryURIs = prefixedData[lang][section].map(function (entry) {
-          return entry.uri;
+          var entryURIs = prefixedData[lang][section].map(function (entry) {
+            return entry.uri;
+          });
+
+          (_routes = routes).push.apply(_routes, (0, _toConsumableArray2["default"])(entryURIs));
         });
-
-        (_routes = routes).push.apply(_routes, (0, _toConsumableArray2["default"])(entryURIs));
-      });
+      }
     }); // Kick out all the pages ending with the home slug
     // this will delete all homes for each language
     // it also means we can't have nested pages in home

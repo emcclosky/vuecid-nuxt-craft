@@ -74,11 +74,19 @@ function generateRoutesFromData(
 
     // go through each language
     Object.keys(prefixedData).map((lang) => {
-      // and through each section
-      sections.forEach((section) => {
-        const entryURIs = prefixedData[lang][section].map((entry) => entry.uri)
-        routes.push(...entryURIs)
-      })
+      if (!sections) {
+        console.error(
+          '👹 GenerateRoutesFromData: You have not provided any sections'
+        )
+      } else {
+        // and through each section
+        sections.forEach((section) => {
+          const entryURIs = prefixedData[lang][section].map(
+            (entry) => entry.uri
+          )
+          routes.push(...entryURIs)
+        })
+      }
     })
 
     // Kick out all the pages ending with the home slug

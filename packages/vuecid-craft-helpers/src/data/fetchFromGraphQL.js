@@ -29,16 +29,25 @@ async function fetch({
   // e.g.: "appearsInNavigation": [] || "appearsInNavigation": ["true"],
   if (propertiesToFilter && propertiesToFilter.length) {
     propertiesToFilter.forEach((property) => {
-      result = result.filter((entry) => {
-        // if the entry does not even have the key we return
-        if (!entry[property]) return true
-        // check if first array item is true, then leave entry in array
-        return entry[property][0] ? entry[property][0] : false
-      })
+      result = filterByProperty(result, property)
     })
   }
 
   return result
+}
+
+function filterByProperty(data = [], property) {
+  return data.filter((entry) => {
+    // check for children and call function recursively
+    if (entry.children) {
+      entry.children = filterByProperty(entry.children, property)
+    }
+    // if the entry does not even have the key we return
+    if (!entry[property]) return true
+    // check if first array item is true, then leave entry in array
+    // this is because a simple boolean value is still return as array
+    return entry[property][0] ? entry[property][0] : false
+  })
 }
 
 export default async function fetchFromGraphQL({
