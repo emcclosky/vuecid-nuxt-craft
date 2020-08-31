@@ -45,40 +45,14 @@ export default {
   },
   methods: {
     ...mapActions('ui', ['toggleMenu', 'closeMenu']),
-    listenerFunction(e) {
-      this.handleKeyboardEvent(e)
-    },
-    isHomeSlug(slug) {
-      return isHomeSlug(slug)
-    },
+    isHomeSlug,
+    verifyLeadingSlash,
     removeHomeSlug(slug) {
-      if (!slug) return ''
+      if (!slug) return '/'
       if (this.isHomeSlug(slug)) {
         let trimmedSlug = slug.replace(config.env.HOMESLUG, '')
         if (trimmedSlug.length) trimmedSlug = removeTrailingSlash(trimmedSlug) // vuecid-helper does not accept empty strings...
         return trimmedSlug
-      }
-      return slug
-    },
-    prepareNuxtLink(uri) {
-      const route = this.verifyLeadingSlash(this.removeHomeSlug(uri))
-      const langPrefix = this.menu?.lang
-        ? this.verifyLeadingSlash(this.menu.lang)
-        : ''
-      // because craft languages are not represented in URIs we need to add them here
-      return `${langPrefix}${route}`
-    },
-    prepareTranslatedNuxtLink(uri, lang) {
-      // because all the entries do not know their language, we need to add the lang prefix manually
-      // BUT, only for the non-default languages
-      const route = this.verifyLeadingSlash(this.removeHomeSlug(uri))
-      const langPrefix =
-        lang !== config.env.DEFAULTLANG ? this.verifyLeadingSlash(lang) : ''
-      return `${langPrefix}${route}`
-    },
-    verifyLeadingSlash(slug) {
-      if (slug) {
-        return verifyLeadingSlash(slug)
       }
       return slug
     },
@@ -88,6 +62,9 @@ export default {
         // Esc key
         this.closeMenu()
       }
+    },
+    listenerFunction(e) {
+      this.handleKeyboardEvent(e)
     },
   },
 }
@@ -174,7 +151,7 @@ export default {
                     :to="
                       item.i18nHandlesRoute
                         ? switchLocalePath(item.lang)
-                        : verifyLeadingSlash(item.path)
+                        : verifyLeadingSlash(item.path || '')
                     "
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
