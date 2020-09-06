@@ -29,13 +29,13 @@
     "@nuxtjs/apollo": "^4.0.1-rc.1",
     "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/google-analytics": "^2.4.0",
-    "@nuxtjs/pwa": "3.0.0-beta.16",
+    "@nuxtjs/pwa": "^3.0.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@wearelucid/vue-bows": "^1.2.0",
     "@wearelucid/vuecid-craft-helpers": "^0.10.0",
     "@wearelucid/vuecid-helpers": "v3.0.1",
     "apollo-link-retry": "^2.2.16",
-    "focus-trap": "^5.0.2",
+    "focus-trap": "^6.0.0",
     "focus-trap-vue": "^0.0.6",
     "global": "^4.4.0",
     "graphql-import-node": "^0.0.4",
@@ -84,6 +84,6 @@
     "pre-commit": "^1.2.2",
     "prettier": "^2.0.5",
     "sass-lint": "^1.12.1",
-    "sass-loader": "^9.0.2"
+    "sass-loader": "^10.0.0"
   }
 }

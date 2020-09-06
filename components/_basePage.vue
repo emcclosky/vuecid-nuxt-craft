@@ -24,7 +24,9 @@ export default {
     entries: {
       query: page,
       prefetch: ({ route }) => ({
-        slug: removeLeadingSlash(route.params.slug2 || route.params.slug || config.env.HOMESLUG) // prettier-ignore
+        slug: removeLeadingSlash(
+          route.params.slug2 || route.params.slug || config.env.HOMESLUG
+        ),
       }),
       variables() {
         let slug = routeSlug(this)

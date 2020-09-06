@@ -20,7 +20,7 @@ export default {
     entries: {
       query: news,
       prefetch: ({ route }) => ({
-        slug: removeLeadingSlash(route.params.postslug) // prettier-ignore
+        slug: removeLeadingSlash(route.params.postslug),
       }),
       variables() {
         const slug = removeLeadingSlash(this.$route.params.postslug) // prettier-ignore
