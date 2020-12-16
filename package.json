@@ -28,7 +28,6 @@
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.1",
     "@nuxtjs/axios": "^5.12.0",
-    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/pwa": "^3.0.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@wearelucid/vue-bows": "^1.2.0",

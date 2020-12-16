@@ -3,14 +3,14 @@ import { generateRoutesFromData } from '@wearelucid/vuecid-craft-helpers'
 import config from './config'
 
 export default {
-  server: {
-    // it is served by default on http://localhost
-    // setting the following will result in serving on your IP like 192.168.1.2 or similar
-    // host: '0.0.0.0'
-  },
+  /**
+   * Server is served by default on http://localhost
+   * Setting it to '0.0.0.0' allows you to access it on your LAN (192.168... something)
+   */
+  server: {},
 
-  /*
-   ** Headers of the page
+  /**
+   * HTML page <head>
    */
   head: {
     title: '…', // Indicate loading during navigation
@@ -23,14 +23,16 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'author', content: 'Lucid – wearelucid.ch' },
       { name: 'theme-color', content: config.themeColor },
-      {
-        name: 'google-site-verification',
-        content: config.googleSiteVerification,
-      },
-      {
-        name: 'msvalidate.01',
-        content: config.bingSiteVerification,
-      },
+      // Google site verification:
+      // {
+      //   name: 'google-site-verification',
+      //   content: config.googleSiteVerification,
+      // },
+      // Bing site verification:
+      // {
+      //   name: 'msvalidate.01',
+      //   content: '',
+      // },
     ],
     script: [
       /* setup-autocomment-polyfill */
@@ -38,8 +40,9 @@ export default {
     ],
   },
 
-  /*
-   ** env: lets you create environment variables that will be shared for the client and server-side.
+  /**
+   * `env` lets you create environment variables
+   * that will be shared client- and server-side.
    */
   env: {
     ...config.env,
@@ -48,19 +51,19 @@ export default {
     NETLIFY: process.env.NETLIFY,
   },
 
-  /*
-   ** Customize the progress-bar color
-   ** TODO: Set your desired loading bar color
+  /**
+   * Customize the progress-bar color
+   * TODO: Set your desired loading bar color
    */
   loading: { color: '#0000ff' },
 
-  /*
-   ** CSS
+  /**
+   * CSS
    */
   css: ['@/assets/css/main.scss'],
 
-  /*
-   ** Plugins
+  /**
+   * Plugins
    */
   plugins: [
     { src: '~/plugins/vue-lazysizes', ssr: false },
@@ -74,58 +77,20 @@ export default {
     // { src: '~/plugins/vue-breakpoint-component', ssr: false }
   ],
 
-  /*
-   ** Modules
+  /**
+   * Modules
+   * * Find more modules on https://modules.nuxtjs.org/
    */
   modules: [
+    'nuxt-i18n',
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
-    'nuxt-i18n',
-    // Make sure you handle user opt-in in your cookie-bar and make the correct settings in your GTM.
-    // [
-    //   '@nuxtjs/google-tag-manager',
-    //   {
-    //     id: config.googleTagManagerID,
-    //     // We only have opt in, but when the user opts-in we definitely track
-    //     // respectDoNotTrack: true,
-    //     pageTracking: true, // sends custom event 'nuxtRoute' to track route changes
-    //     pageViewEventName: 'nuxtRoute'
-    //   }
-    // ],
-
-    // Google Analytics Module
-    // Be aware that there is still a bug where the page title is not updated:
-    // Demo: https://imgur.com/QSv4n12
-    // Issue to watch/subscribe and fix this ASAP: https://github.com/nuxt-community/analytics-module/issues/8
-    // [
-    //   '@nuxtjs/google-analytics',
-    //   {
-    //     id: config.googleAnalyticsId,
-    //     // Opt out by default and enable tracking if user accepts cookies
-    //     disabled: () => {
-    //       if (process.browser) {
-    //         if (localStorage.getItem('cookie:accepted')) {
-    //           return false
-    //         }
-    //       }
-    //       return true
-    //     },
-    //     set: [{ field: 'anonymizeIp', value: true }],
-    //     debug: {
-    //       // Uncomment the following line to debug GA in development environment (check your console output):
-    //       // enabled: process.env.NODE_ENV === 'development',
-    //       // Only send hit task in production. To test locally run `$ yarn netlifyify` (sets NODE_ENV to production).
-    //       sendHitTask: process.env.NODE_ENV === 'production'
-    //     }
-    //   }
-    // ],
     '@nuxtjs/sitemap',
+    '@nuxtjs/eslint-module',
     [
       '@nuxtjs/pwa',
       {
-        icon: {
-          sizes: config.iconSizes,
-        },
+        icon: { sizes: config.iconSizes },
         // Override certain meta tags
         meta: {
           viewport: 'width=device-width, initial-scale=1',
@@ -144,11 +109,10 @@ export default {
         },
       },
     ],
-    '@nuxtjs/eslint-module',
   ],
 
-  /*
-   ** Nuxt i18n config
+  /**
+   * i18n
    */
   i18n: {
     locales: config.env.LOCALES,
@@ -159,25 +123,15 @@ export default {
     },
   },
 
-  /*
-   ** Workbox config
-   */
-  workbox: {
-    config: {
-      debug: false,
-      cacheId: config.siteTitle,
-    },
-  },
-
-  /*
-   ** Axios config
+  /**
+   * Axios config
    */
   axios: {
     baseURL: '/',
   },
 
-  /*
-   ** Apollo config
+  /**
+   * Apollo config
    */
   apollo: {
     includeNodeModules: true,
@@ -189,8 +143,8 @@ export default {
     },
   },
 
-  /*
-   ** Generate
+  /**
+   * Generate
    */
   generate: {
     // Create a 404.html page:
@@ -209,8 +163,8 @@ export default {
     },
   },
 
-  /*
-   ** Build configuration
+  /**
+   * Build configuration
    */
   build: {
     postcss: {
@@ -227,8 +181,8 @@ export default {
     },
   },
 
-  /*
-   ** Router
+  /**
+   * Router
    */
   router: {
     linkActiveClass: 'is-active',
@@ -236,8 +190,8 @@ export default {
     middleware: ['i18n-middleware'],
   },
 
-  /*
-   ** Sitemap Configuration
+  /**
+   * Sitemap Configuration
    */
   sitemap: {
     hostname: config.env.FRONTENDURLPRODUCTION,

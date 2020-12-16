@@ -36,7 +36,10 @@ const langs = [
 const getDefaultLang = () => {
   const defaultLanguage = langs.find((l) => l.default === true)
   if (!defaultLanguage) {
-    console.warn('Did you forget to specify one language as the default lang?: "default: true"') // eslint-disable-line
+    // eslint-disable-next-line no-console
+    console.warn(
+      'Did you forget to specify one language as the default lang?: "default: true"'
+    )
   }
   return defaultLanguage.lang
 }
@@ -77,15 +80,6 @@ const config = {
     GRAPHQL_PATH: urls.graphqlPath,
     HOMESLUG: homeSlug,
   },
-
-  // TODO: Add your Google Analytics ID
-  googleAnalyticsId: 'UA-74285401-2',
-
-  // TODO: Add your Google Site Verification for Search Console
-  googleSiteVerification: 'zG1pVeaKBCYigt69I2cr3ANselSObMYBSnRcDmirZrc',
-
-  // TODO: Optionally add Bing Site Verification
-  bingSiteVerification: 'B2BFE4CC02FBB954E192488D1D844BCC',
 
   // TODO: Add your craft sections (e.g. pages)
   sections: ['pages'],
