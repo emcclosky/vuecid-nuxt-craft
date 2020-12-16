@@ -22,18 +22,12 @@ export default {
       })
       this.$refs.main.focus()
     },
-    // Update current breakpoint in ui store if you use vue-breakpoint-component:
-    // updateBreakpoint(breakpoint) {
-    //   this.$store.commit('ui/UPDATE_BREAKPOINT', breakpoint)
-    // }
   },
 }
 </script>
 
 <template>
   <div class="Layout">
-    <!-- Use this with vue-breakpoint-component: -->
-    <!-- <client-only><VBreakpoint @input="updateBreakpoint($event)" /></client-only> -->
     <TheSkipNavigationLink
       ref="skipnavigationlink"
       @click.native="setFocusOnMain()"

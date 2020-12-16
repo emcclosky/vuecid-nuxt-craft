@@ -18,7 +18,7 @@ Follow these steps to quickly set up your Vuecid-Nuxt-CraftCMS project:
 1. Fetch the data needed to set up your navigation `$ yarn fetch`
 1. Run `$ yarn dev` to start the nuxt server
 1. Find `TODO` comments and setup your project. This might include:
-  - Delete example styling (`/assets/css/_export.breakpoints.scss`)
+  - Delete example styling
   - Delete corresponding (`class="examples--div"` and other stylings from the `_examples.scss`)
   – Delete Nuxt-Child examples (Delete folder `/pages/examples`).
   - Setup typography (heading stylings etc.)

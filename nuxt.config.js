@@ -74,7 +74,6 @@ export default {
     { src: '~/plugins/vuex-router-sync' },
     { src: '~/plugins/vue-focus-trap' },
     { src: '~/plugins/vue-bows' },
-    // { src: '~/plugins/vue-breakpoint-component', ssr: false }
   ],
 
   /**
