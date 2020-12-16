@@ -101,7 +101,7 @@ export default {
                 class="TheNavigation__link"
                 :to="verifyLeadingSlash(removeHomeSlug(item.uri))"
                 :exact="isHomeSlug(item.uri)"
-                :tabIndex="navMenuOpen ? 0 : -1"
+                :tab-index="navMenuOpen ? 0 : -1"
               >
                 <!-- eslint-disable-next-line vue/no-v-html -->
                 <span v-html="item.title" />
@@ -120,7 +120,7 @@ export default {
                   <nuxt-link
                     class="TheNavigation__link"
                     :to="verifyLeadingSlash(child.uri)"
-                    :tabIndex="navMenuOpen ? 0 : -1"
+                    :tab-index="navMenuOpen ? 0 : -1"
                   >
                     <!-- eslint-disable-next-line vue/no-v-html -->
                     <span v-html="child.title" />
@@ -156,7 +156,7 @@ export default {
                     :exact="$route.name && $route.name.includes('index')"
                     :title="item.name"
                     :disabled="!item.path && !item.i18nHandlesRoute"
-                    :tabIndex="navMenuOpen ? 0 : -1"
+                    :tab-index="navMenuOpen ? 0 : -1"
                   >
                     {{ item.lang }}
                   </BBtn>

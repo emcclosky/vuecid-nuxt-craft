@@ -151,8 +151,9 @@ gulp.task('add-modernizr-file', function (done) {
  * Uses inquirer to prompt the user which tools or plugins should be installed
  */
 gulp.task('setup', function (done) {
-  let readEnv = new Promise((resolve) => resolve()) // eslint-disable-line no-unused-vars
+  let readEnv = new Promise((resolve) => resolve())
 
+  // eslint-disable-next-line no-unused-vars
   readEnv = inquirer
     .prompt([
       {
