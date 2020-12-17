@@ -101,7 +101,7 @@ export default {
           ? config.env.FRONTENDURLLOCAL
           : config.env.FRONTENDURLPRODUCTION,
       lang: this.$i18n.locale,
-      // ,debug: true
+      // debug: true,
     })
   },
 }

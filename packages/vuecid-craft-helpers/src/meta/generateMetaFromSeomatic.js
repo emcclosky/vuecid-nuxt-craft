@@ -1,4 +1,3 @@
-import { verifyTrailingSlash } from '@wearelucid/vuecid-helpers'
 import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 
 /* eslint-disable no-console */
@@ -70,13 +69,8 @@ export default function generateMetaFromSeomatic({
   const ogDescription = metaTagContainer['og:description'].content || description // prettier-ignore
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
-  // SEOMatic allows to set a specific url pattern for every section
-  // Per default it sets '{entry.uri}' within the setting SEOMatic > Content SEO > Canonical URL
-  // This will point to the backend url, which is wrong.
-  // Because we don't want to change this for every section we extract the site's home url and replace it with the frontend url
-  const homeUrl = metaLinkContainer.home.href
-  const seomaticOgUrl = metaTagContainer['og:url'].content || ''
-  const ogUrl = seomaticOgUrl.replace(homeUrl, verifyTrailingSlash(frontendUrl))
+  const ogUrl = metaTagContainer['og:url'].content || ''
+  const canonicalUrl = metaLinkContainer.canonical.href
 
   const seomaticOgImage = {
     url: metaTagContainer['og:image'].content || false,
@@ -115,7 +109,7 @@ export default function generateMetaFromSeomatic({
       { hid: 'referrer', property: 'referrer', content: referrer }, // prettier-ignore
       ...ogImage,
     ],
-    link: [{ rel: 'canonical', href: ogUrl }, ...hrefLangLinks],
+    link: [{ rel: 'canonical', href: canonicalUrl }, ...hrefLangLinks],
   }
 
   if (debug) {

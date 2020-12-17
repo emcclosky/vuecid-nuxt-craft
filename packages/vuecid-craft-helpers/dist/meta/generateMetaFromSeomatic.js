@@ -77,14 +77,9 @@ function generateMetaFromSeomatic() {
   var ogTitle = metaTagContainer['og:title'].content || title;
   var ogDescription = metaTagContainer['og:description'].content || description; // prettier-ignore
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
-  // SEOMatic allows to set a specific url pattern for every section
-  // Per default it sets '{entry.uri}' within the setting SEOMatic > Content SEO > Canonical URL
-  // This will point to the backend url, which is wrong.
-  // Because we don't want to change this for every section we extract the site's home url and replace it with the frontend url
 
-  var homeUrl = metaLinkContainer.home.href;
-  var seomaticOgUrl = metaTagContainer['og:url'].content || '';
-  var ogUrl = seomaticOgUrl.replace(homeUrl, (0, _vuecidHelpers.verifyTrailingSlash)(frontendUrl));
+  var ogUrl = metaTagContainer['og:url'].content || '';
+  var canonicalUrl = metaLinkContainer.canonical.href;
   var seomaticOgImage = {
     url: metaTagContainer['og:image'].content || false,
     width: metaTagContainer['og:image:width'].content || false,
@@ -174,7 +169,7 @@ function generateMetaFromSeomatic() {
     }].concat((0, _toConsumableArray2["default"])(ogImage)),
     link: [{
       rel: 'canonical',
-      href: ogUrl
+      href: canonicalUrl
     }].concat((0, _toConsumableArray2["default"])(hrefLangLinks))
   };
 
