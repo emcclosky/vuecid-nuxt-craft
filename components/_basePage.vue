@@ -43,8 +43,14 @@ export default {
         if (!this.$route.query['x-craft-live-preview']) {
           if (!result.data.entries || !result.data.entries[0]) {
             if (!this.$route.params.slug) {
-              console.error(`🏮 Do you have an entry with slug == ${config.env.HOMESLUG}? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results`) // eslint-disable-line
-              console.error(`🏮🏮 Or maybe you forgot to allow an entry type to be accessed via GraphQL? (Public Schema)? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results-2`) // eslint-disable-line
+              // eslint-disable-next-line no-console
+              console.error(
+                `🏮 Do you have an entry with slug == ${config.env.HOMESLUG}? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results`
+              )
+              // eslint-disable-next-line no-console
+              console.error(
+                `🏮🏮 Or maybe you forgot to allow an entry type to be accessed via GraphQL? (Public Schema)? Read more: https://github.com/wearelucid/vuecid-nuxt-craft/blob/master/docs/Troubleshooting.md#no-results-2`
+              )
             }
             this.$store.dispatch(
               'throwError',
@@ -78,9 +84,14 @@ export default {
   },
   // We need to load the preview within beforeMount, because asyncData and middleware are NOT executed on initial load
   // after having used `nuxt generate`, because there is no server that is run
-  beforeMount: async function() { // eslint-disable-line
+  async beforeMount() {
     // check preview and fetch actual data
-    const slug = removeLeadingSlash(this.$route.params.slug3 || this.$route.params.slug2 || this.$route.params.slug || config.env.HOMESLUG) // eslint-disable-line
+    const slug = removeLeadingSlash(
+      this.$route.params.slug3 ||
+        this.$route.params.slug2 ||
+        this.$route.params.slug ||
+        config.env.HOMESLUG
+    )
     this.log('Fetching preview for slug: ', slug, ' – with queries: ', this.$route.query, ' ...') // prettier-ignore
     this.previewData = await loadPreview({
       slug,
@@ -97,7 +108,6 @@ export default {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       lang: this.$i18n.locale,
-      // debug: true,
     })
   },
 }

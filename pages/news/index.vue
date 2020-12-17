@@ -62,7 +62,6 @@ export default {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
       lang: this.$i18n.locale,
-      // ,debug: true
     })
   },
 }
