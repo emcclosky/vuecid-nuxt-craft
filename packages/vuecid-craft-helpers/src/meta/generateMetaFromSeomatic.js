@@ -1,3 +1,4 @@
+import { removeHomeSlug } from '@wearelucid/vuecid-helpers'
 import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
 
 /* eslint-disable no-console */
@@ -10,12 +11,12 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
  * also they have to override nuxt.configs manifest infos, which sets an hid
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
- * @param {Object} seomaticMeta
- * @return {Array}
+ * @param {object} options
+ * @return {object}
  */
-
 export default function generateMetaFromSeomatic({
   seomaticMeta = false,
+  homeSlug = 'home',
   lang = 'de',
   debug = false,
 } = {}) {
@@ -34,9 +35,13 @@ export default function generateMetaFromSeomatic({
   const metaTitleContainer = JSON.parse(seomaticMeta.metaTitleContainer)
 
   if (debug) {
-    console.log('metaTagContainer: ', metaTagContainer)
-    console.log('metaLinkContainer: ', metaLinkContainer)
-    console.log('metaTitleContainer: ', metaTitleContainer)
+    console.log('Data Input:', {
+      homeSlug,
+      lang,
+      metaTagContainer,
+      metaLinkContainer,
+      metaTitleContainer,
+    })
   }
 
   // not needed at this point:
@@ -49,9 +54,6 @@ export default function generateMetaFromSeomatic({
   // using the locale is not possible, because lang="de_CH" is not a valid language
   const language = lang
 
-  // generate alternate links for each language
-  const hrefLangLinks = metaLinkContainer.alternate || false
-
   const locale = metaTagContainer['og:locale'].content || ''
   const siteName = metaTagContainer['og:site_name'].content || ''
   const description = metaTagContainer.description.content || ''
@@ -63,7 +65,22 @@ export default function generateMetaFromSeomatic({
   // const ogSeeAlso = metaTagContainer['og:see_also'].content || ''
 
   const ogUrl = metaTagContainer['og:url'].content || ''
-  const canonicalUrl = metaLinkContainer.canonical.href
+
+  // Remove home slug from canonical link for home pages
+  const canonicalUrl = removeHomeSlug(
+    metaLinkContainer.canonical.href,
+    homeSlug
+  )
+
+  // generate alternate links for each language
+  let hrefLangLinks = metaLinkContainer.alternate || false
+  // Remove home slug from canonical link for alternate pages
+  if (hrefLangLinks.length) {
+    hrefLangLinks = hrefLangLinks.map((x) => ({
+      ...x,
+      href: removeHomeSlug(x.href, homeSlug),
+    }))
+  }
 
   const seomaticOgImage = {
     url: metaTagContainer['og:image'].content || false,
@@ -106,7 +123,7 @@ export default function generateMetaFromSeomatic({
   }
 
   if (debug) {
-    console.table(metaInfo)
+    console.log('Data Output:', { metaInfo })
     console.table(metaInfo.meta)
     console.table(metaInfo.link)
   }
