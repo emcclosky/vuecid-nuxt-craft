@@ -11,13 +11,11 @@ import generateMetaImageFromSeomatic from './generateMetaImageFromSeomatic'
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
  * @param {Object} seomaticMeta
- * @param {String} frontendUrl
  * @return {Array}
  */
 
 export default function generateMetaFromSeomatic({
   seomaticMeta = false,
-  frontendUrl = false,
   lang = 'de',
   debug = false,
 } = {}) {
@@ -28,11 +26,6 @@ export default function generateMetaFromSeomatic({
       title: 'Loading…',
     }
   }
-
-  if (!frontendUrl)
-    throw new Error(
-      'You need to pass your frontend url into the generateMetaFromSeomatic!'
-    )
 
   // Apollo parses the first level of our seomatic object
   // But unfortunately everything that is nested is just a JSON String and needs to be parsed

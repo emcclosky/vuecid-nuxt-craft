@@ -9,8 +9,6 @@ exports["default"] = generateMetaFromSeomatic;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var _vuecidHelpers = require("@wearelucid/vuecid-helpers");
-
 var _generateMetaImageFromSeomatic = _interopRequireDefault(require("./generateMetaImageFromSeomatic"));
 
 /* eslint-disable no-console */
@@ -24,15 +22,12 @@ var _generateMetaImageFromSeomatic = _interopRequireDefault(require("./generateM
  * therefore the og:description hid has to be called 'hid: "og:description"' and so on
  *
  * @param {Object} seomaticMeta
- * @param {String} frontendUrl
  * @return {Array}
  */
 function generateMetaFromSeomatic() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$seomaticMeta = _ref.seomaticMeta,
       seomaticMeta = _ref$seomaticMeta === void 0 ? false : _ref$seomaticMeta,
-      _ref$frontendUrl = _ref.frontendUrl,
-      frontendUrl = _ref$frontendUrl === void 0 ? false : _ref$frontendUrl,
       _ref$lang = _ref.lang,
       lang = _ref$lang === void 0 ? 'de' : _ref$lang,
       _ref$debug = _ref.debug,
@@ -44,10 +39,9 @@ function generateMetaFromSeomatic() {
     return {
       title: 'Loading…'
     };
-  }
-
-  if (!frontendUrl) throw new Error('You need to pass your frontend url into the generateMetaFromSeomatic!'); // Apollo parses the first level of our seomatic object
+  } // Apollo parses the first level of our seomatic object
   // But unfortunately everything that is nested is just a JSON String and needs to be parsed
+
 
   var metaTagContainer = JSON.parse(seomaticMeta.metaTagContainer);
   var metaLinkContainer = JSON.parse(seomaticMeta.metaLinkContainer);
