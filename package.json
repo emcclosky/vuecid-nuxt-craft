@@ -31,7 +31,7 @@
     "@nuxtjs/pwa": "^3.0.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@wearelucid/vue-bows": "^1.2.0",
-    "@wearelucid/vuecid-craft-helpers": "^0.10.0",
+    "@wearelucid/vuecid-craft-helpers": "^0.11.0",
     "@wearelucid/vuecid-helpers": "v3.0.1",
     "apollo-link-retry": "^2.2.16",
     "focus-trap": "^6.0.0",
