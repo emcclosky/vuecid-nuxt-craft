@@ -61,10 +61,6 @@ export default {
   head() {
     return this.$generateMetaFromSeomatic({
       seomaticMeta: this.seomatic,
-      frontendUrl:
-        process.env.NODE_ENV === 'development'
-          ? config.env.FRONTENDURLLOCAL
-          : config.env.FRONTENDURLPRODUCTION,
       lang: this.$i18n.locale,
       // ,debug: true
     })
