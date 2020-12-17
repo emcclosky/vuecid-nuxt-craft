@@ -1,6 +1,6 @@
 {
   "name": "@wearelucid/vuecid-craft-helpers",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "description": "Helper functions to get your Vuecid-CraftCMS Frontend up and running.",
   "author": "Lucid <buero@wearelucid.ch> (https://www.wearelucid.ch)",
   "homepage": "https://github.com/wearelucid/vuecid-nuxt-craft.git",
@@ -19,7 +19,7 @@
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@wearelucid/vuecid-helpers": "^3.0.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.0",
     "fs": "^0.0.1-security",
     "graphql-import-node": "^0.0.4",
     "graphql-tag": "^2.10.1",

@@ -26,6 +26,6 @@ function isHomeSlug(slug) {
   } // eslint-disable-next-line no-console
 
 
-  console.warn('removeHomeSlug(): Your slug was no string: ', slug);
+  console.warn('isHomeSlug(): Your slug was no string: ', slug);
   return slug;
 }
