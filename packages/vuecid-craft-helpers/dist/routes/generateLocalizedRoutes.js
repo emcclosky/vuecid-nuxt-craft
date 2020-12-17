@@ -66,12 +66,12 @@ function generateLocalizedRoutes() {
       } // Construct route object
 
 
-      var route = _objectSpread({
+      var route = _objectSpread(_objectSpread({
         path: path,
         component: component
       }, name ? {
         name: "".concat(name, "-").concat(lang.slug)
-      } : {}, {}, children ? {
+      } : {}), children ? {
         children: children
       } : {}); // Push route to array
 

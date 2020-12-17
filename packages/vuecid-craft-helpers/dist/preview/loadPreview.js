@@ -26,9 +26,7 @@ function loadPreview() {
 }
 
 function _loadPreview() {
-  _loadPreview = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee() {
+  _loadPreview = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
     var options,
         query,
         slug,
@@ -88,7 +86,7 @@ function _loadPreview() {
 
           case 8:
             previewData = _context.sent;
-            return _context.abrupt("return", _objectSpread({}, previewData, {
+            return _context.abrupt("return", _objectSpread(_objectSpread({}, previewData), {}, {
               preview: true
             }));
 

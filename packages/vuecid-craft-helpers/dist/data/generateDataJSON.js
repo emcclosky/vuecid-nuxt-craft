@@ -21,9 +21,7 @@ function generateDataJSON() {
 }
 
 function _generateDataJSON() {
-  _generateDataJSON = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee() {
+  _generateDataJSON = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
     var _ref,
         endpoint,
         graphQLQuery,

@@ -15,15 +15,19 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _printer = require("graphql/language/printer");
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /* eslint-disable no-console */
 function fetch(_x) {
   return _fetch.apply(this, arguments);
 }
 
 function _fetch() {
-  _fetch = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(_ref) {
+  _fetch = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_ref) {
     var endpoint, graphQLQuery, section, graphQLQueryName, language, propertiesToFilter, result;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -40,8 +44,8 @@ function _fetch() {
                 // may be undefined...
                 site: language.handle || 'default'
               }
-            }).then(function (_ref2) {
-              var data = _ref2.data;
+            }).then(function (_ref3) {
+              var data = _ref3.data;
               return data.data[graphQLQueryName];
             });
 
@@ -91,31 +95,23 @@ function fetchFromGraphQL() {
 }
 
 function _fetchFromGraphQL() {
-  _fetchFromGraphQL = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee2() {
-    var _ref3,
+  _fetchFromGraphQL = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
+    var _ref2,
         endpoint,
         graphQLQuery,
-        _ref3$sections,
+        _ref2$sections,
         sections,
-        _ref3$graphQLQueryNam,
+        _ref2$graphQLQueryNam,
         graphQLQueryName,
-        _ref3$langs,
+        _ref2$langs,
         langs,
-        _ref3$transforms,
+        _ref2$transforms,
         transforms,
         propertiesToFilter,
         entries,
-        _iteratorNormalCompletion,
-        _didIteratorError,
-        _iteratorError,
         _iterator,
         _step,
         language,
-        _iteratorNormalCompletion2,
-        _didIteratorError2,
-        _iteratorError2,
         _iterator2,
         _step2,
         section,
@@ -125,19 +121,18 @@ function _fetchFromGraphQL() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _ref3 = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {}, endpoint = _ref3.endpoint, graphQLQuery = _ref3.graphQLQuery, _ref3$sections = _ref3.sections, sections = _ref3$sections === void 0 ? [] : _ref3$sections, _ref3$graphQLQueryNam = _ref3.graphQLQueryName, graphQLQueryName = _ref3$graphQLQueryNam === void 0 ? 'entries' : _ref3$graphQLQueryNam, _ref3$langs = _ref3.langs, langs = _ref3$langs === void 0 ? [] : _ref3$langs, _ref3$transforms = _ref3.transforms, transforms = _ref3$transforms === void 0 ? [] : _ref3$transforms, propertiesToFilter = _ref3.propertiesToFilter;
+            _ref2 = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : {}, endpoint = _ref2.endpoint, graphQLQuery = _ref2.graphQLQuery, _ref2$sections = _ref2.sections, sections = _ref2$sections === void 0 ? [] : _ref2$sections, _ref2$graphQLQueryNam = _ref2.graphQLQueryName, graphQLQueryName = _ref2$graphQLQueryNam === void 0 ? 'entries' : _ref2$graphQLQueryNam, _ref2$langs = _ref2.langs, langs = _ref2$langs === void 0 ? [] : _ref2$langs, _ref2$transforms = _ref2.transforms, transforms = _ref2$transforms === void 0 ? [] : _ref2$transforms, propertiesToFilter = _ref2.propertiesToFilter;
             entries = {};
             _context2.prev = 2;
             // Actually for each language is equal to each craft site in a multisite setup!
-            _iteratorNormalCompletion = true;
-            _didIteratorError = false;
-            _iteratorError = undefined;
-            _context2.prev = 6;
-            _iterator = langs[Symbol.iterator]();
+            _iterator = _createForOfIteratorHelper(langs);
+            _context2.prev = 4;
 
-          case 8:
-            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-              _context2.next = 47;
+            _iterator.s();
+
+          case 6:
+            if ((_step = _iterator.n()).done) {
+              _context2.next = 35;
               break;
             }
 
@@ -145,25 +140,24 @@ function _fetchFromGraphQL() {
             entries[language.lang] = {}; // check if we have to fetch section specific content
 
             if (!sections.length) {
-              _context2.next = 41;
+              _context2.next = 30;
               break;
             }
 
             // load all entries for each section
-            _iteratorNormalCompletion2 = true;
-            _didIteratorError2 = false;
-            _iteratorError2 = undefined;
-            _context2.prev = 15;
-            _iterator2 = sections[Symbol.iterator]();
+            _iterator2 = _createForOfIteratorHelper(sections);
+            _context2.prev = 11;
 
-          case 17:
-            if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-              _context2.next = 25;
+            _iterator2.s();
+
+          case 13:
+            if ((_step2 = _iterator2.n()).done) {
+              _context2.next = 20;
               break;
             }
 
             section = _step2.value;
-            _context2.next = 21;
+            _context2.next = 17;
             return fetch({
               endpoint: endpoint,
               graphQLQuery: graphQLQuery,
@@ -173,54 +167,36 @@ function _fetchFromGraphQL() {
               propertiesToFilter: propertiesToFilter
             });
 
-          case 21:
+          case 17:
             entries[language.lang][section] = _context2.sent;
 
-          case 22:
-            _iteratorNormalCompletion2 = true;
-            _context2.next = 17;
+          case 18:
+            _context2.next = 13;
             break;
+
+          case 20:
+            _context2.next = 25;
+            break;
+
+          case 22:
+            _context2.prev = 22;
+            _context2.t0 = _context2["catch"](11);
+
+            _iterator2.e(_context2.t0);
 
           case 25:
-            _context2.next = 31;
+            _context2.prev = 25;
+
+            _iterator2.f();
+
+            return _context2.finish(25);
+
+          case 28:
+            _context2.next = 33;
             break;
 
-          case 27:
-            _context2.prev = 27;
-            _context2.t0 = _context2["catch"](15);
-            _didIteratorError2 = true;
-            _iteratorError2 = _context2.t0;
-
-          case 31:
-            _context2.prev = 31;
-            _context2.prev = 32;
-
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-
-          case 34:
-            _context2.prev = 34;
-
-            if (!_didIteratorError2) {
-              _context2.next = 37;
-              break;
-            }
-
-            throw _iteratorError2;
-
-          case 37:
-            return _context2.finish(34);
-
-          case 38:
-            return _context2.finish(31);
-
-          case 39:
-            _context2.next = 44;
-            break;
-
-          case 41:
-            _context2.next = 43;
+          case 30:
+            _context2.next = 32;
             return fetch({
               endpoint: endpoint,
               graphQLQuery: graphQLQuery,
@@ -229,63 +205,45 @@ function _fetchFromGraphQL() {
               propertiesToFilter: propertiesToFilter
             });
 
-          case 43:
+          case 32:
             entries[language.lang] = _context2.sent;
 
-          case 44:
-            _iteratorNormalCompletion = true;
-            _context2.next = 8;
+          case 33:
+            _context2.next = 6;
             break;
 
-          case 47:
-            _context2.next = 53;
+          case 35:
+            _context2.next = 40;
             break;
 
-          case 49:
-            _context2.prev = 49;
-            _context2.t1 = _context2["catch"](6);
-            _didIteratorError = true;
-            _iteratorError = _context2.t1;
+          case 37:
+            _context2.prev = 37;
+            _context2.t1 = _context2["catch"](4);
 
-          case 53:
-            _context2.prev = 53;
-            _context2.prev = 54;
+            _iterator.e(_context2.t1);
 
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
+          case 40:
+            _context2.prev = 40;
 
-          case 56:
-            _context2.prev = 56;
+            _iterator.f();
 
-            if (!_didIteratorError) {
-              _context2.next = 59;
-              break;
-            }
+            return _context2.finish(40);
 
-            throw _iteratorError;
-
-          case 59:
-            return _context2.finish(56);
-
-          case 60:
-            return _context2.finish(53);
-
-          case 61:
+          case 43:
             console.log("\uD83D\uDCE1 Fetched entries: ", entries);
             return _context2.abrupt("return", entries);
 
-          case 65:
-            _context2.prev = 65;
+          case 47:
+            _context2.prev = 47;
             _context2.t2 = _context2["catch"](2);
             console.log('fetchFromGraphQL: 📡❌ fetching failed 😢: ', _context2.t2);
 
-          case 68:
+          case 50:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[2, 65], [6, 49, 53, 61], [15, 27, 31, 39], [32,, 34, 38], [54,, 56, 60]]);
+    }, _callee2, null, [[2, 47], [4, 37, 40, 43], [11, 22, 25, 28]]);
   }));
   return _fetchFromGraphQL.apply(this, arguments);
 }
